@@ -174,6 +174,9 @@ export default {
       {text:'00 CSS3',link:'/前端/可视化/00 CSS3'},
       {text:'01 Canvas',link:'/前端/可视化/01 Canvas'},
       {text:'02 SVG',link:'/前端/可视化/02 SVG'},
+      {text:'03 SVG',link:'/前端/可视化/03 SVG'},
+      {text:'04 Echarts',link:'/前端/可视化/04 Echarts'},
+      {text:'05 大屏适配',link:'/前端/可视化/05 大屏适配'},
     ]
   }],
   '/前端/SSR/':[{
