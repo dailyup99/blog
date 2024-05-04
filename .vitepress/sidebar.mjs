@@ -183,6 +183,8 @@ export default {
     text:'SSR',
     items:[
       {text:'00 Node后端渲染+Vue3 SSR',link:'/前端/SSR/00 Node后端渲染+Vue3 SSR'},
+      {text:'01 Vue3+Nuxt3(基础)',link:'/前端/SSR/01 Vue3+Nuxt3(基础)'},
+      {text:'02 Vue3+Nuxt3(核心)',link:'/前端/SSR/02 Vue3+Nuxt3(核心)'},
     ]
   }],
   '/前端/数据结构与算法/':[{

@@ -11,6 +11,10 @@ Emmet (前身为 Zen Coding) 是一个能大幅度提高前端开发效率的一
 
 !和html:5可以快速生成完整结构的html5代码
 
+```json
+https://docs.emmet.io/cheat-sheet/
+```
+
 ## \>（子代）和+（兄弟）
 
 ```html
