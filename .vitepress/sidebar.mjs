@@ -83,6 +83,17 @@ export default {
       {text:'05 Webpack常见的插件和模式',link:'/前端/工程化/05 Webpack常见的插件和模式'},
       {text:'06 Webpack搭建本地服务器',link:'/前端/工程化/06 Webpack搭建本地服务器'},
       {text:'07 Git版本控制工具详解',link:'/前端/工程化/07 Git版本控制工具详解'},
+      {text:'08 Node跨域',link:'/前端/工程化/08 Node跨域'},
+      {text:'09 模块化原理和source-map',link:'/前端/工程化/09 模块化原理和source-map'},
+      {text:'10 深入解析Babel使用',link:'/前端/工程化/10 深入解析Babel使用'},
+      {text:'11 webpack开发服务器配置',link:'/前端/工程化/11 webpack开发服务器配置'},
+      {text:'12 webpack性能优化方案',link:'/前端/工程化/12 webpack性能优化方案'},
+      {text:'13 webpack性能优化方案',link:'/前端/工程化/13 webpack性能优化方案'},
+      {text:'14 webpack自定义loader',link:'/前端/工程化/14 webpack自定义loader'},
+      {text:'15 webpack自定义Plugin',link:'/前端/工程化/15 webpack自定义Plugin'},
+      {text:'16 自动化工具gulp',link:'/前端/工程化/16 自动化工具gulp'},
+      {text:'17 rollup工具使用',link:'/前端/工程化/17 rollup工具使用'},
+      {text:'18 快速开发vite工具',link:'/前端/工程化/18 快速开发vite工具'},
     ]
   }],
   '/前端/Vue/':[{
@@ -158,6 +169,11 @@ export default {
     items:[
       {text:'00 Node服务器和常见模块',link:'/前端/Node/00 Node服务器和常见模块'},
       {text:'01 Web服务器开发和文件上传',link:'/前端/Node/01 Web服务器开发和文件上传'},
+      {text:'02 Node服务器-express框架',link:'/前端/Node/02 Node服务器-express框架'},
+      {text:'03 Node服务器-koa框架',link:'/前端/Node/03 Node服务器-koa框架'},
+      {text:'04 MySQL数据库',link:'/前端/Node/04 MySQL数据库'},
+      {text:'05 MySQL多表查询',link:'/前端/Node/05 MySQL多表查询'},
+      {text:'06 Node中操作MySQL',link:'/前端/Node/06 Node中操作MySQL'},
     ]
   }],
   '/前端/JQuery/':[{
