@@ -14,6 +14,7 @@ export default [
       { text: "TypeScript", link: "/前端/TS/00 邂逅TypeScript语法" },
       { text: "NodeJs", link: "/前端/Node/00 Node服务器和常见模块" },
       { text: "SSR", link: "/前端/SSR/00 Node后端渲染+Vue3 SSR" },
+      { text: "微前端", link: "/前端/微前端/00 架构基础知识" },
       { text: "工程化", link: "/前端/工程化/00 邂逅Node-js开发" },
       { text: "可视化", link: "/前端/可视化/00 CSS3" },
       { text: "数据结构与算法", link: "/前端/数据结构与算法/00 邂逅数据结构与算法" },
