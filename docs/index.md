@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 前端进阶
-      link: /前端/JS高级/00 this指向
+      link: /前端/数据结构与算法/TS版本/00 邂逅数据结构与算法
       target: _blank
     - theme: alt
       text: 软技能

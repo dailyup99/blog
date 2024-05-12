@@ -203,28 +203,34 @@ export default {
       {text:'02 Vue3+Nuxt3(核心)',link:'/前端/SSR/02 Vue3+Nuxt3(核心)'},
     ]
   }],
-  '/前端/数据结构与算法/':[{
-    text:'数据结构与算法',
+  '/前端/数据结构与算法/TS版本':[{
+    text:'TypeScript数据结构与算法',
     items:[
-      {text:'00 邂逅数据结构与算法',link:'/前端/数据结构与算法/00 邂逅数据结构与算法'},
-      {text:'01 线性结构-数组',link:'/前端/数据结构与算法/01 线性结构-数组'},
-      {text:'02 栈结构（Stack）',link:'/前端/数据结构与算法/02 栈结构（Stack）'},
-      {text:'03 队列结构（Queue）',link:'/前端/数据结构与算法/03 队列结构（Queue）'},
-      {text:'04 链表结构（LinkedList）',link:'/前端/数据结构与算法/04 链表结构（LinkedList）'},
-      {text:'05 哈希表（HashTable）',link:'/前端/数据结构与算法/05 哈希表（HashTable）'},
-      {text:'06 树结构（Tree）',link:'/前端/数据结构与算法/06 树结构（Tree）'},
-      {text:'07 图结构（Graph）',link:'/前端/数据结构与算法/07 图结构（Graph）'},
-      {text:'08 高阶链表结构（LinkedList）',link:'/前端/数据结构与算法/08 高阶链表结构（LinkedList）'},
-      {text:'09 堆结构（Heap）',link:'/前端/数据结构与算法/09 堆结构（Heap）'},
-      {text:'10 高阶队列结构',link:'/前端/数据结构与算法/10 高阶队列结构'},
-      {text:'11 平衡二叉树（AVL树、红黑树）',link:'/前端/数据结构与算法/11 平衡二叉树（AVL树、红黑树）'},
-      {text:'12 排序算法（Sorting）',link:'/前端/数据结构与算法/12 排序算法（Sorting）'},
+      {text:'00 邂逅数据结构与算法',link:'/前端/数据结构与算法/TS版本/00 邂逅数据结构与算法'},
+      {text:'01 线性结构-数组',link:'/前端/数据结构与算法/TS版本/01 线性结构-数组'},
+      {text:'02 栈结构（Stack）',link:'/前端/数据结构与算法/TS版本/02 栈结构（Stack）'},
+      {text:'03 队列结构（Queue）',link:'/前端/数据结构与算法/TS版本/03 队列结构（Queue）'},
+      {text:'04 链表结构（LinkedList）',link:'/前端/数据结构与算法/TS版本/04 链表结构（LinkedList）'},
+      {text:'05 哈希表（HashTable）',link:'/前端/数据结构与算法/TS版本/05 哈希表（HashTable）'},
+      {text:'06 树结构（Tree）',link:'/前端/数据结构与算法/TS版本/06 树结构（Tree）'},
+      {text:'07 图结构（Graph）',link:'/前端/数据结构与算法/TS版本/07 图结构（Graph）'},
+      {text:'08 高阶链表结构（LinkedList）',link:'/前端/数据结构与算法/TS版本/08 高阶链表结构（LinkedList）'},
+      {text:'09 堆结构（Heap）',link:'/前端/数据结构与算法/TS版本/09 堆结构（Heap）'},
+      {text:'10 高阶队列结构',link:'/前端/数据结构与算法/TS版本/10 高阶队列结构'},
+      {text:'11 平衡二叉树（AVL树、红黑树）',link:'/前端/数据结构与算法/TS版本/11 平衡二叉树（AVL树、红黑树）'},
+      {text:'12 排序算法（Sorting）',link:'/前端/数据结构与算法/TS版本/12 排序算法（Sorting）'},
+    ]
+  }],
+  '/前端/数据结构与算法/JS版本':[{
+    text:'JavaScript数据结构与算法',
+    items:[
+      {text:'00 数据结构与算法',link:'/前端/数据结构与算法/JS版本/00 数据结构与算法'},
     ]
   }],
   '/前端/微前端/':[{
     text:'微前端',
     items:[
-      {text:'00 架构基础知识',link:'/前端/微前端/微前端实战'},
+      {text:'微前端实战',link:'/前端/微前端/微前端实战'},
     ]
   }],
 }
