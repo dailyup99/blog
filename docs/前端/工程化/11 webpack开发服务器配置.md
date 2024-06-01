@@ -136,7 +136,7 @@ module.exports = {
 
 **proxy是我们开发中非常常用的一个配置选项，它的目的设置代理来解决跨域访问的问题：**
 
-比如我们的一个api请求是 http://localhost:8888，但是本地启动服务器的域名是 http://localhost:8080，这个时候发送网
+比如我们的一个api请求是 `http://localhost:8888`，但是本地启动服务器的域名是 `http://localhost:8080`，这个时候发送网
 
 络请求就会出现跨域的问题；
 
@@ -144,7 +144,7 @@ module.exports = {
 
 **我们可以进行如下的设置：**
 
-target：表示的是代理到的目标地址，比如 /api-hy/moment会被代理到 http://localhost:8888/api-hy/moment；
+target：表示的是代理到的目标地址，比如 /api-hy/moment会被代理到 `http://localhost:8888/api-hy/moment`；
 
 pathRewrite：默认情况下，我们的 /api-hy 也会被写入到URL中，如果希望删除，可以使用pathRewrite；
 
@@ -224,7 +224,7 @@ module.exports = {
 }
 ```
 
-发送/api/users/list这个请求本质上访问的是http://localhost:8888//users/list，然后将这个请求发送给代理服务器devServer，devServer再发送给koa服务器，koa服务器header中的host属性是http://localhost:8888，但是因为服务器的地址是http://localhost:9000，如果服务器有判断host不是localhost:9000就不返回数据（防止数据被爬），那么接口访问就不能拿到数据。
+发送/api/users/list这个请求本质上访问的是`http://localhost:8888//users/list`，然后将这个请求发送给代理服务器devServer，devServer再发送给koa服务器，koa服务器header中的host属性是`http://localhost:8888`，但是因为服务器的地址是`http://localhost:9000`，如果服务器有判断host不是localhost:9000就不返回数据（防止数据被爬），那么接口访问就不能拿到数据。
 
 所以，我们需要设置changeOrigin为true，设置之后会怎么样呢？
 
@@ -245,7 +245,7 @@ module.exports = {
 }
 ```
 
-设置changeOrigin为true之后代理服务器发送给koa服务器就是http://localhost:9000//users/list，这样就能返回数据。
+设置changeOrigin为true之后代理服务器发送给koa服务器就是`http://localhost:9000/users/list`，这样就能返回数据。
 
 <img src="http://139.196.79.103:9001/myimages/imgs/image-20240526160657024.png" alt="image-20240526160657024" style="zoom:67%;" />
 
