@@ -218,6 +218,8 @@ eval函数里面的代码会找到上面图标注红色框的文件。
 
 webpack.config.js
 
+每次打包的时候如果想将之前的文件夹删掉，可以进行如下配置：
+
 ```javascript
 const path = require('path')
 
@@ -228,7 +230,9 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    // 重新打包时, 先将之前打包的文件夹删除掉
+    clean: true
   },
   module: {
     rules: [

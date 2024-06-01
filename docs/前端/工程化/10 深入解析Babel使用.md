@@ -676,10 +676,15 @@ export default App
 
 首先，我们需要在webpack.config.js中进行配置，主要是处理jsx语法，还有就是使用HtmlWebpackPlugin插件，这样进行打包时候才会把index.html也打包进去。
 
+我们使用jsx引入文件如果不想使用后缀名，可以进行extensions的配置：
+
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.json', '.wasm', '.jsx', '.ts']
+  },
   module: {
     rules: [
       // 针对jsx?代码进行babel处理
