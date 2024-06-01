@@ -1178,3 +1178,16 @@ module.exports = {
 }
 ```
 
+## 阅读webpack源码的方法
+
+首先，去github官网把webpack源码下载下来
+
+然后，创建一个why的目录，名字随便取，src里面放一些自己写的代码，webpack.config.js配置和之前一样
+
+最主要的是这个build.js，在里面使用webpack进行打包
+
+怎么打包？
+
+很简单，进入到wht目录，执行node build.js，就能在build.js中断点查看源码。
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240602001956927.png" alt="image-20240602001956927" style="zoom:67%;" />
