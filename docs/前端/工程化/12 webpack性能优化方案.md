@@ -884,3 +884,100 @@ DLL全程是动态链接库（Dynamic Link Library），是为软件在Windows�
 **注意：在升级到webpack4之后，React和Vue脚手架都移除了DLL库（下面的vue作者的回复），所以知道有这么一个概念即**
 
 **可。**
+
+## **打包一个DLL库**
+
+如何打包一个DLLPlugin？（创建一个新的项目）
+
+webpack帮助我们内置了一个DllPlugin可以帮助我们打包一个DLL的库文件；
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240602175519485.png" alt="image-20240602175519485" style="zoom:67%;" />
+
+webpack.dll.js
+
+```javascript
+const path = require('path');
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+
+module.exports = {
+  entry: {
+    react: ["react", "react-dom"]
+  },
+  output: {
+    path: path.resolve(__dirname, "./dll"),
+    filename: "dll_[name].js",
+    library: 'dll_[name]'
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      })
+    ]
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      name: "dll_[name]",
+      path: path.resolve(__dirname, "./dll/[name].manifest.json")
+    })
+  ]
+}
+```
+
+package.json
+
+```json
+{
+  "scripts": {
+    "dll": "webpack --config ./webpack.dll.js"
+  }
+}
+```
+
+## **使用打包的DLL库**
+
+如果我们在我们的代码中使用了react、react-dom，我们有配置splitChunks的情况下，他们会进行分包，打包到
+
+一个独立的chunk中。
+
+但是现在我们有了dll_react，不再需要单独去打包它们，可以直接去引用dll_react即可：
+
+第一步：通过DllReferencePlugin插件告知要使用的DLL库；
+
+第二步：通过AddAssetHtmlPlugin插件，将我们打包的DLL库引入到Html模块中；
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240602175618741.png" alt="image-20240602175618741" style="zoom:67%;" />
+
+config/webpack.comm.js
+
+```javascript
+const resolveApp = require("./paths");
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
+
+...
+
+plugins: [
+  new webpack.DllReferencePlugin({
+    context: resolveApp("./"),
+    manifest: resolveApp("./dll/react.manifest.json")
+  }),
+  new AddAssetHtmlPlugin({
+    filepath: resolveApp('./dll/dll_react.js')
+  })
+]
+```
+
+path.js
+
+```javascript
+const path = require('path');
+
+// node中的api
+const appDir = process.cwd();
+const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
+
+module.exports = resolveApp;
+```
+
+![image-20240602180928077](http://139.196.79.103:9001/myimages/imgs/image-20240602180928077.png)

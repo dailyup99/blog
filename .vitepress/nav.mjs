@@ -20,19 +20,7 @@ export default [
       { text: "微前端", link: "/前端/微前端/微前端实战" },
       { text: "工程化", link: "/前端/工程化/00 邂逅Node-js开发" },
       { text: "可视化", link: "/前端/可视化/00 CSS3" },
-      {
-        text: "数据结构与算法",
-        items: [
-          {
-            text: "JavaScript版本",
-            link: "/前端/数据结构与算法/JS版本/00 数据结构与算法",
-          },
-          {
-            text: "TypeScript版本",
-            link: "/前端/数据结构与算法/TS版本/00 邂逅数据结构与算法",
-          },
-        ],
-      },
+      { text: "数据结构与算法", link: "/前端/数据结构与算法/00 邂逅数据结构与算法" },
       {
         text: "跨端",
         items: [

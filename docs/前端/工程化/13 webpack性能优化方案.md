@@ -854,6 +854,20 @@ npm install purgecss-webpack-plugin -D
 
 paths：表示要检测哪些目录下的内容需要被分析，这里我们可以使用glob；
 
+注意：这里安装的glob如果使用最新的8.x版本会有问题，所以我们安装7.x的版本
+
+8.x的版本打印
+
+```json
+glob.sync(`${path.resolve(__dirname, '../src')}/**/*`, { nodir: true })
+```
+
+发现是个空数组，也就找不到文件
+
+```json
+npm install glob@7.* -D
+```
+
 默认情况下，Purgecss会将我们的html标签的样式移除掉，如果我们希望保留，可以添加一个safelist的属性；
 
 ```javascript
@@ -1178,16 +1192,85 @@ module.exports = {
 }
 ```
 
-## 阅读webpack源码的方法
+## **Webpack的启动流程**
 
-首先，去github官网把webpack源码下载下来
+![image-20240602195234881](http://139.196.79.103:9001/myimages/imgs/image-20240602195234881.png)
 
-然后，创建一个why的目录，名字随便取，src里面放一些自己写的代码，webpack.config.js配置和之前一样
+## **Webpack源码阅读**
 
-最主要的是这个build.js，在里面使用webpack进行打包
+第一步：下载webpack的源码
 
-怎么打包？
+https://github.com/webpack/webpack
 
-很简单，进入到wht目录，执行node build.js，就能在build.js中断点查看源码。
+第二步：安装项目相关的依赖
+
+```json
+npm install
+```
+
+第三步：编写自己的源代码
+
+这里我创建了一个 why 文件夹，里面存放了一些代码
+
+第四步：编写webpack的配置文件
+
+webpack.config.js
+
+第五步：编写启动的文件build.js
 
 <img src="http://139.196.79.103:9001/myimages/imgs/image-20240602001956927.png" alt="image-20240602001956927" style="zoom:67%;" />
+
+```javascript
+const webpack = require('../webpack');
+const config = require("./webpack.config");
+
+const compiler = webpack(config);
+
+compiler.run((err, stats) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(stats);
+  }
+});
+```
+
+## **创建Compiler**
+
+![image-20240602202049214](http://139.196.79.103:9001/myimages/imgs/image-20240602202049214.png)
+
+## **Compiler中run方法执行的Hook**
+
+![image-20240602202118752](http://139.196.79.103:9001/myimages/imgs/image-20240602202118752.png)
+
+## **Compilation对Module的处理**
+
+![image-20240602202139917](http://139.196.79.103:9001/myimages/imgs/image-20240602202139917.png)
+
+## **module的build阶段**
+
+![image-20240602202158384](http://139.196.79.103:9001/myimages/imgs/image-20240602202158384.png)
+
+## **输出asset阶段**
+
+![image-20240602202216182](http://139.196.79.103:9001/myimages/imgs/image-20240602202216182.png)
+
+## **Compiler和Compilation的区别**
+
+Compiler和Compilation的区别
+
+在webpack构建的之初就会创建的一个对象, 并且在webpack的整个生命周期都会存在(before - run - beforeCompiler - compile -
+
+make - finishMake - afterCompiler - done)
+
+只要是做webpack的编译, 都会先创建一个Compiler
+
+Compilation是到准备编译模块(比如main.js), 才会创建Compilation对象
+
+主要是存在于 compile - make 阶段主要使用的对象
+
+watch -> 源代码发生改变就需要重新编译模块
+
+Compiler可以继续使用(如果我修改webpack的配置, 那么需要重新执行run run build)
+
+Compilation需要创建一个新的Compilation对象
