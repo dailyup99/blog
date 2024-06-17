@@ -8,9 +8,7 @@ outline: deep
 
 我们的第一反应应该是流水，源源不断的流动；
 
-程序中的流也是类似的含义，我们可以想象当我们从一个文件中读取数据时，文件的二进制（字节）数据会源源不断的被读
-
-取到我们程序中；
+程序中的流也是类似的含义，我们可以想象当我们从一个文件中读取数据时，文件的二进制（字节）数据会源源不断的被读取到我们程序中；
 
 而这个一连串的字节，就是我们程序中的流；
 
@@ -88,7 +86,7 @@ const fs = require('fs')
 const readStream = fs.createReadStream('./aaa.txt', {
  start: 8,
  end: 22,
- highWaterMark: 3
+ highWaterMark: 3 // 每次读取3个字节
 })
 // 可以通过监听data事件，获取读取到的数据
 readStream.on('data', (data) => {
@@ -100,5 +98,180 @@ readStream.on('data', (data) => {
     readStream.resume() // 恢复
   }, 2000)
 })
+```
+
+## 可读流的其他事件
+
+```javascript
+const fs = require('fs')
+
+// 1.通过流读取文件
+const readStream = fs.createReadStream('./aaa.txt', {
+ start: 8,
+ end: 22,
+ highWaterMark: 3
+})
+
+
+// 2.监听读取到的数据
+readStream.on('data', (data) => {
+  console.log(data.toString())
+})
+
+// 3.补充其他的事件监听
+readStream.on('open', (fd) => {
+  console.log('通过流将文件打开~', fd)
+})
+
+readStream.on('end', () => {
+  console.log('已经读取到end位置')
+})
+
+readStream.on('close', () => {
+  console.log('文件读取结束, 并且被关闭')
+})
+```
+
+## **Writable**
+
+**之前我们写入一个文件的方式是这样的：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617232521594.png" alt="image-20240617232521594" style="zoom:67%;" />
+
+**这种方式相当于一次性将所有的内容写入到文件中，但是这种方式也有很多问题：**
+
+比如我们希望一点点写入内容，精确每次写入的位置等；
+
+**这个时候，我们可以使用 createWriteStream，我们来看几个参数，更多参数可以参考官网：**
+
+flags：默认是w，如果我们希望是追加写入，可以使用 a或者 a+；
+
+start：写入的位置；
+
+## **Writable的使用**
+
+**我们进行一次简单的写入**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617232912162.png" alt="image-20240617232912162" style="zoom:67%;" />
+
+**你可以监听open事件：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617232929485.png" alt="image-20240617232929485" style="zoom:67%;" />
+
+## **close的监听**
+
+**我们会发现，我们并不能监听到 close 事件：**
+
+这是因为写入流在打开后是不会自动关闭的；
+
+我们必须手动关闭，来告诉Node已经写入结束了；
+
+并且会发出一个 finish 事件的；
+
+**另外一个非常常用的方法是 end：end方法相当于做了两步操作： write传入的数据和调用close方法；**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617233058882.png" alt="image-20240617233058882" style="zoom:67%;" />
+
+```javascript
+const fs = require('fs')
+
+// 1.一次性写入内容
+// fs.writeFile('./bbb.txt', 'hello world', {
+//   encoding: 'utf-8',
+//   flag: 'a+'
+// }, (err) => {
+//   console.log('写入文件结果:', err)
+// })
+
+// 2.创建一个写入流
+const writeStream = fs.createWriteStream('./ccc.txt', {
+  flags: 'a'
+})
+
+writeStream.on('open', (fd) => {
+  console.log('文件被打开', fd)
+})
+
+writeStream.write('coderwhy')
+writeStream.write('aaaa')
+writeStream.write('bbbb', (err) => {
+  console.log("写入完成:", err)
+})
+
+writeStream.on('finish', () => {
+  console.log('写入完成了')
+})
+
+writeStream.on('close', () => {
+  console.log('文件被关闭~')
+})
+
+// 3.写入完成时, 需要手动去掉用close方法
+// writeStream.close()
+
+// 4.end方法: 
+// 操作一: 将最后的内容写入到文件中, 并且关闭文件
+// 操作二: 关闭文件
+writeStream.end('哈哈哈哈')
+```
+
+## 可写流的start属性
+
+```javascript
+const fs = require('fs')
+
+const writeStream = fs.createWriteStream('./ddd.txt', {
+  // mac上面是没有问题
+  // flags: 'a+',
+  // window上面是需要使用r+
+  flags: 'r+',
+  start: 5 // 如果想在第5个位置写入，window上必须使用r+
+})
+
+writeStream.write('my name is why')
+writeStream.close()
+```
+
+## **pipe方法**
+
+**正常情况下，我们可以将读取到的 输入流，手动的放到 输出流中进行写入：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617233733538.png" alt="image-20240617233733538" style="zoom:67%;" />
+
+**我们也可以通过pipe来完成这样的操作：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240617233744414.png" alt="image-20240617233744414" style="zoom:67%;" />
+
+文件的拷贝流操作
+
+```javascript
+const fs = require('fs')
+
+// 1.方式一: 一次性读取和写入文件
+// fs.readFile('./foo.txt', (err, data) => {
+//   console.log(data)
+//   fs.writeFile('./foo_copy01.txt', data, (err) => {
+//     console.log('写入文件完成', err)
+//   })
+// })
+
+
+// 2.方式二: 创建可读流和可写流
+// const readStream = fs.createReadStream('./foo.txt')
+// const writeStream = fs.createWriteStream('./foo_copy02.txt')
+
+// readStream.on('data', (data) => {
+//   writeStream.write(data)
+// })
+
+// readStream.on('end', () => [
+//   writeStream.close()
+// ])
+
+// 3.在可读流和可写流之间建立一个管道 将foo.txt拷贝一份到foo_copy03.txt
+const readStream = fs.createReadStream('./foo.txt')
+const writeStream = fs.createWriteStream('./foo_copy03.txt')
+
+readStream.pipe(writeStream)
 ```
 
