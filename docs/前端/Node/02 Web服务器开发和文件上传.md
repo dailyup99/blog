@@ -275,3 +275,154 @@ const writeStream = fs.createWriteStream('./foo_copy03.txt')
 readStream.pipe(writeStream)
 ```
 
+## **Web服务器**
+
+**什么是Web服务器？**
+
+当应用程序（客户端）需要某一个资源时，可以向一台服务器，通过Http请求获取到这个资源；
+
+提供资源的这个服务器，就是一个Web服务器；
+
+![image-20240620215749705](http://139.196.79.103:9001/myimages/imgs/image-20240620215749705.png)
+
+**目前有很多开源的Web服务器：Nginx、Apache（静态）、Apache Tomcat（静态、动态）、Node.js**
+
+## **http模块**
+
+**在Node中，提供web服务器的资源返回给浏览器，主要是通过http模块。**
+
+**我们先简单对它做一个使用：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240620215832754.png" alt="image-20240620215832754" style="zoom:67%;" />
+
+```javascript
+const http = require('http')
+
+
+// 创建一个http对应的服务器
+const server = http.createServer((request, response) => {
+  // request对象中包含本次客户端请求的所有信息
+  // 请求的url
+  // 请求的method
+  // 请求的headers
+  // 请求携带的数据
+
+  // response对象用于给客户端返回结果的
+  response.end("Hello World")
+})
+
+// 开启对应的服务器, 并且告知需要监听的端口
+// 监听端口时, 监听1024以上的端口, 65535以下的端口
+// 1025~65535之间的端口
+// 2个字节 => 256*256 => 65536 => 0~65535
+server.listen(8000, () => {
+  console.log('服务器已经开启成功了~')
+})
+```
+
+## **创建服务器**
+
+**创建服务器对象，我们是通过 createServer 来完成的**
+
+http.createServer会返回服务器的对象；
+
+底层其实使用直接 new Server 对象。
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240620220709369.png" alt="image-20240620220709369" style="zoom:67%;" />
+
+**那么，当然，我们也可以自己来创建这个对象：**
+
+<img src="http://139.196.79.103:9001/myimages/imgs/image-20240620220728298.png" alt="image-20240620220728298" style="zoom:67%;" />
+
+**上面我们已经看到，创建Server时会传入一个回调函数，这个回调函数在被调用时会传入两个参数：**
+
+req：request请求对象，包含请求相关的信息；
+
+res：response响应对象，包含我们要发送给客户端的信息；
+
+```javascript
+const http = require('http')
+
+// 1.创建一个服务器
+const server1 = http.createServer((req, res) => {
+  res.end("2000端口服务器返回的结果~")
+})
+server1.listen(2000, () => {
+  console.log('2000端口对应的服务器启动成功~')
+})
+
+// 2.创建第二个服务器
+const server2 = http.createServer((req, res) => {
+  res.end("3000端口服务器返回的结果~")
+})
+server2.listen(3000, () => {
+  console.log('3000端口对应的服务器启动成功~')
+})
+
+
+// 3.创建第三个服务器
+// const server3 = new http.Server()
+```
+
+## **监听主机和端口号**
+
+**Server**通过listen方法来开启服务器，并且在某一个主机和端口上监听网络请求：
+
+也就是当我们通过 ip:port的方式发送到我们监听的Web服务器上时；
+
+我们就可以对其进行相关的处理；
+
+**listen函数有三个参数：**
+
+端口port: 可以不传, 系统会默认分配端, 后续项目中我们会写入到环境变量中；
+
+主机host: 通常可以传入localhost、ip地址127.0.0.1、或者ip地址0.0.0.0，默认是0.0.0.0；
+
+* localhost：本质上是一个域名，通常情况下会被解析成127.0.0.1；
+* 127.0.0.1：回环地址（Loop Back Address），表达的意思其实是我们主机自己发出去的包，直接被自己接收；
+  * 正常的数据库包进出 应用层 - 传输层 - 网络层 - 数据链路层 - 物理层 ；
+  * 而回环地址，是在网络层直接就被获取到了，是不会进出数据链路层和物理层的；
+  * 比如我们监听 127.0.0.1时，在同一个网段下的主机中，通过ip地址是不能访问的；
+* 0.0.0.0：
+  * 监听IPV4上所有的地址，再根据端口找到不同的应用程序；
+  * 比如我们监听 0.0.0.0时，在同一个网段下的主机中，通过ip地址是可以访问的；
+
+回调函数：服务器启动成功时的回调函数；
+
+## 额外知识点补充
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  console.log('服务器被访问~')
+
+  res.end('hello world aaaa')
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+我们在开启一个sever服务器的时候，发现上面的服务器被访问打印了2次，这是因为在浏览器除了访问`localhost:8000/`，还会访问`localhost:8000/favicon`，而且浏览器只能测试get请求，没法测试post请求。
+
+基于以上两点，我们推荐使用postman这个工具。
+
+首先，我们执行
+
+```json
+node 03_额外小知识点的补充.js
+```
+
+开启服务器，然后在postman工具中发送请求，输入地址，点击send即可。
+
+![image-20240620224906242](http://139.196.79.103:9001/myimages/imgs/image-20240620224906242.png)
+
+我们发现，每次改一个东西都要重新执行node 03_额外小知识点的补充.js来重启服务器，比较麻烦，我们可以通过全局安装nodemon这个工具，就可以自动重启node服务器。
+
+## **request对象**
+
