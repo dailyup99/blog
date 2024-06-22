@@ -9,11 +9,11 @@ hero:
   actions:
     - theme: brand
       text: 前端进阶
-      link: /前端/数据结构与算法/00 邂逅数据结构与算法
-      target: _blank
+      link: /前端/JS高级/00 this指向
+      # target: _blank
     - theme: alt
       text: 软技能
-      link: /api-examples
+      link: /软技能/学习方法/00 一通百通，搞定各领域的全能自学法
 
 features:
   - icon: 📖

@@ -426,3 +426,105 @@ node 03_额外小知识点的补充.js
 
 ## **request对象**
 
+**在向服务器发送请求时，我们会携带很多信息，比如：**
+
+本次请求的URL，服务器需要根据不同的URL进行不同的处理；
+
+本次请求的请求方式，比如GET、POST请求传入的参数和处理的方式是不同的；
+
+本次请求的headers中也会携带一些信息，比如客户端信息、接受数据的格式、支持的编码格式等；
+
+等等...
+
+**这些信息，Node会帮助我们封装到一个request的对象中，我们可以直接来处理这个request对象：**
+
+![image-20240621203353293](http://139.196.79.103:9001/myimages/imgs/image-20240621203353293.png)
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  // request对象中包含哪些信息?
+  // 1.url信息
+  console.log(req.url)
+  // 2.method信息(请求方式)
+  console.log(req.method)
+  // 3.headers信息(请求信息)
+  console.log(req.headers)
+
+  res.end('hello world aaaa')
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+![image-20240621203824786](http://139.196.79.103:9001/myimages/imgs/image-20240621203824786.png)
+
+## **URL的处理**
+
+**客户端在发送请求时，会请求不同的数据，那么会传入不同的请求地址：**
+
+比如 `http://localhost:8000/login`；
+
+比如 `http://localhost:8000/products`;
+
+**服务器端需要根据不同的请求地址，作出不同的响应：**
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  const url = req.url
+
+  if (url === '/login') {
+    res.end('登录成功~')
+  } else if (url === '/products') {
+    res.end('商品列表~')
+  } else if (url === '/lyric') {
+    res.end('天空好想下雨, 我好想住你隔壁!')
+  }
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+区分不同method
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  const url = req.url
+  const method = req.method
+
+  if (url === '/login') {
+    if (method === 'POST') { // 只有当请求地址为/login并且请求方式为POST才能登录成功
+      res.end('登录成功~')
+    } else {
+      res.end('不支持的请求方式, 请检测你的请求方式~')
+    }
+  } else if (url === '/products') {
+    res.end('商品列表~')
+  } else if (url === '/lyric') {
+    res.end('天空好想下雨, 我好想住你隔壁!')
+  }
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
