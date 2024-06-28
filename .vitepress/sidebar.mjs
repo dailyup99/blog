@@ -183,6 +183,12 @@ export default {
       {text:'02 Bootstrap入门到实战',link:'/前端/JQuery/02 Bootstrap入门到实战'},
     ]
   }],
+  '/前端/学习资源/':[{
+    text:'学习资源',
+    items:[
+      {text:'学习资源',link:'/前端/学习资源/学习资源'},
+    ]
+  }],
   '/前端/可视化/':[{
     text:'可视化',
     items:[

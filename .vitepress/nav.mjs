@@ -29,6 +29,7 @@ export default [
         ],
       },
       { text: "JQuery", link: "/前端/JQuery/00 邂逅jQuery" },
+      { text: "学习资源", link: "/前端/学习资源/学习资源.md" },
     ],
   },
   {
