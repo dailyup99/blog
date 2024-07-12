@@ -424,7 +424,7 @@ node 03_额外小知识点的补充.js
 
 我们发现，每次改一个东西都要重新执行node 03_额外小知识点的补充.js来重启服务器，比较麻烦，我们可以通过全局安装nodemon这个工具，就可以自动重启node服务器。
 
-## **request对象**
+## **http服务器-request对象**
 
 **在向服务器发送请求时，我们会携带很多信息，比如：**
 
@@ -465,7 +465,7 @@ server.listen(8000, () => {
 
 ![image-20240621203824786](http://139.196.79.103:9001/myimages/imgs/image-20240621203824786.png)
 
-## **URL的处理**
+## http服务器-区分不同url
 
 **客户端在发送请求时，会请求不同的数据，那么会传入不同的请求地址：**
 
@@ -498,7 +498,24 @@ server.listen(8000, () => {
 })
 ```
 
-区分不同method
+## http服务器-区分不同method
+
+**在Restful规范（设计风格）中，我们对于数据的增删改查应该通过不同的请求方式：**
+
+* GET：查询数据；
+* POST：新建数据；
+* PATCH：更新数据；
+* DELETE：删除数据；
+
+**所以，我们可以通过判断不同的请求方式进行不同的处理。**
+
+比如创建一个用户；
+
+请求接口为 /users；
+
+请求方式为 POST请求；
+
+携带数据 username和password；
 
 ```javascript
 const http = require('http')
@@ -528,3 +545,192 @@ server.listen(8000, () => {
 })
 ```
 
+## nodemon工具
+
+前面每次开启服务我们都需要执行比如
+
+```json 
+node 06_http服务器-区分不同method.js
+```
+
+![image-20240713000401990](http://139.196.79.103:9001/myimages/imgs/202407130004144.png)
+
+但是这样会有个弊端，假如06_http服务器-区分不同method.js这个文件发生了修改，那么就又要重新执行命令非常麻烦。
+
+有没有办法可以自动监听到06_http服务器-区分不同method.js这个文件的变化，自动开启服务呢？
+
+答案是使用nodemon，我们使用npm安装即可
+
+```json
+npm install nodemon -g
+```
+
+接着，就执行
+
+```json
+nodemon 06_http服务器-区分不同method.js
+```
+
+这样一旦文件发生变化，就会自动执行。
+
+## request参数解析-query参数
+
+**那么如果用户发送的地址中还携带一些额外的参数呢？**
+
+**我们如何对它进行解析呢？使用内置模块url：**
+
+**但是 query 信息如何可以获取呢？**
+
+```javascript
+const http = require('http')
+const url = require('url')
+const qs = require('querystring')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  // 1.参数一: query类型参数
+  // /home/list?offset=100&size=20
+  // 1.1.解析url
+  const urlString = req.url
+  const urlInfo = url.parse(urlString)
+
+  // 1.2.解析query: offset=100&size=20
+  const queryString = urlInfo.query
+  const queryInfo = qs.parse(queryString)
+  console.log(queryInfo.offset, queryInfo.size) // 100 20
+
+  res.end('hello world aaaa bbb')
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+## request参数解析-body参数
+
+在postman工具中，选择body，选择raw，选择JSON格式，输入以下内容
+
+![image-20240713003417106](http://139.196.79.103:9001/myimages/imgs/202407130034194.png)
+
+```javascript
+const http = require('http')
+const url = require('url')
+const qs = require('querystring')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  // 获取参数: body参数
+  req.setEncoding('utf-8')
+
+  // request对象本质是上一个readable可读流
+  let isLogin = false
+  req.on('data', (data) => {
+    const dataString = data
+    const loginInfo = JSON.parse(dataString)
+    // 判断用户名和密码都正确才登录成功
+    if (loginInfo.name === 'coderwhy' && loginInfo.password === '123456') {
+      isLogin = true
+    } else {
+      isLogin = false
+    }
+  })
+
+  req.on('end', () => {
+    if (isLogin) {
+      res.end('登录成功, 欢迎回来~')
+    } else {
+      res.end('账号或者密码错误, 请检测登录信息~')
+    }
+  })
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+## request参数解析-headers参数
+
+**在request对象的header中也包含很多有用的信息，客户端会默认传递过来一些信息：**
+
+![image-20240713004555420](http://139.196.79.103:9001/myimages/imgs/202407130045491.png)
+
+**content-type是这次请求携带的数据的类型：**
+
+* application/x-www-form-urlencoded：表示数据被编码成以 '&' 分隔的键 - 值对，同时以 '=' 分隔键和值
+* application/json：表示是一个json类型；
+* text/plain：表示是文本类型；
+* application/xml：表示是xml类型；
+* multipart/form-data：表示是上传文件；
+
+**content-length：文件的大小长度**
+
+**keep-alive：**
+
+http是基于TCP协议的，但是通常在进行一次请求和响应结束后会立刻中断；
+
+在http1.0中，如果想要继续保持连接：
+
+* 浏览器需要在请求头中添加 connection: keep-alive；
+* 服务器需要在响应头中添加 connection:keey-alive；
+* 当客户端再次放请求时，就会使用同一个连接，直接一方中断连接；
+
+在http1.1中，所有连接默认是 connection: keep-alive的；
+
+* 不同的Web服务器会有不同的保持 keep-alive的时间；
+* Node中默认是5s中；
+
+**accept-encoding**：告知服务器，客户端支持的文件压缩格式，比如js文件可以使用gzip编码，对应 .gz文件；
+
+**accept**：告知服务器，客户端可接受文件的格式类型；
+
+**user-agent**：客户端相关的信息；
+
+```javascript
+const http = require('http')
+const url = require('url')
+const qs = require('querystring')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  console.log(req.headers)
+  console.log(req.headers['content-type'])
+
+  // cookie/session/token
+  const token = req.headers['authorization']
+  console.log(token)
+
+  res.end('查看header的信息~')
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+如果这里选择的是raw和JSON，那么请求头的content-type就是application/json
+
+![image-20240713005153646](http://139.196.79.103:9001/myimages/imgs/202407130051717.png)
+
+![image-20240713005123202](http://139.196.79.103:9001/myimages/imgs/202407130051290.png)
+
+如果选择的是x-www-form-urlencoded，那么content-type就是application/x-www-form-urlencoded
+
+![image-20240713005217979](http://139.196.79.103:9001/myimages/imgs/202407130052043.png)
+
+![image-20240713005319605](http://139.196.79.103:9001/myimages/imgs/202407130053687.png)
+
+
+
+如果token这里选择的是Bear Token，那么就能打印token
+
+![image-20240713005555574](http://139.196.79.103:9001/myimages/imgs/202407130055656.png)
+
+![image-20240713005536093](http://139.196.79.103:9001/myimages/imgs/202407130055201.png)
