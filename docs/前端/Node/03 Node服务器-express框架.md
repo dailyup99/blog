@@ -748,13 +748,13 @@ app.listen(9000, () => {
 
 ## **传递参数params和query**
 
-**请求地址：http://localhost:8000/login/abc/why**
+**请求地址：`http://localhost:8000/login/abc/why`**
 
 **获取参数：**
 
 <img src="http://139.196.79.103:9001/myimages/imgs/202407131933224.png" alt="image-20240713193345165" style="zoom:67%;" />
 
-**请求地址：http://localhost:8000/login?username=why&password=123**
+**请求地址：`http://localhost:8000/login?username=why&password=123`**
 
 **获取参数：**
 
