@@ -734,3 +734,318 @@ server.listen(8000, () => {
 ![image-20240713005555574](http://139.196.79.103:9001/myimages/imgs/202407130055656.png)
 
 ![image-20240713005536093](http://139.196.79.103:9001/myimages/imgs/202407130055201.png)
+
+## **返回响应结果**
+
+**如果我们希望给客户端响应的结果数据，可以通过两种方式：**
+
+Write方法：这种方式是直接写出数据，但是并没有关闭流；
+
+end方法：这种方式是写出最后的数据，并且写出后会关闭流；
+
+![image-20240713090036380](http://139.196.79.103:9001/myimages/imgs/202407130900448.png)
+
+**如果我们没有调用 end，客户端将会一直等待结果：**
+
+所以客户端在发送网络请求时，都会设置超时时间。
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  // res: response对象 => Writable可写流
+  // 1.响应数据方式一: write
+  res.write("Hello World")
+  res.write("哈哈哈哈")
+
+  // // 2.响应数据方式二: end
+  res.end("本次写出已经结束")
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+## **返回状态码**
+
+**Http状态码（Http Status Code）是用来表示Http响应状态的数字代码：**
+
+Http状态码非常多，可以根据不同的情况，给客户端返回不同的状态码；
+
+MDN响应码解析地址：https://developer.mozilla.org/zh-CN/docs/web/http/status
+
+![image-20240713090943499](http://139.196.79.103:9001/myimages/imgs/202407130909581.png)
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {  
+  // 响应状态码
+  // 1.方式一: statusCode
+  // res.statusCode = 403
+
+  // 2.方式二: setHead 响应头
+  res.writeHead(401)
+
+  res.end('hello world aaaa')
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+![image-20240713091258871](http://139.196.79.103:9001/myimages/imgs/202407130912964.png)
+
+## **响应头文件**
+
+**返回头部信息，主要有两种方式：**
+
+res.setHeader：一次写入一个头部信息；
+
+res.writeHead：同时写入header和status；
+
+![image-20240713091055404](http://139.196.79.103:9001/myimages/imgs/202407130910474.png)
+
+**Header设置 Content-Type有什么作用呢？**
+
+默认客户端接收到的是字符串，客户端会按照自己默认的方式进行处理；
+
+```javascript
+const http = require('http')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+
+  // 设置header信息: 数据的类型以及数据的编码格式
+  // 1.单独设置某一个header
+  // res.setHeader('Content-Type', 'text/plain;charset=utf8;')
+
+  // 2.和http status code一起设置
+  res.writeHead(200, {
+    'Content-Type': 'application/json;charset=utf8;'
+  })
+
+  const list = [
+    { name: "why", age: 18 },
+    { name: "kobe", age: 30 },
+  ]
+  res.end(JSON.stringify(list))
+})
+
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log('服务器开启成功~')
+})
+```
+
+如果没有设置Content-Type，那么浏览器访问`localhost:8000`，就会是
+
+![image-20240713091710875](http://139.196.79.103:9001/myimages/imgs/202407130917936.png)
+
+设置之后
+
+![image-20240713091734347](http://139.196.79.103:9001/myimages/imgs/202407130917398.png)
+
+## **http请求**
+
+axios库可以在浏览器中使用，也可以在Node中使用：
+
+在浏览器中，axios使用的是封装xhr；
+
+在Node中，使用的是http内置模块；
+
+下面是使用http模块发送网络请求，注意：如果是post请求要主动调用end结束
+
+```javascript
+const http = require('http')
+
+// 1.使用http模块发送get请求
+// http.get('http://localhost:8000', (res) => {
+//   // 从可读流中获取数据
+//   res.on('data', (data) => {
+//     const dataString = data.toString()
+//     const dataInfo = JSON.parse(dataString)
+//     console.log(dataInfo)
+//   })
+// })
+
+// 2.使用http模块发送post请求
+const req = http.request({
+  method: 'POST',
+  hostname: 'localhost',
+  port: 8000
+}, (res) => {
+  res.on('data', (data) => {
+    const dataString = data.toString()
+    const dataInfo = JSON.parse(dataString)
+    console.log(dataInfo)
+  })
+})
+
+// 必须调用end, 表示写入内容完成
+req.end()
+
+```
+
+在Node中使用axios发送网络请求的本质是使用http模块
+
+```javascript
+const axios = require('axios')
+
+axios.get('http://localhost:8000').then(res => {
+  console.log(res.data)
+})
+```
+
+## **文件上传 – 错误示范**
+
+如果是一个很大的文件需要上传到服务器端，服务器端进行保存应该如何操作呢？
+
+使用postman发送一个post请求，选择form-data
+
+![image-20240713100835696](http://139.196.79.103:9001/myimages/imgs/202407131008773.png)
+
+```javascript
+const http = require("http");
+const fs = require('fs')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  // 创建writable的stream
+  const writeStream = fs.createWriteStream('./foo.png', {
+    flags: 'a+'
+  })
+
+  // req.pipe(writeStream)
+
+  // 客户端传递的数据是表单数据(请求体)
+  req.on("data", (data) => {
+    console.log(data);
+    writeStream.write(data)
+  });
+
+  req.on("end", () => {
+    // console.log("数据传输完成~");
+    // writeStream.close()
+    res.end("文件上传成功~");
+  });
+});
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log("服务器开启成功~");
+});
+
+```
+
+先开启服务，然后postman发送请求，就会把123.jpg，写入到foo.png，但是当打开foo.png的时候发现是打不开的。
+
+这是因为foo.png包含了一些冗余的信息是我们不需要的，会返回key为photo，value为123.jpg相关的信息，我们只需要拿到图片即可。
+
+## **文件上传 – 正确做法**
+
+![image-20240713104020007](http://139.196.79.103:9001/myimages/imgs/202407131040116.png)
+
+![image-20240713104042055](http://139.196.79.103:9001/myimages/imgs/202407131040162.png)
+
+```javascript
+const http = require("http");
+const fs = require('fs')
+
+// 1.创建server服务器
+const server = http.createServer((req, res) => {
+  req.setEncoding('binary')
+
+  const boundary = req.headers['content-type'].split('; ')[1].replace('boundary=', '')
+  console.log(boundary)
+
+  // 客户端传递的数据是表单数据(请求体)
+  let formData = ''
+  req.on("data", (data) => {
+    formData += data
+  });
+
+  req.on("end", () => {
+    console.log(formData)
+    // 1.截图从image/jpeg位置开始后面所有的数据
+    const imgType = 'image/jpeg'
+    const imageTypePosition = formData.indexOf(imgType) + imgType.length
+    let imageData = formData.substring(imageTypePosition)
+
+    // 2.imageData开始位置会有两个空格
+    imageData = imageData.replace(/^\s\s*/, '')
+
+    // 3.替换最后的boundary
+    imageData = imageData.substring(0, imageData.indexOf(`--${boundary}--`))
+
+    // 4.将imageData的数据存储到文件中
+    fs.writeFile('./bar.png', imageData, 'binary', () => {
+      console.log('文件存储成功')
+      res.end("文件上传成功~");
+    })
+  });
+});
+
+// 2.开启server服务器
+server.listen(8000, () => {
+  console.log("服务器开启成功~");
+});
+```
+
+我们最终截取的是下图括号的部分，但是需要把\r和\n这些去掉
+
+![image-20240713104514126](http://139.196.79.103:9001/myimages/imgs/202407131045219.png)
+
+## 文件上传 - 浏览器
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <input type="file">
+  <button>上传</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 文件上传的逻辑
+    const btnEl = document.querySelector('button')
+    btnEl.onclick = function() {
+      // 1.创建表单对象
+      const formData = new FormData()
+
+      // 2.将选中的图标文件放入表单
+      const inputEl = document.querySelector('input')
+      formData.set('photo', inputEl.files[0])
+
+      // 3.发送post请求, 将表单数据携带到服务器(axios)
+      axios({
+        method: 'post',
+        url: 'http://localhost:8000',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+    }
+  </script>
+
+</body>
+</html>
+```
+
