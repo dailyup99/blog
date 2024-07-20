@@ -106,7 +106,7 @@ export default {
       {text:'06 组件间通信',link:'/前端/Vue/06 组件间通信'},
       {text:'07 插槽Slot-非父子通信',link:'/前端/Vue/07 插槽Slot-非父子通信'},
       {text:'08 组件化额外知识补充',link:'/前端/Vue/08 组件化额外知识补充'},
-      {text:'09 Vu3-Composition-API',link:'/前端/Vue/09 Vu3-Composition-API'},
+      {text:'09 Vue3-Composition-API',link:'/前端/Vue/09 Vue3-Composition-API'},
       {text:'10 Vue3-Composition-API',link:'/前端/Vue/10 Vue3-Composition-API'},
       {text:'11 Vue-Router详解',link:'/前端/Vue/11 Vue-Router详解'},
       {text:'12 Vuex状态管理',link:'/前端/Vue/12 Vuex状态管理'},
@@ -120,7 +120,7 @@ export default {
   '/前端/TS/':[{
     text:'TypeScript',
     items:[
-      {text:'00 邂逅TypeScript语法',link:'/前端/TS/00 邂逅TypeScript语法'},
+      {text:'00 邂逅TS语法',link:'/前端/TS/00 邂逅TS语法'},
       {text:'01 语法细节',link:'/前端/TS/01 语法细节'},
       {text:'02 面向对象',link:'/前端/TS/02 面向对象'},
       {text:'03 泛型编程',link:'/前端/TS/03 泛型编程'},

@@ -14,7 +14,7 @@ export default [
       },
       { text: "Vue", link: "/前端/Vue/00 邂逅Vue.js开发" },
       { text: "React", link: "/前端/React/00 邂逅React开发" },
-      { text: "TypeScript", link: "/前端/TS/00 邂逅TypeScript语法" },
+      { text: "TypeScript", link: "/前端/TS/00 邂逅TS语法" },
       { text: "NodeJs", link: "/前端/Node/00 邂逅NodeJs开发" },
       { text: "SSR", link: "/前端/SSR/00 Node后端渲染+Vue3 SSR" },
       { text: "微前端", link: "/前端/微前端/微前端实战" },
