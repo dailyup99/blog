@@ -173,6 +173,7 @@ export default {
       {text:'05 MySQL数据库',link:'/前端/Node/05 MySQL数据库'},
       {text:'06 MySQL多表查询',link:'/前端/Node/06 MySQL多表查询'},
       {text:'07 Node中操作MySQL',link:'/前端/Node/07 Node中操作MySQL'},
+      {text:'08 Node项目实战',link:'/前端/Node/08 Node项目实战'},
     ]
   }],
   '/前端/JQuery/':[{
