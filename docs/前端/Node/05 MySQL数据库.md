@@ -136,9 +136,9 @@ mysql --version
 
 两种方式的区别在于输入密码是直接输入，还是另起一行以密文的形式输入；
 
-```json
+```javascript
 # 方式一：
-mysql -uroot -pCoderwhy888.
+mysql -uroot -pCh12
 # 方式二：
 mysql -uroot -p
 Enter password: your password
@@ -148,7 +148,7 @@ Enter password: your password
 
 **我们说过，一个数据库软件中，可以包含很多个数据库，如何查看数据库？**
 
-```json
+```javascript
 show databases;
 ```
 
@@ -161,3 +161,744 @@ performance_schema：性能数据库，记录着MySQL Server数据库引擎在�
 mysql：用于存储数据库管理者的用户信息、权限信息以及一些日志信息等；
 
 sys：相当于是一个简易版的performance_schema，将性能数据库中的数据汇总成更容易理解的形式；
+
+## **终端操作数据库 – 创建数据库-表**
+
+**在终端直接创建一个属于自己的新的数据库coderhub（一般情况下一个新的项目会对应一个新的数据库）。**
+
+```javascript
+create database coderhub;
+```
+
+**使用我们创建的数据库coderhub：**
+
+```javascript
+use coderhub;
+```
+
+**在数据中，创建一张表：**
+
+```javascript
+create table user(
+name varchar(20),
+age int,
+height double
+);
+# 插入数据
+insert into user (name, age, height) values ('why', 18, 1.88);
+insert into user (name, age, height) values ('kobe', 40, 1.98);
+# 查询数据
+select * from user;
+```
+
+<img src="http://139.196.79.103:9001/myimages/imgs/202407192359377.png" alt="image-20240719235922316" style="zoom:67%;" />
+
+## **GUI工具的介绍**
+
+**我们会发现在终端操作数据库有很多不方便的地方：**
+
+语句写出来没有高亮，并且不会有任何的提示；
+
+复杂的语句分成多行，格式看起来并不美观，很容易出现错误；
+
+终端中查看所有的数据库或者表非常的不直观和不方便；
+
+等等...
+
+**所以在开发中，我们可以借助于一些GUI工具来帮助我们连接上数据库，之后直接在GUI工具中操作就会非常方便。**
+
+**常见的MySQL的GUI工具有很多，这里推荐几款：**
+
+Navicat：个人最喜欢的一款工作，但是是收费的（有免费的试用时间）；
+
+SQLYog：一款免费的SQL工具；
+
+TablePlus：常用功能都可以使用，但是会多一些限制（比如只能开两个标签页）；
+
+## **Navicat**
+
+百度搜索Navicat，然后下载试用版本。
+
+![image-20240720001129158](http://139.196.79.103:9001/myimages/imgs/202407200011214.png)
+
+## **认识SQL语句**
+
+**我们希望操作数据库（特别是在程序中），就需要有和数据库沟通的语言，这个语言就是SQL：**
+
+SQL是Structured Query Language，称之为结构化查询语言，简称SQL；
+
+使用SQL编写出来的语句，就称之为SQL语句；
+
+SQL语句可以用于对数据库进行操作；
+
+**事实上，常见的关系型数据库SQL语句都是比较相似的，所以你学会了MySQL中的SQL语句，之后去操作比如Oracle或者其他**
+
+**关系型数据库，也是非常方便的。**
+
+**SQL语句的常用规范：**
+
+通常关键字使用大写的，比如CREATE、TABLE、SHOW等等；
+
+一条语句结束后，需要以 ; 结尾；
+
+如果遇到关键字作为表明或者字段名称，可以使用``包裹;
+
+## **SQL语句的分类**
+
+**常见的SQL语句我们可以分成四类：**
+
+DDL（Data Definition Language）：数据定义语言；
+
+* 可以通过DDL语句对数据库或者表进行：创建、删除、修改等操作；
+
+DML（Data Manipulation Language）：数据操作语言；
+
+* 可以通过DML语句对表进行：添加、删除、修改等操作；
+
+DQL（Data Query Language）：数据查询语言；
+
+* 可以通过DQL从数据库中查询记录；（重点）
+
+DCL（Data Control Language）：数据控制语言；
+
+* 对数据库、表格的权限进行相关访问控制操作；
+
+接下来我们对他们进行一个个的学习和掌握。
+
+## **数据库的操作（一）**
+
+**查看当前数据库：**
+
+```javascript
+# 查看所有的数据
+SHOW DATABASES;
+# 使用某一个数据
+USE coderhub;
+# 查看当前正在使用的数据库
+SELECT DATABASE();
+```
+
+**创建新的数据库：**
+
+```javascript
+# 创建数据库语句
+CREATE DATABASE bilibili;
+CREATE DATABASE IF NOT EXISTS bilibili;
+CREATE DATABASE IF NOT EXISTS bilibili
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+```
+
+## **数据库的操作（二）**
+
+**删除数据库：**
+
+```javascript
+# 删除数据库
+DROP DATABASE bilibili;
+DROP DATABASE IF EXIT bilibili;
+```
+
+**修改数据库：**
+
+```javascript
+# 修改数据库的字符集和排序规则
+ALTER DATABASE bilibili CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
+```
+
+首先，打开Navicat工具，然后新建查询
+
+<img src="http://139.196.79.103:9001/myimages/imgs/202407200036337.png" alt="image-20240720003627304" style="zoom:80%;" />
+
+接着，选中要执行的语句，运行已选择的
+
+<img src="http://139.196.79.103:9001/myimages/imgs/202407200038360.png" alt="image-20240720003801316" style="zoom:80%;" />
+
+创建一个新的数据库或者删除一个数据库，右击刷新即可
+
+![image-20240720004035662](http://139.196.79.103:9001/myimages/imgs/202407200040710.png)
+
+```javascript
+-- 对数据库进行操作:
+-- 1.查看当前所有的数据库
+SHOW DATABASES;
+
+-- 2.使用某一个数据库
+USE music_db;
+
+
+-- 3.查看目前哪一个数据是选中(正在使用的数据)
+SELECT DATABASE();
+
+-- 4.创建一个新的数据库
+-- CREATE DATABASE test_demo;
+CREATE DATABASE IF NOT EXISTS test_demo;
+
+-- 5.删除某一个数据库
+DROP DATABASE IF EXISTS test_demo;
+
+-- 6.修改数据库(了解, 自己演练)
+```
+
+## **数据表的操作**
+
+**查看数据表**
+
+```javascript
+# 查看所有的数据表
+SHOW TABLES;
+# 查看某一个表结构
+DESC user;
+```
+
+**创建数据表**
+
+```javascript
+CREATE TABLE IF NOT EXISTS `users`(
+name VARCHAR(20),
+age INT,
+height DOUBLE
+);
+```
+
+## **SQL的数据类型 – 数字类型**
+
+**我们知道不同的数据会划分为不同的数据类型，在数据库中也是一样：**
+
+MySQL支持的数据类型有：数字类型，日期和时间类型，字符串（字符和字节）类型，空间类型和 JSON数据类型。
+
+**数字类型**
+
+MySQL的数字类型有很多：
+
+整数数字类型：INTEGER，INT，SMALLINT，TINYINT，MEDIUMINT，BIGINT；
+
+![image-20240720084347373](http://139.196.79.103:9001/myimages/imgs/202407200843438.png)
+
+浮点数字类型：FLOAT，DOUBLE（FLOAT是4个字节，DOUBLE是8个字节）；
+
+精确数字类型：DECIMAL，NUMERIC（DECIMAL是NUMERIC的实现形式）；
+
+## **SQL的数据类型 – 日期类型**
+
+**MySQL的日期类型也很多：**
+
+YEAR以YYYY格式显示值
+
+* 范围 1901到2155，和 0000。
+
+DATE类型用于具有日期部分但没有时间部分的值：
+
+* DATE以格式YYYY-MM-DD显示值 ；
+* 支持的范围是 '1000-01-01' 到 '9999-12-31'；
+
+DATETIME类型用于包含日期和时间部分的值：
+
+* DATETIME以格式'YYYY-MM-DD hh:mm:ss'显示值；
+* 支持的范围是1000-01-01 00:00:00到9999-12-31 23:59:59;
+
+TIMESTAMP数据类型被用于同时包含日期和时间部分的值：
+
+* TIMESTAMP以格式'YYYY-MM-DD hh:mm:ss'显示值；
+* 但是它的范围是UTC的时间范围：'1970-01-01 00:00:01'到'2038-01-19 03:14:07';
+
+另外：DATETIME或TIMESTAMP 值可以包括在高达微秒（6位）精度的后小数秒一部分（了解）
+
+* 比如DATETIME表示的范围可以是'1000-01-01 00:00:00.000000'到'9999-12-31 23:59:59.999999';
+
+## **SQL的数据类型 – 字符串类型**
+
+**MySQL的字符串类型表示方式如下：**
+
+CHAR类型在创建表时为固定长度，长度可以是0到255之间的任何值；
+
+* 在被查询时，会删除后面的空格；
+
+VARCHAR类型的值是可变长度的字符串，长度可以指定为0到65535之间的值；
+
+* 在被查询时，不会删除后面的空格；
+
+BINARY和VARBINARY 类型用于存储二进制字符串，存储的是字节字符串；
+
+* https://dev.mysql.com/doc/refman/8.0/en/binary-varbinary.html
+
+BLOB用于存储大的二进制类型；
+
+* 图片和音视频可以直接存储到数据库，但是一般不会这么做，体现不出数据库的优势，而是会保存一个本地文件的路径
+
+TEXT用于存储大的字符串类型；
+
+## **表约束**
+
+**主键：PRIMARY KEY**
+
+**一张表中，我们为了区分每一条记录的唯一性，必须有一个字段是永远不会重复，并且不会为空的，这个字段我们通常会将它设**
+
+**置为主键：**
+
+* 主键是表中唯一的索引；
+* 并且必须是NOT NULL的，如果没有设置 NOT NULL，那么MySQL也会隐式的设置为NOT NULL；
+* 主键也可以是多列索引，PRIMARY KEY(key_part, ...)**，我们一般称之为**联合主键；
+* 建议：开发中主键字段应该是和业务无关的，尽量不要使用业务字段来作为主键；
+
+**唯一：UNIQUE**
+
+某些字段在开发中我们希望是唯一的，不会重复的，比如手机号码、身份证号码等，这个字段我们可以使用UNIQUE来约束：
+
+使用UNIQUE约束的字段在表中必须是不同的；
+
+UNIQUE 索引允许NULL包含的列具有多个值NULL；
+
+**不能为空：NOT NULL**
+
+某些字段我们要求用户必须插入值，不可以为空，这个时候我们可以使用 NOT NULL 来约束；
+
+**默认值：DEFAULT**
+
+某些字段我们希望在没有设置值时给予一个默认值，这个时候我们可以使用 DEFAULT来完成；
+
+**自动递增：AUTO_INCREMENT**
+
+某些字段我们希望不设置值时可以进行递增，比如用户的id，这个时候可以使用AUTO_INCREMENT来完成；
+
+**外键约束也是最常用的一种约束手段，我们再讲到多表关系时，再进行讲解；**
+
+## **创建一个完整的表**
+
+**创建数据表**
+
+```javascript
+# 创建一张表
+CREATE TABLE IF NOT EXISTS `users`(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(20) NOT NULL,
+age INT DEFAULT 0,
+telPhone VARCHAR(20) DEFAULT '' UNIQUE NOT NULL
+);
+```
+
+**删除数据表**
+
+```javascript
+# 删除数据表
+DROP TABLE users;
+DROP TABLE IF EXISTS users;
+```
+
+## **修改表**
+
+**如果我们希望对表中某一个字段进行修改：**
+
+```javascript
+# 1.修改表名
+ALTER TABLE `moments` RENAME TO `moment`;
+# 2.添加一个新的列
+ALTER TABLE `moment` ADD `publishTime` DATETIME;
+ALTER TABLE `moment` ADD `updateTime` DATETIME;
+# 3.删除一列数据
+ALTER TABLE `moment` DROP `updateTime`;
+# 4.修改列的名称
+ALTER TABLE `moment` CHANGE `publishTime` `publishDate` DATE;
+# 5.修改列的数据类型
+ALTER TABLE `moment` MODIFY `id` INT;
+```
+
+DDL-表操作.sql
+
+```javascript
+-- 1.查看当前数据库中有哪些表
+SHOW TABLES;
+
+-- 2.查看某一张表的表结构
+DESC t_singer;
+
+-- 3.创建一张新的表
+-- 3.1.创建基本表结构
+CREATE TABLE IF NOT EXISTS `users`(
+	name VARCHAR(10),
+	age INT,
+	height DOUBLE
+);
+DROP TABLE IF EXISTS `users`;
+
+-- 3.2.创建完整的表结构
+CREATE TABLE IF NOT EXISTS `users`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(20) UNIQUE NOT NULL,
+	level INT DEFAULT 0,
+	telPhone VARCHAR(20) UNIQUE
+);
+
+-- 4.修改表结构
+-- 4.1. 修改表名字
+ALTER TABLE `users` RENAME TO `t_users`;
+-- 4.2. 添加新的字段(field)
+ALTER TABLE `t_users` ADD createTime TIMESTAMP;
+ALTER TABLE `t_users` ADD updateTime TIMESTAMP;
+-- 4.3. 修改字段的名称(field名称)
+ALTER TABLE `t_users` CHANGE createTime createAt DATETIME;
+-- 4.4. 删除某一个字段(field列)
+ALTER TABLE `t_users` DROP createTime;
+-- 4.5. 修改某一字段的类型(id int => bigint)
+ALTER TABLE `t_users` MODIFY id BIGINT;
+```
+
+右键表，设计表，可以查看类型
+
+![image-20240720093200505](http://139.196.79.103:9001/myimages/imgs/202407200932569.png)
+
+## **创建新表-删除操作**
+
+**DML：Data Manipulation Language（数据操作语言）**
+
+**创建一张新的表**
+
+```javascript
+CREATE TABLE IF NOT EXISTS `products`(
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+`title` VARCHAR(20),
+`description` VARCHAR(200),
+`price` DOUBLE,
+`publishTime` DATETIME
+);
+```
+
+**插入数据：**
+
+```javascript
+INSERT INTO `products` (`title`, `description`, `price`, `publishTime`) 
+VALUES ('iPhone', 'iPhone12只要998', 998.88, '2020-10-10'); 
+INSERT INTO `products` (`title`, `description`, `price`, `publishTime`) 
+VALUES ('huawei', 'iPhoneP40只要888', 888.88, '2020-11-11');
+```
+
+## **删除操作-更新操作**
+
+删除数据：
+
+```javascript
+# 删除数据
+# 会删除表中所有的数据
+DELETE FROM `products`;
+# 会删除符合条件的数据
+DELETE FROM `products` WHERE `title` = 'iPhone';
+```
+
+修改数据：
+
+```javascript
+# 修改数据
+# 会修改表中所有的数据
+UPDATE `products` SET `title` = 'iPhone12', `price` = 1299.88;
+# 会修改符合条件的数据
+UPDATE `products` SET `title` = 'iPhone12', `price` = 1299.88 WHERE `title` = 'iPhone';
+```
+
+如果我们希望修改完数据后，直接可以显示最新的更新时间：
+
+```javascript
+ALTER TABLE `products` ADD `updateTime` TIMESTAMP 
+DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+```
+
+DML-插入-删除-修改.sql
+
+```javascript
+-- 1.新建商品表
+CREATE TABLE IF NOT EXISTS `t_products`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(20) UNIQUE NOT NULL,
+	description VARCHAR(200) DEFAULT '',
+	price DOUBLE DEFAULT 0,
+	publishTime DATETIME
+);
+
+
+-- 2.DML语句: 插入数据
+INSERT INTO `t_products` (title, description, price, publishTime) VALUES ('iPhone100', 'iPhone100只要998', 998, '2122-09-10');
+INSERT INTO `t_products` (title, description, price, publishTime) VALUES ('小米99', '小米99只要888', 888, '2123-10-10');
+INSERT INTO `t_products` (title, description, price, publishTime) VALUES ('华为666', '华为666只要6666', 6666, '2166-06-06');
+
+-- 3.DML语句: 删除数据
+-- 3.1.删除表中所有的数据(慎重使用);
+-- DELETE FROM `t_products`;
+-- 3.2.根据条件, 比如id删除某一条
+-- DELETE FROM `t_products` WHERE id = 4;
+
+
+-- 4.DML语句: 修改数据
+-- 4.1.修改表中的所有数据;
+-- UPDATE `t_products` SET price = 8888;
+-- 4.2. 根据条件修改某一条数据
+-- UPDATE `t_products` SET price = 8888 WHERE id = 6;
+UPDATE `t_products` SET price = 12998, title = '华为至尊版' WHERE id = 6;
+
+
+-- 5.扩展: 当修改某一条数据时, 使用最新的时间记录
+ALTER TABLE `t_products` ADD `updateTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+```
+
+## **DQL语句**
+
+**DQL：Data Query Language（数据查询语言）**
+
+* SELECT用于从一个或者多个表中检索选中的行（Record）。
+
+**查询的格式如下：**
+
+```javascript
+SELECT select_expr [, select_expr]...
+  [FROM table_references]
+  [WHERE where_condition]
+  [ORDER BY expr [ASC | DESC]]
+  [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+  [GROUP BY expr]
+  [HAVING where_condition]
+```
+
+## **准备数据**
+
+**准备一张表：**
+
+```javascript
+CREATE TABLE IF NOT EXISTS `products` (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  brand VARCHAR(20),
+  title VARCHAR(100) NOT NULL,
+  price DOUBLE NOT NULL,
+  score DECIMAL(2,1),
+  voteCnt INT,
+  url VARCHAR(100),
+  pid INT
+);
+```
+
+```json
+yarn add mysql2
+```
+
+01_查询语句-准备数据.js
+
+```javascript
+const mysql = require('mysql2');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'Coderwhy888.',
+  database: 'coderhub'
+  });
+  const statement = `INSERT INTO products SET ?;`
+  const phoneJson = require('./phone.json');
+  for (let phone of phoneJson) {
+  connection.query(statement, phone);
+}
+```
+
+然后执行
+
+```javascript
+node 01_查询语句-准备数据.js
+```
+
+这样数据库coderhub的products表就会插入很多条数据，数据来自phone.json，是我们自己模拟的数据。
+
+## **基本查询**
+
+**查询所有的数据并且显示所有的字段：**
+
+```javascript
+SELECT * FROM `products`;
+```
+
+**查询title、brand、price：**
+
+```javascript
+SELECT title, brand, price FROM `products`;
+```
+
+**我们也可以给字段起别名：**
+
+**别名一般在多张表或者给客户端返回对应的key时会使用到；**
+
+```javascript
+SELECT title as t, brand as b, price as p FROM `products`;
+```
+
+## **where查询条件（一）**
+
+**在开发中，我们希望根据条件来筛选我们的数据，这个时候我们要使用条件查询：**
+
+条件查询会使用 WEHRE查询子句；
+
+**WHERE的比较运算符**
+
+```javascript
+# 查询价格小于1000的手机
+SELECT * FROM `products` WHERE price < 1000;
+# 查询价格大于等于2000的手机
+SELECT * FROM `products` WHERE price >= 2000;
+# 价格等于3399的手机
+SELECT * FROM `products` WHERE price = 3399;
+# 价格不等于3399的手机
+SELECT * FROM `products` WHERE price != 3399;
+# 查询华为品牌的手机
+SELECT * FROM `products` WHERE `brand` = '华为';
+```
+
+## **where查询条件（二）**
+
+**WHERE的逻辑运算符**
+
+```javascript
+# 查询品牌是华为，并且小于2000元的手机
+SELECT * FROM `products` WHERE `brand` = '华为' and `price` < 2000;
+SELECT * FROM `products` WHERE `brand` = '华为' && `price` < 2000;
+# 查询1000到2000的手机（不包含1000和2000）
+SELECT * FROM `products` WHERE price > 1000 and price < 2000;
+# OR: 符合一个条件即可
+# 查询所有的华为手机或者价格小于1000的手机
+SELECT * FROM `products` WHERE brand = '华为' or price < 1000;
+# 查询1000到2000的手机（包含1000和2000）
+SELECT * FROM `products` WHERE price BETWEEN 1000 and 2000;
+# 查看多个结果中的一个
+SELECT * FROM `products` WHERE brand in ('华为', '小米');
+```
+
+## **where查询条件（三）**
+
+**模糊查询使用LIKE关键字，结合两个特殊的符号：**
+
+%表示匹配任意个的任意字符；
+
+_表示匹配一个的任意字符；
+
+```javascript
+# 查询所有以v开头的title
+SELECT * FROM `products` WHERE title LIKE 'v%';
+# 查询带M的title
+SELECT * FROM `products` WHERE title LIKE '%M%';
+# 查询带M的title必须是第三个字符
+SELECT * FROM `products` WHERE title LIKE '__M%';
+```
+
+## **查询结果排序**
+
+**当我们查询到结果的时候，我们希望讲结果按照某种方式进行排序，这个时候使用的是ORDER BY；**
+
+**ORDER BY有两个常用的值：**
+
+ASC：升序排列；
+
+DESC：降序排列；
+
+```javascript
+SELECT * FROM `products` WHERE brand = '华为' or price < 1000 ORDER BY price ASC;
+```
+
+## **分页查询**
+
+**当数据库中的数据非常多时，一次性查询到所有的结果进行显示是不太现实的：**
+
+在真实开发中，我们都会要求用户传入offset、limit或者page等字段；
+
+它们的目的是让我们可以在数据库中进行分页查询；
+
+它的用法有[LIMIT {[offset,] row_count | row_count OFFSET offset}]
+
+```javascript
+SELECT * FROM `products` LIMIT 30 OFFSET 0;
+SELECT * FROM `products` LIMIT 30 OFFSET 30;
+SELECT * FROM `products` LIMIT 30 OFFSET 60;
+# 另外一种写法：offset, row_count
+SELECT * FROM `products` LIMIT 90, 30;
+```
+
+offset的意思是偏移，offset 30就是偏移30条，从第31条开始查询。
+
+DQL-查询数据演练.sql
+
+```javascript
+CREATE TABLE IF NOT EXISTS `products` (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	brand VARCHAR(20),
+	title VARCHAR(100) NOT NULL,
+	price DOUBLE NOT NULL,
+	score DECIMAL(2,1),
+	voteCnt INT,
+	url VARCHAR(100),
+	pid INT
+);
+
+-- 1.基本查询
+-- 1.1. 查询所有的数据的所有字段
+-- SELECT * FROM `products`;
+
+-- 1.2. 查询所有的数据, 并且指定对应的字段
+SELECT id, brand, title, price FROM `products`;
+
+-- 1.3.查到字段之后, 给字段重命名(起一个别名, AS关键字可以省略)
+SELECT id AS phoneId, brand phoneBrand, title, price FROM `products`;
+
+-- 2.查询条件(比较运算符)
+-- 2.1. 查询所有价格小于1000的手机
+SELECT * FROM `products` WHERE price < 1000;
+-- 2.2. 查询价格大于等于3000的手机
+SELECT * FROM `products` WHERE price >= 3000;
+-- 2.3. 查询价格等于8699的手机
+SELECT * FROM `products` WHERE price = 8699;
+-- 2.4. 查询所有的华为品牌的手机
+SELECT * FROM `products` WHERE brand = '华为';
+-- 2.5. 查询所有的不是苹果手机品牌的商品
+SELECT * FROM `products` WHERE brand != '苹果';
+
+
+-- 3.查询条件(逻辑运算符)
+-- 3.1. 查询brand为华为, 并且价格小于2000的手机
+SELECT * FROM `products` WHERE brand = '华为' && price < 2000;
+SELECT * FROM `products` WHERE brand = '华为' AND price < 2000;
+-- 3.2. 查询brand为华为, 或者价格大于5000的手机
+SELECT * FROM `products` WHERE brand = '华为' || price > 5000;
+SELECT * FROM `products` WHERE brand = '华为' OR price > 5000;
+
+-- 3.3. 查询区间范围
+SELECT * FROM `products` WHERE price >= 1000 && price <= 2000;
+SELECT * FROM `products` WHERE price BETWEEN 1000 AND 2000;
+
+
+-- 3.4.枚举出多个结果, 其中之一: 小米或者华为
+SELECT * FROM `products` WHERE brand = '小米' OR brand = '华为';
+SELECT * FROM `products` WHERE brand IN ('小米', '华为');
+
+
+
+-- 4.查询条件(模糊查询LIKE)
+-- 4.1.查询所有title以v开头的商品
+SELECT * FROM `products` WHERE title LIKE 'v%';
+-- 4.2.查询所有title带v的商品
+SELECT * FROM `products` WHERE title LIKE '%v%';
+-- 4.3.查询所有title带M, 并且M必须是第三个字符
+SELECT * FROM `products` WHERE title LIKE '__M%'
+
+
+
+-- 5.对结果进行排序(ORDER BY)
+-- 5.1. 查询所有的价格小于1000的手机, 并且按照评分的降序获取结果
+SELECT * FROM `products` 
+	WHERE price < 1000
+	ORDER BY score DESC;
+
+SELECT * FROM `products` 
+	WHERE price < 1000
+	ORDER BY score ASC;
+
+
+-- 6.对表进行分页查询
+-- 6.1.默认不偏移(偏移0条数据)
+SELECT * FROM `products` LIMIT 20;
+-- 6.2.指定偏移多少条数据(size: 20, offset: 40)
+SELECT * FROM `products` LIMIT 20 OFFSET 40;
+
+-- 6.3.另外一种写法
+SELECT * FROM `products` LIMIT 40, 20;
+```
+
