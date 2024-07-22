@@ -3,6 +3,7 @@ export default [
   {
     text: "前端",
     items: [
+      { text: "AI", link: "/前端/AI/00 AI 启蒙课" },
       { text: "HTML", link: "/前端/HTML/00 邂逅Web开发" },
       { text: "CSS", link: "/前端/CSS/00 CSS预处理器SASS从入门到高级进阶" },
       {

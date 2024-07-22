@@ -1,4 +1,10 @@
 export default {
+  '/前端/AI/':[{
+    text:'AI',
+    items:[
+      {text:'00 AI 启蒙课',link:'/前端/AI/00 AI 启蒙课'},
+    ]
+  }],
   '/前端/HTML/':[{
     text:'HTML',
     items:[
