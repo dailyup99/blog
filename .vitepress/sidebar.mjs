@@ -524,10 +524,19 @@ export default {
       items: [{ text: "00 微前端实战", link: "/实战/微前端/00 微前端实战" }],
     },
   ],
-  "/实战/Vue3/": [
+  "/实战/Vue3+TS/": [
     {
-      text: "Vue3",
-      items: [{ text: "00 代码规范", link: "/实战/Vue3/00 代码规范" }],
+      text: "Vue3+TS",
+      items: [
+        {
+          text: "00 项目架构-代码规范-集成第三库",
+          link: "/实战/Vue3+TS/00 项目架构-代码规范-集成第三库",
+        },
+        {
+          text: "01 Element Plus集成-登录模块-接口文档",
+          link: "/实战/Vue3+TS/01 Element Plus集成-登录模块-接口文档",
+        },
+      ],
     },
   ],
 };

@@ -39,7 +39,10 @@ export default [
     items: [
       { text: "AI", link: "/实战/AI/00 AI 启蒙课" },
       { text: "微前端", link: "/实战/微前端/00 微前端实战" },
-      { text: "Vue3", link: "/实战/Vue3/00 代码规范" },
+      {
+        text: "Vue3+TS",
+        link: "/实战/Vue3+TS/00 项目架构-代码规范-集成第三库",
+      },
     ],
   },
 ];

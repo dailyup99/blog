@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 前端进阶
-      link: /前端/JS高级/00 this指向
+      link: /前端体系/JS高级/00 this指向
       # target: _blank
 
 features:
@@ -17,4 +17,3 @@ features:
     title: 学习记录
     details: 好记性不如烂笔头。
 ---
-
