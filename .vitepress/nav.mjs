@@ -35,6 +35,15 @@ export default [
     ],
   },
   {
+    text: "进阶",
+    items: [
+      {
+        text: "JavaScript深度剖析",
+        link: "/进阶/JavaScript深度剖析/00 函数式编程与 JS 异步编程、手写 Promie",
+      },
+    ],
+  },
+  {
     text: "实战",
     items: [
       { text: "AI", link: "/实战/AI/00 AI 启蒙课" },

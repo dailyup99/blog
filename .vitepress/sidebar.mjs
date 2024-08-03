@@ -539,4 +539,15 @@ export default {
       ],
     },
   ],
+  "/进阶/JavaScript深度剖析/": [
+    {
+      text: "JavaScript深度剖析",
+      items: [
+        {
+          text: "00 函数式编程与 JS 异步编程、手写 Promie",
+          link: "/进阶/JavaScript深度剖析/00 函数式编程与 JS 异步编程、手写 Promie",
+        },
+      ],
+    },
+  ],
 };
