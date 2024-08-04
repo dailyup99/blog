@@ -39,7 +39,7 @@ export default [
     items: [
       {
         text: "JavaScript深度剖析",
-        link: "/进阶/JavaScript深度剖析/00 函数式编程与 JS 异步编程、手写 Promie",
+        link: "/进阶/JavaScript深度剖析/00 函数式编程范式",
       },
     ],
   },

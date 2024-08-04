@@ -544,8 +544,12 @@ export default {
       text: "JavaScript深度剖析",
       items: [
         {
-          text: "00 函数式编程与 JS 异步编程、手写 Promie",
-          link: "/进阶/JavaScript深度剖析/00 函数式编程与 JS 异步编程、手写 Promie",
+          text: "00 函数式编程范式",
+          link: "/进阶/JavaScript深度剖析/00 函数式编程范式",
+        },
+        {
+          text: "01 JavaScript性能优化",
+          link: "/进阶/JavaScript深度剖析/01 JavaScript性能优化",
         },
       ],
     },
