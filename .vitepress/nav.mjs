@@ -41,6 +41,10 @@ export default [
         text: "JavaScript深度剖析",
         link: "/进阶/JavaScript深度剖析/00 函数式编程范式",
       },
+      {
+        text: "性能优化",
+        link: "/进阶/性能优化/00 Web性能指标",
+      },
     ],
   },
   {

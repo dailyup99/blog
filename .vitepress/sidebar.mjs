@@ -536,10 +536,6 @@ export default {
           text: "00 项目架构-代码规范-集成第三库",
           link: "/实战/Vue3+TS/00 项目架构-代码规范-集成第三库",
         },
-        {
-          text: "01 Element Plus集成-登录模块-接口文档",
-          link: "/实战/Vue3+TS/01 Element Plus集成-登录模块-接口文档",
-        },
       ],
     },
   ],
@@ -554,6 +550,17 @@ export default {
         {
           text: "01 JavaScript性能优化",
           link: "/进阶/JavaScript深度剖析/01 JavaScript性能优化",
+        },
+      ],
+    },
+  ],
+  "/进阶/性能优化/": [
+    {
+      text: "性能优化",
+      items: [
+        {
+          text: "00 Web性能指标",
+          link: "/进阶/性能优化/00 Web性能指标",
         },
       ],
     },
