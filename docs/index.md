@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
+  name: "My Awesome Project1"
   text: "A VitePress Site"
   tagline: My great project tagline
   actions:
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
