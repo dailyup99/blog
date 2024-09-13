@@ -1,0 +1,33 @@
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    #bd34fe,
+    #41d1ff
+  );
+}
+/*滚动条整体部分,必须要设置 , 高宽分别对应横竖滚动条的尺寸*/
+.VPMenu::-webkit-scrollbar,
+.VPSidebar::-webkit-scrollbar,
+pre::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/*滚动条的轨道*/
+.VPMenu::-webkit-scrollbar-track,
+.VPSidebar::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+
+/*滚动条的滑块按钮*/
+.VPMenu::-webkit-scrollbar-thumb,
+.VPSidebar::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #e1e1e1;
+}
