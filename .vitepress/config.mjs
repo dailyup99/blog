@@ -10,13 +10,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: nav,
-
     sidebar: sidebar,
-
-    socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
-    ],
-    outlineTitle: '页面导航',
+    outlineTitle: "页面导航",
     search: {
       provider: "local",
       options: {
@@ -43,10 +38,9 @@ export default defineConfig({
         },
       },
     },
-
     docFooter: {
-      prev: '上一页',
-      next: '下一页'
+      prev: "上一页",
+      next: "下一页",
     },
   },
 });
