@@ -11,6 +11,10 @@ hero:
       text: 前端进阶
       link: /前端体系/JS高级/00 this指向
       # target: _blank
+    - theme: alt
+      text: 导航
+      link: /导航/index
+      # target: _blank
 
 features:
   - title: 学习笔记

@@ -10,6 +10,7 @@
     "docs:deploy": "bash deploy.sh"
   },
   "dependencies": {
-    "vitepress-plugin-image-viewer": "^1.1.4"
+    "vitepress-plugin-image-viewer": "^1.1.4",
+    "@mdit-vue/shared": "^2.1.2"
   }
 }

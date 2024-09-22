@@ -1,58 +1,64 @@
 {
-  "hash": "46392511",
-  "configHash": "e180d08c",
-  "lockfileHash": "90dee1df",
-  "browserHash": "fd505e45",
+  "hash": "42afb656",
+  "configHash": "a5ad1fe8",
+  "lockfileHash": "498a3b3b",
+  "browserHash": "c9f920e6",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "0fc903cd",
+      "fileHash": "9201d813",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "f07560b2",
+      "fileHash": "ea1792d4",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "957ea5f0",
+      "fileHash": "9faf9d7a",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "3f825124",
+      "fileHash": "3f83a0ce",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "cb09f0db",
+      "fileHash": "3dd4bf47",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "4051dead",
+      "fileHash": "19b53b82",
       "needsInterop": false
     },
     "vitepress-plugin-image-viewer": {
       "src": "../../../node_modules/vitepress-plugin-image-viewer/lib/viewer.js",
       "file": "vitepress-plugin-image-viewer.js",
-      "fileHash": "c6de835c",
+      "fileHash": "fe29fd58",
+      "needsInterop": false
+    },
+    "@mdit-vue/shared": {
+      "src": "../../../node_modules/@mdit-vue/shared/dist/index.mjs",
+      "file": "@mdit-vue_shared.js",
+      "fileHash": "60ffb55f",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-YNLO5MEJ": {
-      "file": "chunk-YNLO5MEJ.js"
+    "chunk-7XDD7NGH": {
+      "file": "chunk-7XDD7NGH.js"
     },
-    "chunk-5QLTCEDZ": {
-      "file": "chunk-5QLTCEDZ.js"
+    "chunk-P4SAR47T": {
+      "file": "chunk-P4SAR47T.js"
     }
   }
 }

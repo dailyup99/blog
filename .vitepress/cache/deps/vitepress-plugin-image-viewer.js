@@ -2,7 +2,7 @@ import {
   nextTick,
   onMounted,
   watch
-} from "./chunk-5QLTCEDZ.js";
+} from "./chunk-P4SAR47T.js";
 
 // node_modules/viewerjs/dist/viewer.esm.js
 function ownKeys(e, r) {
@@ -44,16 +44,13 @@ function _defineProperties(target, props) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
+    if ("value" in descriptor) descriptor.writable = true;
     Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
   }
 }
 function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties(Constructor, staticProps);
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", {
     writable: false
   });
@@ -74,13 +71,11 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 function _toPrimitive(input, hint) {
-  if (typeof input !== "object" || input === null)
-    return input;
+  if (typeof input !== "object" || input === null) return input;
   var prim = input[Symbol.toPrimitive];
   if (prim !== void 0) {
     var res = prim.call(input, hint || "default");
-    if (typeof res !== "object")
-      return res;
+    if (typeof res !== "object") return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return (hint === "string" ? String : Number)(input);
