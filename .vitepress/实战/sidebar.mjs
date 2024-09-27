@@ -1,10 +1,4 @@
 export default {
-  "/实战/AI/": [
-    {
-      text: "AI",
-      items: [{ text: "00 AI 启蒙课", link: "/实战/AI/00 AI 启蒙课" }],
-    },
-  ],
   "/实战/Vue3+TS/": [
     {
       text: "Vue3+TS",

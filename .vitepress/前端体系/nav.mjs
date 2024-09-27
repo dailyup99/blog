@@ -10,6 +10,7 @@ export default {
         { text: "高级", link: "前端体系/JS高级/00 this指向" },
       ],
     },
+    { text: "八股文", link: "/前端体系/八股文/00 前端就业指导" },
     { text: "Vue", link: "/前端体系/Vue/00 邂逅Vue.js开发" },
     { text: "React", link: "/前端体系/React/00 邂逅React开发" },
     { text: "TypeScript", link: "/前端体系/TS/00 邂逅TS语法" },
@@ -29,6 +30,5 @@ export default {
       ],
     },
     { text: "JQuery", link: "/前端体系/JQuery/00 邂逅jQuery" },
-    { text: "学习资源", link: "/前端体系/学习资源/学习资源.md" },
   ],
 };

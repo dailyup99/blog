@@ -17,7 +17,7 @@ const icon = "http://139.196.79.103:9001/myimages/imgs/202409222118480.webp";
 
 export const NAV_DATA: NavData[] = [
   {
-    title: "好用工具",
+    title: "实用网站",
     items: [
       {
         title: "GitHub中文排行榜",
@@ -32,7 +32,7 @@ export const NAV_DATA: NavData[] = [
         link: "https://cn-vuejs-challenges.netlify.app/",
       },
       {
-        title: "patterns",
+        title: "Patterns",
         desc: "一个能学习前端设计模式的网站",
         icon: "https://www.patterns.dev/_astro/patterns-cover-site_16s3HF.webp",
         link: "https://www.patterns.dev/#patterns",
@@ -56,18 +56,6 @@ export const NAV_DATA: NavData[] = [
         link: "https://he3app.com/zh/",
       },
       {
-        title: "project-based-learning",
-        desc: "基于项目的教程整理列表",
-        icon,
-        link: "https://github.com/practical-tutorials/project-based-learning",
-      },
-      {
-        title: "Variant Form",
-        desc: "一款高效的低代码表单",
-        icon: "https://www.vform666.com/mini-logo.png",
-        link: "https://www.vform666.com/",
-      },
-      {
         title: "Hello 算法",
         desc: "动画图解、一键运行的数据结构与算法教程",
         icon,
@@ -86,16 +74,10 @@ export const NAV_DATA: NavData[] = [
         link: "https://qwerty.liumingye.cn/",
       },
       {
-        title: "free-programming-books-zh_CN",
+        title: "计算机编程类中文书籍",
         desc: "免费的计算机编程类中文书籍",
         icon,
         link: "https://github.com/justjavac/free-programming-books-zh_CN?tab=readme-ov-file",
-      },
-      {
-        title: "AI Colors",
-        desc: "一款ai自动化配色工具",
-        icon,
-        link: "https://aicolors.co/?ref=pidoutv.com",
       },
       {
         title: "iCSS",
@@ -104,64 +86,56 @@ export const NAV_DATA: NavData[] = [
         link: "https://github.com/chokcoco/iCSS",
       },
       {
-        title: "AIEditor",
-        desc: "一个面向 AI 的下一代富文本编辑器",
-        icon: "https://aieditor.dev/assets/image/logo.png",
-        link: "https://aieditor.dev/zh/",
-      },
-      {
-        title: "handsontable",
-        desc: "让你的网页快速支持excel表格编辑",
-        icon,
-        link: "https://github.com/handsontable/handsontable",
-      },
-      {
-        title: "tui.calendar",
-        desc: "一款可拖拽日历组件",
-        icon: "https://avatars.githubusercontent.com/u/7907400?s=48&v=4",
-        link: "https://github.com/nhn/tui.calendar",
-      },
-      {
-        title: "type-challenges",
+        title: "Type-Challenges",
         desc: "一个TypeScript挑战平台",
         icon,
         link: "https://github.com/type-challenges/type-challenges",
-      },
-      {
-        title: "VueHook Plus",
-        desc: "一个高性能且简单的Vue 3 Hooks库",
-        icon,
-        link: "https://inhiblabcore.github.io/docs/hooks/",
-      },
-      {
-        title: "css-loaders",
-        desc: "一个专门展示和提供CSS加载动画样式的网站",
-        icon,
-        link: "https://css-loaders.com/",
-      },
-      {
-        title: "vxe-table",
-        desc: "一个高度可定制化的开源表格插件",
-        icon,
-        link: "https://gitee.com/xuliangzhan/vxe-table",
-      },
-      {
-        title: "screenshot-to-code",
-        desc: "一个通过截图即可生成代码的网站",
-        icon,
-        link: "https://github.com/abi/screenshot-to-code",
-      },
-      {
-        title: "CSS可视化",
-        desc: "一个CSS可视化的网站",
-        icon,
-        link: "https://css.bqrdh.com/safety-color",
       },
       {
         title: "CSS-Inspiration",
         desc: "在这里找到写 CSS 的灵感",
         icon,
         link: "https://github.com/chokcoco/CSS-Inspiration",
+      },
+    ],
+  },
+  {
+    title: "大佬博客",
+    items: [
+      {
+        title: "张鑫旭",
+        desc: "前端CSS大佬",
+        icon,
+        link: "http://www.zhangxinxu.com/",
+      },
+      {
+        title: "阮一峰",
+        desc: "前端大佬",
+        icon,
+        link: "https://www.ruanyifeng.com/",
+      },
+      {
+        title: "廖雪峰",
+        desc: "全栈大佬",
+        icon,
+        link: "https://liaoxuefeng.com/",
+      },
+    ],
+  },
+  {
+    title: "面试刷题",
+    items: [
+      {
+        title: "面试官系列",
+        desc: "由(JS每日一题)维护的前端面试题库",
+        icon,
+        link: "https://vue3js.cn/interview/",
+      },
+      {
+        title: "前端充电宝",
+        desc: "前端面试题汇总",
+        icon,
+        link: "https://www.yuque.com/cuggz/interview",
       },
     ],
   },
