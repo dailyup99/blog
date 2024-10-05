@@ -21,8 +21,8 @@ features:
     details: 记录、总结，防止遗忘，也可以当作一个文档进行查阅
   - title: 软技能
     details: 人在江湖，身不由己，须知进退之道，方能立足
-  - title: 生活指南
-    details: 生活不止眼前的苟且，还有诗和远方
+  - title: 副业
+    details: 增加额外收益，抵御未知风险
   - title: 英语
-    details: 学好英语，阅读一手资料，为以后做准备
+    details: 学好英语，跳出内卷
 ---
