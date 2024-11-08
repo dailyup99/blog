@@ -1,55 +1,55 @@
 {
-  "hash": "42afb656",
+  "hash": "4d4a4c15",
   "configHash": "a5ad1fe8",
-  "lockfileHash": "498a3b3b",
-  "browserHash": "c9f920e6",
+  "lockfileHash": "90dee1df",
+  "browserHash": "1f366cab",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "8d319159",
+      "fileHash": "3696ca8a",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "ea1792d4",
+      "fileHash": "d5f65070",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "020b31bc",
+      "fileHash": "b38c8181",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "097389cd",
+      "fileHash": "d517f56a",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "3dd4bf47",
+      "fileHash": "2adee73b",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "19b53b82",
+      "fileHash": "4c1e03b8",
       "needsInterop": false
     },
     "vitepress-plugin-image-viewer": {
       "src": "../../../node_modules/vitepress-plugin-image-viewer/lib/viewer.js",
       "file": "vitepress-plugin-image-viewer.js",
-      "fileHash": "0535b124",
+      "fileHash": "165a9ee5",
       "needsInterop": false
     },
     "@mdit-vue/shared": {
       "src": "../../../node_modules/@mdit-vue/shared/dist/index.mjs",
       "file": "@mdit-vue_shared.js",
-      "fileHash": "60ffb55f",
+      "fileHash": "6ba5925a",
       "needsInterop": false
     }
   },
