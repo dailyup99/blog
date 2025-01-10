@@ -50,7 +50,7 @@ outline: deep
 
 4、背景属性：background、background-color、background-image、background-repeat、background-position、background-attchment
 
-5、定位属性：fload、clear、position、top、right、bottom、left、min-width、min-height、max-width、max-height、overflow、clip、z-index
+5、定位属性：float、clear、position、top、right、bottom、left、min-width、min-height、max-width、max-height、overflow、clip、z-index
 
 6、生成内容属性：content、counter-reset、counter-increment
 

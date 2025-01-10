@@ -40,6 +40,14 @@ export default {
           text: "05 CSS篇",
           link: "/前端体系/八股文/05 CSS篇",
         },
+        {
+          text: "06 JavaScript篇",
+          link: "/前端体系/八股文/06 JavaScript篇",
+        },
+        {
+          text: "07 难点亮点优化100条",
+          link: "/前端体系/八股文/07 难点亮点优化100条",
+        },
       ],
     },
   ],
