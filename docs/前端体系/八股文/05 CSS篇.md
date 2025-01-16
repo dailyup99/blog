@@ -550,8 +550,8 @@ z-index属性在下列情况下会失效：
 优势：
 
 * CPU节能：使用setInterval实现的动画，当页面被隐藏或最小化时，setInterval仍然在后台执行动画任务，由于此时页面处于不可见或不可用状态，刷新动画是没有意义的，完全是浪费CPU资源。而requestAnimationFrame则完全不同，当页面处于未激活的状态下，该页面的屏幕刷新任务也会被系统暂停，因此跟着系统走的requestAnimationFrame也会停止渲染，当页面被激活时，动画就从上次停留的地方继续执行，有效节省了CPU开销
-* 函数节流：在高频率事件（resize, scroll等）中，为了防止一个刷新时间间隔内发生多次函数执行，requestAnimationFrame可保证每个刷新间隔内，函数只执行以此，这样既能保证流畅性，也能更好的节省函数执行的开销，一个刷新间隔内函数执行多次是没有意义的，因为多数显示器每16.7ms刷新一次，多次绘制并不会在屏幕上体现出来
-* 减少DOM操作：requestAnimationFrame会把每一帧中的所有DOM操作集中起来，在以此重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+* 函数节流：在高频率事件（resize, scroll等）中，为了防止一个刷新时间间隔内发生多次函数执行，requestAnimationFrame可保证每个刷新间隔内，函数只执行一次，这样既能保证流畅性，也能更好的节省函数执行的开销，一个刷新间隔内函数执行多次是没有意义的，因为多数显示器每16.7ms刷新一次，多次绘制并不会在屏幕上体现出来
+* 减少DOM操作：requestAnimationFrame会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
 
 setTimeout执行动画的缺点：它通过设定间隔时间来不断改变图像位置，达到动画效果。但是容易出现卡顿、抖动的现象，原因是：
 
@@ -1799,5 +1799,32 @@ metaEl.setAttribute('content', `width=device-width,user-scalable=no,initial-scal
 
 如果还是不能解决，也可以通过js代码来处理，可以更加精准的根据不同的浏览器来调整CSS的动画效果。
 
+## 48.nth-child和nth-of-type的区别
 
+nth-child和nth-of-type都是CSS伪类选择器。
+
+* nth-child：选择元素时主要考虑元素的位置（位置匹配再考虑类型）
+* nth-of-type：选择元素时主要考虑元素的类型（类型过滤后再考虑位置）
+
+```html
+<style>
+	/*只要是奇数行即可，再要满足div*/ 我 帅
+    div:nth-child(2n+1) {
+        color: red;
+    }
+    /*先过滤所有div，再找奇数*/ 我 对
+    div:nth-of-type(2n+1) {
+        color: red;
+    }
+</style>
+
+<body>
+    <div>我</div>
+    <span>很</span>
+    <div>帅</div>
+    <div>对</div>
+    <span>吗</span>
+    <div>？</div>
+</body>
+```
 

@@ -48,6 +48,14 @@ export default {
           text: "07 难点亮点优化100条",
           link: "/前端体系/八股文/07 难点亮点优化100条",
         },
+        {
+          text: "08 跨端",
+          link: "/前端体系/八股文/08 跨端",
+        },
+        {
+          text: "09 TypeScript篇",
+          link: "/前端体系/八股文/09 TypeScript篇",
+        },
       ],
     },
   ],
