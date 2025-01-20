@@ -56,6 +56,10 @@ export default {
           text: "09 TypeScript篇",
           link: "/前端体系/八股文/09 TypeScript篇",
         },
+        {
+          text: "10 实战",
+          link: "/前端体系/八股文/10 实战",
+        },
       ],
     },
   ],
