@@ -92,6 +92,10 @@ export default {
           text: "18 React",
           link: "/前端体系/八股文/18 React",
         },
+        {
+          text: "19 Vue",
+          link: "/前端体系/八股文/19 Vue",
+        },
       ],
     },
   ],
