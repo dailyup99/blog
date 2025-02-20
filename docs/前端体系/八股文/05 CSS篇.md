@@ -319,57 +319,81 @@ MDN上-webkit-min-device-pixel-radio其实是一个非标准的特性，也就�
 
 ## 15.CSS优化和提高性能的方法有哪些？
 
-**加载性能：**
+实现方式有很多种，主要有如下：
 
-（1）CSS压缩：将写好的CSS进行打包压缩，可以减小文件体积
+- 内联首屏关键CSS
+- 异步加载CSS
+- 资源压缩
+- 合理使用选择器
+- 减少使用昂贵的属性
+- 不要使用@import
 
-（2）CSS单一样式：当需要下边距和左边距的时候，很多时候会选择使用margin: top 0 bottom 0；但margin-bottom: bottom;margin-left:left;执行效率会更高
+### 内联首屏关键CSS
 
-（3）减少使用@import，建议使用link，因为后者在页面加载时一起加载，前者是等待页面加载完成之后再进行加载
+在打开一个页面，页面首要内容出现在屏幕的时间影响着用户的体验，而通过内联`css`关键代码能够使浏览器在下载完`html`后就能立刻渲染
 
-**选择器性能：**
+而如果外部引用`css`代码，在解析`html`结构过程中遇到外部`css`文件，才会开始下载`css`代码，再渲染
 
-（1）关键选择器，选择器的最后面的部分为关键选择器（即用来匹配目标元素的部分），CSS选择符是从右到左进行匹配的。当使用后代选择器的时候，浏览器会遍历所有子元素来确定是否是指定的元素等等；
+所以，`CSS`内联使用使渲染时间提前
 
-（2）如果规则拥有ID选择器作为其关键选择器，则不要为规则增加标签；
+注意：但是较大的`css`代码并不合适内联（初始拥塞窗口、没有缓存），而其余代码则采取外部引用方式
 
-（3）避免使用通配规则，如*{}计算次数惊人，只对需要用到的元素进行选择；
+### 异步加载CSS
 
-（4）尽量少的去对标签进行选择，而是用class；
+在`CSS`文件请求、下载、解析完成之前，`CSS`会阻塞渲染，浏览器将不会渲染任何已处理的内容
 
-（5）尽量少的去使用后代选择器，降低选择器的权重值。后代选择器的开销是最高的，尽量将选择器的深度降到最低，最高不要超过三层，更多的使用类来关联每一个标签元素；
+前面加载内联代码后，后面的外部引用`css`则没必要阻塞浏览器渲染。这时候就可以采取异步加载的方案，主要有如下：
 
-（6）了解哪些属性是可以通过继承而来的，然后避免对这些属性重复指定规则；
+- 使用javascript将link标签插到head标签最后
 
-**渲染性能：**
+```js
+// 创建link标签
+const myCSS = document.createElement( "link" );
+myCSS.rel = "stylesheet";
+myCSS.href = "mystyles.css";
+// 插入到header的最后位置
+document.head.insertBefore( myCSS, document.head.childNodes[ document.head.childNodes.length - 1 ].nextSibling );
+```
 
-（1）慎重使用高性能属性：浮动、定位；
+- 设置link标签media属性为noexis，浏览器会认为当前样式表不适用当前类型，会在不阻塞页面渲染的情况下再进行下载。加载完成后，将`media`的值设为`screen`或`all`，从而让浏览器开始解析CSS
 
-（2）尽量减少页面重排、重绘；
+```html
+<link rel="stylesheet" href="mystyles.css" media="noexist" onload="this.media='all'">
+```
 
-（3）去除空规则：{}，空规则的产生原因一般来说是为了预留样式。去除这些空规则无疑能减少CSS文档体积；
+- 通过rel属性将link元素标记为alternate可选样式表，也能实现浏览器异步加载。同样别忘了加载完成之后，将rel设回stylesheet
 
-（4）属性值为0时，不加单位；
+### 资源压缩
 
-（5）属性值为浮动小数0.**，可以省略小数点之前的0；
+利用`webpack`等模块化工具，将`css`代码进行压缩，使文件变小，大大降低了浏览器的加载时间
 
-（6）标准化各种浏览器前缀：带浏览器前缀的在前，标准属性在后；
+### 合理使用选择器
 
-（7）不使用@import前缀，它会影响CSS的加载速度；
+我们在编写选择器的时候，可以遵循以下规则：
 
-（8）选择器优化嵌套，尽量避免层级过深；
+- 不要嵌套使用过多复杂选择器，最好不要三层以上
+- 使用id选择器就没必要再进行嵌套
+- 通配符和属性选择器效率最低，避免使用
 
-（9）CSS雪碧图，同一页面相近部分的小图标，方便使用，减少页面的请求次数，但是同时图片本身会变大，使用时，优劣考虑清楚，再使用；
+### 减少使用昂贵的属性
 
-（10）正确使用display属性，由于display的作用，某些样式组合会无效，徒增样式体积的同时也会影响解析性能；
+在页面发生重绘的时候，昂贵属性如`box-shadow`/`border-radius`/`filter`/透明度/`:nth-child`等，会降低浏览器的渲染性能
 
-（11）不滥用web字体。对于中文网站来说WebFonts可能很陌生，国外却很流行。web fonts通常体积庞大，而且一些浏览器在下载web fonts时会阻塞页面渲染损伤性能；
+### 不要使用@import
 
-**可维护性、健壮性：**
+css样式文件有两种引入方式，一种是`link`元素，另一种是`@import`
 
-（1）将具有相同属性的样式抽离出来，整合并通过class在页面中进行使用，提高CSS的可维护性；
+`@import`会影响浏览器的并行下载，使得页面在加载时增加额外的延迟，增添了额外的往返耗时
 
-（2）样式与内容分离：将CSS代码定义到外部CSS中
+而且多个`@import`可能会导致下载顺序紊乱
+
+### 其他
+
+- 减少重排操作，以及减少不必要的重绘
+- 了解哪些属性可以继承而来，避免对这些属性重复编写
+- cssSprite，合成所有icon图片，用宽高加上backgroud-position的背景图方式显现出我们要的icon图，减少了http请求
+- 把小的icon图片转成base64编码
+- CSS3动画或者过渡尽量使用transform和opacity来实现动画，不要使用left和top属性
 
 ## 16.CSS预处理器/后处理器是什么？为什么要使用它们？
 
@@ -1828,3 +1852,156 @@ nth-child和nth-of-type都是CSS伪类选择器。
 </body>
 ```
 
+## 49.css3动画有哪些？
+
+`css`实现动画的方式，有如下几种：
+
+- transition 实现渐变动画
+- transform 转变动画
+- animation 实现自定义动画
+
+### transition 实现渐变动画
+
+`transition`的属性如下：
+
+- property:填写需要变化的css属性
+- duration:完成过渡效果需要的时间单位(s或者ms)
+- timing-function:完成效果的速度曲线
+- delay: 动画效果的延迟触发时间
+
+其中`timing-function`的值有如下：
+
+| 值                            | 描述                                                         |
+| ----------------------------- | ------------------------------------------------------------ |
+| linear                        | 匀速（等于 cubic-bezier(0,0,1,1)）                           |
+| ease                          | 从慢到快再到慢（cubic-bezier(0.25,0.1,0.25,1)）              |
+| ease-in                       | 慢慢变快（等于 cubic-bezier(0.42,0,1,1)）                    |
+| ease-out                      | 慢慢变慢（等于 cubic-bezier(0,0,0.58,1)）                    |
+| ease-in-out                   | 先变快再到慢（等于 cubic-bezier(0.42,0,0.58,1)），渐显渐隐效果 |
+| cubic-bezier(*n*,*n*,*n*,*n*) | 在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值 |
+
+```html
+<style>
+       .base {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            background-color: #0EA9FF;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #5daf34;
+            transition-property: width, height, background-color, border-width;
+            transition-duration: 2s;
+            transition-timing-function: ease-in;
+            transition-delay: 500ms;
+        }
+
+        /*简写*/
+        /*transition: all 2s ease-in 500ms;*/
+        .base:hover {
+            width: 200px;
+            height: 200px;
+            background-color: #5daf34;
+            border-width: 10px;
+            border-color: #3a8ee6;
+        }
+</style>
+<div class="base"></div>
+```
+
+### transform 转变动画
+
+包含四个常用的功能：
+
+- translate：位移
+- scale：缩放
+- rotate：旋转
+- skew：倾斜
+
+一般配合`transition`过度使用
+
+注意的是，`transform`不支持`inline`元素，使用前把它变成`block`
+
+```html
+<style>
+    .base {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        background-color: #0EA9FF;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #5daf34;
+        transition-property: width, height, background-color, border-width;
+        transition-duration: 2s;
+        transition-timing-function: ease-in;
+        transition-delay: 500ms;
+    }
+    .base2 {
+        transform: none;
+        transition-property: transform;
+        transition-delay: 5ms;
+    }
+
+    .base2:hover {
+        transform: scale(0.8, 1.5) rotate(35deg) skew(5deg) translate(15px, 25px);
+    }
+</style>
+ <div class="base base2"></div>
+```
+
+### animation 实现自定义动画
+
+`animation`是由 8 个属性的简写，分别如下：
+
+|                                        |                                                              |                                               |
+| -------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- |
+| animation-duration                     | 指定动画完成一个周期所需要时间，单位秒（s）或毫秒（ms），默认是 0 |                                               |
+| animation-timing-function              | 指定动画计时函数，即动画的速度曲线，默认是 "ease"            | linear、ease、ease-in、ease-out、ease-in-out  |
+| animation-delay                        | 指定动画延迟时间，即动画何时开始，默认是 0                   |                                               |
+| animation-iteration-count              | 指定动画播放的次数，默认是 1                                 | 执行infinite表示无限动画                      |
+| animation-direction 指定动画播放的方向 | 默认是 normal                                                | normal、reverse、alternate、alternate-reverse |
+| animation-fill-mode                    | 指定动画填充模式。默认是 none                                | forwards、backwards、both                     |
+| animation-play-state                   | 指定动画播放状态，正在运行或暂停。默认是 running             | running、pauser                               |
+| animation-name                         | 指定 @keyframes 动画的名称                                   |                                               |
+
+`CSS` 动画只需要定义一些关键的帧，而其余的帧，浏览器会根据计时函数插值计算出来，
+
+通过 `@keyframes` 来定义关键帧
+
+因此，如果我们想要让元素旋转一圈，只需要定义开始和结束两帧即可：
+
+```css
+@keyframes rotate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+```
+
+`from` 表示最开始的那一帧，`to` 表示结束时的那一帧
+
+也可以使用百分比刻画生命周期
+
+```css
+@keyframes rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+```
+
+定义好了关键帧后，下来就可以直接用它了：
+
+```css
+animation: rotate 2s;
+```

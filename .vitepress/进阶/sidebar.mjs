@@ -14,15 +14,4 @@ export default {
       ],
     },
   ],
-  "/进阶/web3D技术/": [
-    {
-      text: "web3D技术",
-      items: [
-        {
-          text: "00 WebGL+Three.js 入门与实战",
-          link: "/进阶/web3D技术/00 WebGL+Three.js 入门与实战",
-        },
-      ],
-    },
-  ],
 };

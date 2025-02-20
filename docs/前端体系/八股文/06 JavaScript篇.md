@@ -366,7 +366,7 @@ AJAX是 Asynchronous JavaScript and XML 的缩写，指的是通过 JavaScript �
 - **创建一个 XMLHttpRequest 对象。**
 - 在这个对象上**使用 open 方法创建一个 HTTP 请求**，open 方法所需要的参数是请求的方法、请求的地址、是否异步和用户的认证信息。
 - 在发起请求前，可以为这个对象**添加一些信息和监听函数**。比如说可以通过 setRequestHeader 方法来为请求添加头信息。还可以为这个对象添加一个状态监听函数。一个 XMLHttpRequest 对象一共有 5 个状态，当它的状态变化时会触发onreadystatechange 事件，可以通过设置监听函数，来处理请求成功后的结果。当对象的 readyState 变为 4 的时候，代表服务器返回的数据接收完成，这个时候可以通过判断请求的状态，如果状态是 2xx 或者 304 的话则代表返回正常。这个时候就可以通过 response 中的数据来对页面进行更新了。
-- 当对象的属性和监听函数设置完成后，最后调**用 sent 方法来向服务器发起请求**，可以传入参数作为发送的数据体。
+- 当对象的属性和监听函数设置完成后，最后调**用 send 方法来向服务器发起请求**，可以传入参数作为发送的数据体。
 
 ```javascript
 const SERVER_URL = "/server";
@@ -804,25 +804,157 @@ Promise.race([promise1,promise2,promise3]).then(res=>{
 
 （1）第一种是以原型链的方式来实现继承，但是这种实现方式存在的缺点是，在包含有引用类型的数据时，会被所有的实例对象所共享，容易造成修改的混乱。还有就是在创建子类型的时候不能向超类型传递参数。
 
-
+```js
+function Parent() {
+    this.name = 'parent1';
+    this.play = [1, 2, 3]
+  }
+  function Child() {
+    this.type = 'child2';
+  }
+  Child1.prototype = new Parent();
+  console.log(new Child())
+```
 
 （2）第二种方式是使用借用构造函数的方式，这种方式是通过在子类型的函数中调用超类型的构造函数来实现的，这一种方法解决了不能向超类型传递参数的缺点，但是它存在的一个问题就是无法实现函数方法的复用，并且超类型原型定义的方法子类型也没有办法访问到。
 
+```js
+function Parent(){
+    this.name = 'parent1';
+}
 
+Parent.prototype.getName = function () {
+    return this.name;
+}
+
+function Child(){
+    Parent1.call(this);
+    this.type = 'child'
+}
+
+let child = new Child();
+console.log(child);  // 没问题
+console.log(child.getName());  // 会报错
+```
 
 （3）第三种方式是组合继承，组合继承是将原型链和借用构造函数组合起来使用的一种方式。通过借用构造函数的方式来实现类型的属性的继承，通过将子类型的原型设置为超类型的实例来实现方法的继承。这种方式解决了上面的两种模式单独使用时的问题，但是由于我们是以超类型的实例来作为子类型的原型，所以调用了两次超类的构造函数，造成了子类型的原型中多了很多不必要的属性。
 
+```js
+function Parent3 () {
+    this.name = 'parent3';
+    this.play = [1, 2, 3];
+}
 
+Parent3.prototype.getName = function () {
+    return this.name;
+}
+function Child3() {
+    // 第二次调用 Parent3()
+    Parent3.call(this);
+    this.type = 'child3';
+}
 
-（4）第四种方式是原型式继承，原型式继承的主要思路就是基于已有的对象来创建新的对象，实现的原理是，向函数中传入一个对象，然后返回一个以这个对象为原型的对象。这种继承的思路主要不是为了实现创造一种新的类型，只是对某个对象实现一种简单继承，ES5 中定义的 Object.create() 方法就是原型式继承的实现。缺点与原型链方式相同。
+// 第一次调用 Parent3()
+Child3.prototype = new Parent3();
+// 手动挂上构造器，指向自己的构造函数
+Child3.prototype.constructor = Child3;
+var s3 = new Child3();
+var s4 = new Child3();
+s3.play.push(4);
+console.log(s3.play, s4.play);  // 不互相影响
+console.log(s3.getName()); // 正常输出'parent3'
+console.log(s4.getName()); // 正常输出'parent3'
+```
 
+（4）第四种方式是原型式继承，原型式继承的主要思路就是基于已有的对象来创建新的对象，实现的原理是，向函数中传入一个对象，然后返回一个以这个对象为原型的对象。这种继承的思路主要不是为了实现创造一种新的类型，只是对某个对象实现一种简单继承，ES5 中定义的 Object.create() 方法就是原型式继承的实现。这种继承方式的缺点也很明显，因为`Object.create`方法实现的是浅拷贝，多个实例的引用类型属性指向相同的内存，存在篡改的可能
 
+```js
+let parent4 = {
+    name: "parent4",
+    friends: ["p1", "p2", "p3"],
+    getName: function() {
+      return this.name;
+    }
+  };
+
+  let person4 = Object.create(parent4);
+  person4.name = "tom";
+  person4.friends.push("jerry");
+
+  let person5 = Object.create(parent4);
+  person5.friends.push("lucy");
+
+  console.log(person4.name); // tom
+  console.log(person4.name === person4.getName()); // true
+  console.log(person5.name); // parent4
+  console.log(person4.friends); // ["p1", "p2", "p3","jerry","lucy"]
+  console.log(person5.friends); // ["p1", "p2", "p3","jerry","lucy"]
+```
 
 （5）第五种方式是寄生式继承，寄生式继承的思路是创建一个用于封装继承过程的函数，通过传入一个对象，然后复制一个对象的副本，然后对象进行扩展，最后返回这个对象。这个扩展的过程就可以理解是一种继承。这种继承的优点就是对一个简单对象实现继承，如果这个对象不是自定义类型时。缺点是没有办法实现函数的复用。
 
+寄生式继承在上面继承基础上进行优化，利用这个浅拷贝的能力再进行增强，添加一些方法
 
+```js
+let parent5 = {
+    name: "parent5",
+    friends: ["p1", "p2", "p3"],
+    getName: function() {
+        return this.name;
+    }
+};
+
+function clone(original) {
+    let clone = Object.create(original);
+    clone.getFriends = function() {
+        return this.friends;
+    };
+    return clone;
+}
+
+let person5 = clone(parent5);
+
+console.log(person5.getName()); // parent5
+console.log(person5.getFriends()); // ["p1", "p2", "p3"]
+```
 
 （6）第六种方式是寄生式组合继承，组合继承的缺点就是使用超类型的实例做为子类型的原型，导致添加了不必要的原型属性。寄生式组合继承的方式是使用超类型的原型的副本来作为子类型的原型，这样就避免了创建不必要的属性。
+
+```js
+function clone (parent, child) {
+    // 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程
+    child.prototype = Object.create(parent.prototype);
+    child.prototype.constructor = child;
+}
+
+function Parent6() {
+    this.name = 'parent6';
+    this.play = [1, 2, 3];
+}
+Parent6.prototype.getName = function () {
+    return this.name;
+}
+function Child6() {
+    Parent6.call(this);
+    this.friends = 'child5';
+}
+
+clone(Parent6, Child6);
+
+Child6.prototype.getFriends = function () {
+    return this.friends;
+}
+
+let person6 = new Child6();
+console.log(person6); //{friends:"child5",name:"child5",play:[1,2,3],__proto__:Parent6}
+console.log(person6.getName()); // parent6
+console.log(person6.getFriends()); // child5
+
+```
+
+下面以一张图作为总结：
+
+![img](http://139.196.79.103:9001/myimages/imgs/20250221030015379.png)
 
 ## 34.浏览器的垃圾回收机制
 
@@ -884,3 +1016,715 @@ obj2.a =  null
 - **被遗忘的计时器或回调函数：**设置了 setInterval 定时器，而忘记取消它，如果循环函数有对外部变量的引用的话，那么这个变量会被一直留在内存中，而无法被回收。
 - **脱离 DOM 的引用：**获取一个 DOM 元素的引用，而后面这个元素被删除，由于一直保留了对这个元素的引用，所以它也无法被回收。
 - **闭包：**不合理的使用闭包，从而导致某些变量一直被留在内存当中。
+
+## 36.map和weakMap的区别
+
+- Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+- WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合。但是 WeakMap 只接受对象作为键名（ null 除外），不接受其他类型的值作为键名。而且 WeakMap 的键名所指向的对象，不计入垃圾回收机制。
+
+## 37.常见的DOM操作有哪些
+
+#### 1）DOM 节点的获取
+
+```javascript
+getElementById // 按照 id 查询
+getElementsByTagName // 按照标签名查询
+getElementsByClassName // 按照类名查询
+querySelectorAll // 按照 css 选择器查询
+
+// 按照 id 查询
+var imooc = document.getElementById('imooc') // 查询到 id 为 imooc 的元素
+// 按照标签名查询
+var pList = document.getElementsByTagName('p')  // 查询到标签为 p 的集合
+console.log(divList.length)
+console.log(divList[0])
+// 按照类名查询
+var moocList = document.getElementsByClassName('mooc') // 查询到类名为 mooc 的集合
+// 按照 css 选择器查询
+var pList = document.querySelectorAll('.mooc') // 查询到类名为 mooc 的集合
+```
+
+#### 2）DOM 节点的创建
+
+创建一个新节点，并把它添加到指定节点的后面。已知的 HTML 结构如下：
+
+```javascript
+<html>
+  <head>
+    <title>DEMO</title>
+  </head>
+  <body>
+    <div id="container"> 
+      <h1 id="title">我是标题</h1>
+    </div>   
+  </body>
+</html>
+```
+
+要求添加一个有内容的 span 节点到 id 为 title 的节点后面，做法就是：
+
+```javascript
+// 首先获取父节点
+var container = document.getElementById('container')
+// 创建新节点
+var targetSpan = document.createElement('span')
+// 设置 span 节点的内容
+targetSpan.innerHTML = 'hello world'
+// 把新创建的元素塞进父节点里去
+container.appendChild(targetSpan)
+```
+
+#### 3）DOM 节点的删除
+
+**删除指定的 DOM 节点，**已知的 HTML 结构如下：
+
+```javascript
+<html>
+  <head>
+    <title>DEMO</title>
+  </head>
+  <body>
+    <div id="container"> 
+      <h1 id="title">我是标题</h1>
+    </div>   
+  </body>
+</html>
+```
+
+需要删除 id 为 title 的元素，做法是：
+
+```javascript
+// 获取目标元素的父元素
+var container = document.getElementById('container')
+// 获取目标元素
+var targetNode = document.getElementById('title')
+// 删除目标元素
+container.removeChild(targetNode)
+```
+
+或者通过子节点数组来完成删除：
+
+```javascript
+// 获取目标元素的父元素
+var container = document.getElementById('container')
+// 获取目标元素
+var targetNode = container.childNodes[1]
+// 删除目标元素
+container.removeChild(targetNode)
+```
+
+#### 4）修改 DOM 元素
+
+修改 DOM 元素这个动作可以分很多维度，比如说移动 DOM 元素的位置，修改 DOM 元素的属性等。
+
+
+
+**将指定的两个 DOM 元素交换位置，**已知的 HTML 结构如下：
+
+```javascript
+<html>
+  <head>
+    <title>DEMO</title>
+  </head>
+  <body>
+    <div id="container"> 
+      <h1 id="title">我是标题</h1>
+      <p id="content">我是内容</p>
+    </div>   
+  </body>
+</html>
+```
+
+现在需要调换 title 和 content 的位置，可以考虑 insertBefore 或者 appendChild：
+
+```javascript
+// 获取父元素
+var container = document.getElementById('container')   
+ 
+// 获取两个需要被交换的元素
+var title = document.getElementById('title')
+var content = document.getElementById('content')
+// 交换两个元素，把 content 置于 title 前面
+container.insertBefore(content, title)
+```
+
+## 38.ajax、axios、fetch的区别
+
+**（1）AJAX**
+
+Ajax 即“AsynchronousJavascriptAndXML”（异步 JavaScript 和 XML），是指一种创建交互式[网页](https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/%E7%BD%91%E9%A1%B5)应用的网页开发技术。它是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。传统的网页（不使用 Ajax）如果需要更新内容，必须重载整个网页页面。其缺点如下：
+
+- 本身是针对MVC编程，不符合前端MVVM的浪潮
+- 基于原生XHR开发，XHR本身的架构不清晰
+- 不符合关注分离（Separation of Concerns）的原则
+- 配置和调用方式非常混乱，而且基于事件的异步模型不友好。
+
+
+
+**（2）Fetch**
+
+fetch号称是AJAX的替代品，是在ES6出现的，使用了ES6中的promise对象。Fetch是基于promise设计的。Fetch的代码结构比起ajax简单多。**fetch不是ajax的进一步封装，而是原生js，没有使用XMLHttpRequest对象**。
+
+
+
+fetch的优点：
+
+- 语法简洁，更加语义化
+- 基于标准 Promise 实现，支持 async/await
+- 更加底层，提供的API丰富（request, response）
+- 脱离了XHR，是ES规范里新的实现方式
+
+fetch的缺点：
+
+- fetch只对网络请求报错，对400，500都当做成功的请求，服务器返回 400，500 错误码时并不会 reject，只有网络错误这些导致请求不能完成时，fetch 才会被 reject。
+- fetch默认不会带cookie，需要添加配置项： fetch(url, {credentials: 'include'})
+- fetch不支持abort，不支持超时控制，使用setTimeout及Promise.reject的实现的超时控制并不能阻止请求过程继续在后台运行，造成了流量的浪费
+- fetch没有办法原生监测请求的进度，而XHR可以
+
+
+
+**（3）Axios**
+
+Axios 是一种基于Promise封装的HTTP客户端，其特点如下：
+
+- 浏览器端发起XMLHttpRequests请求
+- node端发起http请求
+- 支持Promise API
+- 监听请求和返回
+- 对请求和返回进行转化
+- 取消请求
+- 自动转换json数据
+- 客户端支持抵御XSRF攻击
+
+## 39.异步编程的实现方式？
+
+JavaScript中的异步机制可以分为以下几种：
+
+- **回调函数** 的方式，使用回调函数的方式有一个缺点是，多个回调函数嵌套的时候会造成回调函数地狱，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
+- **Promise** 的方式，使用 Promise 的方式可以将嵌套的回调函数作为链式调用。但是使用这种方法，有时会造成多个 then 的链式调用，可能会造成代码的语义不够明确。
+- **generator** 的方式，它可以在函数的执行过程中，将函数的执行权转移出去，在函数外部还可以将执行权转移回来。当遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕时再将执行权给转移回来。因此在 generator 内部对于异步操作的方式，可以以同步的顺序来书写。使用这种方式需要考虑的问题是何时将函数的控制权转移回来，因此需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行。
+  - `yield`表达式可以暂停函数执行，`next`方法用于恢复函数执行，这使得`Generator`函数非常适合将异步任务同步化
+- **async 函数** 的方式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
+
+## 40.setTimeout、Promise、Async/Await 的区别
+
+#### （1）setTimeout
+
+```javascript
+console.log('script start')	//1. 打印 script start
+setTimeout(function(){
+    console.log('settimeout')	// 4. 打印 settimeout
+})	// 2. 调用 setTimeout 函数，并定义其完成后执行的回调函数
+console.log('script end')	//3. 打印 script start
+// 输出顺序：script start->script end->settimeout
+```
+
+#### （2）Promise
+
+Promise本身是**同步的立即执行函数**， 当在executor中执行resolve或者reject的时候, 此时是异步操作， 会先执行then/catch等，当主栈完成后，才会去调用resolve/reject中存放的方法执行，打印p的时候，是打印的返回结果，一个Promise实例。
+
+```javascript
+console.log('script start')
+let promise1 = new Promise(function (resolve) {
+    console.log('promise1')
+    resolve()
+    console.log('promise1 end')
+}).then(function () {
+    console.log('promise2')
+})
+setTimeout(function(){
+    console.log('settimeout')
+})
+console.log('script end')
+// 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+```
+
+当JS主线程执行到Promise对象时：
+
+- promise1.then() 的回调就是一个 task
+- promise1 是 resolved或rejected: 那这个 task 就会放入当前事件循环回合的 microtask queue
+- promise1 是 pending: 这个 task 就会放入 事件循环的未来的某个(可能下一个)回合的 microtask queue 中
+- setTimeout 的回调也是个 task ，它会被放入 macrotask queue 即使是 0ms 的情况
+
+#### （3）async/await
+
+```javascript
+async function async1(){
+   console.log('async1 start');
+    await async2();
+    console.log('async1 end')
+}
+async function async2(){
+    console.log('async2')
+}
+console.log('script start');
+async1();
+console.log('script end')
+// 输出顺序：script start->async1 start->async2->script end->async1 end
+```
+
+async 函数返回一个 Promise 对象，当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再执行函数体内后面的语句。可以理解为，是让出了线程，跳出了 async 函数体。
+
+await的含义为等待，也就是 async 函数需要等待await后的函数执行完成并且有了返回结果（Promise对象）之后，才能继续执行下面的代码。await通过返回一个Promise对象来实现同步的效果。
+
+## 41.对async/await 的理解
+
+async/await其实是`Generator` 的语法糖，它能实现的效果都能用then链来实现，它是为优化then链而开发出来的。从字面上来看，async是“异步”的简写，await则为等待，所以很好理解async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。当然语法上强制规定await只能出现在asnyc函数中，先来看看async函数返回了什么： 
+
+```javascript
+async function testAsy(){
+   return 'hello world';
+}
+let result = testAsy(); 
+console.log(result)
+```
+
+![img](http://139.196.79.103:9001/myimages/imgs/20250221021604840.png)
+
+所以，async 函数返回的是一个 Promise 对象。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 `return` 一个直接量，async 会把这个直接量通过 `Promise.resolve()` 封装成 Promise 对象。
+
+## 42.你是怎么理解ES6新增Set、Map两种数据结构的？
+
+### Set
+
+**Set是一个新增的数据结构，可以用来保存数据，类似于数组，但是和数组的区别是元素不能重复。**
+
+**Set常见的属性：**
+
+size：返回Set中元素的个数；
+
+**Set常用的方法：**
+
+add(value)：添加某个元素，返回Set对象本身；
+
+delete(value)：从set中删除和这个值相等的元素，返回boolean类型；
+
+has(value)：判断set中是否存在某个元素，返回boolean类型；
+
+clear()：清空set中所有的元素，没有返回值；
+
+forEach(callback, [, thisArg])：通过forEach遍历set；
+
+**另外Set是支持for of的遍历的。**
+
+### Map
+
+**Map，用于存储映射关系。**
+
+**Map常见的属性：**
+
+size：返回Map中元素的个数；
+
+**Map常见的方法：**
+
+set(key, value)：在Map中添加key、value，并且返回整个Map对象；
+
+get(key)：根据key获取Map中的value；
+
+has(key)：判断是否包括某一个key，返回Boolean类型；
+
+delete(key)：根据key删除一个键值对，返回Boolean类型；
+
+clear()：清空所有的元素；
+
+forEach(callback, [, thisArg])：通过forEach遍历Map；
+
+**Map也可以通过for of进行遍历。**
+
+## 43.你是怎么理解ES6中Proxy的？使用场景?
+
+`Proxy`为 构造函数，用来生成 `Proxy`实例
+
+```javascript
+var proxy = new Proxy(target, handler)
+```
+
+`target`表示所要拦截的目标对象（任何类型的对象，包括原生数组，函数，甚至另一个代理））
+
+`handler`通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 `p` 的行为
+
+关于`handler`拦截属性，有如下：
+
+- get(target,propKey,receiver)：拦截对象属性的读取
+- set(target,propKey,value,receiver)：拦截对象属性的设置
+- has(target,propKey)：拦截`propKey in proxy`的操作，返回一个布尔值
+- deleteProperty(target,propKey)：拦截`delete proxy[propKey]`的操作，返回一个布尔值
+- ownKeys(target)：拦截`Object.keys(proxy)`、`for...in`等循环，返回一个数组
+- getOwnPropertyDescriptor(target, propKey)：拦截`Object.getOwnPropertyDescriptor(proxy, propKey)`，返回属性的描述对象
+- defineProperty(target, propKey, propDesc)：拦截`Object.defineProperty(proxy, propKey, propDesc）`，返回一个布尔值
+- preventExtensions(target)：拦截`Object.preventExtensions(proxy)`，返回一个布尔值
+- getPrototypeOf(target)：拦截`Object.getPrototypeOf(proxy)`，返回一个对象
+- isExtensible(target)：拦截`Object.isExtensible(proxy)`，返回一个布尔值
+- setPrototypeOf(target, proto)：拦截`Object.setPrototypeOf(proxy, proto)`，返回一个布尔值
+- apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作
+- construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作
+
+###  Reflect
+
+若需要在`Proxy`内部调用对象的默认行为，建议使用`Reflect`，其是`ES6`中操作对象而提供的新 `API`
+
+基本特点：
+
+- 只要`Proxy`对象具有的代理方法，`Reflect`对象全部具有，以静态方法的形式存在
+- 修改某些`Object`方法的返回结果，让其变得更合理（定义不存在属性行为的时候不报错而是返回`false`）
+- 让`Object`操作都变成函数行为
+
+```javascript
+var person = {
+  name: "张三"
+};
+
+var proxy = new Proxy(person, {
+  get: function(target, propKey) {
+    return Reflect.get(target,propKey)
+  }
+});
+
+proxy.name // "张三"
+```
+
+## 44.JavaScript字符串的常用方法有哪些？
+
+### 增
+
+#### concat
+
+用于将一个或多个字符串拼接成一个新字符串
+
+```js
+let stringValue = "hello ";
+let result = stringValue.concat("world");
+console.log(result); // "hello world"
+console.log(stringValue); // "hello"
+```
+
+### 删
+
+这里的删的意思并不是说删除原字符串的内容，而是创建字符串的一个副本，再进行操作
+
+常见的有：
+
+- slice()
+- substr()
+- substring()
+
+这三个方法都返回调用它们的字符串的一个子字符串，而且都接收一或两个参数。
+
+```js
+let stringValue = "hello world";
+console.log(stringValue.slice(3)); // "lo world"
+console.log(stringValue.substring(3)); // "lo world"
+console.log(stringValue.substr(3)); // "lo world"
+console.log(stringValue.slice(3, 7)); // "lo w"
+console.log(stringValue.substring(3,7)); // "lo w"
+console.log(stringValue.substr(3, 7)); // "lo worl"
+```
+
+`substring(startIndex, endIndex)`
+
+`substr(startIndex, length)`：length表示返回的子字符串长度。
+
+### 改
+
+这里改的意思也不是改变原字符串，而是创建字符串的一个副本，再进行操作
+
+常见的有：
+
+- trim()、trimLeft()、trimRight()
+- repeat()
+- padStart()、padEnd()
+- toLowerCase()、 toUpperCase()
+
+#### trim()、trimLeft()、trimRight()
+
+删除前、后或前后所有空格符，再返回新的字符串
+
+```js
+let stringValue = " hello world ";
+let trimmedStringValue = stringValue.trim();
+console.log(stringValue); // " hello world "
+console.log(trimmedStringValue); // "hello world"
+```
+
+####  repeat()
+
+接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果
+
+```js
+let stringValue = "na ";
+let copyResult = stringValue.repeat(2) // na na 
+```
+
+#### padStart()
+
+复制字符串，如果小于指定长度，则在相应一边填充字符，直至满足长度条件
+
+str.padStart(targetLength [, padString])
+
+参数
+
+- **`targetLength`**：必需。当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。
+- **`padString`**：可选。填充字符串。如果填充字符串的长度超过了目标长度，则只保留最左侧的部分。默认值为空字符串（`""`）。
+
+```js
+let str = "5";
+console.log(str.padStart(2, "0")); // "05"
+console.log(str.padStart(3, "0")); // "005"
+console.log(str.padStart(4, "0")); // "0005"
+```
+
+`padStart` 在处理需要固定长度的字符串时非常有用，例如：
+
+- 格式化日期和时间：确保月份和日期是两位数。
+
+```javascript
+let date = new Date();
+let month = String(date.getMonth() + 1).padStart(2, '0');
+let day = String(date.getDate()).padStart(2, '0');
+console.log(`${date.getFullYear()}-${month}-${day}`); // 例如：2023-10-05
+```
+
+#### toLowerCase()、 toUpperCase()
+
+大小写转化
+
+```js
+let stringValue = "hello world";
+console.log(stringValue.toUpperCase()); // "HELLO WORLD"
+console.log(stringValue.toLowerCase()); // "hello world"
+```
+
+### 查
+
+除了通过索引的方式获取字符串的值，还可通过：
+
+- chatAt()
+- indexOf()
+- startWith()
+- includes()
+
+####  charAt()
+
+返回给定索引位置的字符，由传给方法的整数参数指定
+
+```js
+let message = "abcde";
+console.log(message.charAt(2)); // "c"
+```
+
+####  indexOf()
+
+从字符串开头去搜索传入的字符串，并返回位置（如果没找到，则返回 -1 ）
+
+```js
+let stringValue = "hello world";
+console.log(stringValue.indexOf("o")); // 4
+```
+
+#### startWith()、includes()
+
+从字符串中搜索传入的字符串，并返回一个表示是否包含的布尔值
+
+```js
+let message = "foobarbaz";
+console.log(message.startsWith("foo")); // true
+console.log(message.startsWith("bar")); // false
+console.log(message.includes("bar")); // true
+console.log(message.includes("qux")); // false
+```
+
+### split
+
+把字符串按照指定的分割符，拆分成数组中的每一项
+
+```js
+let str = "12+23+34"
+let arr = str.split("+") // [12,23,34]
+```
+
+###  match()
+
+接收一个参数，可以是一个正则表达式字符串，也可以是一个`RegExp`对象，返回数组
+
+```js
+let text = "cat, bat, sat, fat";
+let pattern = /.at/;
+let matches = text.match(pattern);
+console.log(matches[0]); // "cat"
+```
+
+###  search()
+
+接收一个参数，可以是一个正则表达式字符串，也可以是一个`RegExp`对象，找到则返回匹配索引，否则返回 -1
+
+```js
+let text = "cat, bat, sat, fat";
+let pos = text.search(/at/);
+console.log(pos); // 1
+```
+
+### replace()
+
+接收两个参数，第一个参数为匹配的内容，第二个参数为替换的元素（可用函数）
+
+```js
+let text = "cat, bat, sat, fat";
+let result = text.replace("at", "ond");
+console.log(result); // "cond, bat, sat, fat"
+```
+
+## 45.谈谈 JavaScript 中的类型转换机制
+
+常见的类型转换有：
+
+- 强制转换（显示转换）
+- 自动转换（隐式转换）
+
+### 显示转换
+
+#### Number()
+
+将任意类型的值转化为数值
+
+先给出类型转换规则：
+
+![img](http://139.196.79.103:9001/myimages/imgs/20250221025052844.png)
+
+```js
+Number(324) // 324
+
+// 字符串：如果可以被解析为数值，则转换为相应的数值
+Number('324') // 324
+
+// 字符串：如果不可以被解析为数值，返回 NaN
+Number('324abc') // NaN
+
+// 空字符串转为0
+Number('') // 0
+
+// 布尔值：true 转成 1，false 转成 0
+Number(true) // 1
+Number(false) // 0
+
+// undefined：转成 NaN
+Number(undefined) // NaN
+
+// null：转成0
+Number(null) // 0
+
+// 对象：通常转换成NaN(除了只包含单个数值的数组)
+Number({a: 1}) // NaN
+Number([1, 2, 3]) // NaN
+Number([5]) // 5
+```
+
+#### parseInt()
+
+`parseInt`相比`Number`，就没那么严格了，`parseInt`函数逐个解析字符，遇到不能转换的字符就停下来
+
+```js
+parseInt('32a3') //32
+```
+
+#### String()
+
+可以将任意类型的值转化成字符串
+
+给出转换规则图：
+
+![img](http://139.196.79.103:9001/myimages/imgs/20250221025147714.png)
+
+```js
+// 数值：转为相应的字符串
+String(1) // "1"
+
+//字符串：转换后还是原来的值
+String("a") // "a"
+
+//布尔值：true转为字符串"true"，false转为字符串"false"
+String(true) // "true"
+
+//undefined：转为字符串"undefined"
+String(undefined) // "undefined"
+
+//null：转为字符串"null"
+String(null) // "null"
+
+//对象
+String({a: 1}) // "[object Object]"
+String([1, 2, 3]) // "1,2,3"
+```
+
+#### Boolean()
+
+可以将任意类型的值转为布尔值，转换规则如下：
+
+![img](http://139.196.79.103:9001/myimages/imgs/20250221025235142.png)
+
+```js
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean(NaN) // false
+Boolean('') // false
+Boolean({}) // true
+Boolean([]) // true
+Boolean(new Boolean(false)) // true
+```
+
+### 隐式转换
+
+- 比较运算（`==`、`!=`、`>`、`<`）、`if`、`while`需要布尔值地方
+- 算术运算（`+`、`-`、`*`、`/`、`%`）
+
+#### 自动转换为布尔值
+
+在需要布尔值的地方，就会将非布尔值的参数自动转为布尔值，系统内部会调用`Boolean`函数
+
+可以得出个小结：
+
+- undefined
+- null
+- false
+- +0
+- -0
+- NaN
+- ""
+
+除了上面几种会被转化成`false`，其他都换被转化成`true`
+
+### 自动转换成字符串
+
+遇到预期为字符串的地方，就会将非字符串的值自动转为字符串
+
+具体规则是：先将复合类型的值转为原始类型的值，再将原始类型的值转为字符串
+
+常发生在`+`运算中，一旦存在字符串，则会进行字符串拼接操作
+
+```js
+'5' + 1 // '51'
+'5' + true // "5true"
+'5' + false // "5false"
+'5' + {} // "5[object Object]"
+'5' + [] // "5"
+'5' + function (){} // "5function (){}"
+'5' + undefined // "5undefined"
+'5' + null // "5null"
+```
+
+### 自动转换成数值
+
+除了`+`有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值
+
+```js
+'5' - '2' // 3
+'5' * '2' // 10
+true - 1  // 0
+false - 1 // -1
+'1' - 1   // 0
+'5' * []    // 0
+false / '5' // 0
+'abc' - 1   // NaN
+null + 1 // 1
+undefined + 1 // NaN
+```
