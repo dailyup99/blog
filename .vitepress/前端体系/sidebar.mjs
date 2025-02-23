@@ -465,6 +465,14 @@ export default {
           text: "11 Redux-Saga详解",
           link: "/前端体系/React/11 Redux-Saga详解",
         },
+        {
+          text: "12 dva核心知识与实战运用",
+          link: "/前端体系/React/12 dva核心知识与实战运用",
+        },
+        {
+          text: "13 umi核心知识与实战运用",
+          link: "/前端体系/React/13 umi核心知识与实战运用",
+        },
       ],
     },
   ],

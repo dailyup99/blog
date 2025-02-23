@@ -14,6 +14,12 @@ React并不是将click事件绑定到了div的真实DOM上，而是通过事件�
 
 除此之外，冒泡到document上的事件也不是原生的浏览器事件，而是由react自己实现的合成事件（SyntheticEvent）。因此如果不想要事件冒泡的话应该调用event.preventDefault()方法，而不是调用event.stopProppagation()方法。
 
+#### 合成事件的底层机制
+
+总原则：基于事件委托实现
+
+React17及以后，是委托给#root元素，React17以前，是委托给document元素，并且没有实现捕获阶段的派发
+
 ## 2.React的事件和普通的HTML事件有什么不同？
 
 区别：
