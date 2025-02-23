@@ -236,24 +236,25 @@ function CommentList(props) {
 
 Hoc、render props和hook都是为了解决代码复用的问题，但是hoc和render props都有特定的使用场景和明显的缺点。hook是react16.8更新的新的API，让组件逻辑复用更简洁明了，同时也解决了hoc和render props的一些缺点。
 
-## 5.对React-Fiber的理解，它解决了什么问题？
+## 5.**React** **中** **fiber** **是用来做什么的**
 
-React V15 在渲染时，会递归比对 VirtualDOM 树，找出需要变动的节点，然后同步更新它们， 一气呵成。这个过程期间， React 会占据浏览器资源，这会导致用户触发的事件得不到响应，并且会导致掉帧，**导致用户感觉到卡顿**。
+因为 JavaScript 单线程的特点，每个同步任务不能耗时太长，不然就会让程序不会对其他输入作出相
 
+应，React 的更新过程就是犯了这个禁忌，而 React Fiber 就是要改变现状。 而可以通过分片来破解
 
+JavaScript 中同步操作时间过长的问题。
 
-为了给用户制造一种应用很快的“假象”，不能让一个任务长期霸占着资源。 可以将浏览器的渲染、布局、绘制、资源加载(例如 HTML 解析)、事件响应、脚本执行视作操作系统的“进程”，需要通过某些调度策略合理地分配 CPU 资源，从而提高浏览器的用户响应速率, 同时兼顾任务执行效率。
+把一个耗时长的任务分成很多小片，每一个小片的运行时间很短，虽然总时间依然很长，但是在每个小
 
+片执行完之后，都给其他任务一个执行的机会，这样唯一的线程就不会被独占，其他任务依然有运行的
 
+机会。
 
-所以 React 通过Fiber 架构，让这个执行过程变成可被中断。“适时”地让出 CPU 执行权，除了可以让浏览器及时地响应用户的交互，还有其他好处:
+React Fiber 把更新过程碎片化，每执行完一段更新过程，就把控制权交还给 React 负责任务协调的模
 
-- 分批延时对DOM进行操作，避免一次性操作大量 DOM 节点，可以得到更好的用户体验；
-- 给浏览器一点喘息的机会，它会对代码进行编译优化（JIT）及进行热代码优化，或者对 reflow 进行修正。
+块，看看有没有其他紧急任务要做，如果没有就继续去更新，如果有紧急任务，那就去做紧急任务。
 
-#### 
-
-**核心思想：**Fiber 也称协程或者纤程。它和线程并不一样，协程本身是没有并发或者并行能力的（需要配合线程），它只是一种控制流程的让出机制。让出 CPU 的执行权，让 CPU 能在这段时间执行其他的操作。渲染的过程可以被中断，可以将控制权交回浏览器，让位给高优先级的任务，浏览器空闲后再恢复渲染。
+维护每一个分片的数据结构，就是 Fiber。
 
 ## 6.React.Component 和 React.PureComponent 的区别
 
@@ -879,6 +880,12 @@ setState 并不是单纯同步/异步的，它的表现会因调用场景的不�
 
 - `setState`设计为异步，可以显著的提升性能。如果每次调用 `setState`都进行一次更新，那么意味着`render`函数会被频繁调用，界面重新渲染，这样效率是很低的；最好的办法应该是获取到多个更新，之后进行批量更新； 
 - 如果同步更新了`state`，但是还没有执行`render`函数，那么`state`和`props`不能保持同步。`state`和`props`不能保持一致性，会在开发中产生很多的问题；
+
+React18中，setState的操作是异步的「在任何地方都是」，基于updater更新队列机制，实现了状态的批处理！这样做的好处有：
+
+  \+ 统一更新，提高视图更新的性能
+
+  \+ 处理流程更加稳健
 
 ## 23.React中的setState批量更新的过程是什么？
 
@@ -2853,3 +2860,370 @@ window.addEventListener('error', function(event) { ... })
 然后基于 `react` 内置的服务端渲染方法 `renderToString()`把组件渲染为 `html`字符串在把最终的 `html`进行输出前需要将数据注入到浏览器端
 
 浏览器开始进行渲染和节点对比，然后执行完成组件内事件绑定和一些交互，浏览器重用了服务端输出的 `html` 节点，整个流程结束
+
+## 71.**请描述出webpack核心的几个部分，及作用**
+
+webpack其实是一个平台，在平台中，我们会安装/融入/配置各种打包规则
+
+  \+ mode：打包模式「开发环境development、生产环境production」
+
+  \+ entry：入口「webpack就是从入口开始，根据CommonJS/ES6Module模块规范，分析出模块之间的依赖，从而按照相关的依赖关系，进行打包的」
+
+  \+ output：出口
+
+  \+ loader：加载器「一般都是用于实现代码编译的」
+
+  \+ plugin：插件「处理的需求比较多了，例如：压缩、编译HTML、清空打包...」
+
+  \+ resolve：解析器
+
+  \+ optimization：优化项
+
+  \+ devServer：配合webpack-dev-server，在本地启动Web服务，实现项目预览以及跨域处理...
+
+## 72.**介绍一下，webpack中你知道的加载器、插件及其作用**
+
+常用的插件：
+
+  \+ html-webpack-plugin：编译HTML
+
+  \+ clean-webpack-plugin：清空打包内容
+
+  \+ css-minimizer-webpack-plugin 压缩CSS
+
+  \+ terser-webpack-plugin 压缩JS
+
+  \+ mini-css-extract-plugin 抽离CSS样式
+
+常用的加载器：
+
+  \+ css-loader、style-loader、less-loader、postcss-loader 处理CSS的
+
+  \+ babel-loader 编译JS的
+
+  \+ file-loader、url-loader 处理图片的
+
+  \+ ESLint-loader 代码检测的
+
+## 73.**create-react-app是如何处理IE兼容的**
+
+1. 设置browserslist「浏览器兼容列表」
+
+  "browserslist": {
+
+​    "production": [
+
+​      ">0.2%",
+
+​      "not dead",
+
+​      "not op_mini all"
+
+​    ],
+
+​    "development": [
+
+​      "last 1 chrome version",
+
+​      "last 1 firefox version",
+
+​      "last 1 safari version"
+
+​    ]
+
+  }
+
+
+
+2. 考虑CSS3样式的兼容问题
+
+  \+ webpack内部的postcss-loader & autoprefixer，根据browserslist，自动给CSS3加相关的前缀
+
+
+
+3. 考虑ES6+语法兼容
+
+  \+ webpack内部的babel & babel-loader & @babel/preset-env & @babel/core，根据browserslist，自动把ES6语法转换为ES5语法！
+
+
+
+4. 考虑ES6+内置API的兼容：主要是重写常用的API {@babel/polyfill}
+
+  import 'react-app-polyfill/ie9';
+
+  import 'react-app-polyfill/ie11';
+
+  import 'react-app-polyfill/stable';
+
+## 74.**根据需求，实现相应的代码**
+
+> React项目的“开发环境”下「基于create-react-app创建的项目」，我们需要基于proxy实现跨域代理；目前已知需要代理的服务器地址是：
+>
+> - 公司测试服务器：http://192.168.1.123:9889/
+> - 开源平台服务器地址：https://open.weixin.com/v2/applet/
+>
+> 请写跨域代理配置的代码！
+
+```javascript
+/* src/setupProxy.js */
+const { createProxyMiddleware } = require('http-proxy-middleware');
+module.exports = function (app) {
+    // 参考答案
+    app.use(
+        createProxyMiddleware("/api", {
+            target: "http://192.168.1.123:9889",
+            changeOrigin: true,
+            ws: true,
+            pathRewrite: { "^/api": "" }
+        })
+    );
+    app.use(
+        createProxyMiddleware("/wx", {
+            target: "https://open.weixin.com/v2/applet",
+            changeOrigin: true,
+            ws: true,
+            pathRewrite: { "^/wx": "" }
+        })
+    );
+};
+```
+
+## 75.**有A/B两个模块，A模块中需要调用B模块提供的方法，请你基于ES6Module模块规范，实现模块的导出和导入「至少两种方案」**
+
+方案一：
+
+```javascript
+/* B模块 */
+let listeners = [];
+const sum=function sum(...params){};
+const query=function query(...params){};
+export default {
+    listeners,
+    sum,
+    query
+};
+
+/* A模块 */
+import B from './B';
+B.listeners;
+B.sum();
+B.query();
+```
+
+方案二：
+
+```javascript
+/* B模块 */
+export let listeners = [];
+export const sum=function sum(...params){};
+export const query=function query(...params){};
+
+/* A模块 */
+import {listeners,sum,query} from './B';
+```
+
+## 76.**简单描述：MVC和MVVM两种框架模式的区别**
+
+React框架采用的是MVC体系；Vue框架采用的是MVVM体系；
+
+
+
+MVC：model数据层 + view视图层 + controller控制层
+
+  \+ 实现了数据驱动视图的渲染！！
+
+  \+ 视图中的表单内容改变，想要修改数据，需要开发者自己去写代码实现！！
+
+  \+ MVC是“单向数据驱动”
+
+
+
+MVVM：model数据层 + view视图层 + viewModel数据/视图监听层
+
+  \+ 实现了数据驱动视图的渲染：监听数据的更新，让视图重新渲染
+
+  \+ 实现了视图驱动数据的更改：监听页面中表单元素内容改变，自动去修改相关的数据
+
+  \+ MVVM是“双向数据驱动”
+
+## 77.**简单描述：JSX语法渲染的步骤**
+
+首先：基于babel-preset-react-app把JSX编译为React.createElement格式
+
+其次：把createElement方法执行，创建出virtualDOM虚拟DOM对象
+
+最后：基于root.render方法把virtualDOM变为真实DOM「如果是组件更新，是先进行DOM-DIFF，最后把差异部分渲染为真实DOM即可」
+
+## 78.**根据需求，实现相关的代码**
+
+```javascript
+/* 
+
+根据arr数组，循环动态创建出对应的li元素；
+
+li元素的样式是：字体14px，文字黑色；
+
+em元素的样式是：前三行，字体16px，文字红色；后面和li保持一致；
+
+*/
+
+let arr = [{
+
+​    id:1,
+
+​    title:'全国各地沉痛哀悼江泽民同志'
+
+},{
+
+​    id:2,
+
+​    title:'日本队出线导致德国队被淘汰后，元首的愤怒'
+
+},...];
+
+
+
+const NewsList=function NewsList(){
+
+​    return <ul className="news-box">
+
+​        {arr.map((item,index)=>{
+
+​            let {id,title}=item;
+
+​            return <li key={id} style={{
+
+​                fontSize:'14px',
+
+​                color:'#000'
+
+​            }}>
+
+​                {index<=2?<em style={{
+
+​                    fontSize:'16px',
+
+​                    color:'red'
+
+​                }}>{id}</em>:<em>{id}</em>}
+
+​                {title}
+
+​            </li>;
+
+​        })}
+
+​    </ul>;
+
+};
+```
+
+## 79.**简述：如果让你封装一个公共的组件，你会从哪些角度去提高组件的复用性**
+
+为了提高组件的灵活性/复用性，那么所封装的组件，内部的一些内容是不能写死的，需要调用组件的时候传递进来才可！我们可以基于这样几种方式：
+
+  \+ 数据信息：可以基于props（属性）传递进来
+
+  \+ HTML结构信息：可以基于props.children（插槽）传递进来
+
+还可以基于ref等操作，获取子组件的实例，从而调用其实例上的属性和方法；或者配合React.fowardRef实现ref转发，从而获取子组件内部的元素等！！
+
+## 80.**什么是React Hooks组件，解决了什么问题？**
+
+函数组件：
+
+\+ 不具备“状态、ref、周期函数”等内容，第一次渲染完毕后，无法基于组件内部的操作来控制其更新，因此称之为静态组件！
+
+\+ 但是具备属性及插槽，父组件可以控制其重新渲染！
+
+\+ 渲染流程简单，渲染速度较快！
+
+
+
+类组件：
+
+\+ 具备“状态、ref、周期函数、属性、插槽”等内容，可以灵活的控制组件更新，基于钩子函数也可灵活掌控不同阶段处理不同的事情！
+
+\+ 渲染流程繁琐，渲染速度相对较慢！
+
+
+
+React Hooks 组件，就是基于 React 中新提供的 Hook 函数，可以让函数组件动态化!
+
+## 81.**列举常见的React Hook函数，及作用「不少于5个」**
+
+基础 Hook
+
+\+ useState 使用状态管理
+
+\+ useEffect 使用周期函数
+
+\+ useContext 使用上下文信息
+
+
+
+额外的 Hook
+
+\+ useReducer useState的替代方案，借鉴redux处理思想，管理更复杂的状态和逻辑
+
+\+ useCallback 构建缓存优化方案
+
+\+ useMemo 构建缓存优化方案
+
+\+ useRef 使用ref获取DOM
+
+\+ useImperativeHandle 配合forwardRef（ref转发）一起使用
+
+\+ useLayoutEffect 与useEffect相同，但会在所有的DOM变更之后同步调用effect
+
+## 82.**看代码，分别写出：组件第一次渲染 & 一分钟后点击按钮 各自输出结果**
+
+```javascript
+import React, { useState, useEffect, useLayoutEffect } from "react";
+const Demo = function Demo() {
+    let [x, setX] = useState(10),
+        [y, setY] = useState(0);
+    useEffect(() => {
+        console.log('@1:', x, y);
+        return () => {
+            console.log('@2:', x, y);
+        };
+    });
+    useEffect(() => {
+        console.log('@3:', x, y);
+        setTimeout(() => {
+            console.log('@4:', x, y);
+        }, 10);
+    }, []);
+    useEffect(() => {
+        console.log('@5:', x, y);
+    }, [x]);
+    useEffect(() => {
+        console.log('@6:', x, y);
+    }, [y]);
+    useLayoutEffect(() => {
+        console.log('@7:', x, y);
+    }, [x]);
+    return <div className="demo-box">
+        <span>0</span>
+        <button onClick={() => setX(x + 1)}>按钮</button>
+    </div>;
+};
+export default Demo;
+```
+
+```javascript
+第一次渲染：
+  @7: 10 0
+  @1: 10 0
+  @3: 10 0
+  @5: 10 0
+  @6: 10 0
+  @4: 10 0
+点击按钮：
+  @7: 11 0
+  @2: 10 0
+  @1: 11 0
+  @5: 11 0
+```
+
