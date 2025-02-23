@@ -1451,6 +1451,19 @@ Vue.config.errorHandler = function (err, vm, info) {
 
 一个 `errorCaptured` 钩子能够返回 `false` 以阻止错误继续向上传播。
 
+**总结**
+
+方式
+
+- `errorCaptured` 监听下级组件的错误，可返回 `false` 阻止向上传播
+- `errorHandler` 监听 Vue 全局错误
+- `window.onerror` 监听其他的 JS 错误，如异步
+
+建议：结合使用
+
+- 一些重要的、复杂的、有运行风险的组件，可使用 `errorCaptured` 重点监听
+- 然后用 `errorHandler` `window.onerror` 候补全局监听，避免意外情况
+
 ## 54.对虚拟DOM的理解？
 
 从本质上来说，Virtual Dom是一个JavaScript对象，通过对象的方式来表示DOM结构。将页面的状态抽象为JS对象的形式，配合不同的渲染工具，使跨平台渲染成为可能。通过事务处理机制，将多次DOM修改的结果一次性的更新到页面上，从而有效的减少页面渲染的次数，减少修改DOM的重绘重排次数，提高渲染性能。
