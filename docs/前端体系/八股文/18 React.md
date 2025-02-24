@@ -698,6 +698,10 @@ React-intl提供了两种使用方法，一种是引用React组件，另一种�
 
 在React-intl中，可以配置不同的语言包，他的工作原理就是根据需要，在语言包之间进行切换。
 
+**面试回答**
+
+`React-Intl` 是一个用于在 React 应用中实现国际化（i18n）和本地化（l10n）的强大库。它提供了一系列的React组件，包括数字格式化、字符串格式化、日期格式化等。
+
 ## 17.对 React context 的理解
 
 在React中，数据传递一般使用props传递数据，维持单向数据流，这样可以让组件之间的关系变得简单且可预测，但是单项数据流在某些场景中并不适用。单纯一对的父子组件传递并无问题，但要是组件之间层层依赖深入，props就需要层层传递显然，这样做太繁琐了。
@@ -4147,3 +4151,89 @@ requestIdleCallback 可在网页渲染完成后，CPU 空闲时执行，用于�
 
 - ErrorBoundary 监听渲染时报错
 - `try-catch` 和 `window.onerror` 捕获其他错误
+
+## 110.说说你对immutable的理解？如何应用在react项目中？
+
+Immutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据
+
+对 `Immutable`对象的任何修改或添加删除操作都会返回一个新的 `Immutable`对象
+
+`Immutable` 实现的原理是 `Persistent Data Structure`（持久化数据结构）:
+
+- 用一种数据结构来保存数据
+- 当数据被修改时，会返回一个对象，但是新的对象会尽可能的利用之前的数据结构而不会对内存造成浪费
+
+使用`Immutable`对象最主要的库是`immutable.js`
+
+主要的方法如下：
+
+- fromJS()：将一个js数据转换为Immutable类型的数据
+
+```js
+const obj = Immutable.fromJS({a:'123',b:'234'})
+```
+
+- toJS()：将一个Immutable数据转换为JS类型的数据
+- is()：对两个对象进行比较
+
+```js
+import { Map, is } from 'immutable'
+const map1 = Map({ a: 1, b: 1, c: 1 })
+const map2 = Map({ a: 1, b: 1, c: 1 })
+map1 === map2   //false
+Object.is(map1, map2) // false
+is(map1, map2) // true
+```
+
+- get(key)：对数据或对象取值
+- getIn([]) ：对嵌套对象或数组取值，传参为数组，表示位置
+
+```js
+let abs = Immutable.fromJS({a: {b:2}});
+abs.getIn(['a', 'b']) // 2
+abs.getIn(['a', 'c']) // 子级没有值
+
+let arr = Immutable.fromJS([1 ,2, 3, {a: 5}]);
+arr.getIn([3, 'a']); // 5
+arr.getIn([3, 'c']); // 子级没有值
+```
+
+使用 `Immutable`可以给 `React` 应用带来性能的优化，主要体现在减少渲染的次数
+
+在做`react`性能优化的时候，为了避免重复渲染，我们会在`shouldComponentUpdate()`中做对比，当返回`true`执行`render`方法
+
+`Immutable`通过`is`方法则可以完成对比，而无需像一样通过深度比较的方式比较
+
+在使用`redux`过程中也可以结合`Immutable`，不使用`Immutable`前修改一个数据需要做一个深拷贝
+
+```jsx
+import '_' from 'lodash';
+
+const Component = React.createClass({
+  getInitialState() {
+    return {
+      data: { times: 0 }
+    }
+  },
+  handleAdd() {
+    let data = _.cloneDeep(this.state.data);
+    data.times = data.times + 1;
+    this.setState({ data: data });
+  }
+}
+```
+
+使用 Immutable 后：
+
+```jsx
+getInitialState() {
+  return {
+    data: Map({ times: 0 })
+  }
+},
+  handleAdd() {
+    this.setState({ data: this.state.data.update('times', v => v + 1) });
+    // 这时的 times 并不会改变
+    console.log(this.state.data.get('times'));
+  }
+```
