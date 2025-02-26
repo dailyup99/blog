@@ -257,9 +257,15 @@ React V15 在渲染时，会递归比对 VirtualDOM 树，找出需要变动的�
 - 分批延时对DOM进行操作，避免一次性操作大量 DOM 节点，可以得到更好的用户体验；
 - 给浏览器一点喘息的机会，它会对代码进行编译优化（JIT）及进行热代码优化，或者对 reflow 进行修正。
 
-#### 
+那么是如何让这个过程变成可中断的呢？
 
-**核心思想：**Fiber 也称协程或者纤程。它和线程并不一样，协程本身是没有并发或者并行能力的（需要配合线程），它只是一种控制流程的让出机制。让出 CPU 的执行权，让 CPU 能在这段时间执行其他的操作。渲染的过程可以被中断，可以将控制权交回浏览器，让位给高优先级的任务，浏览器空闲后再恢复渲染。
+`Fiber`把渲染更新过程拆分成多个子任务，每次只做一小部分，做完看是否还有剩余时间，如果有继续下一个任务；如果没有，挂起当前任务，将时间控制权交给主线程，等主线程不忙的时候在继续执行
+
+即可以中断与恢复，恢复后也可以复用之前的中间状态，并给不同的任务赋予不同的优先级，其中每个任务更新单元为 `React Element` 对应的 `Fiber`节点
+
+实现的上述方式的是`requestIdleCallback`方法
+
+`window.requestIdleCallback()`方法将在浏览器的空闲时段内调用的函数排队。这使开发者能够在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应
 
 ## 6.React.Component 和 React.PureComponent 的区别
 
@@ -1665,25 +1671,26 @@ import { Switch, Route} from 'react-router-dom'
 
 ## 43.对 Redux 的理解，主要解决什么问题
 
-React是视图层框架。Redux是一个用来管理数据状态和UI状态的JavaScript应用工具。随着JavaScript单页应用（SPA）开发日趋复杂， JavaScript需要管理比任何时候都要多的state（状态）， Redux就是降低管理难度的。（Redux支持React、Angular、jQuery甚至纯JavaScript）。
+`React`是用于构建用户界面的，帮助我们解决渲染`DOM`的过程
 
+而在整个应用中会存在很多个组件，每个组件的`state`是由自身进行管理，包括组件定义自身的`state`、组件之间的通信通过`props`传递、使用`Context`实现数据共享
 
+如果让每个组件都存储自身相关的状态，理论上来讲不会影响应用的运行，但在开发及后续维护阶段，我们将花费大量精力去查询状态的变化过程
 
-在 React 中，UI 以组件的形式来搭建，组件之间可以嵌套组合。但 React 中组件间通信的数据流是单向的，顶层组件可以通过 props 属性向下层组件传递数据，而下层组件不能向上层组件传递数据，兄弟组件之间同样不能。这样简单的单向数据流支撑起了 React 中的数据可控性。
+这种情况下，如果将所有的状态进行集中管理，当需要更新状态的时候，仅需要对这个管理集中处理，而不用去关心状态是如何分发到每一个组件内部的
 
+`redux`就是一个实现上述集中管理的容器，遵循三大基本原则：
 
+- 单一数据源
+- state 是只读的
+- 使用纯函数来执行修改
 
-当项目越来越大的时候，管理数据的事件或回调函数将越来越多，也将越来越不好管理。管理不断变化的 state 非常困难。如果一个 model 的变化会引起另一个 model 变化，那么当 view 变化时，就可能引起对应 model 以及另一个 model 的变化，依次地，可能会引起另一个 view 的变化。直至你搞不清楚到底发生了什么。state 在什么时候，由于什么原因，如何变化已然不受控制。 当系统变得错综复杂的时候，想重现问题或者添加新功能就会变得举步维艰。如果这还不够糟糕，考虑一些来自前端开发领域的新需求，如更新调优、服务端渲染、路由跳转前请求数据等。state 的管理在大项目中相当复杂。
+小结
 
-
-
-Redux 提供了一个叫 store 的统一仓储库，组件通过 dispatch 将 state 直接传入store，不用通过其他的组件。并且组件通过 subscribe 从 store获取到 state 的改变。使用了 Redux，所有的组件都可以从 store 中获取到所需的 state，他们也能从store 获取到 state 的改变。这比组件之间互相传递数据清晰明朗的多。
-
-
-
-**主要解决的问题：**
-
-单纯的Redux只是一个状态机，是没有UI呈现的，react- redux作用是将Redux的状态机和React的UI呈现绑定在一起，当你dispatch action改变state的时候，会自动更新页面。
+- createStore可以帮助创建 store
+- store.dispatch 帮助派发 action , action 会传递给 store
+- store.getState 这个方法可以帮助获取 store 里边所有的数据内容
+- store.subscrible 方法订阅 store 的改变，只要 store 发生改变， store.subscrible 这个函数接收的这个回调函数就会被执行
 
 ## 44.Redux 原理及工作流程
 
@@ -1729,7 +1736,14 @@ Redux源码主要分为以下几个模块文件
 - 耦合严重: 异步操作与redux的action偶合在⼀起,不⽅便管理 
 - 功能孱弱: 有⼀些实际开发中常⽤的功能需要⾃⼰进⾏封装 
 
+`redux-thunk`是官网推荐的异步处理中间件
 
+默认情况下的`dispatch(action)`，`action`需要是一个`JavaScript`的对象
+
+`redux-thunk`中间件会判断你当前传进来的数据类型，如果是一个函数，将会给函数传入参数值（dispatch，getState）
+
+- dispatch函数用于我们之后再次派发action
+- getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态
 
 使用步骤：
 
@@ -1779,6 +1793,79 @@ componentDidMount(){
     store.dispatch(action)
 }
 ```
+
+## 45-1.Redux 怎么实现属性传递，介绍下原理
+
+react-redux 数据传输∶ view-->action-->reducer-->store-->view。看下点击事件的数据是如何通过redux传到view上：
+
+- view 上的AddClick 事件通过mapDispatchToProps 把数据传到action ---> click:()=>dispatch(ADD)
+- action 的ADD 传到reducer上
+- reducer传到store上 const store = createStore(reducer);
+- store再通过 mapStateToProps 映射穿到view上text:State.text
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+class App extends React.Component{
+    render(){
+        let { text, click, clickR } = this.props;
+        return(
+            <div>
+                <div>数据:已有人{text}</div>
+                <div onClick={click}>加人</div>
+                <div onClick={clickR}>减人</div>
+            </div>
+        )
+    }
+}
+const initialState = {
+    text:5
+}
+const reducer = function(state,action){
+    switch(action.type){
+        case 'ADD':
+            return {text:state.text+1}
+        case 'REMOVE':
+            return {text:state.text-1}
+        default:
+            return initialState;
+    }
+}
+
+let ADD = {
+    type:'ADD'
+}
+let Remove = {
+    type:'REMOVE'
+}
+
+const store = createStore(reducer);
+
+let mapStateToProps = function (state){
+    return{
+        text:state.text
+    }
+}
+
+let mapDispatchToProps = function(dispatch){
+    return{
+        click:()=>dispatch(ADD),
+        clickR:()=>dispatch(Remove)
+    }
+}
+
+const App1 = connect(mapStateToProps,mapDispatchToProps)(App);
+
+ReactDOM.render(
+    <Provider store = {store}>
+        <App1></App1>
+    </Provider>,document.getElementById('root')
+)
+```
+
+
 
 ## 46.mobox 和 redux 有什么区别？
 
@@ -3236,617 +3323,7 @@ export default Demo;
   @5: 11 0
 ```
 
-## 83.React 组件中怎么做事件代理？它的原理是什么？
-
-React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），定义的事件处理器会接收到一个合成事件对象的实例，它符合W3C标准，且与原生的浏览器事件拥有同样的接口，支持冒泡机制，所有的事件都自动绑定在最外层上。
-
-
-
-在React底层，主要对合成事件做了两件事：
-
-- **事件委派：**React会把所有的事件绑定到结构的最外层，使用统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部事件监听和处理函数。
-- **自动绑定：**React组件中，每个方法的上下文都会指向该组件的实例，即自动绑定this为当前组件。
-
-## 84.React.Component 和 React.PureComponent 的区别
-
-PureComponent表示一个纯组件，可以用来优化React程序，减少render函数执行的次数，从而提高组件的性能。
-
-
-
-在React中，当prop或者state发生变化时，可以通过在shouldComponentUpdate生命周期函数中执行return false来阻止页面的更新，从而减少不必要的render执行。React.PureComponent会自动执行 shouldComponentUpdate。
-
-
-
-不过，pureComponent中的 shouldComponentUpdate() 进行的是**浅比较**，也就是说如果是引用数据类型的数据，只会比较不是同一个地址，而不会比较这个地址里面的数据是否一致。浅比较会忽略属性和或状态突变情况，其实也就是数据引用指针没有变化，而数据发生改变的时候render是不会执行的。如果需要重新渲染那么就需要重新开辟空间引用数据。PureComponent一般会用在一些纯展示组件上。
-
-
-
-使用pureComponent的**好处**：当组件更新时，如果组件的props或者state都没有改变，render函数就不会触发。省去虚拟DOM的生成和对比过程，达到提升性能的目的。这是因为react自动做了一层浅比较。
-
-## 85.Component, Element, Instance 之间有什么区别和联系？
-
-- **元素：**一个元素`element`是一个普通对象(plain object)，描述了对于一个DOM节点或者其他组件`component`，你想让它在屏幕上呈现成什么样子。元素`element`可以在它的属性`props`中包含其他元素(译注:用于形成元素树)。创建一个React元素`element`成本很低。元素`element`创建之后是不可变的。
-- **组件：**一个组件`component`可以通过多种方式声明。可以是带有一个`render()`方法的类，简单点也可以定义为一个函数。这两种情况下，它都把属性`props`作为输入，把返回的一棵元素树作为输出。
-- **实例：**一个实例`instance`是你在所写的组件类`component class`中使用关键字`this`所指向的东西(译注:组件实例)。它用来存储本地状态和响应生命周期事件很有用。
-
-
-
-函数式组件(`Functional component`)根本没有实例`instance`。类组件(`Class component`)有实例`instance`，但是永远也不需要直接创建一个组件的实例，因为React帮我们做了这些。
-
-## 86.React声明组件有哪几种方法，有什么不同？
-
-React 声明组件的三种方式：
-
-- 函数式定义的`无状态组件`
-- ES5原生方式`React.createClass`定义的组件
-- ES6形式的`extends React.Component`定义的组件
-
-
-
-**（1）无状态函数式组件**
-
-它是为了创建纯展示组件，这种组件只负责根据传入的props来展示，不涉及到state状态的操作
-
-组件不会被实例化，整体渲染性能得到提升，不能访问this对象，不能访问生命周期的方法
-
-
-
-**（2）ES5 原生方式 React.createClass // RFC**
-
-React.createClass会自绑定函数方法，导致不必要的性能开销，增加代码过时的可能性。
-
-
-
-**（3）E6继承形式 React.Component // RCC**
-
-目前极为推荐的创建有状态组件的方式，最终会取代React.createClass形式；相对于 React.createClass可以更好实现代码复用。
-
-
-
-**无状态组件相对于于后者的区别：**
-
-与无状态组件相比，React.createClass和React.Component都是创建有状态的组件，这些组件是要被实例化的，并且可以访问组件的生命周期方法。
-
-
-
-**React.createClass与React.Component区别：**
-
-**① 函数this自绑定**
-
-- React.createClass创建的组件，其每一个成员函数的this都有React自动绑定，函数中的this会被正确设置。
-- React.Component创建的组件，其成员函数不会自动绑定this，需要开发者手动绑定，否则this不能获取当前组件实例对象。
-
-**② 组件属性类型propTypes及其默认props属性defaultProps配置不同**
-
-- React.createClass在创建组件时，有关组件props的属性类型及组件默认的属性会作为组件实例的属性来配置，其中defaultProps是使用getDefaultProps的方法来获取默认组件属性的
-- React.Component在创建组件时配置这两个对应信息时，他们是作为组件类的属性，不是组件实例的属性，也就是所谓的类的静态属性来配置的。
-
-**③ 组件初始状态state的配置不同**
-
-- React.createClass创建的组件，其状态state是通过getInitialState方法来配置组件相关的状态；
-- React.Component创建的组件，其状态state是在constructor中像初始化组件属性一样声明的。
-
-## 87.React中可以在render访问refs吗？为什么？
-
-```javascript
-<>
-  <span id="name" ref={this.spanRef}>{this.state.title}</span>
-  <span>{
-     this.spanRef.current ? '有值' : '无值'
-  }</span>
-</>
-```
-
-不可以，render 阶段 DOM 还没有生成，无法获取 DOM。
-
-## 88.React中refs的作用是什么？有哪些应用场景？
-
-Refs 提供了一种方式，用于访问在 render 方法中创建的 React 元素或 DOM 节点。Refs 应该谨慎使用，如下场景使用 Refs 比较适合：
-
-- 处理焦点、文本选择或者媒体的控制
-- 触发必要的动画
-- 集成第三方 DOM 库
-
-
-
-Refs 是使用 `React.createRef()` 方法创建的，他通过 `ref` 属性附加到 React 元素上。要在整个组件中使用 Refs，需要将 `ref` 在构造函数中分配给其实例属性：
-
-```javascript
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props)
-    this.myRef = React.createRef()
-  }
-  render() {
-    return <div ref={this.myRef} />
-  }
-}
-```
-
-由于函数组件没有实例，因此不能在函数组件上直接使用 `ref`：
-
-```javascript
-function MyFunctionalComponent() {
-  return <input />;
-}
-class Parent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.textInput = React.createRef();
-  }
-  render() {
-    // 这将不会工作！
-    return (
-      <MyFunctionalComponent ref={this.textInput} />
-    );
-  }
-}
-```
-
-但可以通过闭合的帮助在函数组件内部进行使用 Refs：
-
-```javascript
-function CustomTextInput(props) {
-  // 这里必须声明 textInput，这样 ref 回调才可以引用它
-  let textInput = null;
-  function handleClick() {
-    textInput.focus();
-  }
-  return (
-    <div>
-      <input
-        type="text"
-        ref={(input) => { textInput = input; }} />
-      <input
-        type="button"
-        value="Focus the text input"
-        onClick={handleClick}
-      />
-    </div>
-  );  
-}
-```
-
-**注意：**
-
-- 不应该过度的使用 Refs
-- `ref` 的返回值取决于节点的类型：    
-
-- - 当 `ref` 属性被用于一个普通的 HTML 元素时，`React.createRef()` 将接收底层 DOM 元素作为他的 `current` 属性以创建 `ref`。
-  - 当 `ref` 属性被用于一个自定义的类组件时，`ref` 对象将接收该组件已挂载的实例作为他的 `current`。
-
-- 当在父组件中需要访问子组件中的 `ref` 时可使用传递 Refs 或回调 Refs。
-
-## 89.React.forwardRef是什么？它有什么作用？
-
-React.forwardRef 会创建一个React组件，这个组件能够将其接受的 ref 属性转发到其组件树下的另一个组件中。这种技术并不常见，但在以下两种场景中特别有用：
-
-- 转发 refs 到 DOM 组件
-- 在高阶组件中转发 refs
-
-## 90.React中setState的第二个参数作用是什么？
-
-`setState` 的第二个参数是一个可选的回调函数。这个回调函数将在组件重新渲染后执行。等价于在 `componentDidUpdate` 生命周期内执行。通常建议使用 `componentDidUpdate` 来代替此方式。在这个回调函数中你可以拿到更新后 `state` 的值：
-
-```javascript
-this.setState({
-    key1: newState1,
-    key2: newState2,
-    ...
-}, callback) // 第二个参数是 state 更新完成后的回调函数
-```
-
-## 91.state 是怎么注入到组件的，从 reducer 到组件经历了什么样的过程
-
-通过connect和mapStateToProps将state注入到组件中：
-
-```javascript
-import { connect } from 'react-redux'
-import { setVisibilityFilter } from '@/reducers/Todo/actions'
-import Link from '@/containers/Todo/components/Link'
-
-const mapStateToProps = (state, ownProps) => ({
-    active: ownProps.filter === state.visibilityFilter
-})
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    setFilter: () => {
-        dispatch(setVisibilityFilter(ownProps.filter))
-    }
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Link)
-```
-
-上面代码中，active就是注入到Link组件中的状态。 mapStateToProps（state，ownProps）中带有两个参数，含义是∶
-
-- state-store管理的全局状态对象，所有的组件状态数据都存储在该对象中。
-- ownProps 组件通过props传入的参数。 
-
-
-
-**reducer 到组件经历的过程：**
-
-- reducer对action对象处理，更新组件状态，并将新的状态值返回store。
-- 通过connect（mapStateToProps，mapDispatchToProps）（Component）对组件 Component进行升级，此时将状态值从store取出并作为props参数传递到组件。
-
-## 92.React中怎么检验props？验证props的目的是什么？
-
-**React**为我们提供了**PropTypes**以供验证使用。当我们向**Props**传入的数据无效（向Props传入的数据类型和验证的数据类型不符）就会在控制台发出警告信息。它可以避免随着应用越来越复杂从而出现的问题。并且，它还可以让程序变得更易读。
-
-```javascript
-import PropTypes from 'prop-types';
-
-class Greeting extends React.Component {
-  render() {
-    return (
-      <h1>Hello, {this.props.name}</h1>
-    );
-  }
-}
-
-Greeting.propTypes = {
-  name: PropTypes.string
-};
-```
-
-当然，如果项目汇中使用了TypeScript，那么就可以不用PropTypes来校验，而使用TypeScript定义接口来校验props。
-
-## 93.React 废弃了哪些生命周期？为什么？
-
-被废弃的三个函数都是在render之前，因为fber的出现，很可能因为高优先级任务的出现而打断现有任务导致它们会被执行多次。另外的一个原因则是，React想约束使用者，好的框架能够让人不得已写出容易维护和扩展的代码，这一点又是从何谈起，可以从新增加以及即将废弃的生命周期分析入手
-
-**1) componentWillMount**
-
-首先这个函数的功能完全可以使用componentDidMount和 constructor来代替，异步获取的数据的情况上面已经说明了，而如果抛去异步获取数据，其余的即是初始化而已，这些功能都可以在constructor中执行，除此之外，如果在 willMount 中订阅事件，但在服务端这并不会执行 willUnMount事件，也就是说服务端会导致内存泄漏所以componentWilIMount完全可以不使用，但使用者有时候难免因为各 种各样的情况在 componentWilMount中做一些操作，那么React为了约束开发者，干脆就抛掉了这个API 
-
-**2) componentWillReceiveProps**
-
-在老版本的 React 中，如果组件自身的某个 state 跟其 props 密切相关的话，一直都没有一种很优雅的处理方式去更新 state，而是需要在 componentWilReceiveProps 中判断前后两个 props 是否相同，如果不同再将新的 props更新到相应的 state 上去。这样做一来会破坏 state 数据的单一数据源，导致组件状态变得不可预测，另一方面也会增加组件的重绘次数。类似的业务需求也有很多，如一个可以横向滑动的列表，当前高亮的 Tab 显然隶属于列表自身的时，根据传入的某个值，直接定位到某个 Tab。为了解决这些问题，React引入了第一个新的生命周期：getDerivedStateFromProps。它有以下的优点∶
-
-- getDSFP是静态方法，在这里不能使用this，也就是一个纯函数，开发者不能写出副作用的代码
-- 开发者只能通过prevState而不是prevProps来做对比，保证了state和props之间的简单关系以及不需要处理第一次渲染时prevProps为空的情况
-- 基于第一点，将状态变化（setState）和昂贵操作（tabChange）区分开，更加便于 render 和 commit 阶段操作或者说优化。 
-
-**3) componentWillUpdate**
-
-与 componentWillReceiveProps 类似，许多开发者也会在 componentWillUpdate 中根据 props 的变化去触发一些回调 。 但不论是 componentWilReceiveProps 还 是 componentWilUpdate，都有可能在一次更新中被调用多次，也就是说写在这里的回调函数也有可能会被调用多次，这显然是不可取的。与 componentDidMount 类 似， componentDidUpdate 也不存在这样的问题，一次更新中 componentDidUpdate 只会被调用一次，所以将原先写在 componentWillUpdate 中 的 回 调 迁 移 至 componentDidUpdate 就可以解决这个问题。
-
-
-
-另外一种情况则是需要获取DOM元素状态，但是由于在fber中，render可打断，可能在wilMount中获取到的元素状态很可能与实际需要的不同，这个通常可以使用第二个新增的生命函数的解决 getSnapshotBeforeUpdate(prevProps, prevState)
-
-**4) getSnapshotBeforeUpdate(prevProps, prevState)**
-
-返回的值作为componentDidUpdate的第三个参数。与willMount不同的是，getSnapshotBeforeUpdate会在最终确定的render执行之前执行，也就是能保证其获取到的元素状态与didUpdate中获取到的元素状态相同。官方参考代码：
-
-```javascript
-class ScrollingList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.listRef = React.createRef();
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    // 我们是否在 list 中添加新的 items ？
-    // 捕获滚动​​位置以便我们稍后调整滚动位置。
-    if (prevProps.list.length < this.props.list.length) {
-      const list = this.listRef.current;
-      return list.scrollHeight - list.scrollTop;
-    }
-    return null;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // 如果我们 snapshot 有值，说明我们刚刚添加了新的 items，
-    // 调整滚动位置使得这些新 items 不会将旧的 items 推出视图。
-    //（这里的 snapshot 是 getSnapshotBeforeUpdate 的返回值）
-    if (snapshot !== null) {
-      const list = this.listRef.current;
-      list.scrollTop = list.scrollHeight - snapshot;
-    }
-  }
-
-  render() {
-    return (
-      <div ref={this.listRef}>{/* ...contents... */}</div>
-    );
-  }
-}
-```
-
-## 94.React 16.X 中 props 改变后在哪个生命周期中处理
-
-**在getDerivedStateFromProps中进行处理。**
-
-
-
-这个生命周期函数是为了替代`componentWillReceiveProps`存在的，所以在需要使用`componentWillReceiveProps`时，就可以考虑使用`getDerivedStateFromProps`来进行替代。
-
-
-
-两者的参数是不相同的，而`getDerivedStateFromProps`是一个静态函数，也就是这个函数不能通过this访问到class的属性，也并不推荐直接访问属性。而是应该通过参数提供的nextProps以及prevState来进行判断，根据新传入的props来映射到state。
-
-
-
-需要注意的是，**如果props传入的内容不需要影响到你的state，那么就需要返回一个null**，这个返回值是必须的，所以尽量将其写到函数的末尾：
-
-```javascript
-static getDerivedStateFromProps(nextProps, prevState) {
-    const {type} = nextProps;
-    // 当传入的type发生变化的时候，更新state
-    if (type !== prevState.type) {
-        return {
-            type,
-        };
-    }
-    // 否则，对于state不进行任何操作
-    return null;
-}
-```
-
-## 95.如何配置 React-Router 实现路由切换
-
-**（1）使用 \<Route> 组件**
-
-路由匹配是通过比较 \<Route> 的 path 属性和当前地址的 pathname 来实现的。当一个 \<Route> 匹配成功时，它将渲染其内容，当它不匹配时就会渲染 null。没有路径的 \<Route> 将始终被匹配。
-
-```javascript
-// when location = { pathname: '/about' }
-<Route path='/about' component={About}/> // renders <About/>
-<Route path='/contact' component={Contact}/> // renders null
-<Route component={Always}/> // renders <Always/>
-```
-
-**（2）结合使用 \<Switch> 组件和 \<Route> 组件**
-
-\<Switch> 用于将 \<Route> 分组。
-
-```javascript
-<Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/about" component={About} />
-    <Route path="/contact" component={Contact} />
-</Switch>
-```
-
-\<Switch> 不是分组 \<Route> 所必须的，但他通常很有用。 一个 \<Switch> 会遍历其所有的子 \<Route>元素，并仅渲染与当前地址匹配的第一个元素。
-
-**（3）使用\<Link>、 \<NavLink>、\<Redirect> 组件**
-
-\<Link> 组件来在你的应用程序中创建链接。无论你在何处渲染一个 \<Link> ，都会在应用程序的 HTML 中渲染锚（\<a>）。
-
-```javascript
-<Link to="/">Home</Link>   
-// <a href='/'>Home</a>
-```
-
-\<NavLink> 是一种特殊类型的 \<Link> 当它的 to属性与当前地址匹配时，可以将其定义为"活跃的"。
-
-```javascript
-// location = { pathname: '/react' }
-<NavLink to="/react" activeClassName="hurray">
-    React
-</NavLink>
-// <a href='/react' className='hurray'>React</a>
-```
-
-当我们想强制导航时，可以渲染一个\<Redirect>，当一个\<Redirect>渲染时，它将使用它的to属性进行定向。
-
-## 96.React-Router如何获取URL的参数和历史对象？
-
-**（1）获取URL的参数**
-
-- **get传值**
-
-路由配置还是普通的配置，如：`'admin'`，传参方式如：`'admin?id='1111''`。通过`this.props.location.search`获取url获取到一个字符串`'?id='1111'`
-
-可以用url，qs，querystring，浏览器提供的api URLSearchParams对象或者自己封装的方法去解析出id的值。
-
-- **动态路由传值**
-
-路由需要配置成动态路由：如`path='/admin/:id'`，传参方式，如`'admin/111'`。通过`this.props.match.params.id` 取得url中的动态路由id部分的值，除此之外还可以通过`useParams（Hooks）`来获取
-
-- **通过query或state传值**
-
-传参方式如：在Link组件的to属性中可以传递对象`{pathname:'/admin',query:'111',state:'111'};`。通过`this.props.location.state`或`this.props.location.query`来获取即可，传递的参数可以是对象、数组等，但是存在缺点就是只要刷新页面，参数就会丢失。
-
-**（2）获取历史对象**
-
-- 如果React >= 16.8 时可以使用 React Router中提供的Hooks
-
-```javascript
-import { useHistory } from "react-router-dom";
-let history = useHistory();
-```
-
-2.使用this.props.history获取历史对象
-
-```javascript
-let history = this.props.history;
-```
-
-## 97.Redux 中间件是什么？接受几个参数？柯里化函数两端的参数具体是什么？
-
-Redux 的中间件提供的是位于 action 被发起之后，到达 reducer 之前的扩展点，换而言之，原本 view -→> action -> reducer -> store 的数据流加上中间件后变成了 view -> action -> middleware -> reducer -> store ，在这一环节可以做一些"副作用"的操作，如异步请求、打印日志等。
-
-
-
-applyMiddleware源码：
-
-```javascript
-export default function applyMiddleware(...middlewares) {
-    return createStore => (...args) => {
-        // 利用传入的createStore和reducer和创建一个store
-        const store = createStore(...args)
-        let dispatch = () => {
-            throw new Error()
-        }
-        const middlewareAPI = {
-            getState: store.getState,
-            dispatch: (...args) => dispatch(...args)
-        }
-        // 让每个 middleware 带着 middlewareAPI 这个参数分别执行一遍
-        const chain = middlewares.map(middleware => middleware(middlewareAPI))
-        // 接着 compose 将 chain 中的所有匿名函数，组装成一个新的函数，即新的 dispatch
-        dispatch = compose(...chain)(store.dispatch)
-        return {
-            ...store,
-            dispatch
-        }
-    }
-}
-```
-
-从applyMiddleware中可以看出∶
-
-- redux中间件接受一个对象作为参数，对象的参数上有两个字段 dispatch 和 getState，分别代表着 Redux Store 上的两个同名函数。
-- 柯里化函数两端一个是 middewares，一个是store.dispatch
-
-## 98.Redux 请求中间件如何处理并发
-
-**使用redux-Saga**
-
-redux-saga是一个管理redux应用异步操作的中间件，用于代替 redux-thunk 的。它通过创建 Sagas 将所有异步操作逻辑存放在一个地方进行集中处理，以此将react中的同步操作与异步操作区分开来，以便于后期的管理与维护。 redux-saga如何处理并发：
-
-- **takeEvery**
-
-可以让多个 saga 任务并行被 fork 执行。
-
-```javascript
-import {
-    fork,
-    take
-} from "redux-saga/effects"
-
-const takeEvery = (pattern, saga, ...args) => fork(function*() {
-    while (true) {
-        const action = yield take(pattern)
-        yield fork(saga, ...args.concat(action))
-    }
-})
-```
-
-- **takeLatest**
-
-takeLatest 不允许多个 saga 任务并行地执行。一旦接收到新的发起的 action，它就会取消前面所有 fork 过的任务（如果这些任务还在执行的话）。
-
-在处理 AJAX 请求的时候，如果只希望获取最后那个请求的响应， takeLatest 就会非常有用。
-
-```javascript
-import {
-    cancel,
-    fork,
-    take
-} from "redux-saga/effects"
-
-const takeLatest = (pattern, saga, ...args) => fork(function*() {
-    let lastTask
-    while (true) {
-        const action = yield take(pattern)
-        if (lastTask) {
-            yield cancel(lastTask) // 如果任务已经结束，则 cancel 为空操作
-        }
-        lastTask = yield fork(saga, ...args.concat(action))
-    }
-})
-```
-
-## 99.mobox 和 redux 有什么区别？
-
-**（1）共同点**
-
-- 为了解决状态管理混乱，无法有效同步的问题统一维护管理应用状态;
-- 某一状态只有一个可信数据来源（通常命名为store，指状态容器）;
-- 操作更新状态方式统一，并且可控（通常以action方式提供更新状态的途径）;
-- 支持将store与React组件连接，如react-redux，mobx- react;
-
-**（2）区别**
-
-Redux更多的是遵循Flux模式的一种实现，是一个 JavaScript库，它关注点主要是以下几方面∶ 
-
-- Action∶ 一个JavaScript对象，描述动作相关信息，主要包含type属性和payload属性∶ 
-
-​         o type∶ action 类型; 
-
-​         o payload∶ 负载数据;
-
-- Reducer∶ 定义应用状态如何响应不同动作（action），如何更新状态;
-- Store∶ 管理action和reducer及其关系的对象，主要提供以下功能∶ 
-
-​         o 维护应用状态并支持访问状态(getState());
-
-​         o 支持监听action的分发，更新状态(dispatch(action)); 
-
-​         o 支持订阅store的变更(subscribe(listener));
-
-- 异步流∶ 由于Redux所有对store状态的变更，都应该通过action触发，异步任务（通常都是业务或获取数据任务）也不例外，而为了不将业务或数据相关的任务混入React组件中，就需要使用其他框架配合管理异步任务流程，如redux-thunk，redux-saga等; 
-
-
-
-Mobx是一个透明函数响应式编程的状态管理库，它使得状态管理简单可伸缩∶
-
--  Action∶定义改变状态的动作函数，包括如何变更状态;
-- Store∶ 集中管理模块状态（State）和动作(action)
-- Derivation（衍生）∶ 从应用状态中派生而出，且没有任何其他影响的数据
-
-
-
-**对比总结：**
-
-- redux将数据保存在单一的store中，mobx将数据保存在分散的多个store中
-- redux使用plain object保存数据，需要手动处理变化后的操作;mobx适用observable保存数据，数据变化后自动处理响应的操作
-- redux使用不可变状态，这意味着状态是只读的，不能直接去修改它，而是应该返回一个新的状态，同时使用纯函数;mobx中的状态是可变的，可以直接对其进行修改
-- mobx相对来说比较简单，在其中有很多的抽象，mobx更多的使用面向对象的编程思维;redux会比较复杂，因为其中的函数式编程思想掌握起来不是那么容易，同时需要借助一系列的中间件来处理异步和副作用
-- mobx中有更多的抽象和封装，调试会比较困难，同时结果也难以预测;而redux提供能够进行时间回溯的开发工具，同时其纯函数以及更少的抽象，让调试变得更加的容易
-
-## 100.Redux中的connect有什么作用
-
-connect负责连接React和Redux
-
-**（1）获取state**
-
-connect 通过 context获取 Provider 中的 store，通过` store.getState()` 获取整个store tree 上所有state 
-
-**（2）包装原组件**
-
-将state和action通过props的方式传入到原组件内部 wrapWithConnect 返回—个 ReactComponent 对 象 Connect，Connect 重 新 render 外部传入的原组件 WrappedComponent ，并把 connect 中传入的 mapStateToProps，mapDispatchToProps与组件上原有的 props合并后，通过属性的方式传给WrappedComponent 
-
-**（3）监听store tree变化**
-
-connect缓存了store tree中state的状态，通过当前state状态 和变更前 state 状态进行比较，从而确定是否调用 `this.setState()`方法触发Connect及其子组件的重新渲染
-
-## 101.React Hook 的使用限制有哪些？
-
-React Hooks 的限制主要有两条：
-
-- 不要在循环、条件或嵌套函数中调用 Hook；
-- 在 React 的函数组件中调用 Hook。
-
-
-
-那为什么会有这样的限制呢？Hooks 的设计初衷是为了改进 React 组件的开发模式。在旧有的开发模式下遇到了三个问题。
-
-- 组件之间难以复用状态逻辑。过去常见的解决方案是高阶组件、render props 及状态管理框架。
-- 复杂的组件变得难以理解。生命周期函数与业务逻辑耦合太深，导致关联部分难以拆分。
-- 人和机器都很容易混淆类。常见的有 this 的问题，但在 React 团队中还有类难以优化的问题，希望在编译优化层面做出一些改进。
-
-
-
-这三个问题在一定程度上阻碍了 React 的后续发展，所以为了解决这三个问题，Hooks **基于函数组件**开始设计。然而第三个问题决定了 Hooks 只支持函数组件。
-
-
-
-那为什么不要在循环、条件或嵌套函数中调用 Hook 呢？因为 Hooks 的设计是基于数组实现。在调用时按顺序加入数组中，如果使用循环、条件或嵌套函数很有可能导致数组取值错位，执行错误的 Hook。当然，实质上 React 的源码里不是数组，是链表。
-
-
-
-这些限制会在编码上造成一定程度的心智负担，新手可能会写错，为了避免这样的情况，可以引入 ESLint 的 Hooks 检查插件进行预防。
-
-## 102.React Hooks在平时开发中需要注意的问题和原因
+## 83.React Hooks在平时开发中需要注意的问题和原因
 
 （1）**不要在循环，条件或嵌套函数中调用Hook，必须始终在 React函数的顶层使用Hook**
 
@@ -3942,7 +3419,7 @@ const TableDeail = ({
 
 可以使用基于 useContext 封装的状态管理工具。
 
-## 103.React Hooks 和生命周期的关系？
+## 84.React Hooks 和生命周期的关系？
 
 **函数组件** 的本质是函数，没有 state 的概念的，因此**不存在生命周期**一说，仅仅是一个 **render 函数**而已。
 
@@ -4035,7 +3512,7 @@ useEffect(()=>{
 | componentDidCatch        | 无                        |
 | getDerivedStateFromError | 无                        |
 
-## 104.React组件命名推荐的方式是哪个？
+## 85.React组件命名推荐的方式是哪个？
 
 通过引用而不是使用来命名组件displayName。
 
@@ -4058,7 +3535,7 @@ export default class TodoApp extends React.Component {
 }
 ```
 
-## 105.React必须使用JSX吗？
+## 86.React必须使用JSX吗？
 
 React 并不强制要求使用 JSX。当不想在构建环境中配置有关 JSX 编译时，不在 React 中使用 JSX 会更加方便。
 
@@ -4096,11 +3573,11 @@ ReactDOM.render(
 );
 ```
 
-## 106.在React中怎么使用async/await？
+## 87.在React中怎么使用async/await？
 
 async/await是ES7标准中的新特性。如果是使用React官方的脚手架创建的项目，就可以直接使用。如果是在自己搭建的webpack配置的项目中使用，可能会遇到 **regeneratorRuntime is not defined** 的异常错误。那么我们就需要引入babel，并在babel中配置使用async/await。可以利用babel的 transform-async-to-module-method 插件来转换其成为浏览器支持的语法，虽然没有性能的提升，但对于代码编写体验要更好。
 
-## 107.requestIdleCallback
+## 88.requestIdleCallback
 
 题目
 
@@ -4108,14 +3585,14 @@ async/await是ES7标准中的新特性。如果是使用React官方的脚手架�
 
 **由 React Fiber 引起的关注**
 
-React 16 内部使用 Fiber ，即组件渲染过程可以暂停，先去执行高优任务，CPU 闲置时再继续渲染。<br>
+React 16 内部使用 Fiber ，即组件渲染过程可以暂停，先去执行高优任务，CPU 闲置时再继续渲染。
 其中用到的核心 API 就是 requestIdleCallback 。
 
 **requestAnimationFrame 每次渲染都执行，高优**
 
 页面的渲染是一帧一帧进行的，至少每秒 60 次（即 16.6ms 一次）才能肉眼感觉流畅。所以，网页动画也要这个帧率才能流畅。
 
-用 JS 来控制时间是不靠谱的，因为 JS 执行本身还需要时间，而且 JS 和 DOM 渲染线程互斥。所以 ms 级别的时间会出现误差。<br>
+用 JS 来控制时间是不靠谱的，因为 JS 执行本身还需要时间，而且 JS 和 DOM 渲染线程互斥。所以 ms 级别的时间会出现误差。
 `requestAnimationFrame` 就解决了这个问题，浏览器每次渲染都会执行，不用自己计算时间。
 
 代码参考 requestAnimationFrame.html
@@ -4141,18 +3618,18 @@ requestIdleCallback 可用于一些低优先级的场景，以代替 setTimeout 
 
 requestIdleCallback 可在网页渲染完成后，CPU 空闲时执行，用于低优先级的任务处理。
 
-## 108.vue和react的diff算法区别
+## 89.vue和react的diff算法区别
 
 - React diff 特点 - 仅向右移动
 - Vue2 diff 特点 - 双端比较
 - Vue3 diff 特点 - 最长递增子序列
 
-## 109.React如何进行错误监听
+## 90.React如何进行错误监听
 
 - ErrorBoundary 监听渲染时报错
 - `try-catch` 和 `window.onerror` 捕获其他错误
 
-## 110.说说你对immutable的理解？如何应用在react项目中？
+## 91.说说你对immutable的理解？如何应用在react项目中？
 
 Immutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据
 
@@ -4237,3 +3714,138 @@ getInitialState() {
     console.log(this.state.data.get('times'));
   }
 ```
+
+## 92.React18全揽
+
+### Concurrent Mode
+
+Concurrent Mode（以下简称 CM）翻译叫并发模式
+
+在 CM 模式下，React 在执行过程中，每执行一个 Fiber，都会看看有没有更高优先级的更新，如果有，则当前低优先级的的更新会被暂停，待高优先级任务执行完之后，再继续执行或重新执行。
+
+### startTransition
+
+我们如果要主动发挥 CM 的优势，那就离不开 startTransition。
+
+React 的状态更新可以分为两类：
+
+- 紧急更新（Urgent updates）：比如打字、点击、拖动等，需要立即响应的行为，如果不立即响应会给人很卡，或者出问题了的感觉
+- 过渡更新（Transition updates）：将 UI 从一个视图过渡到另一个视图。不需要即时响应，有些延迟是可以接受的。
+
+React 并不能自动识别哪些更新是优先级更高的。所以它提供了 `startTransition`让我们手动指定哪些更新是紧急的，哪些是非紧急的。通过 `startTransition`来标记一个非紧急更新。
+
+React 会在高优先级更新渲染完成之后，才会启动低优先级更新渲染，并且低优先级渲染随时可被其它高优先级更新中断。
+
+### 自动批处理 Automatic Batching
+
+批处理是指 React 将多个状态更新，聚合到一次 render 中执行，以提升性能。
+
+在 React 18 之前，React 只会在事件回调中使用批处理，而在 Promise、setTimeout、原生事件等场景下，是不能使用批处理的。
+
+而在 React 18 中，所有的状态更新，都会自动使用批处理，不关心场景。
+
+如果你在某种场景下不想使用批处理，你可以通过 `flushSync`来强制同步执行（比如：你需要在状态更新后，立刻读取新 DOM 上的数据等。）
+
+### 流式 SSR
+
+SSR 一次页面渲染的流程大概为：
+
+1. 服务器 fetch 页面所需数据
+2. 数据准备好之后，将组件渲染成 string 形式作为 response 返回
+3. 客户端加载资源
+4. 客户端合成（hydrate）最终的页面内容
+
+在传统的 SSR 模式中，上述流程是串行执行的，如果其中有一步比较慢，都会影响整体的渲染速度。
+
+而在 React 18 中，基于全新的 Suspense，支持了流式 SSR，也就是允许服务端一点一点的返回页面。
+
+### 新 Hooks
+
+#### useDeferredValue
+
+useDeferredValue 可以让一个 state 延迟生效，只有当前没有紧急更新时，该值才会变为最新值。useDeferredValue 和 startTransition 一样，都是标记了一次非紧急更新。
+
+#### useId
+
+支持同一个组件在客户端和服务端生成相同的唯一的 ID，避免 `hydration` 的不兼容。原理是每个 id 代表该组件在组件树中的层级结构。
+
+#### useSyncExternalStore
+
+useSyncExternalStore 能够让 React 组件在 Concurrent Mode 下安全地有效地读取外接数据源。
+
+#### useInsertionEffect
+
+这个 Hooks 只建议 `css-in-js`库来使用。这个 Hooks 执行时机在 DOM 生成之后，useLayoutEffect 生效之前，一般用于提前注入 `<style>` 脚本。
+
+## 93.React19全揽
+
+### useTransition 支持异步函数
+
+在 18 中，useTransition 返回的 startTransition 只支持传递同步函数，而在 19 中，增加了对异步函数的支持。通过这个特性，我们可以用来自动维护异步请求的 isPending 状态。
+
+### useActionState 管理异步函数状态
+
+useActionState 是 React 19 新增的一个 Hook，用来管理异步函数，自动维护了 data、action、pending 等状态。
+
+返回参数含义：
+
+- `state`：代表 fn 函数返回的内容，fn 未执行时，等于 initialState
+- `formAction`：用来触发 fn 函数执行，可以直接调用，也可以传递给 form 的 action 属性
+- `isPending`：fn 函数是否正在执行中
+
+### useOptimistic 乐观更新
+
+读音[ˌɑːptɪˈmɪstɪk]
+
+乐观更新是一种常见的体验优化手段，在发送异步请求之前，我们默认请求是成功的，让用户立即看到成功后的状态。如果请求失败后，再回滚 UI。
+
+经典的场景是点赞场景，用户点赞后，立即更新 UI 为点赞成功，如果请求失败后，再回滚 UI。
+
+### useFormStatus 获取表单状态
+
+主要用来快捷读取到最近的父级 form 表单的数据，其实就是类似 Context 的封装。
+
+useFormStatus 使用场景较窄，绝大部分开发者不会用到。
+
+### use
+
+use 是 React 19 新增的一个特性，支持处理 Promise 和 Context。
+
+假如我们要实现这样一个需求：请求接口数据，请求过程中，显示 loading，请求成功，展示数据。
+
+use 接收一个 Promise，会阻塞 render 继续渲染，通常需要配套 Suspense 处理 loading 状态，需要配套 ErrorBoundary 来处理异常状态。
+
+另外 use 也支持接收 Context，类似之前的 useContext，但比 useContext 更灵活，可以在条件语句和循环中使用。
+
+### ref
+
+在之前，父组件传递 ref 给子组件，子组件如果要消费，则必须通过 forwardRef 来消费。
+
+React 19 开始，不需要使用 forwardRef 了，ref 可以作为一个普通的 props 了。
+
+未来在某个版本会删除掉 forwardRef。
+
+### Context
+
+在 React 19 之前，我们需要使用 `Context.Provider`
+
+在 React 19 中，我们可以使用 `Context`来代替 `Context.Provider`了
+
+### ref 支持返回 cleanup 函数
+
+ref 支持返回一个 cleanup 函数，在组件卸载时会调用该函数。
+
+### useDeferredValue 增加了 initialValue 参数
+
+useDeferredValue 现在增加了第二个参数 initialValue，指定初始化值。
+
+### 支持 Document Metadata
+
+在之前，如果我们希望动态的在组件中指定 `meta`、`title`、`link`等文档属性，我们可能会这样做：
+
+1. 在 useEffect 中，通过 JS 手动创建
+2. 使用 react-helmet 这类三方库
+
+在 React 19 中，原生支持了这三个文档属性，支持在组件中设置。
+
+在渲染过程中，React 发现这三种标签，会自动提升到  上。
