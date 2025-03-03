@@ -3621,8 +3621,24 @@ requestIdleCallback 可在网页渲染完成后，CPU 空闲时执行，用于�
 ## 89.vue和react的diff算法区别
 
 - React diff 特点 - 仅向右移动
+
+  - 比较子节点时，仅向右移动，不向左移动。
+
 - Vue2 diff 特点 - 双端比较
+
+  - 定义四个指针，分别比较
+
+    - oldStartNode 和 newStartNode
+    - oldStartNode 和 newEndNode
+    - oldEndNode 和 newStartNode
+    - oldEndNode 和 newEndNode
+
+    然后指针继续向中间移动，直到指针汇合。
+
 - Vue3 diff 特点 - 最长递增子序列
+
+  - 该方法旨在尽量减少 DOM 的移动，达到最少的 DOM 操作。
+
 
 ## 90.React如何进行错误监听
 
