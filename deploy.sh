@@ -22,3 +22,5 @@ git commit -m 'deploy docs'
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 git push -f chenml@139.196.79.103:/home/chenml/blog.git master
 cd -
+
+rm -rf docs/.vitepress/dist  #删除dist文件夹

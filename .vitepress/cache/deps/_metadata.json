@@ -2,12 +2,12 @@
   "hash": "73344535",
   "configHash": "0ecfecda",
   "lockfileHash": "498a3b3b",
-  "browserHash": "556c0a82",
+  "browserHash": "d1308bb0",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "70009cce",
+      "fileHash": "510f0aca",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
@@ -19,13 +19,13 @@
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "a3710d4c",
+      "fileHash": "02c2aaa4",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "4d148d90",
+      "fileHash": "46aa66dd",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
@@ -43,7 +43,13 @@
     "vitepress-plugin-image-viewer": {
       "src": "../../../node_modules/vitepress-plugin-image-viewer/lib/viewer.js",
       "file": "vitepress-plugin-image-viewer.js",
-      "fileHash": "3639ed68",
+      "fileHash": "636ded2d",
+      "needsInterop": false
+    },
+    "@mdit-vue/shared": {
+      "src": "../../../node_modules/@mdit-vue/shared/dist/index.mjs",
+      "file": "@mdit-vue_shared.js",
+      "fileHash": "8f345694",
       "needsInterop": false
     }
   },
