@@ -31,3 +31,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #e1e1e1;
 }
+
+.VPImage {
+  border-radius: 50%;
+}
