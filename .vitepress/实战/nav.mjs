@@ -9,9 +9,5 @@ export default {
       text: "Element-Plus",
       link: "/实战/二次封装Element-Plus组件/00 封装组件初级篇（上）",
     },
-    {
-      text: "工程化体系",
-      link: "/实战/工程化体系/00 工程化实战",
-    },
   ],
 };

@@ -1591,3 +1591,46 @@ key 是为 Vue 中 vnode 的唯一标记，通过这个 key，diff 操作可以�
 
 **动态组件和异步组件支持**：在动态组件和异步组件加载时，通过 `name` 来标识和区分组件。
 
+## 66. Vue 子组件和父组件执行顺序
+
+**加载渲染过程：**
+
+1.父组件 beforeCreate
+
+2.父组件 created
+
+3.父组件 beforeMount
+
+4.子组件 beforeCreate
+
+5.子组件 created
+
+6.子组件 beforeMount
+
+7.子组件 mounted
+
+8.父组件 mounted
+
+
+
+**更新过程：**
+
+1. 父组件 beforeUpdate
+
+2.子组件 beforeUpdate
+
+3.子组件 updated
+
+4.父组件 updated
+
+
+
+**销毁过程：**
+
+1. 父组件 beforeDestroy
+
+2.子组件 beforeDestroy
+
+3.子组件 destroyed
+
+4.父组件 destoryed
