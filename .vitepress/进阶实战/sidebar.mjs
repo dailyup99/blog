@@ -1,11 +1,11 @@
 export default {
-  "/进阶实战/Vue3+TS/": [
+  "/进阶实战/Vue3后台管理系统/": [
     {
-      text: "Vue3+TS",
+      text: "Vue3后台管理系统",
       items: [
         {
           text: "00 项目架构-代码规范-集成第三库",
-          link: "/进阶实战/Vue3+TS/00 项目架构-代码规范-集成第三库",
+          link: "/进阶实战/Vue3后台管理系统/00 项目架构-代码规范-集成第三库",
         },
       ],
     },
@@ -48,6 +48,49 @@ export default {
         {
           text: "01 微前端实战",
           link: "/进阶实战/技术解决方案/01 微前端实战",
+        },
+      ],
+    },
+  ],
+  "/进阶实战/打造媲美Element-Plus的组件库/": [
+    {
+      text: "打造媲美Element-Plus的组件库",
+      items: [
+        {
+          text: "00 万事开头难 - Button 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/00 万事开头难 - Button 组件",
+        },
+        {
+          text: "01 更近一步 Collapse 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/01 更近一步 Collapse 组件",
+        },
+        {
+          text: "02 它山之石 - Icon 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/02 它山之石 - Icon 组件",
+        },
+        {
+          text: "03 通用组件 -Tooltip 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/03 通用组件 -Tooltip 组件",
+        },
+        {
+          text: "04 现学现卖 - Dropdown 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/04 现学现卖 - Dropdown 组件",
+        },
+        {
+          text: "05 高难度 - Message 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/05 高难度 - Message 组件",
+        },
+        {
+          text: "06 进入表单的世界 - Input 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/06 进入表单的世界 - Input 组件",
+        },
+        {
+          text: "07 狸猫换太子 - Switch 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/07 狸猫换太子 - Switch 组件",
+        },
+        {
+          text: "08 魔高一丈- Select 组件",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/08 魔高一丈- Select 组件",
         },
       ],
     },
