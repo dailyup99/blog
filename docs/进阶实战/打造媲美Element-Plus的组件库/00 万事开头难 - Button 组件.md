@@ -310,6 +310,7 @@ import Icon from '../Icon/Icon.vue'
 
 describe('Button.vue', () => { 
   test('basic button', () => {
+    // mount 将组件挂载到DOM
     const wrapper = mount(Button, {
       props: {
         type: 'primary'
@@ -319,13 +320,17 @@ describe('Button.vue', () => {
       }
     })
     console.log(wrapper.html())
+    // 拿到所有的class，判断是否包含vk-button--primary
     expect(wrapper.classes()).toContain('vk-button--primary')
     // slot
     // get, find
+    // 遍历wrapper，可以使用get或find
     expect(wrapper.get('button').text()).toBe('button')
     // events
+    // 判断events是否被触发过
     wrapper.get('button').trigger('click')
     console.log(wrapper.emitted())
+    // wrapper.emitted()获取所有被触发的事件
     expect(wrapper.emitted()).toHaveProperty('click')
   })
   test('disabled', () => {
@@ -338,8 +343,10 @@ describe('Button.vue', () => {
       }
     })
     // attributes
+    // 所有所有属性
     expect(wrapper.attributes('disabled')).toBeDefined()
     // attributes
+    // 获取真实dom通过.element
     expect(wrapper.find('button').element.disabled).toBeDefined()
     wrapper.get('button').trigger('click')
     expect(wrapper.emitted()).not.toHaveProperty('click')
@@ -353,6 +360,7 @@ describe('Button.vue', () => {
         default: 'icon'
       },
       global: {
+        // 使用第三方组件库，的时候可以使用stubs
         stubs: ['FontAwesomeIcon']
       }
     })

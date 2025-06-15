@@ -34,4 +34,5 @@ body::-webkit-scrollbar-thumb {
 
 .VPImage {
   border-radius: 50%;
+  width: 200px;
 }

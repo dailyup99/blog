@@ -237,7 +237,7 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
 </script>
 ```
 
-Collapse.test.tsx
+###  Collapse.test.tsx
 
 ```typescript
 import { describe, test, expect, vi, beforeAll } from 'vitest'

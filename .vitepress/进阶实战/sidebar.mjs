@@ -92,6 +92,14 @@ export default {
           text: "08 魔高一丈- Select 组件",
           link: "/进阶实战/打造媲美Element-Plus的组件库/08 魔高一丈- Select 组件",
         },
+        {
+          text: "09 组件测试",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/09 组件测试",
+        },
+        {
+          text: "10 组件库的打包以及发布",
+          link: "/进阶实战/打造媲美Element-Plus的组件库/10 组件库的打包以及发布",
+        },
       ],
     },
   ],

@@ -11,7 +11,7 @@ hero:
     alt: VitePress
   actions:
     - theme: brand
-      text: JS高级
+      text: 开始学习
       link: /前端体系/JS高级/00 this指向
       target: _blank
     - theme: alt
