@@ -7,6 +7,14 @@ export default {
           text: "00 项目初始搭建与配置",
           link: "/进阶实战/Vue3.5 企业级管理系统实战/00 项目初始搭建与配置",
         },
+        {
+          text: "01 Router、Pinia 及 Element-Plus 集成",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/01 Router、Pinia 及 Element-Plus 集成",
+        },
+        {
+          text: "02 页面布局及样式处理 （Scss & UnoCSS ）",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/02 页面布局及样式处理 （Scss & UnoCSS ）",
+        },
       ],
     },
   ],
