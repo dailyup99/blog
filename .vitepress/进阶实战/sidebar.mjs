@@ -15,6 +15,18 @@ export default {
           text: "02 页面布局及样式处理 （Scss & UnoCSS ）",
           link: "/进阶实战/Vue3.5 企业级管理系统实战/02 页面布局及样式处理 （Scss & UnoCSS ）",
         },
+        {
+          text: "03 组件及API自动导入配置",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/03 组件及API自动导入配置",
+        },
+        {
+          text: "04 图标组件",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/04 图标组件",
+        },
+        {
+          text: "05 Vue3中defineProps用法",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/05 Vue3中defineProps用法",
+        },
       ],
     },
   ],
