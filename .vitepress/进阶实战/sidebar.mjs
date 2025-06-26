@@ -27,6 +27,18 @@ export default {
           text: "05 Vue3中defineProps用法",
           link: "/进阶实战/Vue3.5 企业级管理系统实战/05 Vue3中defineProps用法",
         },
+        {
+          text: "06 Sidebar组件开发 1",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/06 Sidebar组件开发 1",
+        },
+        {
+          text: "07 Sidebar组件开发 2",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/07 Sidebar组件开发 2",
+        },
+        {
+          text: "08 菜单组件",
+          link: "/进阶实战/Vue3.5 企业级管理系统实战/08 菜单组件",
+        },
       ],
     },
   ],
