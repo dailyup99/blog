@@ -67,9 +67,7 @@ window.addEventListener(
 
 IOS 和安卓不同，即使页面没有设置滚动，仍然可以拉扯，给人一种橡皮筋的感觉，如果是 Mac 系统的同学，可以打开 Chrome 模拟查看我们的页面，可以看到下面的效果。
 
-
-
-![dd956d94-6971-43af-8848-9ab4fdaa2297.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06767f47b965460085620ab0ec89e395~tplv-k3u1fbpfcp-watermark.image?)
+![dd956d94-6971-43af-8848-9ab4fdaa2297.gif](http://139.196.79.103:9001/myimages/imgs/202508171346746.gif)
 
 那么怎么去解决这个问题呢？我们来讨论一下。
 
