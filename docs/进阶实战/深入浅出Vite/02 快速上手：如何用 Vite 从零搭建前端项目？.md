@@ -13,7 +13,7 @@ outline: deep
 其次是安装 Node.js，如果你的系统中还没有安装 Node.js ，可以进入 Nodejs 官网下载相应的安装包进行手动安装；如果已经安装了 Node.js ，你可以使用这个命令检查一下 Node.js 版本:
 
 ```javascript
-node -v
+node - v;
 ```
 
 推荐 12.0.0 及以上版本，如果低于这个版本，推荐使用 nvm 工具切换 Nodejs 版本。
@@ -21,7 +21,7 @@ node -v
 安装完 Nodejs 之后，包管理器 npm 也会被自动安装，你可以执行下面的命令来验证:
 
 ```javascript
-npm -v
+npm - v;
 ```
 
 当然，在现代的前端项目中，我非常不推荐使用 npm 作为项目的包管理器，甚至也不再推荐 yarn ( npm 的替代方案)，因为两者都存在比较严重的性能和安全问题，而这些问题在 pnpm 中得到了很好的解决，更多细节可以参考我的这篇博客: 关于现代包管理器的深
@@ -54,11 +54,11 @@ pnpm create vite
 
 后续的交互流程梳理如下:
 
-* 输入项目名称；
+- 输入项目名称；
 
-* 选择前端框架；
+- 选择前端框架；
 
-* 选择开发语言。
+- 选择开发语言。
 
 首先是输入项目名称，这里你可以输入 vite-project ，然后按下回车，进入 选择前端框架 的部分:
 
@@ -79,7 +79,7 @@ pnpm run dev
 
 <img src="http://139.196.79.103:9001/myimages/imgs/202508240212221.png" alt="image-20250824021203181" style="zoom:67%;" />
 
-紧接着，我们立马去浏览器中打开 http://localhost:3000 页面，你可以看到：
+紧接着，我们立马去浏览器中打开 `http://localhost:3000` 页面，你可以看到：
 
 <img src="http://139.196.79.103:9001/myimages/imgs/202508240212627.png" alt="image-20250824021223594" style="zoom:67%;" />
 
@@ -93,7 +93,7 @@ Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截�
 
 言归正传，我们继续学习 Vite 初始化后的项目。项目的目录结构如下:
 
-├──  index.html
+├── index.html
 
 ├── package.json
 
@@ -119,21 +119,21 @@ Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截�
 
 └── vite.config.ts
 
-值得注意的是，在项目根目录中有一个 index.html 文件，这个文件十分关键，因为 Vite默认会把项目根目录下的 index.html 作为入口文件。也就是说，当你访问http://localhost:3000 的时候，Vite 的 Dev Server 会自动返回这个 HTML 文件的内容。我们来看看这个 HTML 究竟写了什么:
+值得注意的是，在项目根目录中有一个 index.html 文件，这个文件十分关键，因为 Vite 默认会把项目根目录下的 index.html 作为入口文件。也就是说，当你访问 http://localhost:3000 的时候，Vite 的 Dev Server 会自动返回这个 HTML 文件的内容。我们来看看这个 HTML 究竟写了什么:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
- <head>
- <meta charset="UTF-8" />
-   <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Vite App</title>
- </head>
- <body>
-   <div id="root"></div>
-   <script type="module" src="/src/main.tsx"></script>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
 ```
 
@@ -145,23 +145,23 @@ Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截�
 
 由于现代浏览器原生支持了 ES 模块规范，因此原生的 ES 语法也可以直接放到浏览器中执行，只需要在 script 标签中声明 type="module" 即可。比如上面的 script 标签就声明了 type="module"，同时 src 指向了 /src/main.tsx 文件，此时相当于请求了
 
-http://localhost:3000/src/main.tsx 这个资源，Vite 的 Dev Server 此时会接受到这个请求，然后读取对应的文件内容，进行一定的中间处理，最后将处理的结果返回给浏览器。
+`http://localhost:3000/src/main.tsx` 这个资源，Vite 的 Dev Server 此时会接受到这个请求，然后读取对应的文件内容，进行一定的中间处理，最后将处理的结果返回给浏览器。
 
 ![image-20250824021646837](http://139.196.79.103:9001/myimages/imgs/202508240216880.png)
 
 我们可以来看看 main.tsx 的内容:
 
 ```javascript
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 ReactDOM.render(
- <React.StrictMode>
- <App />
- </React.StrictMode>,
- document.getElementById('root')
-)
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 ```
 
 到这里可能你会诧异: 浏览器并不识别 tsx 语法，也无法直接 import css 文件，上面这段代码究竟是如何被浏览器正常执行的呢？
@@ -189,16 +189,16 @@ Vite 当中支持多种配置文件类型，包括 .js 、 .ts 、 .mjs 三种�
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 export default defineConfig({
- plugins: [react()]
-})
+  plugins: [react()],
+});
 ```
 
 可以看到配置文件中默认在 plugins 数组中配置了官方的 react 插件，来提供 React 项目编译和热更新的功能。
 
-接下来，我们可以基于这个文件完成更加丰富的配置。之前我就遇到过这样一个需求: 页面的入口文件 index.html 并不在项目根目录下，而需要放到 src 目录下，如何在访问localhost:3000 的时候让 Vite 自动返回 src 目录下的 index.html 呢？我们可以通过root 参数配置项目根目录的位置:
+接下来，我们可以基于这个文件完成更加丰富的配置。之前我就遇到过这样一个需求: 页面的入口文件 index.html 并不在项目根目录下，而需要放到 src 目录下，如何在访问 localhost:3000 的时候让 Vite 自动返回 src 目录下的 index.html 呢？我们可以通过 root 参数配置项目根目录的位置:
 
 ```typescript
 // vite.config.ts
@@ -221,7 +221,7 @@ export default defineConfig({
 
 ## 生产环境构建
 
-有人说 Vite 因为其不打包的特性而不能上生产环境，其实这种观点是相当有误的。在开发阶段 Vite 通过 Dev Server 实现了不打包的特性，而在生产环境中，Vite 依然会基于Rollup 进行打包，并采取一系列的打包优化手段。从脚手架项目的 package.json 中就可见一斑：
+有人说 Vite 因为其不打包的特性而不能上生产环境，其实这种观点是相当有误的。在开发阶段 Vite 通过 Dev Server 实现了不打包的特性，而在生产环境中，Vite 依然会基于 Rollup 进行打包，并采取一系列的打包优化手段。从脚手架项目的 package.json 中就可见一斑：
 
 ```javascript
 "scripts": {
@@ -259,14 +259,14 @@ tsc 作为 TypeScript 的官方编译命令，可以用来编译 TypeScript 代�
 
 <img src="http://139.196.79.103:9001/myimages/imgs/202508240226252.png" alt="image-20250824022625207" style="zoom:67%;" />
 
-在浏览器中打开 http://localhost:5000 地址，你将看到和开发阶段一样的页面内容，证明我们成功完成第一个 Vite 项目的生产环境构建。
+在浏览器中打开 `http://localhost:5000` 地址，你将看到和开发阶段一样的页面内容，证明我们成功完成第一个 Vite 项目的生产环境构建。
 
 小结
 
 恭喜你完成了本节的学习！在这一小节中，我们正式地开始近距离接触 Vite，使用它来初始化第一个 Vite 项目。
 
-在最开始，我们一起搭建了基本的前端开发环境，安装常用的编辑器、浏览器、Node.js环境及包管理器 pnpm，接着我和你使用 Vite 的初始化命令创建一个 React 项目并成功启动，让你真切地体验到 Vite 的快速和轻量。
+在最开始，我们一起搭建了基本的前端开发环境，安装常用的编辑器、浏览器、Node.js 环境及包管理器 pnpm，接着我和你使用 Vite 的初始化命令创建一个 React 项目并成功启动，让你真切地体验到 Vite 的快速和轻量。
 
-项目启动之后我也与你分析了项目背后的启动流程，强调了 一个 import 语句代表一个HTTP 请求 ，而正是 Vite 的 Dev Server 来接收这些请求、进行文件转译以及返回浏览器可以运行的代码，从而让项目正常运行。
+项目启动之后我也与你分析了项目背后的启动流程，强调了 一个 import 语句代表一个 HTTP 请求 ，而正是 Vite 的 Dev Server 来接收这些请求、进行文件转译以及返回浏览器可以运行的代码，从而让项目正常运行。
 
 不仅如此，我还带你一起初步接触了 Vite 的配置文件，并尝试进行生产环境的打包，为下一节的学习作下了铺垫。在下一小节中，我们将通过 Vite 搭建起一个相对完整的工程化项目框架，你也将会面临更多的开发场景和挑战，逐渐对 Vite 的使用轻车熟路，让我们下一节再见！
