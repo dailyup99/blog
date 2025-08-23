@@ -119,7 +119,7 @@ Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截�
 
 └── vite.config.ts
 
-值得注意的是，在项目根目录中有一个 index.html 文件，这个文件十分关键，因为 Vite 默认会把项目根目录下的 index.html 作为入口文件。也就是说，当你访问 http://localhost:3000 的时候，Vite 的 Dev Server 会自动返回这个 HTML 文件的内容。我们来看看这个 HTML 究竟写了什么:
+值得注意的是，在项目根目录中有一个 index.html 文件，这个文件十分关键，因为 Vite 默认会把项目根目录下的 index.html 作为入口文件。也就是说，当你访问 `http://localhost:3000` 的时候，Vite 的 Dev Server 会自动返回这个 HTML 文件的内容。我们来看看这个 HTML 究竟写了什么:
 
 ```html
 <!DOCTYPE html>
@@ -198,7 +198,7 @@ export default defineConfig({
 
 可以看到配置文件中默认在 plugins 数组中配置了官方的 react 插件，来提供 React 项目编译和热更新的功能。
 
-接下来，我们可以基于这个文件完成更加丰富的配置。之前我就遇到过这样一个需求: 页面的入口文件 index.html 并不在项目根目录下，而需要放到 src 目录下，如何在访问 localhost:3000 的时候让 Vite 自动返回 src 目录下的 index.html 呢？我们可以通过 root 参数配置项目根目录的位置:
+接下来，我们可以基于这个文件完成更加丰富的配置。之前我就遇到过这样一个需求: 页面的入口文件 index.html 并不在项目根目录下，而需要放到 src 目录下，如何在访问 `localhost:3000` 的时候让 Vite 自动返回 src 目录下的 index.html 呢？我们可以通过 root 参数配置项目根目录的位置:
 
 ```typescript
 // vite.config.ts
@@ -215,7 +215,7 @@ export default defineConfig({
 })
 ```
 
-当手动指定 root 参数之后，Vite 会自动从这个路径下寻找 index.html 文件，也就是说当我直接访问 localhost:3000 的时候，Vite 从 src 目录下读取入口文件，这样就成功实现了刚才的需求。
+当手动指定 root 参数之后，Vite 会自动从这个路径下寻找 index.html 文件，也就是说当我直接访问 `localhost:3000` 的时候，Vite 从 src 目录下读取入口文件，这样就成功实现了刚才的需求。
 
 当然，这只是让你体验了一个简单的配置案例，在 Vite 中还有非常多的配置，由于篇幅所限，本文就不再逐个进行演示了，对于一些经常使用或者比较难理解的配置，后面的文章中会给大家一一介绍。
 
