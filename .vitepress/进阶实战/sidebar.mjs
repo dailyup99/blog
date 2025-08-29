@@ -216,6 +216,14 @@ export default {
           text: "08 得力的性能推手：Esbuild 功能使用与插件开发实战",
           link: "/进阶实战/深入浅出Vite/08 得力的性能推手：Esbuild 功能使用与插件开发实战",
         },
+        {
+          text: "09 Vite 构建基石(上)——Rollup 打包基本概念及使用",
+          link: "/进阶实战/深入浅出Vite/09 Vite 构建基石(上)——Rollup 打包基本概念及使用",
+        },
+        {
+          text: "10 Vite 构建基石(下)——深入理解 Rollup 的插件机制",
+          link: "/进阶实战/深入浅出Vite/10 Vite 构建基石(下)——深入理解 Rollup 的插件机制",
+        },
       ],
     },
   ],
