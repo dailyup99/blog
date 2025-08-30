@@ -224,6 +224,10 @@ export default {
           text: "10 Vite 构建基石(下)——深入理解 Rollup 的插件机制",
           link: "/进阶实战/深入浅出Vite/10 Vite 构建基石(下)——深入理解 Rollup 的插件机制",
         },
+        {
+          text: "11 插件开发与实战：如何开发一个完整的 Vite 插件？.md",
+          link: "/进阶实战/深入浅出Vite/11 插件开发与实战：如何开发一个完整的 Vite 插件？.md",
+        },
       ],
     },
   ],
