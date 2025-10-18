@@ -346,10 +346,10 @@ export const NAV_DATA: NavData[] = [
         link: "https://www.yuque.com/cuggz/interview",
       },
       {
-        title: "前端登顶",
-        desc: "前端系统进阶笔记 & 面试指南",
+        title: "面试鸭",
+        desc: "程序员求职面试刷题神器",
         icon,
-        link: "https://www.123fe.net/index.html",
+        link: "https://www.mianshiya.com/",
       },
     ],
   },
