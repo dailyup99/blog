@@ -1,2 +1,5 @@
 node_modules/
 docs/.vitepress/dist
+
+# vitepress build output
+docs/.vitepress/dist/
