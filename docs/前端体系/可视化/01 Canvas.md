@@ -1366,7 +1366,7 @@ shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, font, textAlign, textBase
 </html>
 ```
 
-<img src="..\..\images\image-20230730210816810.png" />
+<img src="../../images/image-20230730210816810.png" />
 
 它们是成对存在的，相当于存储在一个栈中，red 先放进去，然后是 green，最后是 blue，取出来的时候刚好相反。
 
@@ -1742,7 +1742,7 @@ setInterval 定时器不是非常精准的，因为 setInterval 的回调函数�
 </html>
 ```
 
-<img src="..\..\images\image-20230802200730508.png" />
+<img src="../../images/image-20230802200730508.png" />
 
 ## **绘制秒针-requestAnimationFrame**
 
@@ -2132,7 +2132,7 @@ setInterval 定时器不是非常精准的，因为 setInterval 的回调函数�
 
 **求圆上 x, y 的坐标：**
 
-<img src="..\..\images\image-20230803201112065.png" />
+<img src="../../images/image-20230803201112065.png" />
 
 圆上 x, y 轴坐标实际上就是右图的 ( AB, BC )，AC 为时钟半径
 
@@ -2144,7 +2144,7 @@ y= BC = sina _ AC => y = Math.sin(弧度) _ R
 
 比如：旋转 90°：弧度为 Math.PI / 2； 旋转 180°：为 Math.PI ； 旋转 360°：为 Math.PI \* 2； 旋转-90°：为-Math.PI / 2
 
-<img src="..\..\images\image-20230803201256818.png" />
+<img src="../../images/image-20230803201256818.png" />
 
 第 i 小时的坐标：
 

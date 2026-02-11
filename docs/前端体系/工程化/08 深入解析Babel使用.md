@@ -16,7 +16,7 @@ Babel 是一个工具链，主要用于旧浏览器或者缓解中将 ECMAScript
 
 包括：语法转换、源代码转换、Polyfill 实现目标环境缺少的功能等；
 
-<img src="..\..\images\image-20240525141332916.png" />
+<img src="../../images/image-20240525141332916.png" />
 
 ## **Babel 命令行使用**
 
@@ -370,21 +370,21 @@ npx browserslist ">1%, last 2 version, not dead"
 
 **方案一：package.json 配置：**
 
-<img src="..\..\images\image-20240525205241015.png" />
+<img src="../../images/image-20240525205241015.png" />
 
 **方案二：.browserslistrc 文件**
 
-<img src="..\..\images\image-20240525205312906.png" />
+<img src="../../images/image-20240525205312906.png" />
 
 ## **默认配置和条件关系**
 
 **如果没有配置，那么也会有一个默认配置：**
 
-<img src="..\..\images\image-20240525205423453.png" />
+<img src="../../images/image-20240525205423453.png" />
 
 **我们编写了多个条件之后，多个条件之间是什么关系呢？**
 
-<img src="..\..\images\image-20240525205441646.png" />
+<img src="../../images/image-20240525205441646.png" />
 
 ## **设置目标浏览器 browserslist**
 
@@ -485,7 +485,7 @@ ECMAScript 规范定义了 JavaScript 如何一步一步的进化、发展；
 
 但是从 babel7 开始，已经不建议使用了，建议使用 preset-env 来设置；
 
-<img src="..\..\images\image-20240525211610302.png" />
+<img src="../../images/image-20240525211610302.png" />
 
 ## **Babel 的配置文件**
 
@@ -735,7 +735,7 @@ tsc --init
 
 **生成配置文件如下：**
 
-<img src="..\..\images\image-20240525232108686.png" />
+<img src="../../images/image-20240525232108686.png" />
 
 **之后我们可以运行 npx tsc 来编译自己的 ts 代码：**
 

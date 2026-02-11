@@ -8,7 +8,7 @@ outline: deep
 
 ## Vue 脚手架加载配置
 
-<img src="..\..\images\image-20240609212419768.png" />
+<img src="../../images/image-20240609212419768.png" />
 
 如果只想看 vue 脚手架有什么 webpack 配置，可以执行
 
@@ -263,7 +263,7 @@ module.exports = {
 
 如果我们希望对代码进行压缩和丑化，那么可以使用 uglify 或者 terser 插件；
 
-<img src="..\..\images\image-20240609223401261.png" />
+<img src="../../images/image-20240609223401261.png" />
 
 babel 可以单独创建一个 babel.config.js 进行配置
 

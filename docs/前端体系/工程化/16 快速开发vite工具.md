@@ -170,7 +170,7 @@ module.exports = {
 
 **注意：在 vite2 中，已经不再使用 Koa 了，而是使用 Connect 来搭建的服务器**
 
-<img src="..\..\images\image-20240610094914451.png" />
+<img src="../../images/image-20240610094914451.png" />
 
 ## **Vite 对 vue 的支持**
 

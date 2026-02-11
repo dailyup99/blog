@@ -56,11 +56,11 @@ reducers：相当于之前的 reducer 函数
 
 **createSlice 返回值是一个对象，包含所有的 actions；**
 
-<img src="..\..\images\image-20230618093051408.png" />
+<img src="../../images/image-20230618093051408.png" />
 
 ## **重构代码 – 创建 home 的 reducer**
 
-<img src="..\..\images\image-20230618093145379.png" />
+<img src="../../images/image-20230618093145379.png" />
 
 ## **store 的创建**
 
@@ -72,7 +72,7 @@ middleware：可以使用参数，传入其他的中间件（自行了解）；
 
 devTools：是否配置 devTools 工具，默认为 true；
 
-<img src="..\..\images\image-20230618093249584.png" />
+<img src="../../images/image-20230618093249584.png" />
 
 ## **Redux Toolkit 的异步操作**
 
@@ -92,7 +92,7 @@ rejected：执行过程中有错误或者抛出了异常；
 
 **我们可以在 createSlice 的 entraReducer 中监听这些结果：**
 
-<img src="..\..\images\image-20230618095145927.png" />
+<img src="../../images/image-20230618095145927.png" />
 
 src/index.js
 
@@ -326,7 +326,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 我们可以向 builder 中添加 case 来监听异步操作的结果：
 
-<img src="..\..\images\image-20230618101502132.png" />
+<img src="../../images/image-20230618101502132.png" />
 
 这是另外一种写法
 
@@ -761,7 +761,7 @@ root.render(
 
 **当然，我们可以将它封装到一个模块中，只要调用这个模块中的函数，就可以对 store 进行这样的处理：**
 
-<img src="..\..\images\image-20230618124415824.png" />
+<img src="../../images/image-20230618124415824.png" />
 
 ## **thunk 需求**
 
@@ -775,13 +775,13 @@ root.render(
 
 我们又对 dispatch 进行转换，这个 dispatch 会判断传入的
 
-<img src="..\..\images\image-20230618124506407.png" />
+<img src="../../images/image-20230618124506407.png" />
 
 ## **合并中间件**
 
 **单个调用某个函数来合并中间件并不是特别的方便，我们可以封装一个函数来实现所有的中间件合并：**
 
-<img src="..\..\images\image-20230618124554812.png" />
+<img src="../../images/image-20230618124554812.png" />
 
 **我们来理解一下上面操作之后，代码的流程：**
 

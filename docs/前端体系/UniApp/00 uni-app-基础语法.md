@@ -470,7 +470,7 @@ getCurrentPages() 函数**(** 兼容 h5、weapp、app )
 
 常用方法如下图所示：
 
-<img src="..\..\images\image-20230623220143551.png" />
+<img src="../../images/image-20230623220143551.png" />
 
 App.vue
 
@@ -558,7 +558,7 @@ pages.json 文件用来对 uni-app 进行全局配置，类似微信小程序中
 
 决定页面的路径、窗口样式、原生的导航栏、底部的原生 tabbar 等。
 
-<img src="..\..\images\image-20230623220406191.png" />
+<img src="../../images/image-20230623220406191.png" />
 
 pages.json
 

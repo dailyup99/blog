@@ -45,7 +45,7 @@ koa 也是通过注册中间件来完成请求操作的；
 
 后续我们学习 Koa 的源码，来看一下它是一个怎么样的函数；
 
-<img src="..\..\images\202407141043482.png" />
+<img src="../../images/202407141043482.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -115,7 +115,7 @@ Koa 并没有提供 methods 的方式来注册中间件；
 
 方式二：使用第三方路由中间件；
 
-<img src="..\..\images\202407141055435.png" />
+<img src="../../images/202407141055435.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -241,13 +241,13 @@ module.exports = userRouter;
 
 获取 params：
 
-<img src="..\..\images\202407141124377.png" />
+<img src="../../images/202407141124377.png" />
 
 **请求地址：`http://localhost:8000/login?username=why&password=123`**
 
 获取 query：
 
-<img src="..\..\images\202407141125819.png" />
+<img src="../../images/202407141125819.png" />
 
 ## **参数解析：json**
 
@@ -255,7 +255,7 @@ module.exports = userRouter;
 
 **body 是 json 格式：**
 
-<img src="..\..\images\202407141125397.png" />
+<img src="../../images/202407141125397.png" />
 
 **获取 json 数据：**
 
@@ -263,7 +263,7 @@ module.exports = userRouter;
 
 使用 koa-bodyparser 的中间件；
 
-<img src="..\..\images\202407141126285.png" />
+<img src="../../images/202407141126285.png" />
 
 ## **参数解析：x-www-form-urlencoded**
 
@@ -279,7 +279,7 @@ body 是 x-www-form-urlencoded 格式：
 
 使用 koa-bodyparser 的中间件；
 
-<img src="..\..\images\202407141127266.png" />
+<img src="../../images/202407141127266.png" />
 
 ## **参数解析：form-data**
 
@@ -295,7 +295,7 @@ body 是 form-data 格式
 
 使用 multer 中间件；
 
-<img src="..\..\images\202407141128809.png" />
+<img src="../../images/202407141128809.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -421,7 +421,7 @@ npm install koa-static
 
 部署的过程类似于 express：
 
-<img src="..\..\images\202407141205348.png" />
+<img src="../../images/202407141205348.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -653,7 +653,7 @@ app.listen(6000, () => {
 });
 ```
 
-<img src="..\..\images\202407141607089.png" />
+<img src="../../images/202407141607089.png" />
 
 ## koa 中间件-执行异步
 
@@ -753,4 +753,4 @@ express 中间件的 next 返回的是一个函数，而 koa 的 next 返回的�
 
 Response 返回 body 执行；
 
-<img src="..\..\images\202407141631544.png" />
+<img src="../../images/202407141631544.png" />

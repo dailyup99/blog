@@ -23,13 +23,13 @@ num = 200;
 
 那么我们再来看一下对象的响应式：
 
-<img src="..\..\images\image-20230603112812904.png" />
+<img src="../../images/image-20230603112812904.png" />
 
 ## **响应式函数设计**
 
 首先，执行的代码中可能不止一行代码，所以我们可以将这些代码放到一个函数中：
 
-<img src="..\..\images\image-20230603112932753.png" />
+<img src="../../images/image-20230603112932753.png" />
 
 那么我们的问题就变成了，当数据发生变化时，自动去执行某一个函数；
 
@@ -127,7 +127,7 @@ reactiveFns.forEach((fn) => {
 
 每个响应式对象都有自己的数组
 
-<img src="..\..\images\image-20230603114558444.png" />
+<img src="../../images/image-20230603114558444.png" />
 
 ```javascript
 class Depend {

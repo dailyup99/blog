@@ -58,7 +58,7 @@ HTTP 是万维网的数据通信的基础，设计 HTTP 最初的目的是为了
 
 我们称这个响应服务器为源服务器（origin server）；
 
-<img src="..\..\images\image-20230527203446811.png" />
+<img src="../../images/image-20230527203446811.png" />
 
 ## **网页中资源的获取**
 
@@ -190,7 +190,7 @@ MDN 响应码解析地址：https://developer.mozilla.org/zh-CN/docs/web/http/st
 
 **响应的 header 中包括一些服务器给客户端的信息：**
 
-<img src="..\..\images\image-20230527220621672.png" />
+<img src="../../images/image-20230527220621672.png" />
 
 ## **Chrome 安装插件 - FeHelper**
 
@@ -883,7 +883,7 @@ function hyajax({
 
 **fetch 函数的使用：**
 
-<img src="..\..\images\image-20230528044200826.png" />
+<img src="../../images/image-20230528044200826.png" />
 
 input：定义要获取的资源地址，可以是一个 URL 字符串，也可以使用一个 Request 对象（实验性特性）类型；
 
@@ -925,11 +925,11 @@ response.json() —— 将 response 解析为 JSON；
 
 **基于 Promise 的使用方案：**
 
-<img src="..\..\images\image-20230528044856701.png" />
+<img src="../../images/image-20230528044856701.png" />
 
 **基于 async、await 的使用方案：**
 
-<img src="..\..\images\image-20230528044917075.png" />
+<img src="../../images/image-20230528044917075.png" />
 
 ## **Fetch POST 请求**
 
@@ -943,7 +943,7 @@ body：request body，其中之一：
 
 FormData 对象，以 multipart/form-data 形式发送数据，
 
-<img src="..\..\images\image-20230528045021726.png" />
+<img src="../../images/image-20230528045021726.png" />
 
 ```html
 <!DOCTYPE html>

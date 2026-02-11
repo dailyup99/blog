@@ -346,7 +346,7 @@ watch 需要侦听特定的数据源，并且执行其回调函数；
 
 **侦听器还可以使用数组同时侦听多个源：**
 
-<img src="..\..\images\image-20230527160955626.png" />
+<img src="../../images/image-20230527160955626.png" />
 
 ## **watch 的选项**
 
@@ -354,7 +354,7 @@ watch 需要侦听特定的数据源，并且执行其回调函数；
 
 也可以传入 immediate 立即执行；
 
-<img src="..\..\images\image-20230527161056113.png" />
+<img src="../../images/image-20230527161056113.png" />
 
 ## **watchEffect**
 
@@ -872,7 +872,7 @@ Home.vue
 
 **使用这个语法，需要将 setup attribute 添加到 `<script>` 代码块上：**
 
-<img src="..\..\images\image-20230527180135707.png" />
+<img src="../../images/image-20230527180135707.png" />
 
 里面的代码会被编译成组件 setup() 函数的内容：
 
@@ -886,7 +886,7 @@ Home.vue
 
 **都能在模板中直接使用**
 
-<img src="..\..\images\image-20230527180159040.png" />
+<img src="../../images/image-20230527180159040.png" />
 
 **响应式数据需要通过 ref、reactive 来创建。**
 
@@ -894,7 +894,7 @@ Home.vue
 
 `<script setup>` 范围里的值也能被直接作为自定义组件的标签名使用：
 
-<img src="..\..\images\image-20230527180218676.png" />
+<img src="../../images/image-20230527180218676.png" />
 
 ## **defineProps() 和 defineEmits()**
 
@@ -912,7 +912,7 @@ Home.vue
 
 **通过 defineExpose 编译器宏来显式指定在 `<script setup>` 组件中要暴露出去的 property：**
 
-<img src="..\..\images\image-20230527180723117.png" />
+<img src="../../images/image-20230527180723117.png" />
 
 App.vue
 
@@ -1003,7 +1003,7 @@ defineExpose({
 
 ## **案例实战练习**
 
-<img src="..\..\images\image-20230527182309572.png" />
+<img src="../../images/image-20230527182309572.png" />
 
 App.vue
 

@@ -59,7 +59,7 @@ export default {
 
 在双引擎架构这一节中介绍过，Vite **开发阶段**会模拟 Rollup 的行为:
 
-<img src="..\..\images\202508301039379.png" />
+<img src="../../images/202508301039379.png" />
 
 其中 Vite 会调用一系列与 Rollup 兼容的钩子，这个钩子主要分为三个阶段:
 
@@ -318,11 +318,11 @@ export default function testHookPlugin () {
 
 将插件加入到 Vite 配置文件中，然后启动，你可以观察到各个 Hook 的执行顺序:
 
-<img src="..\..\images\202508301100782.png" />
+<img src="../../images/202508301100782.png" />
 
 由此我们可以梳理出 Vite 插件的执行顺序:
 
-<img src="..\..\images\202508301101314.png" />
+<img src="../../images/202508301101314.png" />
 
 - 服务启动阶段: config 、 configResolved 、 options 、 configureServer 、buildStart
 
@@ -439,7 +439,7 @@ alert(`结果: ${fib(10)}`);
 
 这里我们使用了 virtual:fib 这个虚拟模块，虽然这个模块不存在真实的文件系统中，但你打开浏览器后可以发现这个模块导出的函数是可以正常执行的:
 
-<img src="..\..\images\202508301113925.png" />
+<img src="../../images/202508301113925.png" />
 
 接着我们来尝试一下如何通过虚拟模块来读取内存中的变量，在 virtual-module.ts 中增加如下代码:
 
@@ -496,7 +496,7 @@ declare module "virtual:*" {
 
 这样就解决了类型报错的问题。接着你可以去浏览器观察一下输出的情况:
 
-<img src="..\..\images\202508301119523.png" />
+<img src="../../images/202508301119523.png" />
 
 Vite 环境变量能正确地在浏览器中打印出来，说明在内存中计算出来的 virtual:env 模块的确被成功地加载了。从中你可以看到，虚拟模块的内容完全能够被动态计算出来，因此它的灵活性和可定制程度非常高，实用性也很强，在 Vite 内部的插件被深度地使用，社区当中也有不少知名的插件(如 vite-plugin-windicss 、 vite-plugin-svg-icons 等)也使用了虚拟模块的技术。
 
@@ -639,7 +639,7 @@ export default App;
 
 打开浏览器，可以看到组件已经正常显示:
 
-<img src="..\..\images\202508301141748.png" />
+<img src="../../images/202508301141748.png" />
 
 ## 调试技巧
 
@@ -659,7 +659,7 @@ import inspect from "vite-plugin-inspect";
 
 这样当你再次启动项目时，会发现多出一个调试地址:
 
-<img src="..\..\images\202508301142782.png" />
+<img src="../../images/202508301142782.png" />
 
 你可以通过这个地址来查看项目中各个模块的编译结果：
 

@@ -139,7 +139,7 @@ document.cookie = "name=why;max-age=30;";
 
 /demo 请求中获取 cookie
 
-<img src="..\..\images\202407202029024.png" />
+<img src="../../images/202407202029024.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -296,13 +296,13 @@ token 可以翻译为令牌；
 - HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey);
 - 但是如果 secretKey 暴露是一件非常危险的事情，因为之后就可以模拟颁发 token，也可以解密 token；
 
-<img src="..\..\images\202407202151932.png" />
+<img src="../../images/202407202151932.png" />
 
 ## **Token 的使用**
 
 **当然，在真实开发中，我们可以直接使用一个库来完成： jsonwebtoken；**
 
-<img src="..\..\images\202407202152924.png" />
+<img src="../../images/202407202152924.png" />
 
 ```javascript
 const Koa = require("koa");
@@ -395,11 +395,11 @@ openssl
 
 ## **使用公钥和私钥签发和验证签名**
 
-<img src="..\..\images\202407202207110.png" />
+<img src="../../images/202407202207110.png" />
 
 ## **派发令牌和验证令牌**
 
-<img src="..\..\images\202407202207100.png" />
+<img src="../../images/202407202207100.png" />
 
 非对称加密-token 颁发和验证.js
 

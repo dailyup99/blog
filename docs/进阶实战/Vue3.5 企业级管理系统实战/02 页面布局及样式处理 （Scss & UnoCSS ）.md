@@ -181,7 +181,7 @@ app.mount("#app");
 
 效果如下：
 
-![图片](..\..\images\202506241138894.webp)
+![图片](../../images/202506241138894.webp)
 
 ### **2.3 Sass + Unocss 结合使用**
 
@@ -254,7 +254,7 @@ pnpm install normalize.css
 
 在 main.ts 中引入
 
-![图片](..\..\images\202506241141564.webp)
+![图片](../../images/202506241141564.webp)
 
 ```typescript
 //main.ts

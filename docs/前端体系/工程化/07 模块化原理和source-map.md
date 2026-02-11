@@ -42,7 +42,7 @@ outline: deep
 
 ## **Mode 配置代表更多**
 
-![image-20240520211028863](..\..\images\image-20240520211028863.png)
+![image-20240520211028863](../../images/image-20240520211028863.png)
 
 ## **Webpack 的模块化**
 
@@ -105,7 +105,7 @@ module.exports = {
 
 执行 npm run build 打包的时候，就会生成一个 bundle.js 文件和 bundle.js.map，那么 bundle.js 如何关联 bundle.js.map 呢？
 
-<img src="..\..\images\image-20240521211231125.png" />
+<img src="../../images/image-20240521211231125.png" />
 
 打包之后的 bundle.js 最后的注释，它的作用就是用来关联 bundle.js.map。
 
@@ -115,7 +115,7 @@ module.exports = {
 
 下面这俩默认开启
 
-<img src="..\..\images\image-20240521211413574.png" />
+<img src="../../images/image-20240521211413574.png" />
 
 ## **分析 source-map**
 
@@ -139,7 +139,7 @@ sourceContent：转换前的具体代码信息（和 sources 是对应的关系�
 
 sourceRoot：所有的 sources 相对的根目录；
 
-<img src="..\..\images\image-20240521212328368.png" />
+<img src="../../images/image-20240521212328368.png" />
 
 ## **生成 source-map**
 
@@ -182,19 +182,19 @@ eval 函数里面的代码会找到上面图标注红色框的文件。
 //# sourceMappingURL=bundle.js.map
 ```
 
-<img src="..\..\images\image-20240521215837342.png" />
+<img src="../../images/image-20240521215837342.png" />
 
 ## **eval-source-map 值**
 
 **eval-source-map**：会生成 sourcemap，但是 source-map 是以 DataUrl 添加到 eval 函数的后面
 
-<img src="..\..\images\image-20240525135024823.png" />
+<img src="../../images/image-20240525135024823.png" />
 
 ## **inline-source-map 值**
 
 **inline-source-map**：会生成 sourcemap，但是 source-map 是以 DataUrl 添加到 bundle 文件的后面
 
-<img src="..\..\images\image-20240525135053806.png" />
+<img src="../../images/image-20240525135053806.png" />
 
 ## **cheap-source-map**
 
@@ -204,7 +204,7 @@ eval 函数里面的代码会找到上面图标注红色框的文件。
 
 因为在开发中，我们只需要行信息通常就可以定位到错误了
 
-<img src="..\..\images\image-20240525135147746.png" />
+<img src="../../images/image-20240525135147746.png" />
 
 ## **cheap-module-source-map 值**
 
@@ -276,7 +276,7 @@ module.exports = {
 
 点击错误提示，无法查看源码：
 
-![image-20240525140127364](..\..\images\image-20240525140127364.png)
+![image-20240525140127364](../../images/image-20240525140127364.png)
 
 ## **多个值的组合**
 

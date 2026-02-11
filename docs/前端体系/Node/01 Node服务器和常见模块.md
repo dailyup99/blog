@@ -559,7 +559,7 @@ console.log(buf4.toString("utf16le"));
 
 ## **Buffer 的其他创建**
 
-<img src="..\..\images\image-20240108140328714.png" />
+<img src="../../images/image-20240108140328714.png" />
 
 ```javascript
 const fs = require("fs");
@@ -646,7 +646,7 @@ fs.readFile("./kobe02.png", (err, data) => {
 
 事实上我们创建 Buffer 时，并不会频繁的向操作系统申请内存，它会默认先申请一个 8 \* 1024 个字节大小的内存，也就是 8kb
 
-<img src="..\..\images\image-20240502145926894.png" />
+<img src="../../images/image-20240502145926894.png" />
 
 ## **Buffer.from 源码**
 

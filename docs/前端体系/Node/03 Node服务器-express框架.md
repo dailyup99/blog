@@ -405,17 +405,17 @@ registry 仓库中也有很多可以辅助我们开发的中间件；
 
 ## **编写解析 request body 中间件**
 
-<img src="..\..\images\202407131730456.png" />
+<img src="../../images/202407131730456.png" />
 
 ## **应用中间件 – express 提供**
 
 **但是，事实上我们可以使用 expres 内置的中间件或者使用 body-parser 来完成：**
 
-<img src="..\..\images\202407131731368.png" />
+<img src="../../images/202407131731368.png" />
 
 **如果我们解析的是 application/x-www-form-urlencoded：**
 
-<img src="..\..\images\202407131731478.png" />
+<img src="../../images/202407131731478.png" />
 
 ```javascript
 const express = require("express");
@@ -545,7 +545,7 @@ app.listen(9000, () => {
 
 注意：需要单独安装
 
-<img src="..\..\images\202407131748035.png" />
+<img src="../../images/202407131748035.png" />
 
 ```javascript
 const fs = require("fs");
@@ -576,7 +576,7 @@ app.listen(9000, () => {
 
 **上传文件，我们可以使用 express 提供的 multer 来完成：**
 
-<img src="..\..\images\202407131748486.png" />
+<img src="../../images/202407131748486.png" />
 
 ## 应用中间件 – 单个文件上传
 
@@ -617,7 +617,7 @@ app.listen(9000, () => {
 
 **上传文件，我们可以使用 express 提供的 multer 来完成：**
 
-<img src="..\..\images\202407131817142.png" />
+<img src="../../images/202407131817142.png" />
 
 ```javascript
 const express = require("express");
@@ -696,7 +696,7 @@ app.listen(9000, () => {
 
 **如果我们希望借助于 multer 帮助我们解析一些 form-data 中的普通数据，那么我们可以使用 any：**
 
-<img src="..\..\images\202407131924950.png" />
+<img src="../../images/202407131924950.png" />
 
 ```javascript
 const express = require("express");
@@ -747,13 +747,13 @@ app.listen(9000, () => {
 
 **获取参数：**
 
-<img src="..\..\images\202407131933224.png" />
+<img src="../../images/202407131933224.png" />
 
 **请求地址：`http://localhost:8000/login?username=why&password=123`**
 
 **获取参数：**
 
-<img src="..\..\images\202407131934318.png" />
+<img src="../../images/202407131934318.png" />
 
 ```javascript
 const express = require("express");
@@ -856,7 +856,7 @@ app.listen(9000, () => {
 
 因此，它也被称为 迷你应用程序（mini-app）；
 
-<img src="..\..\images\202407132005236.png" />
+<img src="../../images/202407132005236.png" />
 
 ```javascript
 const express = require("express");
@@ -948,7 +948,7 @@ module.exports = userRouter;
 
 Node 也可以作为静态资源服务器，并且 express 给我们提供了方便部署静态资源的方法；
 
-<img src="..\..\images\202407132013176.png" />
+<img src="../../images/202407132013176.png" />
 
 ```javascript
 const express = require("express");
@@ -973,7 +973,7 @@ app.listen(9000, () => {
 
 那么我们在浏览器就可以直接访问
 
-![image-20240713201512691](..\..\images\202407132015968.png)
+![image-20240713201512691](../../images/202407132015968.png)
 
 也可以将之前的 react 项目打包之后的 build 文件夹放进来进行部署
 
@@ -985,7 +985,7 @@ app.listen(9000, () => {
 
 ## **服务端的错误处理**
 
-![02_服务器返回错误信息的两种方案](..\..\images\202407132026897.png)
+![02_服务器返回错误信息的两种方案](../../images/202407132026897.png)
 
 后端还是正常返回 200，只不过会返回自定义的 code。
 

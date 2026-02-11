@@ -201,7 +201,7 @@ margin-bottom 传递
 
 父子块级元素之间 margin 的折叠
 
-![image-20221124201742538](..\..\images\image-20221124201742538.png)
+![image-20221124201742538](../../images/image-20221124201742538.png)
 
 ## 外轮廓 - outline
 
@@ -301,7 +301,7 @@ padding、border 都布置在 width、height 里边
 
 ## W3C 标准盒子模型
 
-![image-20221124204403872](..\..\images\image-20221124204403872.png)
+![image-20221124204403872](../../images/image-20221124204403872.png)
 
 ## 元素的水平居中方案
 

@@ -16,7 +16,7 @@ outline: deep
 
 在模块中我们会产生一些行为事件，处理这些行为事件时，有可能会修改 state，这些行为事件我们称之为 actions；
 
-<img src="..\..\images\image-20230529015811036.png" />
+<img src="../../images/image-20230529015811036.png" />
 
 ## **复杂的状态管理**
 
@@ -225,7 +225,7 @@ mutations: {
 
 **当然，如果觉得那种方式有点繁琐（表达式过长），我们可以使用计算属性：**
 
-<img src="..\..\images\image-20230529025026737.png" />
+<img src="../../images/image-20230529025026737.png" />
 
 **但是，如果我们有很多个状态都需要获取话，可以使用 mapState 的辅助函数：**
 
@@ -415,7 +415,7 @@ state: () => ({
 
 **这里我们也可以使用 mapGetters 的辅助函数。**
 
-<img src="..\..\images\image-20230530132422702.png" />
+<img src="../../images/image-20230530132422702.png" />
 
 ```javascript
 <template>

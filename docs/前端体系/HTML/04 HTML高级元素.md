@@ -175,7 +175,7 @@ https://developer.mozilla.org/zhCN/docs/Web/HTML/Element/Input
 
 我们也可以通过按钮来实现:
 
-![image-20221124215727705](..\..\images\image-20221124215727705.png)
+![image-20221124215727705](../../images/image-20221124215727705.png)
 
 ## input 和 label 的关系
 
@@ -191,7 +191,7 @@ labe 可以跟某个 input 绑定，点击 label 就可以激活对应的 input 
 
 name 值相同的 radio 才具备单选功能
 
-<img src="..\..\images\image-20221124220018583.png" />
+<img src="../../images/image-20221124220018583.png" />
 
 ## checkbox 的使用
 

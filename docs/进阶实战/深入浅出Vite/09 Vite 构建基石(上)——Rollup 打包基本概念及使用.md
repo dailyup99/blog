@@ -24,9 +24,9 @@ pnpm i rollup
 
 └── src
 
- ├── index.js
+├── index.js
 
- └── util.js
+└── util.js
 
 文件的内容分别如下：
 
@@ -45,13 +45,13 @@ export const multi = (a, b) => a * b;
  * @type { import('rollup').RollupOptions }
  */
 const buildOptions = {
-   input: ["src/index.js"],
-   output: {
-     // 产物输出目录
-     dir: "dist/es",
-     // 产物格式
-     format: "esm",
-   },
+  input: ["src/index.js"],
+  output: {
+    // 产物输出目录
+    dir: "dist/es",
+    // 产物格式
+    format: "esm",
+  },
 };
 export default buildOptions;
 ```
@@ -60,14 +60,14 @@ export default buildOptions;
 
 ```json
 {
-   // rollup 打包命令，`-c` 表示使用配置文件中的配置
-   "build": "rollup -c"
+  // rollup 打包命令，`-c` 表示使用配置文件中的配置
+  "build": "rollup -c"
 }
 ```
 
 接着在终端执行一下 npm run build ，可以看到如下的命令行信息:
 
-<img src="..\..\images\202508292107470.png" />
+<img src="../../images/202508292107470.png" />
 
 OK，现在你已经成功使用 Rollup 打出了第一份产物! 我们可以去 dist/es 目录查看一下产物的内容:
 
@@ -78,7 +78,7 @@ const add = (a, b) => a + b;
 console.log(add(1, 2));
 ```
 
-同时你也可以发现， util.js 中的 multi 方法并没有被打包到产物中，这是因为 Rollup具有天然的 Tree Shaking 功能，可以分析出未使用到的模块并自动擦除。
+同时你也可以发现， util.js 中的 multi 方法并没有被打包到产物中，这是因为 Rollup 具有天然的 Tree Shaking 功能，可以分析出未使用到的模块并自动擦除。
 
 所谓 Tree Shaking (摇树)，也是计算机编译原理中 DCE (Dead Code Elimination，即消除无用代码) 技术的一种实现。由于 ES 模块依赖关系是确定的，和运行时状态无关。因此 Rollup 可以在编译阶段分析出依赖关系，对 AST 语法树中没有使用到的节点进行删除，从而实现 Tree Shaking。
 
@@ -94,18 +94,18 @@ console.log(add(1, 2));
  * @type { import('rollup').RollupOptions }
  */
 const buildOptions = {
-   input: ["src/index.js"],
-   // 将 output 改造成一个数组
-   output: [
-     {
-       dir: "dist/es",
-       format: "esm",
-     },
-     {
-       dir: "dist/cjs",
-       format: "cjs",
-     },
-   ],
+  input: ["src/index.js"],
+  // 将 output 改造成一个数组
+  output: [
+    {
+      dir: "dist/es",
+      format: "esm",
+    },
+    {
+      dir: "dist/cjs",
+      format: "cjs",
+    },
+  ],
 };
 export default buildOptions;
 ```
@@ -131,7 +131,7 @@ export default buildOptions;
 
 通过执行 npm run build 可以发现，所有入口的不同格式产物已经成功输出:
 
-<img src="..\..\images\202508292113583.png" />
+<img src="../../images/202508292113583.png" />
 
 如果不同入口对应的打包配置不一样，我们也可以默认导出一个 配置数组 ，如下所示:
 
@@ -141,20 +141,20 @@ export default buildOptions;
  * @type { import('rollup').RollupOptions }
  */
 const buildIndexOptions = {
-   input: ["src/index.js"],
-   output: [
-   // 省略 output 配置
-   ],
+  input: ["src/index.js"],
+  output: [
+    // 省略 output 配置
+  ],
 };
 
 /**
  * @type { import('rollup').RollupOptions }
  */
 const buildUtilOptions = {
-   input: ["src/util.js"],
-   output: [
-   // 省略 output 配置
-   ],
+  input: ["src/util.js"],
+  output: [
+    // 省略 output 配置
+  ],
 };
 export default [buildIndexOptions, buildUtilOptions];
 ```
@@ -200,7 +200,7 @@ output: {
 
 ```javascript
 {
-   external: ['react', 'react-dom']
+  external: ["react", "react-dom"];
 }
 ```
 
@@ -208,11 +208,11 @@ output: {
 
 ## 接入插件能力
 
-在 Rollup 的日常使用中，我们难免会遇到一些 Rollup 本身不支持的场景，比如 兼容CommonJS 打包 、 注入环境变量 、 配置路径别名 、 压缩产物代码 等等。这个时候就需要我们引入相应的 Rollup 插件了。接下来以一个具体的场景为例带大家熟悉一下 Rollup 插件的使用。
+在 Rollup 的日常使用中，我们难免会遇到一些 Rollup 本身不支持的场景，比如 兼容 CommonJS 打包 、 注入环境变量 、 配置路径别名 、 压缩产物代码 等等。这个时候就需要我们引入相应的 Rollup 插件了。接下来以一个具体的场景为例带大家熟悉一下 Rollup 插件的使用。
 
-虽然 Rollup 能够打包 输出 出 CommonJS 格式的产物，但对于 输入 给 Rollup 的代码并不支持 CommonJS，仅仅支持 ESM。你可能会说，那我们直接在项目中统一使用 ESM规范就可以了啊，这有什么问题呢？需要注意的是，我们不光要考虑项目本身的代码，还要考虑第三方依赖。目前为止，还是有不少第三方依赖只有 CommonJS 格式产物而并未提供 ESM 产物，比如项目中用到 lodash 时，打包项目会出现这样的报错：
+虽然 Rollup 能够打包 输出 出 CommonJS 格式的产物，但对于 输入 给 Rollup 的代码并不支持 CommonJS，仅仅支持 ESM。你可能会说，那我们直接在项目中统一使用 ESM 规范就可以了啊，这有什么问题呢？需要注意的是，我们不光要考虑项目本身的代码，还要考虑第三方依赖。目前为止，还是有不少第三方依赖只有 CommonJS 格式产物而并未提供 ESM 产物，比如项目中用到 lodash 时，打包项目会出现这样的报错：
 
-<img src="..\..\images\202508292129756.png" />
+<img src="../../images/202508292129756.png" />
 
 因此，我们需要引入额外的插件去解决这个问题。
 
@@ -222,8 +222,8 @@ output: {
 pnpm i @rollup/plugin-node-resolve @rollup/plugin-commonjs
 ```
 
-* @rollup/plugin-node-resolve 是为了允许我们加载第三方依赖，否则像 import React from 'react' 的依赖导入语句将不会被 Rollup 识别。
-* @rollup/plugin-commonjs 的作用是将 CommonJS 格式的代码转换为 ESM 格式
+- @rollup/plugin-node-resolve 是为了允许我们加载第三方依赖，否则像 import React from 'react' 的依赖导入语句将不会被 Rollup 识别。
+- @rollup/plugin-commonjs 的作用是将 CommonJS 格式的代码转换为 ESM 格式
 
 然后让我们在配置文件中导入这些插件:
 
@@ -235,19 +235,19 @@ import commonjs from "@rollup/plugin-commonjs";
  * @type { import('rollup').RollupOptions }
  */
 export default {
-   input: ["src/index.js"],
-   output: [
-     {
-       dir: "dist/es",
-       format: "esm",
-     },
-     {
-       dir: "dist/cjs",
-       format: "cjs",
-     },
-   ],
-   // 通过 plugins 参数添加插件
-   plugins: [resolve(), commonjs()],
+  input: ["src/index.js"],
+  output: [
+    {
+      dir: "dist/es",
+      format: "esm",
+    },
+    {
+      dir: "dist/cjs",
+      format: "cjs",
+    },
+  ],
+  // 通过 plugins 参数添加插件
+  plugins: [resolve(), commonjs()],
 };
 ```
 
@@ -266,22 +266,22 @@ console.log(merge);
 
 然后执行 npm run build ，你可以发现产物已经正常生成了:
 
-<img src="..\..\images\202508292133545.png" />
+<img src="../../images/202508292133545.png" />
 
-在 Rollup 配置文件中， plugins 除了可以与 output 配置在同一级，也可以配置在output 参数里面，如:
+在 Rollup 配置文件中， plugins 除了可以与 output 配置在同一级，也可以配置在 output 参数里面，如:
 
 ```javascript
 // rollup.config.js
-import { terser } from 'rollup-plugin-terser'
+import { terser } from "rollup-plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 export default {
-   output: {
-   // 加入 terser 插件，用来压缩代码
-   plugins: [terser()]
-   },
-   plugins: [resolve(), commonjs()]
-}
+  output: {
+    // 加入 terser 插件，用来压缩代码
+    plugins: [terser()],
+  },
+  plugins: [resolve(), commonjs()],
+};
 ```
 
 > 当然，你可以将上述的 terser 插件放到最外层的 plugins 配置中。
@@ -290,41 +290,41 @@ export default {
 
 另外，这里也给大家分享其它一些比较常用的 Rollup 插件库:
 
-* [@rollup/plugin-json](https://github.com/rollup/plugins/tree/master/packages/json)： 支持 .json 的加载，并配合 rollup 的 Tree Shaking 机制去掉未使用的部分，进行按需打包。
-* [@rollup/plugin-babel](https://github.com/rollup/plugins/tree/master/packages/babel)：在 Rollup 中使用 Babel 进行 JS 代码的语法转译。
-* [@rollup/plugin-typescript](https://github.com/rollup/plugins/tree/master/packages/typescript): 支持使用 TypeScript 开发。
-* [@rollup/plugin-alias](https://github.com/rollup/plugins/tree/master/packages/alias)：支持别名配置。
-* [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)：在 Rollup 进行变量字符串的替换。
-* [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer): 对 Rollup 打包产物进行分析，自动生成产物体积可视化分析图。
+- [@rollup/plugin-json](https://github.com/rollup/plugins/tree/master/packages/json)： 支持 .json 的加载，并配合 rollup 的 Tree Shaking 机制去掉未使用的部分，进行按需打包。
+- [@rollup/plugin-babel](https://github.com/rollup/plugins/tree/master/packages/babel)：在 Rollup 中使用 Babel 进行 JS 代码的语法转译。
+- [@rollup/plugin-typescript](https://github.com/rollup/plugins/tree/master/packages/typescript): 支持使用 TypeScript 开发。
+- [@rollup/plugin-alias](https://github.com/rollup/plugins/tree/master/packages/alias)：支持别名配置。
+- [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)：在 Rollup 进行变量字符串的替换。
+- [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer): 对 Rollup 打包产物进行分析，自动生成产物体积可视化分析图。
 
 ## JavaScript API 方式调用
 
-以上我们通过 Rollup 的配置文件结合 rollup -c 完成了 Rollup 的打包过程，但有些场景下我们需要基于 Rollup 定制一些打包过程，配置文件就不够灵活了，这时候我们需要用到对应 JavaScript API 来调用 Rollup，主要分为 rollup.rollup 和 rollup.watch 两个API，接下来我们以具体的例子来学习一下。
+以上我们通过 Rollup 的配置文件结合 rollup -c 完成了 Rollup 的打包过程，但有些场景下我们需要基于 Rollup 定制一些打包过程，配置文件就不够灵活了，这时候我们需要用到对应 JavaScript API 来调用 Rollup，主要分为 rollup.rollup 和 rollup.watch 两个 API，接下来我们以具体的例子来学习一下。
 
 首先是 rollup.rollup ，用来一次性地进行 Rollup 打包，你可以新建 build.js ，内容如下:
 
 ```javascript
 // build.js
-const rollup = require('rollup');
+const rollup = require("rollup");
 // 常用 inputOptions 配置
 const inputOptions = {
-  input: './src/index.js',
+  input: "./src/index.js",
   external: [],
-  plugins: []
+  plugins: [],
 };
 const outputOptionsList = [
   // 常用 outputOptions 配置
   {
-    dir: 'dist/es',
+    dir: "dist/es",
     entryFileNames: `[name].[hash].js`,
-    chunkFileNames: 'chunk-[hash].js',
-    assetFileNames: 'assets/[name]-[hash][extname]',
-    format: 'es',
+    chunkFileNames: "chunk-[hash].js",
+    assetFileNames: "assets/[name]-[hash][extname]",
+    format: "es",
     sourcemap: true,
     globals: {
-      lodash: '_'
-    }
-  }
+      lodash: "_",
+    },
+  },
   // 省略其它的输出配置
 ];
 async function build() {
@@ -354,42 +354,42 @@ build();
 
 主要的执行步骤如下:
 
-* 通过 rollup.rollup 方法，传入 inputOptions ，生成 bundle 对象；
-* 调用 bundle 对象的 generate 和 write 方法，传入 outputOptions ，分别完成产物和生成和磁盘写入。
-* 调用 bundle 对象的 close 方法来结束打包。
+- 通过 rollup.rollup 方法，传入 inputOptions ，生成 bundle 对象；
+- 调用 bundle 对象的 generate 和 write 方法，传入 outputOptions ，分别完成产物和生成和磁盘写入。
+- 调用 bundle 对象的 close 方法来结束打包。
 
-接着你可以执行 node build.js ，这样，我们就可以完成了以编程的方式来调用 Rollup打包的过程。
+接着你可以执行 node build.js ，这样，我们就可以完成了以编程的方式来调用 Rollup 打包的过程。
 
-除了通过 rollup.rollup 完成一次性打包，我们也可以通过 rollup.watch 来完成 watch模式下的打包，即每次源文件变动后自动进行重新打包。你可以新建 watch.js 文件，内容入下:
+除了通过 rollup.rollup 完成一次性打包，我们也可以通过 rollup.watch 来完成 watch 模式下的打包，即每次源文件变动后自动进行重新打包。你可以新建 watch.js 文件，内容入下:
 
 ```javascript
 // watch.js
-const rollup = require('rollup');
+const rollup = require("rollup");
 const watcher = rollup.watch({
   // 和 rollup 配置文件中的属性基本一致，只不过多了`watch`配置
-  input: './src/index.js',
+  input: "./src/index.js",
   output: [
     {
-      dir: 'dist/es',
-      format: 'esm'
+      dir: "dist/es",
+      format: "esm",
     },
-    { dir: 'dist/cjs', format: 'cjs' }
+    { dir: "dist/cjs", format: "cjs" },
   ],
   watch: {
-    exclude: ['node_modules/**'],
-    include: ['src/**']
-  }
+    exclude: ["node_modules/**"],
+    include: ["src/**"],
+  },
 });
 // 监听 watch 各种事件
-watcher.on('restart', () => {
-  console.log('重新构建...');
+watcher.on("restart", () => {
+  console.log("重新构建...");
 });
-watcher.on('change', id => {
-  console.log('发生变动的模块id: ', id);
+watcher.on("change", (id) => {
+  console.log("发生变动的模块id: ", id);
 });
-watcher.on('event', e => {
-  if (e.code === 'BUNDLE_END') {
-    console.log('打包信息:', e);
+watcher.on("event", (e) => {
+  if (e.code === "BUNDLE_END") {
+    console.log("打包信息:", e);
   }
 });
 ```

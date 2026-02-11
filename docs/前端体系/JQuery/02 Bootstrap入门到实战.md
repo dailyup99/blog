@@ -224,7 +224,7 @@ crossorigin：加载不同源的资源时，是否需要需带用户凭证（coo
 
 ## **方式三 : npm 安装**
 
-<img src="..\..\images\image-20230731205528173.png" />
+<img src="../../images/image-20230731205528173.png" />
 
 ## **Bootstrap 初体验**
 
@@ -603,7 +603,7 @@ Containers 容器
 - 因为容器是用于包含任何内容，而不仅仅是存放网格行和列
 - 如果容器上没有 padding，内容默认会靠在布局的边缘
 
-<img src="..\..\images\image-20230731223703352.png" />
+<img src="../../images/image-20230731223703352.png" />
 
 row 行
 
@@ -953,9 +953,9 @@ none(xs) : <576px 、sm : >=576px、 md : >=768px、 lg : >=992、 xl : >=1200px
 
 ## **响应式工具类-Display**
 
-<img src="..\..\images\image-20230731231534358.png" />
+<img src="../../images/image-20230731231534358.png" />
 
-<img src="..\..\images\image-20230731231547866.png" />
+<img src="../../images/image-20230731231547866.png" />
 
 ```html
 <!-- 1.某个元素只在lg(>=992px) 和 xl 屏显示 -->

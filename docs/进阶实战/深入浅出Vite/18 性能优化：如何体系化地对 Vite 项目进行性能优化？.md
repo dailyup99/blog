@@ -6,11 +6,11 @@ outline: deep
 
 对于项目的加载性能优化而言，常见的优化手段可以分为下面三类:
 
-* **网络优化**。包括 HTTP2 、 DNS 预解析 、 Preload 、 Prefetch 等手段。
+- **网络优化**。包括 HTTP2 、 DNS 预解析 、 Preload 、 Prefetch 等手段。
 
-* **资源优化**。包括 构建产物分析 、 资源压缩 、 产物拆包 、 按需加载 等优化方式。
+- **资源优化**。包括 构建产物分析 、 资源压缩 、 产物拆包 、 按需加载 等优化方式。
 
-* **预渲染优化**，本文主要介绍 服务端渲染 (SSR)和 静态站点生成 (SSG)两种手段。
+- **预渲染优化**，本文主要介绍 服务端渲染 (SSR)和 静态站点生成 (SSG)两种手段。
 
 而无论是以上哪一类优化方式，都离不开构建工具的支持，也就是说，在这些性能优化的场景中，我们将高频地使用到 Vite，对 Vite 本身的构建能力进行深度地应用或者定制。
 
@@ -20,12 +20,12 @@ outline: deep
 
 ### HTTP2
 
-传统的 HTTP 1.1 存在**队头阻塞**的问题，同一个 TCP 管道中同一时刻只能处理一个HTTP 请求，也就是说如果当前请求没有处理完，其它的请求都处于阻塞状态，另外浏览器对于同一域名下的并发请求数量都有限制 比如 Chrome 中只允许 6 个请求并发（这个数量不允许用户配置），也就是说请求数量超过 6 个时，多出来的请求只能**排队**、等待发送。
+传统的 HTTP 1.1 存在**队头阻塞**的问题，同一个 TCP 管道中同一时刻只能处理一个 HTTP 请求，也就是说如果当前请求没有处理完，其它的请求都处于阻塞状态，另外浏览器对于同一域名下的并发请求数量都有限制 比如 Chrome 中只允许 6 个请求并发（这个数量不允许用户配置），也就是说请求数量超过 6 个时，多出来的请求只能**排队**、等待发送。
 
-因此，在 HTTP 1.1 协议中，**队头阻塞**和**请求排队**问题很容易成为网络层的性能瓶颈。而HTTP 2 的诞生就是为了解决这些问题，它主要实现了如下的能力：
+因此，在 HTTP 1.1 协议中，**队头阻塞**和**请求排队**问题很容易成为网络层的性能瓶颈。而 HTTP 2 的诞生就是为了解决这些问题，它主要实现了如下的能力：
 
-* **多路复用**。将数据分为多个二进制帧，多个请求和响应的数据帧在同一个 TCP 通道进行传输，解决了之前的队头阻塞问题。而与此同时，在 HTTP2 协议下，浏览器不再有同域名的并发请求数量限制，因此请求排队问题也得到了解决。
-* **Server Push**，即服务端推送能力。可以让某些资源能够提前到达浏览器，比如对于一个 html 的请求，通过 HTTP 2 我们可以同时将相应的 js 和 css 资源推送到浏览器，省去了后续请求的开销。
+- **多路复用**。将数据分为多个二进制帧，多个请求和响应的数据帧在同一个 TCP 通道进行传输，解决了之前的队头阻塞问题。而与此同时，在 HTTP2 协议下，浏览器不再有同域名的并发请求数量限制，因此请求排队问题也得到了解决。
+- **Server Push**，即服务端推送能力。可以让某些资源能够提前到达浏览器，比如对于一个 html 的请求，通过 HTTP 2 我们可以同时将相应的 js 和 css 资源推送到浏览器，省去了后续请求的开销。
 
 在 Vite 中，我们可以通过 vite-plugin-mkcert 在本地 Dev Server 上开启 HTTP2:
 
@@ -51,7 +51,7 @@ export default defineConfig({
 
 插件的原理也比较简单，由于 HTTP2 依赖 TLS 握手，插件会帮你自动生成 TLS 证书，然后支持通过 HTTPS 的方式启动，而 Vite 会自动把 HTTPS 服务升级为 HTTP2。
 
-> 其中有一个特例，即当你使用 Vite 的 proxy 配置时，Vite 会将 HTTP2 降级为HTTPS，不过这个问题你可以通过[vite-plugin-proxy-middleware](https://github.com/williamyorkl/vite-plugin-proxy-middleware)插件解决。
+> 其中有一个特例，即当你使用 Vite 的 proxy 配置时，Vite 会将 HTTP2 降级为 HTTPS，不过这个问题你可以通过[vite-plugin-proxy-middleware](https://github.com/williamyorkl/vite-plugin-proxy-middleware)插件解决。
 
 使用上 HTTP2 之后，在某些情况下大量并行请求的问题会得到明显的改善，这里有一个多请求的示例项目，我已经放到了小册的[Github 仓库](https://github.com/sanyuan0704/juejin-book-vite/tree/main/19-performace/multi-request)中，在仓库中执行:
 
@@ -106,7 +106,7 @@ npm run generate
 
 modulepreload 的兼容性如下:
 
-<img src="..\..\images\202508311701089.png" />
+<img src="../../images/202508311701089.png" />
 
 仅有 70% 左右的浏览器支持这个特性，不过在 Vite 中我们可以通过配置一键开启 modulepreload 的 Polyfill，从而在使所有支持原生 ESM 的浏览器(占比 90% 以上)都能使用该特性，配置方式如下:
 
@@ -114,9 +114,9 @@ modulepreload 的兼容性如下:
 // vite.config.ts
 export default {
   build: {
-  	polyfillModulePreload: true
-  }
-}
+    polyfillModulePreload: true,
+  },
+};
 ```
 
 除了 Preload ， Prefetch 也是一个比较常用的优化方式，它相当于告诉浏览器空闲的时候去预加载其它页面的资源，比如对于 A 页面中插入了这样的 link 标签:
@@ -125,9 +125,9 @@ export default {
 <link rel="prefetch" href="https://B.com/index.js" as="script">
 ```
 
-这样浏览器会在 A 页面加载完毕之后去加载 B 这个域名下的资源，如果用户跳转到了 B页面中，浏览器会直接使用预加载好的资源，从而提升 B 页面的加载速度。而相比Preload， Prefetch 的浏览器[兼容性](https://caniuse.com/?search=preload)不太乐观，具体数据如下图所示:
+这样浏览器会在 A 页面加载完毕之后去加载 B 这个域名下的资源，如果用户跳转到了 B 页面中，浏览器会直接使用预加载好的资源，从而提升 B 页面的加载速度。而相比 Preload， Prefetch 的浏览器[兼容性](https://caniuse.com/?search=preload)不太乐观，具体数据如下图所示:
 
-<img src="..\..\images\202508311704311.png" />
+<img src="../../images/202508311704311.png" />
 
 ## 资源优化
 
@@ -183,7 +183,7 @@ export default {
 值得注意的是 target 参数，也就是压缩产物的目标环境。Vite 默认的参数是 modules ，即如下的 browserlist:
 
 ```json
-['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1']
+["es2019", "edge88", "firefox78", "chrome87", "safari13.1"]
 ```
 
 可能你会有疑问，既然是压缩代码，为什么还跟目标环境有关系呢？
@@ -198,14 +198,14 @@ info == null ? undefined : info.name
 如果你将 target 配置为 exnext ，也就是最新的 JS 语法，会发现压缩后的代码变成了下面这样:
 
 ```typescript
-info?.name
+info?.name;
 ```
 
 这就是压缩工具在背后所做的事情，将某些语句识别之后转换成更高级的语法，从而达到更优的代码体积。
 
 因此，设置合适的 target 就显得特别重要了，一旦目标环境的设置不能覆盖所有的用户群体，那么极有可能在某些低端浏览器中出现语法不兼容问题，从而发生**线上事故**。
 
-笔者曾在生产环境中就见过这种情况，由于 Vite 默认的 target 无法覆盖所有支持原生ESM 的浏览器，经过压缩器的语法转换后，在某些 iOS 机型(iOS 11.2)上出现白屏事故，最后通过指定 target 为 es2015 或者 es6 解决了这个问题。
+笔者曾在生产环境中就见过这种情况，由于 Vite 默认的 target 无法覆盖所有支持原生 ESM 的浏览器，经过压缩器的语法转换后，在某些 iOS 机型(iOS 11.2)上出现白屏事故，最后通过指定 target 为 es2015 或者 es6 解决了这个问题。
 
 因此，为了线上的稳定性，推荐大家最好还是将 target 参数设置为 ECMA 语法的最低版本 es2015 / es6 。
 
@@ -216,11 +216,11 @@ info?.name
 ```typescript
 // vite.config.ts
 export default {
-   build: {
-     // 设置 CSS 的目标环境
-     cssTarget: ''
-   }
-}
+  build: {
+    // 设置 CSS 的目标环境
+    cssTarget: "",
+  },
+};
 ```
 
 默认情况下 Vite 会使用 Esbuild 对 CSS 代码进行压缩，一般不需要我们对 cssTarget 进行配置。
@@ -235,14 +235,14 @@ export default {
 
 一般来说，如果不对产物进行 代码分割 (或者 拆包 )，全部打包到一个 chunk 中，会产生如下的问题:
 
-* 首屏加载的代码体积过大，即使是当前页面不需要的代码也会进行加载。
+- 首屏加载的代码体积过大，即使是当前页面不需要的代码也会进行加载。
 
-* 线上**缓存复用率**极低，改动一行代码即可导致整个 bundle 产物缓存失效。
+- 线上**缓存复用率**极低，改动一行代码即可导致整个 bundle 产物缓存失效。
 
 而 Vite 中内置如下的代码拆包能力:
 
-* CSS 代码分割，即实现一个 chunk 对应一个 css 文件。
-* 默认有一套拆包策略，将应用的代码和第三方库的代码分别打包成两份产物，并对于动态 import 的模块单独打包成一个 chunk。
+- CSS 代码分割，即实现一个 chunk 对应一个 css 文件。
+- 默认有一套拆包策略，将应用的代码和第三方库的代码分别打包成两份产物，并对于动态 import 的模块单独打包成一个 chunk。
 
 当然，我们也可以通过 manualChunks 参数进行自定义配置：
 

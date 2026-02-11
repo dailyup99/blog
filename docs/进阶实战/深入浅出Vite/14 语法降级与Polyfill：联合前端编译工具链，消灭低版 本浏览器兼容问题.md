@@ -157,7 +157,7 @@ iOS >= 9, Android >= 4.4, last 2 versions, > 0.2%, not dead
 
 对于这些配置对应的具体浏览器列表，大家可以去 [browserslist.dev](https://browserslist.dev) 站点查看:
 
-<img src="..\..\images\202509020036024.png" />
+<img src="../../images/202509020036024.png" />
 
 好，在说明了目标浏览器的配置之后，接下来我们来看另外一个重要的配置——useBuiltIns ，它决定了添加 Polyfill 策略，默认是 false ，即不添加任何的 Polyfill。
 
@@ -336,7 +336,7 @@ export default defineConfig({
 
 通过官方的 legacy 插件， Vite 会分别打包出 Modern 模式和 Legacy 模式的产物，然后将两种产物插入同一个 HTML 里面， Modern 产物被放到 type="module" 的 script 标签中，而 Legacy 产物则被放到带有 [nomodule](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-nomodule) 的 script 标签中。浏览器的加载策略如下图所示：
 
-<img src="..\..\images\202509020105855.png" />
+<img src="../../images/202509020105855.png" />
 
 这样产物便就能够同时放到现代浏览器和不支持 type="module" 的低版本浏览器当中执行。当然，在具体的代码语法层面，插件还需要考虑语法降级和 Polyfill 按需注入的问题，接下来我们就来分析一下 Vite 的官方 legacy 插件是如何解决这些问题的。
 
@@ -344,7 +344,7 @@ export default defineConfig({
 
 官方的 legacy 插件是一个相对复杂度比较高的插件，直接看源码可能会很难理解，这里我梳理了画了一张简化后的流程图，接下来我们就根据这张流程图来一一拆解这个插件在各个钩子阶段到底做了些什么。
 
-<img src="..\..\images\202509020106268.png" />
+<img src="../../images/202509020106268.png" />
 
 首先是在 configResolved 钩子中调整了 output 属性，这么做的目的是让 Vite 底层使用的打包引擎 Rollup 能另外打包出一份 Legacy 模式 的产物，实现代码如下:
 

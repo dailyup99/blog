@@ -22,7 +22,7 @@ SELECT COUNT(*) FROM `products`;
 SELECT COUNT(*) FROM `products` WHERE brand = '华为';
 ```
 
-<img src="..\..\images\202407201335270.png" />
+<img src="../../images/202407201335270.png" />
 
 ## **认识 Group By**
 
@@ -375,7 +375,7 @@ SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
 
 全连接
 
-<img src="..\..\images\202407201511073.png" />
+<img src="../../images/202407201511073.png" />
 
 重点掌握左连接和内连接。
 
@@ -387,7 +387,7 @@ SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
 
 这个也是开发中使用最多的情况，它的完整写法是 LEFT [OUTER] JOIN，但是 OUTER 可以省略的；
 
-<img src="..\..\images\202407201512539.png" />
+<img src="../../images/202407201512539.png" />
 
 ```javascript
 SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id;
@@ -398,7 +398,7 @@ SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id
 
 ![image-20240720151752320](../../images/202407201517415.png)
 
-![image-20240720151918195](..\..\images\202407201519248.png)
+![image-20240720151918195](../../images/202407201519248.png)
 
 brands 表中没有锤子科技，但是锤子科技也会显示出来，以左表 products 为主。
 
@@ -414,7 +414,7 @@ brands 表中没有锤子科技，但是锤子科技也会显示出来，以左�
 
 右连接在开发中没有左连接常用，它的完整写法是 RIGHT [OUTER] JOIN，但是 OUTER 可以省略的；
 
-<img src="..\..\images\202407201523081.png" />
+<img src="../../images/202407201523081.png" />
 
 ```javascript
 SELECT * FROM `products` RIGHT JOIN `brand` ON `products`.brand_id = `brand`.id;
@@ -451,7 +451,7 @@ SQL 语句二：where 条件，代表的是先计算出笛卡尔乘积，在笛�
 
 **SQL 规范中全连接是使用 FULL JOIN，但是 MySQL 中并没有对它的支持，我们需要使用 UNION 来实现：**
 
-<img src="..\..\images\202407201526777.png" />
+<img src="../../images/202407201526777.png" />
 
 ```javascript
 (SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id)

@@ -62,7 +62,7 @@ public 目录下可以放一些静态资源，比如 js/css/img/font 等
 
 在 index.html 中，我们应该如何去引入这个文件呢？
 
-<img src="..\..\images\image-20240526152230257.png" />
+<img src="../../images/image-20240526152230257.png" />
 
 webpack.config.js 中设置 static 即可，但是注意，使用的时候要用相对路径
 
@@ -247,7 +247,7 @@ module.exports = {
 
 设置 changeOrigin 为 true 之后代理服务器发送给 koa 服务器就是`http://localhost:9000/users/list`，这样就能返回数据。
 
-<img src="..\..\images\image-20240526160657024.png" />
+<img src="../../images/image-20240526160657024.png" />
 
 在源码中有判断如果 changeOrigin 为 true，就会使用 target 的地址
 

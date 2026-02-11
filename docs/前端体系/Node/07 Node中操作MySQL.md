@@ -14,7 +14,7 @@ SELECT * FROM products LEFT JOIN brand ON products.brand_id = brand.id;
 
 ## **将 brand 转成对象**
 
-![image-20240720173058322](..\..\images\202407201730390.png)
+![image-20240720173058322](../../images/202407201730390.png)
 
 但是在真实开发中，实际上红色圈起来的部分应该放入到一个对象中，那么我们可以使用下面的查询方式：
 
@@ -30,7 +30,7 @@ FROM products LEFT JOIN brand ON products.brand_id = brand.id;
 
 ## **多对多转成数组**
 
-![image-20240720173122475](..\..\images\202407201731551.png)
+![image-20240720173122475](../../images/202407201731551.png)
 
 在多对多关系中，我们希望查询到的是一个数组：
 
@@ -136,7 +136,7 @@ connection.query(statement, (err, values, fields) => {
 
 ![image-20240720173220788](../../images/202407201732880.png)
 
-<img src="..\..\images\202407201729471.png" />
+<img src="../../images/202407201729471.png" />
 
 ```javascript
 const mysql = require("mysql2");
@@ -197,7 +197,7 @@ connectionPool.execute(statement, [1000, 8], (err, values) => {
 
 **目前在 JavaScript 开发中我们更习惯 Promise 和 await、async 的方式，mysql2 同样是支持的：**
 
-<img src="..\..\images\202407201747313.png" />
+<img src="../../images/202407201747313.png" />
 
 ```javascript
 const mysql = require("mysql2");

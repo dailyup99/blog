@@ -1083,7 +1083,7 @@ https://leetcode.cn/problems/delete-node-in-a-linked-list/description/
 
 - node 后面的所有值顺序相同。
 
-<img src="..\..\images\202408241039733.png" />
+<img src="../../images/202408241039733.png" />
 
 正常来说，比如上图想删除 5 这个节点，只需要让 4 指向 1 就可以，但是这道题，不允许访问前 1 个节点，也就是 4 无法指向 1。
 

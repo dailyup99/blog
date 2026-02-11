@@ -242,7 +242,7 @@ geo：地理坐标系组件。用于地图的绘制，支持在地理坐标系�
 
 ![image-20240503141310175](../../images/image-20240503141310175.png)
 
-![image-20240503141324325](..\..\images\image-20240503141324325.png)
+![image-20240503141324325](../../images/image-20240503141324325.png)
 
 ```html
 <!DOCTYPE html>
@@ -921,11 +921,11 @@ data 里面的 itemStyle 优先级高
 
 emphsis 的结构和普通样式结构相同，如左图：
 
-<img src="..\..\images\image-20240503145507942.png" />
+<img src="../../images/image-20240503145507942.png" />
 
 ECharts4 以前，高亮和普通样式的写法，如右图
 
-<img src="..\..\images\image-20240503145531539.png" />
+<img src="../../images/image-20240503145531539.png" />
 
 这种写法 **仍然被兼容**，但是不再推荐了
 

@@ -118,15 +118,15 @@ mysql --version
 
 点击环境变量
 
-<img src="..\..\images\202407182315090.png" />
+<img src="../../images/202407182315090.png" />
 
 编辑系统环境变量的 Path
 
-<img src="..\..\images\202407182316667.png" />
+<img src="../../images/202407182316667.png" />
 
 然后添加环境变量即可，这个路径是 mysql 的安装路径
 
-<img src="..\..\images\202407182317083.png" />
+<img src="../../images/202407182317083.png" />
 
 ## **终端连接数据库**
 
@@ -191,7 +191,7 @@ insert into user (name, age, height) values ('kobe', 40, 1.98);
 select * from user;
 ```
 
-<img src="..\..\images\202407192359377.png" />
+<img src="../../images/202407192359377.png" />
 
 ## **GUI 工具的介绍**
 
@@ -307,11 +307,11 @@ ALTER DATABASE bilibili CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 首先，打开 Navicat 工具，然后新建查询
 
-<img src="..\..\images\202407200036337.png" />
+<img src="../../images/202407200036337.png" />
 
 接着，选中要执行的语句，运行已选择的
 
-<img src="..\..\images\202407200038360.png" />
+<img src="../../images/202407200038360.png" />
 
 创建一个新的数据库或者删除一个数据库，右击刷新即可
 

@@ -59,7 +59,7 @@ Google 爬虫的工作流程分为 3 个阶段，并非每个网页都会经历�
 
 当用户在 Google 中搜索时，搜索引擎会根据内容的类型，选择一组网页中最具代表性的网页进行呈现
 
-<img src="..\..\images\image-20240504140314255.png" />
+<img src="../../images/image-20240504140314255.png" />
 
 ## **搜索引擎的优化（SEO）**
 
@@ -75,7 +75,7 @@ Google 爬虫的工作流程分为 3 个阶段，并非每个网页都会经历�
 
 确保链接可供抓取，如右图所示：
 
-<img src="..\..\images\image-20240504141030364.png" />
+<img src="../../images/image-20240504141030364.png" />
 
 meta 标签优化：设置 description keywords 等
 
@@ -430,7 +430,7 @@ package.json
 
 访问 localhost:3000，就可以看到 App.vue 了
 
-<img src="..\..\images\image-20240504170330239.png" />
+<img src="../../images/image-20240504170330239.png" />
 
 不过，+1 按钮不能点击，需要进行水合，具体往下看
 

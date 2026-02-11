@@ -4,7 +4,7 @@ outline: deep
 
 ## **认识 JSX**
 
-<img src="..\..\images\image-20230607210439872.png" />
+<img src="../../images/image-20230607210439872.png" />
 
 **这段 element 变量的声明右侧赋值的标签语法是什么呢？**
 
@@ -1095,7 +1095,7 @@ React 事件的命名采用小驼峰式（camelCase），而不是纯小写；
 
 **我们会发现在前面的代码中只要展示列表都会报一个警告：**
 
-<img src="..\..\images\image-20230607234324375.png" />
+<img src="../../images/image-20230607234324375.png" />
 
 **这个警告是告诉我们需要在列表展示的 jsx 中添加一个 key。**
 
@@ -1141,7 +1141,7 @@ key 主要的作用是为了提高 diff 算法时的效率；
 
 可以在 babel 的官网中快速查看转换的过程：https://babeljs.io/repl/#?presets=react
 
-<img src="..\..\images\image-20230607235739819.png" />
+<img src="../../images/image-20230607235739819.png" />
 
 ## **直接编写 jsx 代码**
 
@@ -1315,7 +1315,7 @@ key 主要的作用是为了提高 diff 算法时的效率；
 
 **我们通过 React.createElement 最终创建出来一个 ReactElement 对象：**
 
-<img src="..\..\images\image-20230608001749149.png" />
+<img src="../../images/image-20230608001749149.png" />
 
 **这个 ReactElement 对象是什么作用呢？React 为什么要创建它呢？**
 
@@ -1331,11 +1331,11 @@ JavaScript 的对象树就是虚拟 DOM（Virtual DOM）；
 
 **而 ReactElement 最终形成的树结构就是 Virtual DOM；**
 
-<img src="..\..\images\image-20230608001722288.png" />
+<img src="../../images/image-20230608001722288.png" />
 
 ## **jsx – 虚拟 DOM – 真实 DOM**
 
-<img src="..\..\images\image-20230608001815350.png" />
+<img src="../../images/image-20230608001815350.png" />
 
 ## **声明式编程**
 
@@ -1367,7 +1367,7 @@ React 来确保 DOM 和这些状态是匹配的；
 
 4.点击移除按钮，可以将书籍移除（当所有的书籍移除完毕时，显示：购物车为空~）；
 
-<img src="..\..\images\image-20230608230003516.png" />
+<img src="../../images/image-20230608230003516.png" />
 
 ```html
 <!DOCTYPE html>

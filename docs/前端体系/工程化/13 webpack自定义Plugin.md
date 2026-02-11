@@ -42,15 +42,15 @@ Tapable 是管理着需要的 Hook，这些 Hook 可以被应用到我们的插�
 
 第一步：创建 Hook 对象
 
-<img src="..\..\images\image-20240609160907926.png" />
+<img src="../../images/image-20240609160907926.png" />
 
 第二步：注册 Hook 中的事件
 
-<img src="..\..\images\image-20240609160924420.png" />
+<img src="../../images/image-20240609160924420.png" />
 
 第三步：触发事件
 
-<img src="..\..\images\image-20240609160939967.png" />
+<img src="../../images/image-20240609160939967.png" />
 
 ```javascript
 const {

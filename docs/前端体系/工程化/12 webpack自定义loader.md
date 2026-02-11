@@ -79,7 +79,7 @@ module.exports = {
 
 从后向前、从右向左的
 
-<img src="..\..\images\image-20240609110627688.png" />
+<img src="../../images/image-20240609110627688.png" />
 
 ## pitch-loader 和 enforce
 
@@ -457,7 +457,7 @@ module.exports = function (content) {
 
 执行 npm run build，控制台可以看到 markdown 语法都被转换成了 html。
 
-<img src="..\..\images\image-20240609150336259.png" />
+<img src="../../images/image-20240609150336259.png" />
 
 我们找到自定义的 hymd-loader，将转换后的 htmlContent 返回。
 
@@ -578,7 +578,7 @@ module.exports = function (content) {
 
 再次打包发现标签都被加上了一些样式
 
-<img src="..\..\images\image-20240609152253876.png" />
+<img src="../../images/image-20240609152253876.png" />
 
 那么，我们就可以根据这些 class 名来自定义样式，
 
@@ -600,4 +600,4 @@ import "highlight.js/styles/default.css";
 
 再次打包，发现代码已经高亮
 
-<img src="..\..\images\image-20240609152533265.png" />
+<img src="../../images/image-20240609152533265.png" />

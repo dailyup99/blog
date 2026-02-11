@@ -14,7 +14,7 @@ outline: deep
 
 映射表会决定数据的流向；
 
-<img src="..\..\images\image-20230528121059184.png" />
+<img src="../../images/image-20230528121059184.png" />
 
 路由的概念在软件工程中出现，最早是在后端路由中实现的，原因是 web 的发展主要经历了这样一些阶段：
 
@@ -52,7 +52,7 @@ Controller 进行各种处理, 最终生成 HTML 或者数据, 返回给前端.
 
 而且通常情况下 HTML 代码和数据以及对应的逻辑会混在一起, 编写和维护都是非常糟糕的事情；
 
-<img src="..\..\images\image-20230528121906251.png" />
+<img src="../../images/image-20230528121906251.png" />
 
 ## **前后端分离阶段**
 
@@ -76,7 +76,7 @@ Controller 进行各种处理, 最终生成 HTML 或者数据, 返回给前端.
 
 目前比较少的网站采用这种模式开发；
 
-<img src="..\..\images\image-20230528123141968.png" />
+<img src="../../images/image-20230528123141968.png" />
 
 **单页面富应用阶段:**
 
@@ -86,7 +86,7 @@ Controller 进行各种处理, 最终生成 HTML 或者数据, 返回给前端.
 
 前端路由的核心是什么呢？改变 URL，但是页面不进行整体的刷新。
 
-<img src="..\..\images\image-20230528123404726.png" />
+<img src="../../images/image-20230528123404726.png" />
 
 ## **URL 的 hash**
 
@@ -98,7 +98,7 @@ URL 的 hash 也就是锚点(#), 本质上是改变 window.location 的 href 属
 
 我们可以通过直接赋值 location.hash 来改变 href, 但是页面不发生刷新；
 
-<img src="..\..\images\image-20230528124044736.png" />
+<img src="../../images/image-20230528124044736.png" />
 
 hash 的优势就是兼容性更好，在老版 IE 中都可以运行，但是缺陷是有一个#，显得不像一个真实的路径。
 
@@ -120,7 +120,7 @@ back：向后改变路径；
 
 ![image-20230528124235584](../../images/image-20230528124235584.png)
 
-<img src="..\..\images\image-20230528124246887.png" />
+<img src="../../images/image-20230528124246887.png" />
 
 ## **认识 vue-router**
 
@@ -180,7 +180,7 @@ npm install vue-router
 
 **如何可以让路径默认跳到到首页, 并且`<router-view>`渲染首页组件呢?**
 
-<img src="..\..\images\image-20230528155939835.png" />
+<img src="../../images/image-20230528155939835.png" />
 
 **我们在 routes 中又配置了一个映射：**
 
@@ -192,7 +192,7 @@ redirect 是重定向, 也就是我们将根路径重定向到/home 的路径下
 
 **另外一种选择的模式是 history 模式：**
 
-<img src="..\..\images\image-20230528160006865.png" />
+<img src="../../images/image-20230528160006865.png" />
 
 history 模式浏览器打开地址没有#，而 hash 模式有#
 
@@ -249,7 +249,7 @@ history 模式浏览器打开地址没有#，而 hash 模式有#
 
 而 import 函数就是返回一个 Promise；
 
-<img src="..\..\images\image-20230528161232338.png" />
+<img src="../../images/image-20230528161232338.png" />
 
 router/index.js
 
@@ -312,7 +312,7 @@ npm run build
 
 我们会发现分包是没有一个很明确的名称的，其实 webpack 从 3.x 开始支持对分包进行命名（chunk name）：
 
-<img src="..\..\images\image-20230528161925821.png" />
+<img src="../../images/image-20230528161925821.png" />
 
 打包出来并不知道哪个是 home，哪个是 about
 
@@ -335,7 +335,7 @@ name 属性：路由记录独一无二的名称；不用重复
 
 meta 属性：自定义的数据
 
-<img src="..\..\images\image-20230528162231165.png" />
+<img src="../../images/image-20230528162231165.png" />
 
 ## **动态路由基本匹配**
 
@@ -633,12 +633,12 @@ App.vue
 
 操作，那么可以使用 replace：
 
-<img src="..\..\images\image-20230528171603126.png" />
+<img src="../../images/image-20230528171603126.png" />
 
 ## **页面的前进后退**
 
 **router 的 go 方法：**
-<img src="..\..\images\image-20230528171640497.png" />
+<img src="../../images/image-20230528171640497.png" />
 
 **router 也有 back：**
 
@@ -703,7 +703,7 @@ About.vue
 
 方式三：通过 addRoute 方法的返回值回调；
 
-<img src="..\..\images\image-20230528202314283.png" />
+<img src="../../images/image-20230528202314283.png" />
 
 **路由的其他方法补充：**
 

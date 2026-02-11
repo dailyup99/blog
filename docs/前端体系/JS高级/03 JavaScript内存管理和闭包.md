@@ -239,7 +239,7 @@ console.log(adder8(30));
 
 调用 createAdder 完成
 
-![image-20230102170424901](..\..\images\image-20230102170424901.png)
+![image-20230102170424901](../../images/image-20230102170424901.png)
 
 内部 adder 执行完成
 
@@ -247,7 +247,7 @@ console.log(adder8(30));
 
 第二次执行 createAdder
 
-![image-20230102171046239](..\..\images\image-20230102171046239.png)
+![image-20230102171046239](../../images/image-20230102171046239.png)
 
 ## 闭包的内存泄漏
 

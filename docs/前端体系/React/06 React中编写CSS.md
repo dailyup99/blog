@@ -536,7 +536,7 @@ styled-components 会给该 class 添加相关的样式；
 
 直接伪类选择器、伪元素等；
 
-<img src="..\..\images\image-20230614235615770.png" />
+<img src="../../images/image-20230614235615770.png" />
 
 App.jsx
 
@@ -619,7 +619,7 @@ export const AppWrapper = styled.div`
 
 **styled 设置主题**
 
-![image-20230615003327028](..\..\images\image-20230615003327028.png)
+![image-20230615003327028](../../images/image-20230615003327028.png)
 
 App.jsx
 

@@ -102,11 +102,11 @@ return (
 
 可以发现图片能够正常显示:
 
-<img src="..\..\images\202508240542568.png" />
+<img src="../../images/202508240542568.png" />
 
 而图片路径也被解析为了正确的格式( / 表示项目根路径):
 
-<img src="..\..\images\202508240543581.png" />
+<img src="../../images/202508240543581.png" />
 
 OK，现在让我们进入 Header 组件的样式文件中添加 background 属性:
 
@@ -119,7 +119,7 @@ OK，现在让我们进入 Header 组件的样式文件中添加 background 属�
 
 再次回到浏览器，可以看到生效后的背景如下:
 
-<img src="..\..\images\202508240544931.png" />
+<img src="../../images/202508240544931.png" />
 
 ### SVG 组件方式加载
 
@@ -388,7 +388,7 @@ interface ImportMeta {
 
 接下来在 开发环境 启动项目或者 生产环境 打包后可以看到环境变量已经被替换，地址能够正常显示:
 
-<img src="..\..\images\202508240615560.png" />
+<img src="../../images/202508240615560.png" />
 
 至此，我们就彻底解决了图片资源生产环境域名替换的问题。
 
@@ -490,7 +490,7 @@ const icons = import.meta.glob('../../assets/icons/logo-*.svg');
 
 结果如下:
 
-<img src="..\..\images\202508240624608.png" />
+<img src="../../images/202508240624608.png" />
 
 可以看到对象的 value 都是动态 import，适合按需加载的场景。在这里我们只需要同步加载即可，可以使用 import.meta.globEager 来完成:
 

@@ -4,7 +4,7 @@ outline: deep
 
 上一小节，我们使用 Vite 初始化了一个 Web 项目，迈出了使用 Vite 的第一步。但在实际工作中，仅用 Vite 官方的脚手架项目是不够的，往往还需要考虑诸多的工程化因素，借助 Vite 本身的配置以及业界的各种生态，才能搭建一个名副其实的脚手架工程。
 
-那在接下来的几个小节内容中，我们将以 实战 的方式逐个击破项目工程化的要素。你可以跟着我一起进行编码，从0搭建一个完整的 Vite 项目架构。不仅如此，在实战的过程中，你也会对 Vite 本身的功能有全面了解，能够熟练地将它应用到实际项目。
+那在接下来的几个小节内容中，我们将以 实战 的方式逐个击破项目工程化的要素。你可以跟着我一起进行编码，从 0 搭建一个完整的 Vite 项目架构。不仅如此，在实战的过程中，你也会对 Vite 本身的功能有全面了解，能够熟练地将它应用到实际项目。
 
 样式方案是前端工程化离不开的一个话题，也是本节要具体探讨的内容。在最原始的开发阶段大家都是手写原生的 CSS，但原生 CSS 存在着诸多问题。本小节，我们通过引入现代的各种 CSS 样式方案，一起动手实践，让你学会如何在 Vite 中落地这些样式方案。
 
@@ -17,11 +17,11 @@ outline: deep
 ```css
 // 选择器只能平铺，不能嵌套
 .container .header .nav .title .text {
- color: blue;
+  color: blue;
 }
 .container .header .nav .box {
- color: blue;
- border: 1px solid grey;
+  color: blue;
+  border: 1px solid grey;
 }
 ```
 
@@ -38,7 +38,7 @@ outline: deep
 // b.css
 // 很有可能覆盖 a.css 的样式！
 .container {
- color: blue;
+  color: blue;
 }
 ```
 
@@ -48,15 +48,15 @@ outline: deep
 
 针对如上原生 CSS 的痛点，社区中诞生了不少解决方案，常见的有 5 类。
 
-* CSS 预处理器 ：主流的包括 Sass/Scss 、 Less 和 Stylus 。这些方案各自定义了一套语法，让 CSS 也能使用嵌套规则，甚至能像编程语言一样定义变量、写条件判断和循环语句，大大增强了样式语言的灵活性，解决原生 CSS 的**开发体验问题**。
+- CSS 预处理器 ：主流的包括 Sass/Scss 、 Less 和 Stylus 。这些方案各自定义了一套语法，让 CSS 也能使用嵌套规则，甚至能像编程语言一样定义变量、写条件判断和循环语句，大大增强了样式语言的灵活性，解决原生 CSS 的**开发体验问题**。
 
-* CSS Modules ：能将 CSS 类名处理成哈希值，这样就可以避免同名的情况下**样式污染**的问题。
+- CSS Modules ：能将 CSS 类名处理成哈希值，这样就可以避免同名的情况下**样式污染**的问题。
 
-* CSS 后处理器 PostCSS ，用来解析和处理 CSS 代码，可以实现的功能非常丰富，比如将 px 转换为 rem 、根据目标浏览器情况自动加上类似于 --moz-- 、 -o- 的属性前缀等等。
+- CSS 后处理器 PostCSS ，用来解析和处理 CSS 代码，可以实现的功能非常丰富，比如将 px 转换为 rem 、根据目标浏览器情况自动加上类似于 --moz-- 、 -o- 的属性前缀等等。
 
-* CSS in JS 方案，主流的包括 emotion 、 styled-components 等等，顾名思义，这类方案可以实现直接在 JS 中写样式代码，基本包含 CSS 预处理器 和 CSS Modules 的各项优点，非常灵活，解决了开发体验和全局样式污染的问题。
+- CSS in JS 方案，主流的包括 emotion 、 styled-components 等等，顾名思义，这类方案可以实现直接在 JS 中写样式代码，基本包含 CSS 预处理器 和 CSS Modules 的各项优点，非常灵活，解决了开发体验和全局样式污染的问题。
 
-* CSS 原子化框架，如 Tailwind CSS 、 Windi CSS ，通过类名来指定样式，大大简化了样式写法，提高了样式开发的效率，主要解决了原生 CSS **开发体验**的问题。
+- CSS 原子化框架，如 Tailwind CSS 、 Windi CSS ，通过类名来指定样式，大大简化了样式写法，提高了样式开发的效率，主要解决了原生 CSS **开发体验**的问题。
 
 不过，各种方案没有孰优孰劣，各自解决的方案有重叠的部分，但也有一定的差异，大家可以根据自己项目的痛点来引入。接下来，我们进入实战阶段，在 Vite 中应用上述常见的 CSS 方案。
 
@@ -72,32 +72,22 @@ Vite 本身对 CSS 各种预处理器语言( Sass/Scss 、 Less 和 Stylus )做�
 pnpm i sass -D
 ```
 
-然后，在上一节初始化后的项目中新建 src/components/Header 目录，并且分别新建index.tsx 和 index.scss 文件，代码如下:
+然后，在上一节初始化后的项目中新建 src/components/Header 目录，并且分别新建 index.tsx 和 index.scss 文件，代码如下:
 
 ```html
-// index.tsx
-import './index.scss';
-export function Header() {
- return <p className="header">This is Header</p>
-};
-// index.scss
-.header {
- color: red;
-}
+// index.tsx import './index.scss'; export function Header() { return
+<p className="header">This is Header</p>
+}; // index.scss .header { color: red; }
 ```
 
 这样就完成了一个最简单的 demo 组件。接着我们在 App.tsx 应用这个组件:
 
 ```html
-import { Header } from "./components/Header";
-function App() {
- return (
- <div>
- 	<Header />
- </div>
- );
-}
-export default App;
+import { Header } from "./components/Header"; function App() { return (
+<div>
+  <header />
+</div>
+); } export default App;
 ```
 
 现在你可以执行 pnpm run dev ，然后到浏览器上查看效果:
@@ -114,7 +104,7 @@ $theme-color: red;
 ```scss
 @import "../../variable";
 .header {
- color: $theme-color;
+  color: $theme-color;
 }
 ```
 
@@ -122,44 +112,44 @@ $theme-color: red;
 
 ```typescript
 // vite.config.ts
-import { normalizePath } from 'vite';
+import { normalizePath } from "vite";
 // 如果类型报错，需要安装 @types/node: pnpm i @types/node -D
-import path from 'path';
+import path from "path";
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
-const variablePath = normalizePath(path.resolve('./src/variable.scss'));
+const variablePath = normalizePath(path.resolve("./src/variable.scss"));
 export default defineConfig({
-   // css 相关的配置
-   css: {
-     preprocessorOptions: {
-       scss: {
-         // additionalData 的内容会在每个 scss 文件的开头自动注入
-         additionalData: `@import "${variablePath}";`
-       }
-     }
-   }
-})
+  // css 相关的配置
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // additionalData 的内容会在每个 scss 文件的开头自动注入
+        additionalData: `@import "${variablePath}";`,
+      },
+    },
+  },
+});
 ```
 
 现在你可以直接在文件中使用全局文件的变量，相当于之前手动引入的方式显然方便了许多:
 
 ```css
 .header {
- color: $theme-color;
+  color: $theme-color;
 }
 ```
 
 同样的，你可以对 less 和 stylus 进行一些能力的配置，如果有需要你可以去下面的官方文档中查阅更多的配置项:
 
-* Sass
-* Less
-* Stylus
+- Sass
+- Less
+- Stylus
 
 ## CSS Modules
 
 CSS Modules 在 Vite 也是一个开箱即用的能力，Vite 会对后缀带有 .module 的样式文件自动应用 CSS Modules。接下来我们通过一个简单的例子来使用这个功能。
 
-首先，将 Header 组件中的 index.scss 更名为 index.module.scss ，然后稍微改动一下index.tsx 的内容，如下:
+首先，将 Header 组件中的 index.scss 更名为 index.module.scss ，然后稍微改动一下 index.tsx 的内容，如下:
 
 ```scss
 // index.tsx
@@ -171,29 +161,29 @@ export function Header() {
 
 现在打开浏览器，可以看见 p 标签的类名已经被处理成了哈希值的形式:
 
-<img src="..\..\images\202508240316605.png" />
+<img src="../../images/202508240316605.png" />
 
-说明现在 CSS Modules 已经正式生效了！同样的，你也可以在配置文件中的css.modules 选项来配置 CSS Modules 的功能，比如下面这个例子:
+说明现在 CSS Modules 已经正式生效了！同样的，你也可以在配置文件中的 css.modules 选项来配置 CSS Modules 的功能，比如下面这个例子:
 
 ```typescript
 // vite.config.ts
 export default {
- css: {
-   modules: {
-     // 一般我们可以通过 generateScopedName 属性来对生成的类名进行自定义
-     // 其中，name 表示当前文件名，local 表示类名
-     generateScopedName: "[name]__[local]___[hash:base64:5]"
-   },
-   preprocessorOptions: {
-   	// 省略预处理器配置
-   }
- }
-}
+  css: {
+    modules: {
+      // 一般我们可以通过 generateScopedName 属性来对生成的类名进行自定义
+      // 其中，name 表示当前文件名，local 表示类名
+      generateScopedName: "[name]__[local]___[hash:base64:5]",
+    },
+    preprocessorOptions: {
+      // 省略预处理器配置
+    },
+  },
+};
 ```
 
 再次访问页面，我们可以发现刚才的类名已经变成了我们自定义的形式:
 
-<img src="..\..\images\202508240317111.png" />
+<img src="../../images/202508240317111.png" />
 
 这是一个 CSS Modules 中很常见的配置，对开发时的调试非常有用。其它的一些配置项不太常用，大家可以去这个地址进行查阅。
 
@@ -211,20 +201,20 @@ pnpm i autoprefixer -D
 
 ```typescript
 // vite.config.ts 增加如下的配置
-import autoprefixer from 'autoprefixer';
+import autoprefixer from "autoprefixer";
 export default {
-   css: {
-     // 进行 PostCSS 配置
-     postcss: {
-       plugins: [
-         autoprefixer({
-           // 指定目标浏览器
-           overrideBrowserslist: ['Chrome > 40', 'ff > 31', 'ie 11']
-         })
-       ]
-     }
-   }
-}
+  css: {
+    // 进行 PostCSS 配置
+    postcss: {
+      plugins: [
+        autoprefixer({
+          // 指定目标浏览器
+          overrideBrowserslist: ["Chrome > 40", "ff > 31", "ie 11"],
+        }),
+      ],
+    },
+  },
+};
 ```
 
 配置完成后，我们回到 Header 组件的样式文件中添加一个新的 CSS 属性:
@@ -249,11 +239,11 @@ export default {
 
 由于有 CSS 代码的 AST (抽象语法树)解析能力，PostCSS 可以做的事情非常多，甚至能实现 CSS 预处理器语法和 CSS Modules，社区当中也有不少的 PostCSS 插件，除了刚刚提到的 autoprefixer 插件，常见的插件还包括:
 
-* [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)： 用来将 px 转换为 rem 单位，在适配移动端的场景下很常用。
+- [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)： 用来将 px 转换为 rem 单位，在适配移动端的场景下很常用。
 
-* [postcss-preset-env](https://github.com/csstools/postcss-preset-env): 通过它，你可以编写最新的 CSS 语法，不用担心兼容性问题。
+- [postcss-preset-env](https://github.com/csstools/postcss-preset-env): 通过它，你可以编写最新的 CSS 语法，不用担心兼容性问题。
 
-* [cssnano](https://github.com/cssnano/cssnano): 主要用来压缩 CSS 代码，跟常规的代码压缩工具不一样，它能做得更加智能，比如提取一些公共样式进行复用、缩短一些常见的属性值等等。
+- [cssnano](https://github.com/cssnano/cssnano): 主要用来压缩 CSS 代码，跟常规的代码压缩工具不一样，它能做得更加智能，比如提取一些公共样式进行复用、缩短一些常见的属性值等等。
 
 关于 PostCSS 插件，这里还给大家推荐一个站点：www.postcss.parts/ ，你可以去里面探索更多的内容。
 
@@ -296,7 +286,7 @@ export default defineConfig({
 
 ## CSS 原子化框架
 
-在目前的社区当中，CSS 原子化框架主要包括 Tailwind CSS 和 Windi CSS 。Windi CSS作为前者的替换方案，实现了按需生成 CSS 类名的功能，开发环境下的 CSS 产物体积大大减少，速度上比 Tailwind CSS v2 快 20~100 倍！当然，Tailwind CSS 在 v3 版本也引入 JIT(即时编译) 的功能，解决了开发环境下 CSS 产物体积庞大的问题。接下来我们将这两个方案分别接入到 Vite 中，在实际的项目中你只需要使用其中一种就可以了。我个人比较喜欢 Windi CSS 本身的 attributify 、 shortcuts 等独有的特性，因此首先从windicss 开始说起。
+在目前的社区当中，CSS 原子化框架主要包括 Tailwind CSS 和 Windi CSS 。Windi CSS 作为前者的替换方案，实现了按需生成 CSS 类名的功能，开发环境下的 CSS 产物体积大大减少，速度上比 Tailwind CSS v2 快 20~100 倍！当然，Tailwind CSS 在 v3 版本也引入 JIT(即时编译) 的功能，解决了开发环境下 CSS 产物体积庞大的问题。接下来我们将这两个方案分别接入到 Vite 中，在实际的项目中你只需要使用其中一种就可以了。我个人比较喜欢 Windi CSS 本身的 attributify 、 shortcuts 等独有的特性，因此首先从 windicss 开始说起。
 
 ### Windi CSS 接入
 
@@ -313,10 +303,10 @@ pnpm i windicss vite-plugin-windicss -D
 import windi from "vite-plugin-windicss";
 export default {
   plugins: [
-     // 省略其它插件
-     windi()
-   ]
-}
+    // 省略其它插件
+    windi(),
+  ],
+};
 ```
 
 接着要注意在 src/main.tsx 中引入一个必需的 import 语句:
@@ -330,22 +320,19 @@ import "virtual:windi.css";
 这样我们就完成了 Windi CSS 在 Vite 中的接入，接下来我们在 Header 组件中来测试，组件代码修改如下:
 
 ```html
-// src/components/Header/index.tsx
-import { devDependencies } from "../../../package.json";
-export function Header() {
- return (
-   <div className="p-20px text-center">
-     <h1 className="font-bold text-2xl mb-2">
-     	vite version: {devDependencies.vite}
-     </h1>
-   </div>
- );
-}
+// src/components/Header/index.tsx import { devDependencies } from
+"../../../package.json"; export function Header() { return (
+<div className="p-20px text-center">
+  <h1 className="font-bold text-2xl mb-2">
+    vite version: {devDependencies.vite}
+  </h1>
+</div>
+); }
 ```
 
 启动项目可以看到如下的效果，说明样式已经正常生效:
 
-<img src="..\..\images\202508240329091.png" />
+<img src="../../images/202508240329091.png" />
 
 除了本身的原子化 CSS 能力，Windi CSS 还有一些非常好用的高级功能，在此我给大家推荐自己常用的两个能力: **attributify** 和 **shortcuts**。
 
@@ -354,8 +341,8 @@ export function Header() {
 ```typescript
 import { defineConfig } from "vite-plugin-windicss";
 export default defineConfig({
- // 开启 attributify
- attributify: true,
+  // 开启 attributify
+  attributify: true,
 });
 ```
 
@@ -363,13 +350,13 @@ export default defineConfig({
 
 ```html
 <button
- bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
- text="sm white"
- font="mono light"
- p="y-2 x-4"
- border="2 rounded blue-200"
+  bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
+  text="sm white"
+  font="mono light"
+  p="y-2 x-4"
+  border="2 rounded blue-200"
 >
- Button
+  Button
 </button>
 ```
 
@@ -378,9 +365,9 @@ export default defineConfig({
 不过使用 attributify 的时候需要注意类型问题，你需要添加 types/shim.d.ts 来增加类型声明，以防类型报错:
 
 ```typescript
-import { AttributifyAttributes } from 'windicss/types/jsx';
-declare module 'react' {
- type HTMLAttributes<T> = AttributifyAttributes;
+import { AttributifyAttributes } from "windicss/types/jsx";
+declare module "react" {
+  type HTMLAttributes<T> = AttributifyAttributes;
 }
 ```
 
@@ -390,10 +377,10 @@ shortcuts 用来封装一系列的原子化能力，尤其是一些常见的类�
 //windi.config.ts
 import { defineConfig } from "vite-plugin-windicss";
 export default defineConfig({
- attributify: true,
- shortcuts: {
- "flex-c": "flex justify-center items-center",
- }
+  attributify: true,
+  shortcuts: {
+    "flex-c": "flex justify-center items-center",
+  },
 });
 ```
 
@@ -424,25 +411,22 @@ pnpm install -D tailwindcss postcss autoprefixer
 ```javascript
 // tailwind.config.js
 module.exports = {
-   content: [
-     "./index.html",
-     "./src/**/*.{vue,js,ts,jsx,tsx}",
-   ],
-   theme: {
-   		extend: {},
-   },
-   plugins: [],
-}
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
 // postcss.config.js
 // 从中你可以看到，Tailwind CSS 的编译能力是通过 PostCSS 插件实现的
-// 而 Vite 本身内置了 PostCSS，因此可以通过 PostCSS 配置接入 Tailwind CSS 
+// 而 Vite 本身内置了 PostCSS，因此可以通过 PostCSS 配置接入 Tailwind CSS
 // 注意: Vite 配置文件中如果有 PostCSS 配置的情况下会覆盖掉 postcss.config.js 的内容!
 module.exports = {
   plugins: {
-     tailwindcss: {},
-     autoprefixer: {},
+    tailwindcss: {},
+    autoprefixer: {},
   },
-}
+};
 ```
 
 接着在项目的入口 CSS 中引入必要的样板代码:
@@ -450,28 +434,23 @@ module.exports = {
 现在，你就可以在项目中安心地使用 Tailwind 样式了，如下所示:
 
 ```html
-// App.tsx
-import logo from "./logo.svg";
-import "./App.css";
-function App() {
- return (
-   <div>
-     <header className="App-header">
-       <img src={logo} className="w-20" alt="logo" />
-       <p className="bg-red-400">Hello Vite + React!</p>
-     </header>
-   </div>
- );
-}
-export default App;
+// App.tsx import logo from "./logo.svg"; import "./App.css"; function App() {
+return (
+<div>
+  <header className="App-header">
+    <img src="{logo}" className="w-20" alt="logo" />
+    <p className="bg-red-400">Hello Vite + React!</p>
+  </header>
+</div>
+); } export default App;
 ```
 
 当你启动项目之后可以看到 Tailwind CSS 的样式已经正常生效:
 
-<img src="..\..\images\202508240340689.png" />
+<img src="../../images/202508240340689.png" />
 
 小结
 
-OK，本小节的内容到这里就结束了。这一节我们完成了脚手架项目样式部分的搭建，你需要重点掌握前端工程中各种样式方案在 Vite 的接入方法。这些样式方案包括，包括CSS 预处理器 、 CSS Modules 、 PostCSS 、 CSS In JS 和 CSS 原子化框架(Windi CSS) 。
+OK，本小节的内容到这里就结束了。这一节我们完成了脚手架项目样式部分的搭建，你需要重点掌握前端工程中各种样式方案在 Vite 的接入方法。这些样式方案包括，包括 CSS 预处理器 、 CSS Modules 、 PostCSS 、 CSS In JS 和 CSS 原子化框架(Windi CSS) 。
 
 与此同时，你应该明白了各种样式方案的含义以及背后所解决的问题。接下来，我们将会进入项目规范搭建的部分，让我们下一节再见！

@@ -3399,7 +3399,7 @@ timeline
 
 ## **SVG + GSAP 动画**
 
-<img src="..\..\images\image-20240503110925055.png" />
+<img src="../../images/image-20240503110925055.png" />
 
 ```html
 <!DOCTYPE html>

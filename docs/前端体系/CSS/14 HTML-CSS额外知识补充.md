@@ -35,7 +35,7 @@ HTML5 新增了语义化的元素：
 </header>
 ```
 
-<img src="..\..\images\image-20221126122810523.png" />
+<img src="../../images/image-20221126122810523.png" />
 
 ## HTML5 其他新增元素
 

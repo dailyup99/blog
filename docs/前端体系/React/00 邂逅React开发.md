@@ -20,7 +20,7 @@ React 的官网文档：https://zh-hans.reactjs.org/
 
 它允许我们只需要维护自己的状态，当状态改变时，React 可以根据最新的状态去渲染我们的 UI 界面；
 
-<img src="..\..\images\image-20230606222132568.png" />
+<img src="../../images/image-20230606222132568.png" />
 
 ## **React 特点 – 组件化开发**
 
@@ -30,7 +30,7 @@ React 的官网文档：https://zh-hans.reactjs.org/
 
 如何合理的进行组件的划分和设计也是后面我会讲到的一个重点；
 
-<img src="..\..\images\image-20230606222226184.png" />
+<img src="../../images/image-20230606222226184.png" />
 
 ## **React 的特点 – 多平台适配**
 
@@ -44,7 +44,7 @@ ReactNative）；
 
 2017 年，Facebook 推出 ReactVR，用于开发虚拟现实 Web 应用程序；（VR 也会是一个火爆的应用场景）；
 
-<img src="..\..\images\image-20230606222317984.png" />
+<img src="../../images/image-20230606222317984.png" />
 
 ## **Hello React 案例说明**
 
@@ -54,7 +54,7 @@ ReactNative）；
 
 点击下方的一个按钮，点击后文本改变为 Hello React
 
-<img src="..\..\images\image-20230606222351838.png" />
+<img src="../../images/image-20230606222351838.png" />
 
 **当然，你也可以使用 jQuery 和 Vue 来实现，甚至是原生方式来实现，对它们分别进行对比学习**
 
@@ -136,7 +136,7 @@ react-dom 针对 web 和 native 所完成的事情不同：
 
 注意：这里我们编写 React 的 script 代码中，必须添加 type="text/babel"，作用是可以让 babel 解析 jsx 的语法
 
-<img src="..\..\images\image-20230606222902972.png" />
+<img src="../../images/image-20230606222902972.png" />
 
 **ReactDOM. createRoot 函数：用于创建一个 React 根，之后渲染的内容会包含在这个根中**
 
@@ -284,7 +284,7 @@ react-dom 针对 web 和 native 所完成的事情不同：
 
 render 当中返回的 jsx 内容，就是之后 React 会帮助我们渲染的内容
 
-<img src="..\..\images\image-20230606231733671.png" />
+<img src="../../images/image-20230606231733671.png" />
 
 ## **组件化 - 数据依赖**
 
@@ -304,7 +304,7 @@ render 当中返回的 jsx 内容，就是之后 React 会帮助我们渲染的�
 
 在进行 update 操作时，就会重新调用 render 函数，并且使用最新的数据，来渲染界面
 
-<img src="..\..\images\image-20230606231849647.png" />
+<img src="../../images/image-20230606231849647.png" />
 
 ## **组件化 – 事件绑定**
 
@@ -328,7 +328,7 @@ render 当中返回的 jsx 内容，就是之后 React 会帮助我们渲染的�
 
 类似于下面的写法：
 
-<img src="..\..\images\image-20230606232055612.png" />
+<img src="../../images/image-20230606232055612.png" />
 
 这里涉及到 this 绑定问题，也就是在严格模式下函数的调用 this 会指向 undefined。
 

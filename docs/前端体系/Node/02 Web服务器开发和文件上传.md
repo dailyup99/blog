@@ -54,7 +54,7 @@ Transform：Duplex 可以在写入和读取数据时修改或转换数据的流�
 
 **之前我们读取一个文件的信息：**
 
-<img src="..\..\images\image-20240108145451670.png" />
+<img src="../../images/image-20240108145451670.png" />
 
 **这种方式是一次性将一个文件中所有的内容都读取到程序（内存）中，但是这种读取方式就会出现我们之前提到的很多问题：**
 
@@ -135,7 +135,7 @@ readStream.on("close", () => {
 
 **之前我们写入一个文件的方式是这样的：**
 
-<img src="..\..\images\image-20240617232521594.png" />
+<img src="../../images/image-20240617232521594.png" />
 
 **这种方式相当于一次性将所有的内容写入到文件中，但是这种方式也有很多问题：**
 
@@ -151,11 +151,11 @@ start：写入的位置；
 
 **我们进行一次简单的写入**
 
-<img src="..\..\images\image-20240617232912162.png" />
+<img src="../../images/image-20240617232912162.png" />
 
 **你可以监听 open 事件：**
 
-<img src="..\..\images\image-20240617232929485.png" />
+<img src="../../images/image-20240617232929485.png" />
 
 ## **close 的监听**
 
@@ -169,7 +169,7 @@ start：写入的位置；
 
 **另外一个非常常用的方法是 end：end 方法相当于做了两步操作： write 传入的数据和调用 close 方法；**
 
-<img src="..\..\images\image-20240617233058882.png" />
+<img src="../../images/image-20240617233058882.png" />
 
 ```javascript
 const fs = require("fs");
@@ -235,11 +235,11 @@ writeStream.close();
 
 **正常情况下，我们可以将读取到的 输入流，手动的放到 输出流中进行写入：**
 
-<img src="..\..\images\image-20240617233733538.png" />
+<img src="../../images/image-20240617233733538.png" />
 
 **我们也可以通过 pipe 来完成这样的操作：**
 
-<img src="..\..\images\image-20240617233744414.png" />
+<img src="../../images/image-20240617233744414.png" />
 
 文件的拷贝流操作
 
@@ -291,7 +291,7 @@ readStream.pipe(writeStream);
 
 **我们先简单对它做一个使用：**
 
-<img src="..\..\images\image-20240620215832754.png" />
+<img src="../../images/image-20240620215832754.png" />
 
 ```javascript
 const http = require("http");
@@ -325,11 +325,11 @@ http.createServer 会返回服务器的对象；
 
 底层其实使用直接 new Server 对象。
 
-<img src="..\..\images\image-20240620220709369.png" />
+<img src="../../images/image-20240620220709369.png" />
 
 **那么，当然，我们也可以自己来创建这个对象：**
 
-<img src="..\..\images\image-20240620220728298.png" />
+<img src="../../images/image-20240620220728298.png" />
 
 **上面我们已经看到，创建 Server 时会传入一个回调函数，这个回调函数在被调用时会传入两个参数：**
 
@@ -709,19 +709,19 @@ server.listen(8000, () => {
 
 ![image-20240713005153646](../../images/202407130051717.png)
 
-![image-20240713005123202](..\..\images\202407130051290.png)
+![image-20240713005123202](../../images/202407130051290.png)
 
 如果选择的是 x-www-form-urlencoded，那么 content-type 就是 application/x-www-form-urlencoded
 
 ![image-20240713005217979](../../images/202407130052043.png)
 
-![image-20240713005319605](..\..\images\202407130053687.png)
+![image-20240713005319605](../../images/202407130053687.png)
 
 如果 token 这里选择的是 Bear Token，那么就能打印 token
 
 ![image-20240713005555574](../../images/202407130055656.png)
 
-![image-20240713005536093](..\..\images\202407130055201.png)
+![image-20240713005536093](../../images/202407130055201.png)
 
 ## **返回响应结果**
 
@@ -837,7 +837,7 @@ server.listen(8000, () => {
 
 设置之后
 
-![image-20240713091734347](..\..\images\202407130917398.png)
+![image-20240713091734347](../../images/202407130917398.png)
 
 ## **http 请求**
 
@@ -940,7 +940,7 @@ server.listen(8000, () => {
 
 ![image-20240713104020007](../../images/202407131040116.png)
 
-![image-20240713104042055](..\..\images\202407131040162.png)
+![image-20240713104042055](../../images/202407131040162.png)
 
 ```javascript
 const http = require("http");

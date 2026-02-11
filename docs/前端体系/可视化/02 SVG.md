@@ -183,7 +183,7 @@ SVG 的文档类型声明（DTD），让解析器验证 XML 文件是否符合�
 <!DOCTYPE svg PUBLIC “-//W3C//DTD SVG 1.1//EN” "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 ```
 
-<img src="..\..\images\image-20230805092512467.png" />
+<img src="../../images/image-20230805092512467.png" />
 
 **SVG2.0 文档结构：**https://www.w3.org/TR/SVG2/struct.html#Namespace
 
@@ -425,7 +425,7 @@ SVG2 version 和 baseProfile 属性已删除，也不推荐写文档类型声明
 
 支持交互式 svg，能拿到 embed 的引用，为 SVG 设置动画、更改其样式表等，对旧版浏览器有更好的支持。
 
-<img src="..\..\images\image-20230805101354606.png" />
+<img src="../../images/image-20230805101354606.png" />
 
 ## **SVG Grid 和 坐标系**
 
@@ -479,7 +479,7 @@ SVG2 version 和 baseProfile 属性已删除，也不推荐写文档类型声明
 </html>
 ```
 
-<img src="..\..\images\image-20230805102306042.png" />
+<img src="../../images/image-20230805102306042.png" />
 
 ## **SVG 坐标系单位**
 
@@ -491,7 +491,7 @@ SVG 坐标系统，在没有明确指定单位时，默认以像素为单位。
 
 当然我们也可以手动指明坐标系的单位，比如：
 
-<img src="..\..\images\image-20230805102550177.png" />
+<img src="../../images/image-20230805102550177.png" />
 
 ```html
 <!DOCTYPE html>
@@ -524,7 +524,7 @@ SVG 坐标系统，在没有明确指定单位时，默认以像素为单位。
 </html>
 ```
 
-<img src="..\..\images\image-20230805102619223.png" />
+<img src="../../images/image-20230805102619223.png" />
 
 ## **视口-viewport**
 
@@ -664,7 +664,7 @@ viewBox 区域等比例被放大（放大不会失真）以填充整个视口。
 </html>
 ```
 
-<img src="..\..\images\image-20230805110038873.png" />
+<img src="../../images/image-20230805110038873.png" />
 
 绿色区域是视图框，红色区域是视口，绿色区域画出来的圆会等比例缩放填充到视口中。
 
@@ -707,7 +707,7 @@ viewBox 区域等比例被放大（放大不会失真）以填充整个视口。
 </html>
 ```
 
-<img src="..\..\images\image-20230805110616981.png" />
+<img src="../../images/image-20230805110616981.png" />
 
 **想改变视口内的视框位置怎么办？**
 
@@ -755,11 +755,11 @@ viewBox 区域等比例被放大（放大不会失真）以填充整个视口。
 </html>
 ```
 
-<img src="..\..\images\image-20230805111023763.png" />
+<img src="../../images/image-20230805111023763.png" />
 
 如果改为 none 效果如下：在 y 轴上被拉伸
 
-<img src="..\..\images\image-20230805111115924.png" />
+<img src="../../images/image-20230805111115924.png" />
 
 ## **绘制-矩形 ( rect )**
 
@@ -817,7 +817,7 @@ SVG 所支持的基本形状有：矩形、圆形、椭圆、线条、折线、�
 </html>
 ```
 
-<img src="..\..\images\image-20230805130039166.png" />
+<img src="../../images/image-20230805130039166.png" />
 
 ## **绘制-圆形 ( circle )**
 
@@ -865,7 +865,7 @@ cy ：圆心的 y 轴位置
 </html>
 ```
 
-<img src="..\..\images\image-20230805131936974.png" />
+<img src="../../images/image-20230805131936974.png" />
 
 ## **绘制-椭圆 ( ellipse )**
 
@@ -917,7 +917,7 @@ cy :椭圆中心的 y 轴位置
 </html>
 ```
 
-<img src="..\..\images\image-20230805132131108.png" />
+<img src="../../images/image-20230805132131108.png" />
 
 ## **绘制-线条( line )**
 
@@ -979,7 +979,7 @@ y2 :终点的 y 轴位置
 </html>
 ```
 
-<img src="..\..\images\image-20230805132316388.png" />
+<img src="../../images/image-20230805132316388.png" />
 
 ## **绘制-折线( polyline )**
 
@@ -1045,7 +1045,7 @@ points : 点集数列。每个数字用空白、逗号、终止命令符或者�
 </html>
 ```
 
-<img src="..\..\images\image-20230805132706484.png" />
+<img src="../../images/image-20230805132706484.png" />
 
 ```html
 <!DOCTYPE html>
@@ -1089,7 +1089,7 @@ points : 点集数列。每个数字用空白、逗号、终止命令符或者�
 </html>
 ```
 
-<img src="..\..\images\image-20230805132559111.png" />
+<img src="../../images/image-20230805132559111.png" />
 
 当使用 fill 为 transparent 时，发现折线到最后一个点没有闭合
 
@@ -1149,7 +1149,7 @@ points :点集数列。每个数字用空白符、逗号、终止命令或者换
 </html>
 ```
 
-<img src="..\..\images\image-20230805133223448.png" />
+<img src="../../images/image-20230805133223448.png" />
 
 ## **绘制-路径（path）**
 
@@ -1216,7 +1216,7 @@ d :一个点集数列，以及其它关于如何绘制路径的信息，必须 M
 </html>
 ```
 
-<img src="..\..\images\image-20230805133711476.png" />
+<img src="../../images/image-20230805133711476.png" />
 
 ## **SVG 路径 和 命令**
 
@@ -1283,7 +1283,7 @@ d :一个点集数列，以及其它关于如何绘制路径的信息，必须 M
 </html>
 ```
 
-<img src="..\..\images\image-20230805134157107.png" />
+<img src="../../images/image-20230805134157107.png" />
 
 ## **绘制-图片**
 
@@ -1291,7 +1291,7 @@ d :一个点集数列，以及其它关于如何绘制路径的信息，必须 M
 
 在\<image>元素的 href 属性引入图片 URL
 
-<img src="..\..\images\image-20230805142240653.png" />
+<img src="../../images/image-20230805142240653.png" />
 
 **注意事项**
 
@@ -1380,7 +1380,7 @@ href 属性兼容性： https://developer.mozilla.org/en-US/docs/Web/SVG/Attribu
 </html>
 ```
 
-<img src="..\..\images\image-20230805142424324.png" />
+<img src="../../images/image-20230805142424324.png" />
 
 ## **绘制-文字**
 
@@ -1396,7 +1396,7 @@ text-anchor 文本流方向属性，可以有 start、middle、end 或 inherit �
 
 dominant-baseline 基线对齐属性 : 有 auto 、middle 或 hanging 值, 默认值：auto
 
-<img src="..\..\images\image-20230805143457740.png" />
+<img src="../../images/image-20230805143457740.png" />
 
 **\<text>元素的字体属性**
 
@@ -1458,7 +1458,7 @@ fill 可以写在样式 style 里面，也可以写在 text 元素的属性上
 </html>
 ```
 
-<img src="..\..\images\image-20230805143730560.png" />
+<img src="../../images/image-20230805143730560.png" />
 
 **其它文本相关的元素：**
 
@@ -1509,7 +1509,7 @@ alignment-baseline 基线对齐属性：auto 、baseline、middle、hanging、to
 </html>
 ```
 
-<img src="..\..\images\image-20230805143801168.png" />
+<img src="../../images/image-20230805143801168.png" />
 
 ## **元素的组合（g）**
 
@@ -1586,7 +1586,7 @@ Presentation Attributes（也可说是 CSS 属性，这些属性可写在 CSS �
 </html>
 ```
 
-<img src="..\..\images\image-20230805150121544.png" />
+<img src="../../images/image-20230805150121544.png" />
 
 ## **图形元素的复用（defs）**
 
@@ -1747,7 +1747,7 @@ width / height ：元素的宽和高（在引入 svg 或 symbol 元素才起作�
 </html>
 ```
 
-<img src="..\..\images\image-20230805150819769.png" />
+<img src="../../images/image-20230805150819769.png" />
 
 ## **图形元素复用（symbols）**
 
@@ -1876,7 +1876,7 @@ width / height：symbol 元素的宽度。 默认值：0
 </html>
 ```
 
-<img src="..\..\images\image-20230805152643093.png" />
+<img src="../../images/image-20230805152643093.png" />
 
 SVG 制作精灵图
 
@@ -2046,7 +2046,7 @@ fill-opacity = ”number ”， 该属性专门用来控制填充色的不透明
 </html>
 ```
 
-<img src="..\..\images\image-20230805180950224.png" />
+<img src="../../images/image-20230805180950224.png" />
 
 ## **第一种：描边属性（stroke）**
 
@@ -2113,7 +2113,7 @@ stroke-dashoffset：指定在 dasharray 模式下路径的偏移量。
 </html>
 ```
 
-<img src="..\..\images\image-20230805181336098.png" />
+<img src="../../images/image-20230805181336098.png" />
 
 stroke-linecap
 
@@ -2158,7 +2158,7 @@ stroke-linecap
 </html>
 ```
 
-<img src="..\..\images\image-20230805181436676.png" />
+<img src="../../images/image-20230805181436676.png" />
 
 ```html
 <!DOCTYPE html>
@@ -2210,7 +2210,7 @@ stroke-linecap
 </html>
 ```
 
-<img src="..\..\images\image-20230805181935136.png" />
+<img src="../../images/image-20230805181935136.png" />
 
 stroke-dasharray
 
@@ -2255,7 +2255,7 @@ stroke-dasharray
 </html>
 ```
 
-<img src="..\..\images\image-20230805182316848.png" />
+<img src="../../images/image-20230805182316848.png" />
 
 stroke-dashoffset
 
@@ -2301,7 +2301,7 @@ stroke-dashoffset
 </html>
 ```
 
-<img src="..\..\images\image-20230805182419978.png" />
+<img src="../../images/image-20230805182419978.png" />
 
 ## **第二种：CSS 样式**
 

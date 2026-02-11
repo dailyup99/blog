@@ -750,7 +750,7 @@ import "./demo/parse-lyric";
 
 打包之后发现 parseLyric 和 test 都被删除了，但是 window.lyric 并没有被删除，因为这个是有副作用的代码。
 
-<img src="..\..\images\image-20240601215554605.png" />
+<img src="../../images/image-20240601215554605.png" />
 
 假如，我们把 demo/parse-lyric.js 中的
 
@@ -760,7 +760,7 @@ window.lyric = "哈哈哈哈哈";
 
 删掉，那么再次打包，会发现整个模块依然没有被删除掉
 
-<img src="..\..\images\image-20240601215758731.png" />
+<img src="../../images/image-20240601215758731.png" />
 
 如果我们想将整个模块删除掉，可以在 package.json 中进行配置
 
@@ -796,7 +796,7 @@ package.json
 }
 ```
 
-<img src="..\..\images\image-20240601221154134.png" />
+<img src="../../images/image-20240601221154134.png" />
 
 我们除了引入 js，还会引入 css
 
@@ -920,7 +920,7 @@ module.exports = {
 
 没有配置之前，想要拿到 sum 函数，需要跨作用域。
 
-<img src="..\..\images\image-20240601223850464.png" />
+<img src="../../images/image-20240601223850464.png" />
 
 配置之后在一个模块里面，直接使用。
 
@@ -936,11 +936,11 @@ module.exports = {
 
 第二步：兼容的浏览器在向服务器发送请求时，会告知服务器自己支持哪些压缩格式；
 
-<img src="..\..\images\image-20240601224348617.png" />
+<img src="../../images/image-20240601224348617.png" />
 
 第三步：服务器在浏览器支持的压缩格式下，直接返回对应的压缩后的文件，并且在响应头中告知浏览器；
 
-<img src="..\..\images\image-20240601224408512.png" />
+<img src="../../images/image-20240601224408512.png" />
 
 ## **目前的压缩格式**
 
@@ -995,7 +995,7 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601232551547.png" />
+<img src="../../images/image-20240601232551547.png" />
 
 ## **HTML 文件中代码的压缩**
 
@@ -1150,7 +1150,7 @@ package.json
 
 目前，这个仓库打开之后有个分析地址，已经失效
 
-<img src="..\..\images\image-20240601234932504.png" />
+<img src="../../images/image-20240601234932504.png" />
 
 只能把这个项目 clone 下来，然后安装依赖跑起来，把生成的 stats.json 拖进去，就可以看到分析信息
 
@@ -1215,7 +1215,7 @@ webpack.config.js
 
 第五步：编写启动的文件 build.js
 
-<img src="..\..\images\image-20240602001956927.png" />
+<img src="../../images/image-20240602001956927.png" />
 
 ```javascript
 const webpack = require("../webpack");
@@ -1250,7 +1250,7 @@ compiler.run((err, stats) => {
 
 ## **输出 asset 阶段**
 
-![image-20240602202216182](..\..\images\image-20240602202216182.png)
+![image-20240602202216182](../../images/image-20240602202216182.png)
 
 ## **Compiler 和 Compilation 的区别**
 

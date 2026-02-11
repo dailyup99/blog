@@ -70,7 +70,7 @@ Vue 技术栈
 
 ## **Nuxt.js VS Nuxt3**
 
-<img src="..\..\images\image-20240504184037189.png" />
+<img src="../../images/image-20240504184037189.png" />
 
 ## **Nuxt3 环境搭建**
 
@@ -119,11 +119,11 @@ Vue 技术栈
 
 package.json
 
-![image-20240504232113244](..\..\images\image-20240504232113244.png)
+![image-20240504232113244](../../images/image-20240504232113244.png)
 
 .nuxt 目录下的 types 下会生成很多类型，这些类型是什么时候生成的呢？
 
-<img src="..\..\images\image-20240504232257105.png" />
+<img src="../../images/image-20240504232257105.png" />
 
 是在执行 nuxt prepare 的时候生成的。
 

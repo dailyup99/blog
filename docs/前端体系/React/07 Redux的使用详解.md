@@ -56,7 +56,7 @@ splice：splice 截取数组, 会返回一个新的数组, 也会对原数组进
 
 **slice 就是一个纯函数，不会修改数组本身，而 splice 函数不是一个纯函数；**
 
-<img src="..\..\images\image-20230617145937059.png" />
+<img src="../../images/image-20230617145937059.png" />
 
 ## **判断下面函数是否是纯函数？**
 
@@ -102,7 +102,7 @@ JavaScript 需要管理的状态越来越多，越来越复杂；
 
 React 主要负责帮助我们管理视图，state 如何维护最终还是我们自己来决定；
 
-<img src="..\..\images\image-20230617151213025.png" />
+<img src="../../images/image-20230617151213025.png" />
 
 **Redux 就是一个帮助我们管理 State 的容器：Redux 是 JavaScript 的状态容器，提供了可预测的状态管理；**
 
@@ -122,7 +122,7 @@ React 主要负责帮助我们管理视图，state 如何维护最终还是我�
 
 **整个应用程序错综复杂，当出现 bug 时，很难跟踪到底哪里发生的变化；**
 
-<img src="..\..\images\image-20230617151426774.png" />
+<img src="../../images/image-20230617151426774.png" />
 
 ## **Redux 的核心理念 - action**
 
@@ -379,7 +379,7 @@ store.dispatch(addNumberAction(100));
 
 ## **Redux 官方图**
 
-<img src="..\..\images\image-20230617161942302.png" />
+<img src="../../images/image-20230617161942302.png" />
 
 ## **redux 融入 react 代码**
 
@@ -643,7 +643,7 @@ root.render(
 
 第二步，在 About.jsx 中使用，这里就不需要传入 store 了，只需要使用 connect 函数，它的返回值是一个高阶组件。connect 函数支持传入两个参数，第一个参数是告诉 connet()这个高阶组件需要把哪些 state 映射过去，因为 state 里面可能存放很多数据，我们这里只需要用到 counter，那么就只需要把 counter 映射过去即可，映射过去之后，就能在 About 组件的 props 属性获取到 counter 了。这个高阶组件内部相当于做了下面这个事情，把 fn1 返回的对象合并到了 About 组件当中，后面就可以从 props 取出映射的对象。
 
-<img src="..\..\images\image-20230617175953425.png" />
+<img src="../../images/image-20230617175953425.png" />
 
 ```javascript
 import React, { PureComponent } from "react";
@@ -926,7 +926,7 @@ yarn add redux-thunk
 
 将 enhancer 作为第二个参数传入到 createStore 中；
 
-<img src="..\..\images\image-20230617213346704.png" />
+<img src="../../images/image-20230617213346704.png" />
 
 **3.定义返回一个函数的 action：**
 
@@ -934,7 +934,7 @@ yarn add redux-thunk
 
 该函数在 dispatch 之后会被执行；
 
-<img src="..\..\images\image-20230617213421073.png" />
+<img src="../../images/image-20230617213421073.png" />
 
 使用 redux-thunk 的代码变成下面这样，就可以在 redux 里面发送网络请求。
 
@@ -1131,7 +1131,7 @@ export default store;
 
 另外关于 reducer 中用到的 constant、action 等我们也依然是在同一个文件中；
 
-<img src="..\..\images\image-20230617230214133.png" />
+<img src="../../images/image-20230617230214133.png" />
 
 ## **combineReducers 函数**
 

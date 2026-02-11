@@ -112,7 +112,7 @@ back：向后改变路径；
 
 ![image-20230715213705858](../../images/image-20230715213705858.png)
 
-<img src="..\..\images\image-20230715213717981.png" />
+<img src="../../images/image-20230715213717981.png" />
 
 ## **认识 react-router**
 

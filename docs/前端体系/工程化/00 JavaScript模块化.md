@@ -815,7 +815,7 @@ https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/
 
 ## **阶段一：构建阶段**
 
-![image-20230327204836016](..\..\images\image-20230327204836016.png)
+![image-20230327204836016](../../images/image-20230327204836016.png)
 
 ## **阶段二和三：实例化阶段 – 求值阶段**
 

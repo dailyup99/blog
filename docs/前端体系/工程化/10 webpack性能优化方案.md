@@ -101,7 +101,7 @@ module.exports = {
 
 ![image-20240527231625477](../../images/image-20240527231625477.png)
 
-![image-20240527231653531](..\..\images\image-20240527231653531.png)
+![image-20240527231653531](../../images/image-20240527231653531.png)
 
 ## **Entry Dependencies(入口依赖)**
 
@@ -135,7 +135,7 @@ module.exports = {
 
 进行共享配置之后，再执行 npm run build，就会多出一个 shared-bundle.js，里面放的就是 axios 的依赖
 
-<img src="..\..\images\image-20240601075432526.png" />
+<img src="../../images/image-20240601075432526.png" />
 
 ## **动态导入(dynamic import)**
 
@@ -224,7 +224,7 @@ btn2.onclick = function () {
 
 打开打包之后的 index.html，一开始不会加载打包之后的 src_router_about_js-bundle.js 和 src_router_category_js-bundle.js
 
-<img src="..\..\images\image-20240601082146496.png" />
+<img src="../../images/image-20240601082146496.png" />
 
 而是等到点击的时候再加载对应的 js 文件。
 
@@ -294,7 +294,7 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601085536418.png" />
+<img src="../../images/image-20240601085536418.png" />
 
 除了加上 name，也可以加上 id，默认打包出来 id 和 name 的名字一样
 
@@ -307,7 +307,7 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601085702385.png" />
+<img src="../../images/image-20240601085702385.png" />
 
 事实上，id 和 name 的名字都可以修改，id 的修改后面再讲，这里先学习怎么修改 name。
 
@@ -513,11 +513,11 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601125919862.png" />
+<img src="../../images/image-20240601125919862.png" />
 
 设置成 single，只会打包一个 runtime.bundle.js
 
-<img src="..\..\images\image-20240601130218400.png" />
+<img src="../../images/image-20240601130218400.png" />
 
 也可以设置成一个对象
 
@@ -531,7 +531,7 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601130322218.png" />
+<img src="../../images/image-20240601130322218.png" />
 
 对象里面除了写 name，还支持传入 function，会打包出来 2 个文件
 
@@ -547,7 +547,7 @@ module.exports = {
 };
 ```
 
-<img src="..\..\images\image-20240601130458980.png" />
+<img src="../../images/image-20240601130458980.png" />
 
 ## **Prefetch 和 Preload**
 
@@ -592,7 +592,7 @@ btn2.onclick = function () {
 
 打包之后打开浏览器就会看到这 2 个 js 文件也会被加载出来，但是顺序一定要在其他资源加载完毕之后。再次刷新浏览器获取是通过 prefetch cache 获取。
 
-<img src="..\..\images\image-20240601124606730.png" />
+<img src="../../images/image-20240601124606730.png" />
 
 ## **什么是 CDN？**
 
@@ -604,7 +604,7 @@ btn2.onclick = function () {
 
 来提供高性能、可扩展性及低成本的网络内容传递给用户；
 
-<img src="..\..\images\image-20240601132823236.png" />
+<img src="../../images/image-20240601132823236.png" />
 
 在开发中，我们使用 CDN 主要是两种方式：
 
@@ -622,7 +622,7 @@ btn2.onclick = function () {
 
 我们可以直接修改 publicPath，在打包时添加上自己的 CDN 地址；
 
-<img src="..\..\images\image-20240601132904643.png" />
+<img src="../../images/image-20240601132904643.png" />
 
 ## **第三方库的 CDN 服务器**
 
@@ -886,7 +886,7 @@ DLL 全程是动态链接库（Dynamic Link Library），是为软件在 Windows
 
 webpack 帮助我们内置了一个 DllPlugin 可以帮助我们打包一个 DLL 的库文件；
 
-<img src="..\..\images\image-20240602175519485.png" />
+<img src="../../images/image-20240602175519485.png" />
 
 webpack.dll.js
 
@@ -942,7 +942,7 @@ package.json
 
 第二步：通过 AddAssetHtmlPlugin 插件，将我们打包的 DLL 库引入到 Html 模块中；
 
-<img src="..\..\images\image-20240602175618741.png" />
+<img src="../../images/image-20240602175618741.png" />
 
 config/webpack.comm.js
 
