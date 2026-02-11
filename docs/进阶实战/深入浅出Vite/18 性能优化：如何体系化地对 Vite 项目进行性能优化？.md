@@ -106,7 +106,7 @@ npm run generate
 
 modulepreload 的兼容性如下:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508311701089.png" alt="image-20250831170133020" style="zoom:67%;" />
+<img src="..\..\images\202508311701089.png" />
 
 仅有 70% 左右的浏览器支持这个特性，不过在 Vite 中我们可以通过配置一键开启 modulepreload 的 Polyfill，从而在使所有支持原生 ESM 的浏览器(占比 90% 以上)都能使用该特性，配置方式如下:
 
@@ -127,7 +127,7 @@ export default {
 
 这样浏览器会在 A 页面加载完毕之后去加载 B 这个域名下的资源，如果用户跳转到了 B页面中，浏览器会直接使用预加载好的资源，从而提升 B 页面的加载速度。而相比Preload， Prefetch 的浏览器[兼容性](https://caniuse.com/?search=preload)不太乐观，具体数据如下图所示:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508311704311.png" alt="image-20250831170458262" style="zoom:67%;" />
+<img src="..\..\images\202508311704311.png" />
 
 ## 资源优化
 

@@ -4,15 +4,15 @@ outline: deep
 
 ## **computed**
 
-**在前面我们讲解过计算属性computed：当我们的某些属性是依赖其他状态时，我们可以使用计算属性来处理**
+**在前面我们讲解过计算属性 computed：当我们的某些属性是依赖其他状态时，我们可以使用计算属性来处理**
 
-在前面的Options API中，我们是使用computed选项来完成的；
+在前面的 Options API 中，我们是使用 computed 选项来完成的；
 
-在Composition API中，我们可以在 setup 函数中使用 computed 方法来编写一个计算属性；
+在 Composition API 中，我们可以在 setup 函数中使用 computed 方法来编写一个计算属性；
 
-**如何使用computed呢？**
+**如何使用 computed 呢？**
 
-方式一：接收一个getter函数，并为 getter 函数返回的值，返回一个不变的 ref 对象；
+方式一：接收一个 getter 函数，并为 getter 函数返回的值，返回一个不变的 ref 对象；
 
 方式二：接收一个具有 get 和 set 的对象，返回一个可变的（可读写）ref 对象；
 
@@ -76,11 +76,11 @@ import { reactive, computed, ref } from 'vue'
 </style>
 ```
 
-## **setup中使用ref**
+## **setup 中使用 ref**
 
-**在setup中如何使用ref获取元素或者组件？**
+**在 setup 中如何使用 ref 获取元素或者组件？**
 
-其实非常简单，我们只需要定义一个ref对象，绑定到元素或者组件的ref属性上即可；
+其实非常简单，我们只需要定义一个 ref 对象，绑定到元素或者组件的 ref 属性上即可；
 
 App.vue
 
@@ -170,33 +170,33 @@ ShowInfo.vue
 
 **我们前面说过 setup 可以用来替代 data 、 methods 、 computed 等等这些选项，也可以替代生命周期钩子。**
 
-**那么setup中如何使用生命周期函数呢？**
+**那么 setup 中如何使用生命周期函数呢？**
 
 可以使用直接导入的 onX 函数注册生命周期钩子；
 
-![image-20230525193533810](http://139.196.79.103:9001/myimages/imgs/image-20230525193533810.png)
+![image-20230525193533810](../../images/image-20230525193533810.png)
 
-## **Provide函数**
+## **Provide 函数**
 
-**事实上我们之前还学习过Provide和Inject，Composition API也可以替代之前的 Provide 和 Inject 的选项。**
+**事实上我们之前还学习过 Provide 和 Inject，Composition API 也可以替代之前的 Provide 和 Inject 的选项。**
 
-**我们可以通过 provide来提供数据：**
+**我们可以通过 provide 来提供数据：**
 
 可以通过 provide 方法来定义每个 Property；
 
-**provide可以传入两个参数：**
+**provide 可以传入两个参数：**
 
 name：提供的属性名称；
 
 value：提供的属性值；
 
-## **Inject函数**
+## **Inject 函数**
 
 **在 后代组件 中可以通过 inject 来注入需要的属性和对应的值：**
 
 可以通过 inject 来注入需要的内容；
 
-**inject可以传入两个参数：**
+**inject 可以传入两个参数：**
 
 要 inject 的 property 的 name；
 
@@ -273,19 +273,19 @@ ShowInfo.vue
 
 ## **侦听数据的变化**
 
-**在前面的Options API中，我们可以通过watch选项来侦听data或者props的数据变化，当数据变化时执行某一些操作。**
+**在前面的 Options API 中，我们可以通过 watch 选项来侦听 data 或者 props 的数据变化，当数据变化时执行某一些操作。**
 
-**在Composition API中，我们可以使用watchEffect和watch来完成响应式数据的侦听；**
+**在 Composition API 中，我们可以使用 watchEffect 和 watch 来完成响应式数据的侦听；**
 
 watchEffect：用于自动收集响应式数据的依赖；
 
 watch：需要手动指定侦听的数据源；
 
-## **Watch的使用**
+## **Watch 的使用**
 
-**watch的API完全等同于组件watch选项的Property：**
+**watch 的 API 完全等同于组件 watch 选项的 Property：**
 
-watch需要侦听特定的数据源，并且执行其回调函数；
+watch 需要侦听特定的数据源，并且执行其回调函数；
 
 默认情况下它是惰性的，只有当被侦听的源发生变化时才会执行回调；
 
@@ -346,15 +346,15 @@ watch需要侦听特定的数据源，并且执行其回调函数；
 
 **侦听器还可以使用数组同时侦听多个源：**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527160955626.png" alt="image-20230527160955626" style="zoom:67%;" />
+<img src="..\..\images\image-20230527160955626.png" />
 
-## **watch的选项**
+## **watch 的选项**
 
-**如果我们希望侦听一个深层的侦听，那么依然需要设置 deep 为true：**
+**如果我们希望侦听一个深层的侦听，那么依然需要设置 deep 为 true：**
 
 也可以传入 immediate 立即执行；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527161056113.png" alt="image-20230527161056113" style="zoom:67%;" />
+<img src="..\..\images\image-20230527161056113.png" />
 
 ## **watchEffect**
 
@@ -362,13 +362,13 @@ watch需要侦听特定的数据源，并且执行其回调函数；
 
 我们来看一个案例：
 
-首先，watchEffect传入的函数会被立即执行一次，并且在执行的过程中会收集依赖；
+首先，watchEffect 传入的函数会被立即执行一次，并且在执行的过程中会收集依赖；
 
-其次，只有收集的依赖发生变化时，watchEffect传入的函数才会再次执行；
+其次，只有收集的依赖发生变化时，watchEffect 传入的函数才会再次执行；
 
-## **watchEffect的停止侦听**
+## **watchEffect 的停止侦听**
 
-**如果在发生某些情况下，我们希望停止侦听，这个时候我们可以获取watchEffect的返回值函数，调用该函数即可。**
+**如果在发生某些情况下，我们希望停止侦听，这个时候我们可以获取 watchEffect 的返回值函数，调用该函数即可。**
 
 ```javascript
 <template>
@@ -419,31 +419,31 @@ watch需要侦听特定的数据源，并且执行其回调函数；
 hooks/useCounter.js
 
 ```javascript
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
 export default function useCounter() {
-  const counter = ref(0)
+  const counter = ref(0);
   function increment() {
-    counter.value++
+    counter.value++;
   }
   function decrement() {
-    counter.value--
+    counter.value--;
   }
   onMounted(() => {
     setTimeout(() => {
-      counter.value = 989
+      counter.value = 989;
     }, 1000);
-  })
+  });
 
   return {
     counter,
     increment,
-    decrement
-  }
+    decrement,
+  };
 }
 ```
 
-在Home.vue中使用
+在 Home.vue 中使用
 
 ```javascript
 <template>
@@ -473,7 +473,7 @@ export default function useCounter() {
 </style>
 ```
 
-在About.vue中使用
+在 About.vue 中使用
 
 ```javascript
 <template>
@@ -501,7 +501,7 @@ export default function useCounter() {
 
 ## **useTitle**
 
-如果我们只是想点击按钮修改标题，可以写个下面这样的useTitle
+如果我们只是想点击按钮修改标题，可以写个下面这样的 useTitle
 
 App.vue
 
@@ -542,13 +542,13 @@ hooks/useTitle.js
 
 ```javascript
 export default function useTitle() {
-  document.title = title
+  document.title = title;
 }
 ```
 
-如果我们是在多个页面来回之间切换，当点击home按钮时，标题改成首页，点击about按钮时，标题改成关于
+如果我们是在多个页面来回之间切换，当点击 home 按钮时，标题改成首页，点击 about 按钮时，标题改成关于
 
-在Home.vue和About.vue都调用useTitle就行了
+在 Home.vue 和 About.vue 都调用 useTitle 就行了
 
 App.vue
 
@@ -665,7 +665,7 @@ views/About.vue
 </style>
 ```
 
-但是也有可能我们想在Home.vue中频繁更改title，比如下面这样，那么会发现调用了多次useTitle函数
+但是也有可能我们想在 Home.vue 中频繁更改 title，比如下面这样，那么会发现调用了多次 useTitle 函数
 
 ```javascript
 <template>
@@ -717,7 +717,7 @@ views/About.vue
 </style>
 ```
 
-我们希望的是useTitle会返回一个title，然后在Home.vue中引入，只需要调用一次useTitle，之后只需要改useTitle返回的title就行了。
+我们希望的是 useTitle 会返回一个 title，然后在 Home.vue 中引入，只需要调用一次 useTitle，之后只需要改 useTitle 返回的 title 就行了。
 
 ```javascript
 <template>
@@ -771,7 +771,7 @@ views/About.vue
 </style>
 ```
 
-useTitle.js也得做修改，返回title
+useTitle.js 也得做修改，返回 title
 
 ```javascript
 import { ref, watch } from "vue";
@@ -780,48 +780,51 @@ export default function useTitle(titleValue) {
   // document.title = title
 
   // 定义ref的引入数据
-  const title = ref(titleValue)
+  const title = ref(titleValue);
 
   // 监听title的改变
-  watch(title, (newValue) => {
-    document.title = newValue
-  }, {
-    immediate: true
-  })
+  watch(
+    title,
+    (newValue) => {
+      document.title = newValue;
+    },
+    {
+      immediate: true,
+    }
+  );
 
   // 返回ref值
   return {
-    title
-  }
+    title,
+  };
 }
 ```
 
 ## **useScrollPosition**
 
-我们来完成一个监听界面滚动位置的Hook：
+我们来完成一个监听界面滚动位置的 Hook：
 
 useScrollPosition.js
 
 ```javascript
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 export default function useScrollPosition() {
   // 1.使用reative记录位置
   const scrollPosition = reactive({
     x: 0,
-    y: 0
-  })
+    y: 0,
+  });
 
   // 2.监听滚动
   document.addEventListener("scroll", () => {
-    scrollPosition.x = window.scrollX
-    scrollPosition.y = window.scrollY
-  })
-
+    scrollPosition.x = window.scrollX;
+    scrollPosition.y = window.scrollY;
+  });
 
   return {
-    scrollPosition
-  }
+    scrollPosition,
+  };
 }
 ```
 
@@ -855,7 +858,7 @@ Home.vue
 </style>
 ```
 
-## **script setup语法**
+## **script setup 语法**
 
 `<script setup>` 是在单文件组件 (SFC) 中使用组合式 API 的编译时语法糖，当同时使用 SFC 与组合式 API 时则推荐该语法。
 
@@ -869,7 +872,7 @@ Home.vue
 
 **使用这个语法，需要将 setup attribute 添加到 `<script>` 代码块上：**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527180135707.png" alt="image-20230527180135707" style="zoom:67%;" />
+<img src="..\..\images\image-20230527180135707.png" />
 
 里面的代码会被编译成组件 setup() 函数的内容：
 
@@ -879,19 +882,19 @@ Home.vue
 
 ## **顶层的绑定会被暴露给模板**
 
-**当使用 `<script setup>` 的时候，任何在 `<script setup> `声明的顶层的绑定 (包括变量，函数声明，以及 import 引入的内容)** 
+**当使用 `<script setup>` 的时候，任何在 `<script setup> `声明的顶层的绑定 (包括变量，函数声明，以及 import 引入的内容)**
 
 **都能在模板中直接使用**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527180159040.png" alt="image-20230527180159040" style="zoom:67%;" />
+<img src="..\..\images\image-20230527180159040.png" />
 
-**响应式数据需要通过ref、reactive来创建。**
+**响应式数据需要通过 ref、reactive 来创建。**
 
 ## **导入的组件直接使用**
 
 `<script setup>` 范围里的值也能被直接作为自定义组件的标签名使用：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527180218676.png" alt="image-20230527180218676" style="zoom:67%;" />
+<img src="..\..\images\image-20230527180218676.png" />
 
 ## **defineProps() 和 defineEmits()**
 
@@ -899,7 +902,7 @@ Home.vue
 
 **地在 `<script setup>` 中可用：**
 
-![image-20230527180536618](http://139.196.79.103:9001/myimages/imgs/image-20230527180536618.png)
+![image-20230527180536618](../../images/image-20230527180536618.png)
 
 ## **defineExpose()**
 
@@ -909,7 +912,7 @@ Home.vue
 
 **通过 defineExpose 编译器宏来显式指定在 `<script setup>` 组件中要暴露出去的 property：**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527180723117.png" alt="image-20230527180723117" style="zoom:67%;" />
+<img src="..\..\images\image-20230527180723117.png" />
 
 App.vue
 
@@ -917,7 +920,7 @@ App.vue
 <template>
   <div>AppContent: {{ message }}</div>
   <button @click="changeMessage">修改message</button>
-  <show-info name="why" 
+  <show-info name="why"
              :age="18"
              @info-btn-click="infoBtnClick"
              ref="showInfoRef">
@@ -1000,7 +1003,7 @@ defineExpose({
 
 ## **案例实战练习**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230527182309572.png" alt="image-20230527182309572" style="zoom: 80%;" />
+<img src="..\..\images\image-20230527182309572.png" />
 
 App.vue
 
@@ -1238,10 +1241,7 @@ data/high_score.json
       "id": "47773281",
       "picture_url": "https://z1.muscache.cn/im/pictures/miso/Hosting-47773281/original/de5df68f-8582-4ee6-82c4-a52443d9e83b.jpeg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "整套公寓型住宅",
-          "1室1卫1床"
-        ],
+        "messages": ["整套公寓型住宅", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "价格真实 实图拍摄 整套单独使用每客消毒 高清投影【方糖】人民北路地铁|龙湖上城|火车北站|密码锁|",
@@ -1274,10 +1274,7 @@ data/high_score.json
       "id": "54376288",
       "picture_url": "https://z1.muscache.cn/im/pictures/miso/Hosting-54376288/original/71d12acc-ee2c-4721-8809-8a2b4666bb01.jpeg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "整套公寓型住宅",
-          "1室1卫1床"
-        ],
+        "messages": ["整套公寓型住宅", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "漫漫 | 杨桃 轻奢一居室/地铁口/近春熙路太古里/4米9挑高/全景落地窗",
@@ -1310,10 +1307,7 @@ data/high_score.json
       "id": "45817721",
       "picture_url": "https://z1.muscache.cn/im/pictures/miso/Hosting-45817721/original/80f99830-f104-4404-86fd-1af856ac9b73.jpeg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "独立房间",
-          "1室1卫1床"
-        ],
+        "messages": ["独立房间", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "【可月租】【网红美食街区】/近春熙路/宽窄巷子/熊猫基地//【轻奢大床房】",
@@ -1346,10 +1340,7 @@ data/high_score.json
       "id": "47434782",
       "picture_url": "https://z1.muscache.cn/im/pictures/miso/Hosting-47434782/original/8e550632-acec-4478-a641-7ecc0062b1db.jpeg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "整套公寓型住宅",
-          "1室1卫1床"
-        ],
+        "messages": ["整套公寓型住宅", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "可月租！品质大床！高空观景露台/步行地铁站/白天免费停车/直达春熙路/近建设巷小吃街",
@@ -1382,10 +1373,7 @@ data/high_score.json
       "id": "40356486",
       "picture_url": "https://z1.muscache.cn/im/pictures/e4aa2fdd-70f5-43dc-90ee-8a6d1d739d84.jpg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "整套公寓型住宅",
-          "1室1卫1床"
-        ],
+        "messages": ["整套公寓型住宅", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "「精致mini房」楼下商场｜地铁直达近春熙路太古里｜建设巷小吃街｜白天免费停车｜可开发票｜行李寄存",
@@ -1418,10 +1406,7 @@ data/high_score.json
       "id": "45098754",
       "picture_url": "https://z1.muscache.cn/im/pictures/6e739539-940e-456f-a10d-0e8526feb943.jpg?aki_policy=large",
       "verify_info": {
-        "messages": [
-          "整套公寓",
-          "1室1卫1床"
-        ],
+        "messages": ["整套公寓", "1室1卫1床"],
         "text_color": "#767676"
       },
       "name": "【住.颜23】免清洁费/下楼就是太古里春熙路/高空浴缸/落地窗带阳台/百寸极米投影双地铁/其他点头像",
@@ -1453,4 +1438,3 @@ data/high_score.json
   ]
 }
 ```
-

@@ -8,7 +8,7 @@ outline: deep
 
 首先，屏蔽掉之前全部引入的代码
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250044025.webp)
+![图片](../../images/202506250044025.webp)
 
 通过 pnpm 安装 unplugin-vue-components 和 unplugin-auto-import 插件，可自动按需导入，无需手动操作，兼顾开发效率与性能优化。
 
@@ -30,7 +30,7 @@ outline: deep
 pnpm install -D unplugin-vue-components unplugin-auto-import
 ```
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250045579.webp)
+![图片](../../images/202506250045579.webp)
 
 ## **普通组件自动导入配置**
 
@@ -38,7 +38,7 @@ pnpm install -D unplugin-vue-components unplugin-auto-import
 
 在 vite.config.ts 中引入
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250046385.webp)
+![图片](../../images/202506250046385.webp)
 
 ```typescript
 //vite.config.ts
@@ -52,20 +52,20 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
   plugins: [
     vue(),
     UnoCSS({
-      configFile: "./UnoCSS.config.ts"
+      configFile: "./UnoCSS.config.ts",
     }),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()]
-    })
-  ]
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
 });
 ```
 
@@ -73,17 +73,17 @@ export default defineConfig({
 
 在 dashboard.vue 中尝试引入一个 Element Plus 组件
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250048748.webp)
+![图片](../../images/202506250048748.webp)
 
 npm run dev 启动项目，可以看见页面能正常显示按钮，说明 Element Plus 组件已经自动按需导入了
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250048306.webp)
+![图片](../../images/202506250048306.webp)
 
 ### **2.3 自定义组件自动导入**
 
 一般自定义组件使用时，需要在页面用 import 引入，否则会报错。其实，自定义组件也可以实现按需自定义导入，修改 vite.config.ts 配置如下
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250049607.webp)
+![图片](../../images/202506250049607.webp)
 
 ```typescript
 //vite.config.ts
@@ -97,15 +97,15 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
   plugins: [
     vue(),
     UnoCSS({
-      configFile: "./UnoCSS.config.ts"
+      configFile: "./UnoCSS.config.ts",
     }),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver()],
     }),
     Components({
       //解析Element Plus组件
@@ -115,20 +115,20 @@ export default defineConfig({
         "src/components",
         "src/layout/components",
         "src/views/**/components",
-        "src/views/"
-      ]
-    })
-  ]
+        "src/views/",
+      ],
+    }),
+  ],
 });
 ```
 
-这样，在页面中使用配置好的文件夹下的组件时，就会自动导入，如下图，可以在 Dashboard.vue 中直接使用 Test 组件，不需要 import 
+这样，在页面中使用配置好的文件夹下的组件时，就会自动导入，如下图，可以在 Dashboard.vue 中直接使用 Test 组件，不需要 import
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250052591.webp)
+![图片](../../images/202506250052591.webp)
 
 页面效果如下
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250052291.webp)
+![图片](..\..\images\202506250052291.webp)
 
 ### **2.4 自动生成的配置文件**
 
@@ -146,17 +146,17 @@ export default defineConfig({
 > - **内容**：文件中会为每个 Vue 组件生成一个类型声明，这些声明告诉 TypeScript 编译器这些组件的存在以及它们的 props、slots 等。
 > - **生成方式**：在 Vue 项目中，通常是通过 `vue-loader` 或其他相关的 Vue 插件自动检测项目中的组件，并生成相应的类型声明。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250054892.webp)
+![图片](../../images/202506250054892.webp)
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250054775.webp)
+![图片](..\..\images\202506250054775.webp)
 
-## **API自动导入配置**
+## **API 自动导入配置**
 
-在 vite 中使用 unplugin-auto-import 插件，会自动扫描代码，在需要的地方插入必要的导入语句。通常用于自动导入某些库或模块中的API。
+在 vite 中使用 unplugin-auto-import 插件，会自动扫描代码，在需要的地方插入必要的导入语句。通常用于自动导入某些库或模块中的 API。
 
 如图，在 vite.config.ts 中增加配置
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250056313.webp)
+![图片](../../images/202506250056313.webp)
 
 ```typescript
 //vite.config.ts
@@ -170,17 +170,17 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
   plugins: [
     vue(),
     UnoCSS({
-      configFile: "./UnoCSS.config.ts"
+      configFile: "./UnoCSS.config.ts",
     }),
     AutoImport({
       // api
       imports: ["vue", "vue-router", "pinia"],
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver()],
     }),
     Components({
       //解析Element Plus组件
@@ -189,20 +189,20 @@ export default defineConfig({
       dirs: [
         "src/components",
         "src/layout/components",
-        "src/views/**/components"
-      ]
-    })
-  ]
+        "src/views/**/components",
+      ],
+    }),
+  ],
 });
 ```
 
-在配置完成后，您就可以在项目中直接使用 `vue`、`vue-router` 和 `pinia` 的 API，而无需手动导入它们。例如，您可以直接使用 `ref`、`computed` 等 Vue 的响应式API，而无需在文件顶部写 `import { ref, computed } from 'vue'`。
+在配置完成后，您就可以在项目中直接使用 `vue`、`vue-router` 和 `pinia` 的 API，而无需手动导入它们。例如，您可以直接使用 `ref`、`computed` 等 Vue 的响应式 API，而无需在文件顶部写 `import { ref, computed } from 'vue'`。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250057558.webp)
+![图片](../../images/202506250057558.webp)
 
 如上图，虽然现在不需要在文件顶部通过 import 导入 vue 等的 api，但是 eslint 会飘红报错，这需要在 vite.config.ts 中修改一个 eslint 的配置。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250058679.webp)
+![图片](../../images/202506250058679.webp)
 
 ```typescript
 //vite.config.ts
@@ -216,18 +216,18 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
   plugins: [
     vue(),
     UnoCSS({
-      configFile: "./UnoCSS.config.ts"
+      configFile: "./UnoCSS.config.ts",
     }),
     AutoImport({
       // api
       imports: ["vue", "vue-router", "pinia"],
       resolvers: [ElementPlusResolver()],
-      eslintrc: { enabled: false } // 给eslint生产的配置 只需要一次,
+      eslintrc: { enabled: false }, // 给eslint生产的配置 只需要一次,
     }),
     Components({
       //解析Element Plus组件
@@ -236,16 +236,16 @@ export default defineConfig({
       dirs: [
         "src/components",
         "src/layout/components",
-        "src/views/**/components"
-      ]
-    })
-  ]
+        "src/views/**/components",
+      ],
+    }),
+  ],
 });
 ```
 
 配置后，会生成一个 .eslintrc-auto-import.json 文件
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250058804.webp)
+![图片](../../images/202506250058804.webp)
 
 在 eslint.config.js 中引入
 
@@ -266,32 +266,32 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...autoImport.globals
-      }
-    }
+        ...autoImport.globals,
+      },
+    },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs["flat/essential"],
   {
     files: ["**/*.vue"],
-    languageOptions: { parserOptions: { parser: tseslint.parser } }
+    languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
   {
     // 自定义规则,根据需要增加  eslint 主要是校验代码规范  prettier  格式化代码的
     rules: {
       "no-console": "warn",
-      "vue/multi-word-component-names": "off"
-    }
+      "vue/multi-word-component-names": "off",
+    },
   },
-  prettierRecommended // 覆盖掉eslint的规范
+  prettierRecommended, // 覆盖掉eslint的规范
 ];
 ```
 
 修改 tsconfig.app.json 的 types
 
 ```json
-//tsconfig.app.json 
+//tsconfig.app.json
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
@@ -314,11 +314,11 @@ export default [
 
 这样，页面中就不会报错了
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250100363.webp)
+![图片](../../images/202506250100363.webp)
 
 页面也正常显示
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250101993.webp)
+![图片](..\..\images\202506250101993.webp)
 
 ## **服务型组件自动导入配置**
 
@@ -331,7 +331,7 @@ export default [
 
 由于服务型组件的特点，上文中组件自动导入配置就无法生效，使用时需要单独引入。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250103611.webp)
+![图片](../../images/202506250103611.webp)
 
 为了使服务型组件也可以自动导入，这里需要单独配置。
 
@@ -377,11 +377,11 @@ app.mount("#app");
 
 这样，就可以在页面中通过实例直接使用了
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250105649.webp)
+![图片](../../images/202506250105649.webp)
 
 页面中点击按钮，可以发现消息功能正常，但是样式还存在问题
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250105973.webp)
+![图片](../../images/202506250105973.webp)
 
 解决样式问题，需要通过 pnpm 安装插件 unplugin-element-plus 来自动导入样式
 
@@ -389,11 +389,11 @@ app.mount("#app");
 pnpm i unplugin-element-plus
 ```
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250106063.webp)
+![图片](../../images/202506250106063.webp)
 
 在 vite.config.ts 中引入
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250106806.webp)
+![图片](../../images/202506250106806.webp)
 
 ```typescript
 //vite.config.ts
@@ -408,18 +408,18 @@ import ElementPlus from "unplugin-element-plus/vite";
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
   plugins: [
     vue(),
     UnoCSS({
-      configFile: "./UnoCSS.config.ts"
+      configFile: "./UnoCSS.config.ts",
     }),
     AutoImport({
       // api
       imports: ["vue", "vue-router", "pinia"],
       resolvers: [ElementPlusResolver()],
-      eslintrc: { enabled: false } // 给eslint生产的配置 只需要一次,
+      eslintrc: { enabled: false }, // 给eslint生产的配置 只需要一次,
     }),
     Components({
       //解析Element Plus组件
@@ -428,16 +428,16 @@ export default defineConfig({
       dirs: [
         "src/components",
         "src/layout/components",
-        "src/views/**/components"
-      ]
+        "src/views/**/components",
+      ],
     }),
-    ElementPlus({}) // 导入样式 不需要引入
-  ]
+    ElementPlus({}), // 导入样式 不需要引入
+  ],
 });
 ```
 
 配置完成后，页面就能正常显示了，样式都是按需加载的
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506250107063.webp)
+![图片](../../images/202506250107063.webp)
 
 现在，我们的项目更加高效且易于管理了。这样的改进虽然简单，但效果显著，让我们的工作变得更轻松。期待未来，我们能继续这样一点一滴地进步。

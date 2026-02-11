@@ -2,13 +2,13 @@
 outline: deep
 ---
 
-## **认识插槽Slot**
+## **认识插槽 Slot**
 
 **在开发中，我们会经常封装一个个可复用的组件：**
 
-前面我们会通过props传递给组件一些数据，让组件来进行展示；
+前面我们会通过 props 传递给组件一些数据，让组件来进行展示；
 
-但是为了让这个组件具备更强的通用性，我们不能将组件中的内容限制为固定的div、span等等这些元素；
+但是为了让这个组件具备更强的通用性，我们不能将组件中的内容限制为固定的 div、span 等等这些元素；
 
 比如某种情况下我们使用组件，希望组件显示的是一个按钮，某种情况下我们使用组件希望显示的是一张图片；
 
@@ -24,27 +24,27 @@ outline: deep
 
 右边可能是一个文字，也可能是一个图标，也可能什么都不显示；
 
-![image-20230508200451131](http://139.196.79.103:9001/myimages/imgs/image-20230508200451131.png)
+![image-20230508200451131](../../images/image-20230508200451131.png)
 
-## **如何使用插槽slot？**
+## **如何使用插槽 slot？**
 
-**这个时候我们就可以来定义插槽slot：**
+**这个时候我们就可以来定义插槽 slot：**
 
 插槽的使用过程其实是抽取共性、预留不同；
 
 我们会将共同的元素、内容依然在组件内进行封装；
 
-同时会将不同的元素使用slot作为占位，让外部决定到底显示什么样的元素；
+同时会将不同的元素使用 slot 作为占位，让外部决定到底显示什么样的元素；
 
-**如何使用slot呢？**
+**如何使用 slot 呢？**
 
-Vue中将 `<slot> `元素作为承载分发内容的出口；
+Vue 中将 `<slot> `元素作为承载分发内容的出口；
 
 在封装组件中，使用特殊的元素`<slot>`就可以为封装组件开启一个插槽；
 
 该插槽插入什么内容取决于父组件如何使用；
 
-![image-20230508200610217](http://139.196.79.103:9001/myimages/imgs/image-20230508200610217.png)
+![image-20230508200610217](../../images/image-20230508200610217.png)
 
 ## **插槽的默认内容**
 
@@ -124,17 +124,17 @@ ShowMessage.vue
 
 我们会发现默认情况下每个插槽都会获取到我们插入的内容来显示；
 
-![image-20230508202556485](http://139.196.79.103:9001/myimages/imgs/image-20230508202556485.png)
+![image-20230508202556485](../../images/image-20230508202556485.png)
 
 ## **插槽的基本使用**
 
-**我们一个组件MySlotCpn.vue：该组件中有一个插槽，我们可以在插槽中放入需要显示的内容；**
+**我们一个组件 MySlotCpn.vue：该组件中有一个插槽，我们可以在插槽中放入需要显示的内容；**
 
-**我们在App.vue中使用它们：**
+**我们在 App.vue 中使用它们：**
 
-我们可以插入普通的内容、html元素、组件，都可以是可以的；
+我们可以插入普通的内容、html 元素、组件，都可以是可以的；
 
-![image-20230508202724602](http://139.196.79.103:9001/myimages/imgs/image-20230508202724602.png)
+![image-20230508202724602](../../images/image-20230508202724602.png)
 
 ## **具名插槽的使用**
 
@@ -142,9 +142,9 @@ ShowMessage.vue
 
 具名插槽顾名思义就是给插槽起一个名字，`<slot>` 元素有一个特殊的 attribute：name；
 
-一个不带 name 的slot，会带有隐含的名字 default；
+一个不带 name 的 slot，会带有隐含的名字 default；
 
-![image-20230508202847100](http://139.196.79.103:9001/myimages/imgs/image-20230508202847100.png)
+![image-20230508202847100](../../images/image-20230508202847100.png)
 
 ## **动态插槽名**
 
@@ -152,11 +152,11 @@ ShowMessage.vue
 
 目前我们使用的插槽名称都是固定的；
 
-比如 v-slot:left、v-slot:center等等；
+比如 v-slot:left、v-slot:center 等等；
 
 我们可以通过 v-slot:[dynamicSlotName]方式动态绑定一个名称；
 
-![image-20230508202942255](http://139.196.79.103:9001/myimages/imgs/image-20230508202942255.png)
+![image-20230508202942255](../../images/image-20230508202942255.png)
 
 ## **具名插槽使用的时候缩写**
 
@@ -166,7 +166,7 @@ ShowMessage.vue
 
 即把参数之前的所有内容 (v-slot:) 替换为字符 #；
 
-![image-20230508203014362](http://139.196.79.103:9001/myimages/imgs/image-20230508203014362.png)
+![image-20230508203014362](../../images/image-20230508203014362.png)
 
 App.vue
 
@@ -271,7 +271,7 @@ NavBar.vue
 
 ## **渲染作用域**
 
-**在Vue中有渲染作用域的概念：**
+**在 Vue 中有渲染作用域的概念：**
 
 父级模板里的所有内容都是在父级作用域中编译的；
 
@@ -279,13 +279,13 @@ NavBar.vue
 
 **如何理解这句话呢？我们来看一个案例：**
 
-在我们的案例中ChildCpn自然是可以让问自己作用域中的title内容的；
+在我们的案例中 ChildCpn 自然是可以让问自己作用域中的 title 内容的；
 
-但是在App中，是访问不了ChildCpn中的内容的，因为它们是跨作用域的访问；
+但是在 App 中，是访问不了 ChildCpn 中的内容的，因为它们是跨作用域的访问；
 
 ## **渲染作用域案例**
 
-![image-20230508203911110](http://139.196.79.103:9001/myimages/imgs/image-20230508203911110.png)
+![image-20230508203911110](../../images/image-20230508203911110.png)
 
 ## **认识作用域插槽**
 
@@ -293,45 +293,45 @@ NavBar.vue
 
 当一个组件被用来渲染一个数组元素时，我们使用插槽，并且希望插槽中没有显示每项的内容；
 
-这个Vue给我们提供了作用域插槽；
+这个 Vue 给我们提供了作用域插槽；
 
- **我们来看下面的一个案例：**
+**我们来看下面的一个案例：**
 
-1.在App.vue中定义好数据
+1.在 App.vue 中定义好数据
 
-2.传递给ShowNames组件中
+2.传递给 ShowNames 组件中
 
-3.ShowNames组件中遍历names数据
+3.ShowNames 组件中遍历 names 数据
 
-4.定义插槽的prop
+4.定义插槽的 prop
 
-5.通过v-slot:default的方式获取到slot的props
+5.通过 v-slot:default 的方式获取到 slot 的 props
 
-6.使用slotProps中的item和index
+6.使用 slotProps 中的 item 和 index
 
 ## **作用域插槽的案例**
 
-![image-20230508204825260](http://139.196.79.103:9001/myimages/imgs/image-20230508204825260.png)
+![image-20230508204825260](../../images/image-20230508204825260.png)
 
 ## **独占默认插槽的缩写**
 
-**如果我们的插槽是默认插槽default，那么在使用的时候 v-slot:default="slotProps"可以简写为v-slot="slotProps"：**
+**如果我们的插槽是默认插槽 default，那么在使用的时候 v-slot:default="slotProps"可以简写为 v-slot="slotProps"：**
 
-![image-20240502132948360](http://139.196.79.103:9001/myimages/imgs/image-20240502132948360.png)
+![image-20240502132948360](../../images/image-20240502132948360.png)
 
 **并且如果我们的插槽只有默认插槽时，组件的标签可以被当做插槽的模板来使用，这样，我们就可以将 v-slot 直接用在组件上：**
 
-![image-20230508205432822](http://139.196.79.103:9001/myimages/imgs/image-20230508205432822.png)
+![image-20230508205432822](../../images/image-20230508205432822.png)
 
 ## **默认插槽和具名插槽混合**
 
-**但是，如果我们有默认插槽和具名插槽，那么按照完整的template来编写。**
+**但是，如果我们有默认插槽和具名插槽，那么按照完整的 template 来编写。**
 
-![image-20230508205459761](http://139.196.79.103:9001/myimages/imgs/image-20230508205459761.png)
+![image-20230508205459761](../../images/image-20230508205459761.png)
 
 **只要出现多个插槽，请始终为所有的插槽使用完整的基于 `<template>` 的语法：**
 
-![image-20230508205558444](http://139.196.79.103:9001/myimages/imgs/image-20230508205558444.png)
+![image-20230508205558444](../../images/image-20230508205558444.png)
 
 App.vue
 
@@ -339,7 +339,7 @@ App.vue
 <template>
   <div class="app">
     <!-- 1.tab-control -->
-    <tab-control :titles="['衣服', '鞋子', '裤子']" 
+    <tab-control :titles="['衣服', '鞋子', '裤子']"
                  @tab-item-click="tabItemClick"/>
 
     <!-- <tab-control :titles="['流行', '最新', '优选']"/> -->
@@ -348,16 +348,16 @@ App.vue
     <h1>{{ pageContents[currentIndex] }}</h1>
 
     <!-- 1.tab-control: button -->
-    <tab-control :titles="['衣服', '鞋子', '裤子']" 
+    <tab-control :titles="['衣服', '鞋子', '裤子']"
                  @tab-item-click="tabItemClick">
       <template v-slot:default="props">
         <button>{{ props.item }}</button>
       </template>
     </tab-control>
 
-    
+
     <!-- 2.tab-control: a元素(重要) -->
-    <tab-control :titles="['衣服', '鞋子', '裤子']" 
+    <tab-control :titles="['衣服', '鞋子', '裤子']"
                  @tab-item-click="tabItemClick">
       <template #default="props">
         <a href="#">{{ props.item }}</a>
@@ -365,7 +365,7 @@ App.vue
     </tab-control>
 
     <!-- 3.独占默认插槽的简写(了解) -->
-    <tab-control :titles="['衣服', '鞋子', '裤子']" 
+    <tab-control :titles="['衣服', '鞋子', '裤子']"
                  @tab-item-click="tabItemClick">
       <template v-slot="props">
         <button>{{ props.item }}</button>
@@ -373,7 +373,7 @@ App.vue
     </tab-control>
 
     <!-- 4.如果只有一个默认插槽, 那么template可以省略 -->
-    <tab-control :titles="['衣服', '鞋子', '裤子']" 
+    <tab-control :titles="['衣服', '鞋子', '裤子']"
                  @tab-item-click="tabItemClick"
                  v-slot="props">
       <button>{{ props.item }}</button>
@@ -481,13 +481,13 @@ TabControl.vue
 
 Provide/Inject；
 
-## **Provide和Inject**
+## **Provide 和 Inject**
 
-Provide/Inject用于**非父子组件之间共享数据**：
+Provide/Inject 用于**非父子组件之间共享数据**：
 
 比如有一些深度嵌套的组件，子组件想要获取父组件的部分内容；
 
-在这种情况下，如果我们仍然将props沿着组件链逐级传递下去，就会非常的麻烦；
+在这种情况下，如果我们仍然将 props 沿着组件链逐级传递下去，就会非常的麻烦；
 
 对于这种情况下，**我们可以使用 Provide 和 Inject ：**
 
@@ -503,43 +503,43 @@ Provide/Inject用于**非父子组件之间共享数据**：
 
 子组件不需要知道 inject 的 property 来自哪里
 
-![image-20230511081149188](http://139.196.79.103:9001/myimages/imgs/image-20230511081149188.png)
+![image-20230511081149188](../../images/image-20230511081149188.png)
 
-## **Provide和Inject基本使用**
+## **Provide 和 Inject 基本使用**
 
 我们开发一个这样的结构：
 
-![image-20230511081242872](http://139.196.79.103:9001/myimages/imgs/image-20230511081242872.png)
+![image-20230511081242872](../../images/image-20230511081242872.png)
 
-## **Provide和Inject函数的写法**
+## **Provide 和 Inject 函数的写法**
 
-如果Provide中提供的一些数据是**来自data**，那么我们可能会想要**通过this来获取**：
+如果 Provide 中提供的一些数据是**来自 data**，那么我们可能会想要**通过 this 来获取**：
 
 **这个时候会报错：**
 
-如果provide想使用data里面的数据，就要写成函数的形式，像下面这样
+如果 provide 想使用 data 里面的数据，就要写成函数的形式，像下面这样
 
-![image-20230511081354500](http://139.196.79.103:9001/myimages/imgs/image-20230511081354500.png)
+![image-20230511081354500](../../images/image-20230511081354500.png)
 
 ## **处理响应式数据**
 
-我们先来验证一个结果：**如果我们修改了this.names的内容，那么使用length的子组件会不会是响应式的？**
+我们先来验证一个结果：**如果我们修改了 this.names 的内容，那么使用 length 的子组件会不会是响应式的？**
 
 我们会发现对应的子组件中是**没有反应的**：
 
-这是因为当我们修改了names之后，之前在provide中引入的 this.names.length 本身并不是响应式的；
+这是因为当我们修改了 names 之后，之前在 provide 中引入的 this.names.length 本身并不是响应式的；
 
 **那么怎么样可以让我们的数据变成响应式的呢？**
 
-非常的简单，我们可以使用响应式的一些API来完成这些功能，比如说computed函数；
+非常的简单，我们可以使用响应式的一些 API 来完成这些功能，比如说 computed 函数；
 
-当然，这个computed是vue3的新特性，在后面我会专门讲解，这里大家可以先直接使用一下；
+当然，这个 computed 是 vue3 的新特性，在后面我会专门讲解，这里大家可以先直接使用一下；
 
-**注意：我们在使用length的时候需要获取其中的value**
+**注意：我们在使用 length 的时候需要获取其中的 value**
 
-这是因为computed返回的是一个ref对象，需要取出其中的value来使用；
+这是因为 computed 返回的是一个 ref 对象，需要取出其中的 value 来使用；
 
-![image-20230511081609954](http://139.196.79.103:9001/myimages/imgs/image-20230511081609954.png)
+![image-20230511081609954](../../images/image-20230511081609954.png)
 
 下面是另外一个示例
 
@@ -627,11 +627,11 @@ HomeBanner.vue
 </style>
 ```
 
-## **全局事件总线mitt库**
+## **全局事件总线 mitt 库**
 
-**Vue3从实例中移除了 $on、$off 和 $once 方法，所以我们如果希望继续使用全局事件总线，要通过第三方的库**：
+**Vue3 从实例中移除了 $on、$off 和 $once 方法，所以我们如果希望继续使用全局事件总线，要通过第三方的库**：
 
-Vue3官方有推荐一些库，例如 mitt 或 tiny-emitter；
+Vue3 官方有推荐一些库，例如 mitt 或 tiny-emitter；
 
 这里我们主要讲解一下 hy-event-store 的使用；
 
@@ -641,23 +641,23 @@ Vue3官方有推荐一些库，例如 mitt 或 tiny-emitter；
 npm install hy-event-bus
 ```
 
-**其次，我们可以封装一个工具eventbus.js：**
+**其次，我们可以封装一个工具 eventbus.js：**
 
 ```javascript
-import { HYEventBus } from 'hy-event-store'
+import { HYEventBus } from "hy-event-store";
 
-const eventBus = new HYEventBus()
+const eventBus = new HYEventBus();
 
-export default eventBus
+export default eventBus;
 ```
 
 ## **使用事件总线工具**
 
 **在项目中可以使用它们：**
 
-在HomeBanner.vue中触发事件
+在 HomeBanner.vue 中触发事件
 
-在App.vue中监听事件
+在 App.vue 中监听事件
 
 HomeBanner.vue
 
@@ -727,18 +727,18 @@ App.vue
 utils/event-bus.js
 
 ```javascript
-import { HYEventBus } from 'hy-event-store'
+import { HYEventBus } from "hy-event-store";
 
-const eventBus = new HYEventBus()
+const eventBus = new HYEventBus();
 
-export default eventBus
+export default eventBus;
 ```
 
-## **Mitt的事件取消**
+## **Mitt 的事件取消**
 
 在某些情况下我们可能希望**取消掉之前注册的函数监听**：
 
-在App.vue，加个按钮控制是否展示category组件
+在 App.vue，加个按钮控制是否展示 category 组件
 
 ```javascript
 <template>
@@ -814,4 +814,3 @@ Category.vue
 <style scoped>
 </style>
 ```
-

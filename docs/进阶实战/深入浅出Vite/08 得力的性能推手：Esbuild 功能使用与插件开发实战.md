@@ -57,7 +57,7 @@ pnpm install react react-dom
 
 现在，你可以在终端执行 pnpm run build ，可以发现如下的日志信息:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241459417.png" alt="image-20250824145946388" style="zoom:67%;" />
+<img src="..\..\images\202508241459417.png" />
 
 说明我们已经成功通过命令行完成了 Esbuild 打包！但命令行的使用方式不够灵活，只能传入一些简单的命令行参数，稍微复杂的场景就不适用了，所以一般情况下我们还是会用代码调用的方式。
 
@@ -114,13 +114,13 @@ runBuild();
 
 随后，你在命令行执行 node build.js ，就能在控制台发现如下日志信息:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241502119.png" alt="image-20250824150216086" style="zoom:67%;" />
+<img src="..\..\images\202508241502119.png" />
 
 以上就是 Esbuild 打包的元信息，这对我们编写插件扩展 Esbuild 能力非常有用。
 
 接着，我们再观察一下 dist 目录，发现打包产物和相应的 SourceMap 文件也已经成功写入磁盘:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241502165.png" alt="image-20250824150245139" style="zoom:67%;" />
+<img src="..\..\images\202508241502165.png" />
 
 其实 buildSync 方法的使用几乎相同，如下代码所示:
 
@@ -180,7 +180,7 @@ runBuild();
 
 我们在浏览器访问 localhost:8000 可以看到 Esbuild 服务器返回的编译产物如下所示：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241506256.png" alt="image-20250824150629218" style="zoom:67%;" />
+<img src="..\..\images\202508241506256.png" />
 
 后续每次在浏览器请求都会触发 Esbuild 重新构建，而每次重新构建都是一个增量构建的过程，耗时也会比首次构建少很多(一般能减少 70% 左右)。
 
@@ -432,7 +432,7 @@ render(<Greet />, document.getElementById("root"));
 
 示例代码中我们用到了 Skypack 这个提供 npm 第三方包 ESM 产物的 CDN 服务 ，我们可以通过 url 访问第三方包的资源，如下图所示:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241521278.png" alt="image-20250824152146237" style="zoom:80%;" />
+<img src="..\..\images\202508241521278.png" />
 
 现在我们需要通过 Esbuild 插件来识别这样的 url 路径，然后从网络获取模块内容并让Esbuild 进行加载，甚至不再需要 npm install 安装依赖了，这看上去是不是很酷呢？
 
@@ -508,15 +508,15 @@ runBuild();
 
 通过 node build.js 执行打包脚本，发现插件不能 work，抛出了这样一个错误:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241523751.png" alt="image-20250824152357711" style="zoom:67%;" />
+<img src="..\..\images\202508241523751.png" />
 
 这是为什么呢？你可以回过头观察一下第三方包的响应内容:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241524922.png" alt="image-20250824152443897" style="zoom:67%;" />
+<img src="..\..\images\202508241524922.png" />
 
 进一步查看还有更多的模块内容:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241525576.png" alt="image-20250824152507539" style="zoom:67%;" />
+<img src="..\..\images\202508241525576.png" />
 
 因此我们可以得出一个结论：除了要解析 react-dom 这种直接依赖的路径，还要解析它依赖的路径，也就是间接依赖的路径。
 
@@ -534,11 +534,11 @@ build.onResolve({ filter: /.*/, namespace: "http-url" }, (args) => ({
 
 加了这段逻辑后，Esbuild 路径解析的流程如下:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241526896.png" alt="image-20250824152602855" style="zoom:67%;" />
+<img src="..\..\images\202508241526896.png" />
 
 现在我们再次执行 node build.js ，发现依赖已经成功下载并打包了。
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241526523.png" alt="image-20250824152640486" style="zoom:80%;" />
+<img src="..\..\images\202508241526523.png" />
 
 ## 实战 2: 实现 HTML 构建插件
 
@@ -654,11 +654,11 @@ serve .
 
 可以看到如下的界面:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241535277.png" alt="image-20250824153517233" style="zoom:67%;" />
+<img src="..\..\images\202508241535277.png" />
 
 再访问 localhost:3000 ，会默认访问到 index.html 的内容：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508241535842.png" alt="image-20250824153538805" style="zoom:67%;" />
+<img src="..\..\images\202508241535842.png" />
 
 这样一来，应用的内容就成功显示了，也说明 HTML 插件正常生效了。当然，如果要做一个足够通用的 HTML 插件，还需要考虑诸多的因素，比如 自定义 HTML 内容 、 自定义公共前缀(publicPath) 、 自定义 script 标签类型 以及 多入口打包 等等，大家感兴趣的话
 

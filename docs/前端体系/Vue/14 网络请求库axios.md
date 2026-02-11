@@ -14,7 +14,7 @@ outline: deep
 
 **为什么选择axios? 作者推荐和功能特点**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530232953609.png" alt="image-20230530232953609" style="zoom:67%;" />
+<img src="..\..\images\image-20230530232953609.png" />
 
 **功能特点:**
 

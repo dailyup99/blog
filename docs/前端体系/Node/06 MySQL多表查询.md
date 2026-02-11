@@ -22,19 +22,19 @@ SELECT COUNT(*) FROM `products`;
 SELECT COUNT(*) FROM `products` WHERE brand = '华为';
 ```
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202407201335270.png" alt="image-20240720133504159" style="zoom:67%;" />
+<img src="..\..\images\202407201335270.png" />
 
-## **认识Group By**
+## **认识 Group By**
 
 **事实上聚合函数相当于默认将所有的数据分成了一组：**
 
-* 我们前面使用avg还是max等，都是将所有的结果看成一组来计算的；
+- 我们前面使用 avg 还是 max 等，都是将所有的结果看成一组来计算的；
 
-*  那么如果我们希望划分多个组：比如华为、苹果、小米等手机分别的平均价格，应该怎么来做呢？
+- 那么如果我们希望划分多个组：比如华为、苹果、小米等手机分别的平均价格，应该怎么来做呢？
 
-* 这个时候我们可以使用 GROUP BY；
+- 这个时候我们可以使用 GROUP BY；
 
-**GROUP BY通常和聚合函数一起使用：**
+**GROUP BY 通常和聚合函数一起使用：**
 
 表示我们先对数据进行分组，再对每一组数据，进行聚合函数的计算；
 
@@ -47,8 +47,8 @@ SELECT COUNT(*) FROM `products` WHERE brand = '华为';
 也包括：最高价格、最低价格、平均评分；
 
 ```javascript
-SELECT brand, 
-  COUNT(*) as count, 
+SELECT brand,
+  COUNT(*) as count,
   ROUND(AVG(price),2) as avgPrice,
   MAX(price) as maxPrice,
   MIN(price) as minPrice,
@@ -56,20 +56,20 @@ SELECT brand,
   FROM `products` GROUP BY brand;
 ```
 
-## **Group By的约束条件**
+## **Group By 的约束条件**
 
-**如果我们希望给Group By查询到的结果添加一些约束，那么我们可以使用：HAVING。**
+**如果我们希望给 Group By 查询到的结果添加一些约束，那么我们可以使用：HAVING。**
 
-**比如：如果我们还希望筛选出平均价格在4000以下，并且平均分在7以上的品牌：**
+**比如：如果我们还希望筛选出平均价格在 4000 以下，并且平均分在 7 以上的品牌：**
 
 ```javascript
-SELECT brand, 
-  COUNT(*) as count, 
+SELECT brand,
+  COUNT(*) as count,
   ROUND(AVG(price),2) as avgPrice,
   MAX(price) as maxPrice,
   MIN(price) as minPrice,
   AVG(score) as avgScore
-  FROM `products` GROUP BY brand 
+  FROM `products` GROUP BY brand
   HAVING avgPrice < 4000 and avgScore > 7;
 ```
 
@@ -98,14 +98,14 @@ SELECT COUNT(*) FROM `products` WHERE brand = '华为';
 
 -- 6.group by:数据根据brand进行分组
 -- ROUND(AVG(price),2) 保留2位小数
-SELECT 
+SELECT
 	brand, MAX(price) maxPrice, MIN(price) minPrice, ROUND(AVG(price),2) avgPrice, AVG(score) avgScore
 FROM `products`
 GROUP BY brand
 HAVING avgScore > 7 AND avgPrice < 4000;
 ```
 
-![image-20240720134010750](http://139.196.79.103:9001/myimages/imgs/202407201340800.png)
+![image-20240720134010750](../../images/202407201340800.png)
 
 ## **创建多张表**
 
@@ -115,7 +115,7 @@ HAVING avgScore > 7 AND avgPrice < 4000;
 
 **如果我们直接在商品中去体现品牌相关的信息，会存在一些问题：**
 
-一方面，products表中应该表示的都是商品相关的数据，应该又另外一张表来表示brand的数据；
+一方面，products 表中应该表示的都是商品相关的数据，应该又另外一张表来表示 brand 的数据；
 
 另一方面，多个商品使用的品牌是一致时，会存在大量的冗余数据；
 
@@ -149,7 +149,7 @@ INSERT INTO `brand` (name, website, worldRank) VALUES ('Google', 'www.google.com
 
 ## **创建外键**
 
-**将两张表联系起来，我们可以将products中的brand_id关联到brand中的id：**
+**将两张表联系起来，我们可以将 products 中的 brand_id 关联到 brand 中的 id：**
 
 如果是创建表添加外键约束，我们需要在创建表的()最后添加如下语句；
 
@@ -164,7 +164,7 @@ ALTER TABLE `products` ADD `brand_id` INT;
 ALTER TABLE `products` ADD FOREIGN KEY (brand_id) REFERENCES brand(id);
 ```
 
-**现在我们可以将products中的brand_id关联到brand中的id的值：**
+**现在我们可以将 products 中的 brand_id 关联到 brand 中的 id 的值：**
 
 ```javascript
 UPDATE `products` SET `brand_id` = 1 WHERE `brand` = '华为';
@@ -177,9 +177,9 @@ UPDATE `products` SET `brand_id` = 2 WHERE `brand` = '小米';
 
 **我们来思考一个问题：**
 
-如果products中引用的外键被更新了或者删除了，这个时候会出现什么情况呢？
+如果 products 中引用的外键被更新了或者删除了，这个时候会出现什么情况呢？
 
-**我们来进行一个更新操作：比如将华为的id更新为100**
+**我们来进行一个更新操作：比如将华为的 id 更新为 100**
 
 ```javascript
 UPDATE `brand` SET id = 100 WHERE id = 1;
@@ -187,11 +187,11 @@ UPDATE `brand` SET id = 100 WHERE id = 1;
 
 **这个时候执行代码是报错的：**
 
-![image-20240720142748750](http://139.196.79.103:9001/myimages/imgs/202407201427825.png)
+![image-20240720142748750](../../images/202407201427825.png)
 
 ## **如何进行更新呢？**
 
-**如果我希望可以更新呢？我们需要修改on delete或者on update的值；**
+**如果我希望可以更新呢？我们需要修改 on delete 或者 on update 的值；**
 
 **我们可以给更新或者删除时设置几个值：**
 
@@ -199,19 +199,19 @@ RESTRICT（默认属性）：当更新或删除某个记录时，会检查该记
 
 删除；
 
-NO ACTION：和RESTRICT是一致的，是在SQL标准中定义的；
+NO ACTION：和 RESTRICT 是一致的，是在 SQL 标准中定义的；
 
 CASCADE：当更新或删除某个记录时，会检查该记录是否有关联的外键记录，有的话：
 
-* 更新：那么会更新对应的记录；
-* 删除：那么关联的记录会被一起删除掉；
+- 更新：那么会更新对应的记录；
+- 删除：那么关联的记录会被一起删除掉；
 
-SET NULL：当更新或删除某个记录时，会检查该记录是否有关联的外键记录，有的话，将对应的值设置为NULL；
+SET NULL：当更新或删除某个记录时，会检查该记录是否有关联的外键记录，有的话，将对应的值设置为 NULL；
 
 ```javascript
 ALTER TABLE `products` DROP FOREIGN KEY products_ibfk_1;
-ALTER TABLE `products` ADD FOREIGN KEY (brand_id) REFERENCES brand(id) 
-  ON UPDATE CASCADE 
+ALTER TABLE `products` ADD FOREIGN KEY (brand_id) REFERENCES brand(id)
+  ON UPDATE CASCADE
   ON DELETE CASCADE;
 ```
 
@@ -221,9 +221,9 @@ ALTER TABLE `products` ADD FOREIGN KEY (brand_id) REFERENCES brand(id)
 SHOW CREATE TABLE `products`;
 ```
 
-![image-20240720143044803](http://139.196.79.103:9001/myimages/imgs/202407201430852.png)
+![image-20240720143044803](../../images/202407201430852.png)
 
-复制这些内容，可以拿到外键id名products_ibfk_1
+复制这些内容，可以拿到外键 id 名 products_ibfk_1
 
 ```javascript
 CREATE TABLE `products` (
@@ -331,7 +331,7 @@ ALTER TABLE `products` ADD FOREIGN KEY (brand_id) REFERENCES brands(id)
 UPDATE `brands` SET id = 99 WHERE id = 1;
 ```
 
-设置成CASCADE，这样当品牌表brands的id从1改成99之后，products表的brand_id也会被修改成99。
+设置成 CASCADE，这样当品牌表 brands 的 id 从 1 改成 99 之后，products 表的 brand_id 也会被修改成 99。
 
 ## **什么是多表查询？**
 
@@ -340,24 +340,24 @@ UPDATE `brands` SET id = 99 WHERE id = 1;
 **如果我们直接通过查询语句希望在多张表中查询到数据，这个时候是什么效果呢？**
 
 ```javascript
-SELECT * FROM `products`, `brand`;
+SELECT * FROM`products`, `brand`;
 ```
 
 ## **默认多表查询的结果**
 
-**我们会发现一共有648条数据，这个数据量是如何得到的呢？**
+**我们会发现一共有 648 条数据，这个数据量是如何得到的呢？**
 
-第一张表的108条 * 第二张表的6条数据；
+第一张表的 108 条 \* 第二张表的 6 条数据；
 
 也就是说第一张表中每一个条数据，都会和第二张表中的每一条数据结合一次；
 
-这个结果我们称之为 笛卡尔乘积，也称之为直积，表示为 X*Y；
+这个结果我们称之为 笛卡尔乘积，也称之为直积，表示为 X\*Y；
 
 **但是事实上很多的数据是没有意义的，比如华为和苹果、小米的品牌结合起来的数据就是没有意义的，我们可不可以进行筛选呢？**
 
-使用where来进行筛选；
+使用 where 来进行筛选；
 
-这个表示查询到笛卡尔乘积后的结果中，符合products.brand_id = brand.id条件的数据过滤出来；
+这个表示查询到笛卡尔乘积后的结果中，符合 products.brand_id = brand.id 条件的数据过滤出来；
 
 ```javascript
 SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
@@ -375,7 +375,7 @@ SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
 
 全连接
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202407201511073.png" alt="image-20240720151127959" style="zoom:50%;" />
+<img src="..\..\images\202407201511073.png" />
 
 重点掌握左连接和内连接。
 
@@ -383,11 +383,11 @@ SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
 
 **如果我们希望获取到的是左边所有的数据（以左表为主）：**
 
-这个时候就表示无论左边的表是否有对应的brand_id的值对应右边表的id，左边的数据都会被查询出来；
+这个时候就表示无论左边的表是否有对应的 brand_id 的值对应右边表的 id，左边的数据都会被查询出来；
 
-这个也是开发中使用最多的情况，它的完整写法是LEFT [OUTER] JOIN，但是OUTER可以省略的；
+这个也是开发中使用最多的情况，它的完整写法是 LEFT [OUTER] JOIN，但是 OUTER 可以省略的；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202407201512539.png" alt="image-20240720151221467" style="zoom:67%;" />
+<img src="..\..\images\202407201512539.png" />
 
 ```javascript
 SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id;
@@ -396,25 +396,25 @@ SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id
 	WHERE brand.id IS NULL;
 ```
 
-![image-20240720151752320](http://139.196.79.103:9001/myimages/imgs/202407201517415.png)
+![image-20240720151752320](../../images/202407201517415.png)
 
-![image-20240720151918195](http://139.196.79.103:9001/myimages/imgs/202407201519248.png)
+![image-20240720151918195](..\..\images\202407201519248.png)
 
-brands表中没有锤子科技，但是锤子科技也会显示出来，以左表products为主。
+brands 表中没有锤子科技，但是锤子科技也会显示出来，以左表 products 为主。
 
-![image-20240720152120021](http://139.196.79.103:9001/myimages/imgs/202407201521119.png)
+![image-20240720152120021](../../images/202407201521119.png)
 
-查询出products表中的所有品牌不在brands表中的所有手机。
+查询出 products 表中的所有品牌不在 brands 表中的所有手机。
 
 ## **右连接**
 
 **如果我们希望获取到的是右边所有的数据（以右表为主）：**
 
-这个时候就表示无论左边的表中的brand_id是否有和右边表中的id对应，右边的数据都会被查询出来；
+这个时候就表示无论左边的表中的 brand_id 是否有和右边表中的 id 对应，右边的数据都会被查询出来；
 
-右连接在开发中没有左连接常用，它的完整写法是RIGHT [OUTER] JOIN，但是OUTER可以省略的；
+右连接在开发中没有左连接常用，它的完整写法是 RIGHT [OUTER] JOIN，但是 OUTER 可以省略的；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202407201523081.png" alt="image-20240720152337997" style="zoom:67%;" />
+<img src="..\..\images\202407201523081.png" />
 
 ```javascript
 SELECT * FROM `products` RIGHT JOIN `brand` ON `products`.brand_id = `brand`.id;
@@ -429,7 +429,7 @@ SELECT * FROM `products` RIGHT JOIN `brand` ON `products`.brand_id = `brand`.id
 
 内连接在开发中偶尔也会有一些场景使用，看自己的场景。
 
-内连接有其他的写法：CROSS JOIN或者 JOIN都可以；
+内连接有其他的写法：CROSS JOIN 或者 JOIN 都可以；
 
 ```javascript
 SELECT * FROM `products` INNER JOIN `brand` ON `products`.brand_id = `brand`.id;
@@ -443,15 +443,15 @@ SELECT * FROM `products`, `brand` WHERE `products`.brand_id = `brand`.id;
 
 **但是他们代表的含义并不相同：**
 
-SQL语句一：内连接，代表的是在两张表连接时就会约束数据之间的关系，来决定之后查询的结果；
+SQL 语句一：内连接，代表的是在两张表连接时就会约束数据之间的关系，来决定之后查询的结果；
 
-SQL语句二：where条件，代表的是先计算出笛卡尔乘积，在笛卡尔乘积的数据基础之上进行where条件的帅选；
+SQL 语句二：where 条件，代表的是先计算出笛卡尔乘积，在笛卡尔乘积的数据基础之上进行 where 条件的帅选；
 
 ## **全连接**
 
-**SQL规范中全连接是使用FULL JOIN，但是MySQL中并没有对它的支持，我们需要使用 UNION 来实现：**
+**SQL 规范中全连接是使用 FULL JOIN，但是 MySQL 中并没有对它的支持，我们需要使用 UNION 来实现：**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202407201526777.png" alt="image-20240720152623708" style="zoom:67%;" />
+<img src="..\..\images\202407201526777.png" />
 
 ```javascript
 (SELECT * FROM `products` LEFT JOIN `brand` ON `products`.brand_id = `brand`.id)
@@ -511,7 +511,7 @@ UNION
 
 这种情况我们应该在开发中如何处理呢？
 
-![image-20240720154410520](http://139.196.79.103:9001/myimages/imgs/202407201544602.png)
+![image-20240720154410520](../../images/202407201544602.png)
 
 **我们先建立好两张表**
 
@@ -571,20 +571,20 @@ INSERT INTO `students_select_courses` (student_id, course_id) VALUES (3, 4);
 
 ```javascript
 # 查询所有的学生选择的所有课程
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 JOIN `students_select_courses` ssc
 	ON stu.id = ssc.student_id
-JOIN `courses` cs 
-	ON ssc.course_id = cs.id; 
+JOIN `courses` cs
+	ON ssc.course_id = cs.id;
 # 查询所有的学生选课情况
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 LEFT JOIN `students_select_courses` ssc
 	ON stu.id = ssc.student_id
-LEFT JOIN `courses` cs 
+LEFT JOIN `courses` cs
 	ON ssc.course_id = cs.id;
 ```
 
@@ -600,21 +600,21 @@ stu.id studentId和stu.id AS studentId是一样的，AS可以省略 `students` s
 
 ```javascript
 # why同学选择了哪些课程
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 JOIN `students_select_courses` ssc
 	ON stu.id = ssc.student_id
-JOIN `courses` cs 
+JOIN `courses` cs
 	ON ssc.course_id = cs.id
-	WHERE stu.id = 1; 
+	WHERE stu.id = 1;
 # lily同学选择了哪些课程(注意，这里必须用左连接，事实上上面也应该使用的是左连接)
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 LEFT JOIN `students_select_courses` ssc
 	ON stu.id = ssc.student_id
-LEFT JOIN `courses` cs 
+LEFT JOIN `courses` cs
 	ON ssc.course_id = cs.id
 	WHERE stu.id = 5;
 ```
@@ -625,7 +625,7 @@ LEFT JOIN `courses` cs
 
 ```javascript
 # 哪些学生是没有选课的
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 LEFT JOIN `students_select_courses` ssc
@@ -634,7 +634,7 @@ LEFT JOIN `courses` cs
 	ON ssc.course_id = cs.id
 	WHERE cs.id IS NULL;
 # 查询哪些课程没有被学生选择
-SELECT 
+SELECT
 	stu.id studentId, stu.name studentName, cs.id courseId, cs.name courseName, cs.price coursePrice
 FROM `students` stu
 RIGHT JOIN `students_select_courses` ssc
@@ -749,4 +749,3 @@ RIGHT JOIN `students_select_courses` ssc ON stu.id = ssc.student_id
 RIGHT JOIN `courses` cs ON ssc.course_id = cs.id
 WHERE stu.id IS NULL;
 ```
-

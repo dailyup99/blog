@@ -67,7 +67,7 @@ export default buildOptions;
 
 接着在终端执行一下 npm run build ，可以看到如下的命令行信息:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508292107470.png" alt="image-20250829210747426" style="zoom:67%;" />
+<img src="..\..\images\202508292107470.png" />
 
 OK，现在你已经成功使用 Rollup 打出了第一份产物! 我们可以去 dist/es 目录查看一下产物的内容:
 
@@ -131,7 +131,7 @@ export default buildOptions;
 
 通过执行 npm run build 可以发现，所有入口的不同格式产物已经成功输出:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508292113583.png" alt="image-20250829211343543" style="zoom:67%;" />
+<img src="..\..\images\202508292113583.png" />
 
 如果不同入口对应的打包配置不一样，我们也可以默认导出一个 配置数组 ，如下所示:
 
@@ -212,7 +212,7 @@ output: {
 
 虽然 Rollup 能够打包 输出 出 CommonJS 格式的产物，但对于 输入 给 Rollup 的代码并不支持 CommonJS，仅仅支持 ESM。你可能会说，那我们直接在项目中统一使用 ESM规范就可以了啊，这有什么问题呢？需要注意的是，我们不光要考虑项目本身的代码，还要考虑第三方依赖。目前为止，还是有不少第三方依赖只有 CommonJS 格式产物而并未提供 ESM 产物，比如项目中用到 lodash 时，打包项目会出现这样的报错：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508292129756.png" alt="image-20250829212915714" style="zoom:67%;" />
+<img src="..\..\images\202508292129756.png" />
 
 因此，我们需要引入额外的插件去解决这个问题。
 
@@ -266,7 +266,7 @@ console.log(merge);
 
 然后执行 npm run build ，你可以发现产物已经正常生成了:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508292133545.png" alt="image-20250829213319485" style="zoom:67%;" />
+<img src="..\..\images\202508292133545.png" />
 
 在 Rollup 配置文件中， plugins 除了可以与 output 配置在同一级，也可以配置在output 参数里面，如:
 

@@ -50,7 +50,7 @@ pnpm create vite
 
 在执行完这个命令后，pnpm 首先会自动下载 create-vite 这个第三方包，然后执行这个包中的项目初始化逻辑。因此，你很快就可以看到这样的交互界面:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240210979.png" alt="image-20250824021045939" style="zoom:67%;" />
+<img src="..\..\images\202508240210979.png" />
 
 后续的交互流程梳理如下:
 
@@ -62,7 +62,7 @@ pnpm create vite
 
 首先是输入项目名称，这里你可以输入 vite-project ，然后按下回车，进入 选择前端框架 的部分:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240211610.png" alt="image-20250824021122580" style="zoom: 67%;" />
+<img src="..\..\images\202508240211610.png" />
 
 好，现在脚手架的模板已经生成完毕。你可以执行如下命令在本地启动项目:
 
@@ -77,15 +77,15 @@ pnpm run dev
 
 执行 pnpm run dev 之后你可以看到如下界面，表示项目已经成功启动啦。
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240212221.png" alt="image-20250824021203181" style="zoom:67%;" />
+<img src="..\..\images\202508240212221.png" />
 
 紧接着，我们立马去浏览器中打开 `http://localhost:3000` 页面，你可以看到：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240212627.png" alt="image-20250824021223594" style="zoom:67%;" />
+<img src="..\..\images\202508240212627.png" />
 
 至此，我们成功搭建起了一个 React 前端项目。怎么样？利用 Vite 来初始化一个前端项目是不是非常简单？经过初步尝试，Vite 给人的第一感觉就是简洁、轻量、快速。我曾经拿 react 官方基于 Webpack 的脚手架 create-react-app ，也就是大家常说的 cra 来测试过，从项目初始化到依赖安装所花的时间与 Vite 对比如下:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240212550.png" alt="image-20250824021257509" style="zoom:67%;" />
+<img src="..\..\images\202508240212550.png" />
 
 Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截，显而易见地提升了初始化速度和开发体验。
 
@@ -147,7 +147,7 @@ Vite 已经比 cra 快了接近 6 倍，并且一开始就甩了 cra 一大截�
 
 `http://localhost:3000/src/main.tsx` 这个资源，Vite 的 Dev Server 此时会接受到这个请求，然后读取对应的文件内容，进行一定的中间处理，最后将处理的结果返回给浏览器。
 
-![image-20250824021646837](http://139.196.79.103:9001/myimages/imgs/202508240216880.png)
+![image-20250824021646837](../../images/202508240216880.png)
 
 我们可以来看看 main.tsx 的内容:
 
@@ -168,7 +168,7 @@ ReactDOM.render(
 
 这就归功了 Vite Dev Server 所做的“中间处理”了，也就是说，在读取到 main.tsx 文件的内容之后，Vite 会对文件的内容进行编译，大家可以从 Chrome 的网络调试面板看到编译后的结果:
 
-![image-20250824021759491](http://139.196.79.103:9001/myimages/imgs/202508240217560.png)
+![image-20250824021759491](../../images/202508240217560.png)
 
 当然，大家不用纠结每句代码的含义，因为这涉及 Vite 内部的编译流程，我们会在后面的章节深入分析。这里你只需要知道，Vite 会将项目的源代码编译成浏览器可以识别的代码，与此同时，一个 import 语句即代表了一个 HTTP 请求，如下面两个 import 语句:
 
@@ -253,11 +253,11 @@ tsc 作为 TypeScript 的官方编译命令，可以用来编译 TypeScript 代�
 
 接下来你可以试着执行一下这个打包命令:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240226977.png" alt="image-20250824022607934" style="zoom:67%;" />
+<img src="..\..\images\202508240226977.png" />
 
 此时 Vite 已经生成了最终的打包产物，我们可以通过 pnpm run preview 命令预览一下打包产物的执行效果。
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240226252.png" alt="image-20250824022625207" style="zoom:67%;" />
+<img src="..\..\images\202508240226252.png" />
 
 在浏览器中打开 `http://localhost:5000` 地址，你将看到和开发阶段一样的页面内容，证明我们成功完成第一个 Vite 项目的生产环境构建。
 

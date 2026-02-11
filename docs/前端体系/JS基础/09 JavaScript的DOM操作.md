@@ -2,19 +2,19 @@
 outline: deep
 ---
 
-## 认识DOM和BOM
+## 认识 DOM 和 BOM
 
-**前面我们花了很多时间学习JavaScript的基本语法，但是这些基本语法，但是这些语法好像和做网页没有什么关系，和前面学习**
+**前面我们花了很多时间学习 JavaScript 的基本语法，但是这些基本语法，但是这些语法好像和做网页没有什么关系，和前面学习**
 
-**的HTML、CSS也没有什么关系呢？**
+**的 HTML、CSS 也没有什么关系呢？**
 
-* 这是因为我们前面学习的部分属于ECMAScript，也就是JavaScript本身的语法部分；
-* 除了语法部分之外，我们还需要学习浏览器提供给我们开发者的DOM、BOM相关的API才能对页面、浏览器进行操作；
+- 这是因为我们前面学习的部分属于 ECMAScript，也就是 JavaScript 本身的语法部分；
+- 除了语法部分之外，我们还需要学习浏览器提供给我们开发者的 DOM、BOM 相关的 API 才能对页面、浏览器进行操作；
 
-**前面我们学习了一个window的全局对象，window上事实上就包含了这些内容：**
+**前面我们学习了一个 window 的全局对象，window 上事实上就包含了这些内容：**
 
-* 我们已经学习了JavaScript语法部分的Object、Array、Date等；
-* 另外还有DOM、BOM部分；
+- 我们已经学习了 JavaScript 语法部分的 Object、Array、Date 等；
+- 另外还有 DOM、BOM 部分；
 
 **DOM：文档对象模型（Document Object Model**
 
@@ -24,83 +24,83 @@ outline: deep
 
 简称 BOM，由浏览器提供的用于处理文档（document）之外的所有内容的其他对象；
 
-比如navigator、location、history等对象；
+比如 navigator、location、history 等对象；
 
-## 深入理解DOM
+## 深入理解 DOM
 
-**浏览器会对我们编写的HTML、CSS进行渲染，同时它又要考虑我们可能会通过JavaScript来对其进行操作：**
+**浏览器会对我们编写的 HTML、CSS 进行渲染，同时它又要考虑我们可能会通过 JavaScript 来对其进行操作：**
 
-* 于是浏览器将我们编写在HTML中的每一个元素（Element）都抽象成了一个个对象；
-* 所有这些对象都可以通过JavaScript来对其进行访问，那么我们就可以通过JavaScript来操作页面；
-* 所以，我们将这个抽象过程称之为 文档对象模型（Document Object Model）；
+- 于是浏览器将我们编写在 HTML 中的每一个元素（Element）都抽象成了一个个对象；
+- 所有这些对象都可以通过 JavaScript 来对其进行访问，那么我们就可以通过 JavaScript 来操作页面；
+- 所以，我们将这个抽象过程称之为 文档对象模型（Document Object Model）；
 
 **整个文档被抽象到** **document** **对象中：**
 
-* 比如document.documentElement对应的是html元素；
-* 比如document.body对应的是body元素；
-* 比如document.head对应的是head元素；
+- 比如 document.documentElement 对应的是 html 元素；
+- 比如 document.body 对应的是 body 元素；
+- 比如 document.head 对应的是 head 元素；
 
 **下面的一行代码可以让整个页面变成红色：**
 
 ```javascript
-document.body.style.backgroundColor = "red"
+document.body.style.backgroundColor = "red";
 ```
 
-**所以我们学习DOM，就是在学习如何通过JavaScript对文档进行操作的；**
+**所以我们学习 DOM，就是在学习如何通过 JavaScript 对文档进行操作的；**
 
-## **DOM Tree的理解**
+## **DOM Tree 的理解**
 
-**一个页面不只是有html、head、body元素，也包括很多的子元素：**
+**一个页面不只是有 html、head、body 元素，也包括很多的子元素：**
 
-* 在html结构中，最终会形成一个树结构；
-* 在抽象成DOM对象的时候，它们也会形成一个树结构，我们称之为DOM Tree；
+- 在 html 结构中，最终会形成一个树结构；
+- 在抽象成 DOM 对象的时候，它们也会形成一个树结构，我们称之为 DOM Tree；
 
-![image-20221218112715648](http://139.196.79.103:9001/myimages/imgs/image-20221218112715648.png)
+![image-20221218112715648](../../images/image-20221218112715648.png)
 
-## **DOM的学习顺序**
+## **DOM 的学习顺序**
 
-**DOM相关的API非常多，我们会通过如下顺序来学习：**
+**DOM 相关的 API 非常多，我们会通过如下顺序来学习：**
 
-* 1.DOM元素之间的关系
-* 2.获取DOM元素
-* 3.DOM节点的type、tag、content
-* 4.DOM节点的attributes、properies
-* 5.DOM节点的创建、插入、克隆、删除
-* 6.DOM节点的样式、类
-* 7.DOM元素 window的大小、滚动、坐标
+- 1.DOM 元素之间的关系
+- 2.获取 DOM 元素
+- 3.DOM 节点的 type、tag、content
+- 4.DOM 节点的 attributes、properies
+- 5.DOM 节点的创建、插入、克隆、删除
+- 6.DOM 节点的样式、类
+- 7.DOM 元素 window 的大小、滚动、坐标
 
 **整体会按照这个顺序来学习，也会额外补充其他的知识。**
 
-# **DOM的继承关系图**
+# **DOM 的继承关系图**
 
-**DOM相当于是JavaScript和HTML、CSS之间的桥梁**
+**DOM 相当于是 JavaScript 和 HTML、CSS 之间的桥梁**
 
-通过浏览器提供给我们的DOM API，我们可以对元素以及其中的内容做任何事情；
+通过浏览器提供给我们的 DOM API，我们可以对元素以及其中的内容做任何事情；
 
 **类型之间有如下的继承关系：**
 
-![image-20221218123205983](http://139.196.79.103:9001/myimages/imgs/image-20221218123205983.png)
+![image-20221218123205983](../../images/image-20221218123205983.png)
 
-## **document对象**
+## **document 对象**
 
-**Document节点表示的整个载入的网页，它的实例是全局的document对象：**
+**Document 节点表示的整个载入的网页，它的实例是全局的 document 对象：**
 
-* 对DOM的所有操作都是从 document 对象开始的；
-* 它是DOM的 入口点，可以从document开始去访问任何节点元素；
+- 对 DOM 的所有操作都是从 document 对象开始的；
+- 它是 DOM 的 入口点，可以从 document 开始去访问任何节点元素；
 
-**对于最顶层的html、head、body元素，我们可以直接在document对象中获取到：**
+**对于最顶层的 html、head、body 元素，我们可以直接在 document 对象中获取到：**
 
-* html元素：\<html> = document.documentElement
-* body元素：\<body> = document.body
-* head元素：\<head> = document.head
-* 文档声明：\<!DOCTYPE html> = document.doctype
+- html 元素：\<html> = document.documentElement
+- body 元素：\<body> = document.body
+- head 元素：\<head> = document.head
+- 文档声明：\<!DOCTYPE html> = document.doctype
 
 ```javascript
-var htmlEl = document.documentElement
-var bodyEl = document.body
-var headEl = document.head
-var doctype = document.doctype
-console.log(htmlEl, bodyEl, headEl, doctype)
+var htmlEl = document.documentElement;
+var bodyEl = document.body;
+var headEl = document.head;
+var doctype = document.doctype;
+console.log(htmlEl, bodyEl, headEl, doctype);
 ```
 
 ## **节点（Node）之间的导航（navigator）**
@@ -109,18 +109,17 @@ console.log(htmlEl, bodyEl, headEl, doctype)
 
 **节点之间存在如下的关系：**
 
-* 父节点：parentNode
-* 前兄弟节点：previousSibling
-* 后兄弟节点：nextSibling
-* 子节点：childNodes
-* 第一个子节点：firstChild
-* 第一个子节点：firstChild
+- 父节点：parentNode
+- 前兄弟节点：previousSibling
+- 后兄弟节点：nextSibling
+- 子节点：childNodes
+- 第一个子节点：firstChild
+- 第一个子节点：firstChild
 
 **尝试获取下面结构的节点：**
 
 ```html
 <body>
-  
   <!-- 我是注释, 哈哈哈 -->
   我是文本, 呵呵呵
 
@@ -132,24 +131,21 @@ console.log(htmlEl, bodyEl, headEl, doctype)
     <li>4</li>
     <li>5</li>
   </ul>
-  
-  <script>
 
+  <script>
     // 1.获取节点的导航
-    var bodyEl = document.body
+    var bodyEl = document.body;
     // 1.1.获取body所有的子节点
     // console.log(bodyEl.childNodes)
     // 1.2.获取body的第一个子节点
-    var bodyElFirstChild = bodyEl.firstChild // 第一个子节点是text，body和注释直接的空白部分
+    var bodyElFirstChild = bodyEl.firstChild; // 第一个子节点是text，body和注释直接的空白部分
     // 1.3.获取body中的注释
-    var bodyElCommentChild = bodyElFirstChild.nextSibling
-    console.log(bodyElCommentChild) // <!-- 我是注释, 哈哈哈 -->
+    var bodyElCommentChild = bodyElFirstChild.nextSibling;
+    console.log(bodyElCommentChild); // <!-- 我是注释, 哈哈哈 -->
     // 1.4.获取body的父节点
-    var bodyParent = bodyEl.parentNode
-    console.log(bodyParent) // html
-
+    var bodyParent = bodyEl.parentNode;
+    console.log(bodyParent); // html
   </script>
-
 </body>
 ```
 
@@ -159,18 +155,17 @@ console.log(htmlEl, bodyEl, headEl, doctype)
 
 **节点之间存在如下的关系：**
 
-* 父元素：parentElement
-* 前兄弟节点：previousElementSibling
-* 后兄弟节点：nextElementSibling
-* 子节点：children
-* 第一个子节点：firstElementChild
-* 第二个子节点：lastElementChild
+- 父元素：parentElement
+- 前兄弟节点：previousElementSibling
+- 后兄弟节点：nextElementSibling
+- 子节点：children
+- 第一个子节点：firstElementChild
+- 第二个子节点：lastElementChild
 
-![image-20221218132026537](http://139.196.79.103:9001/myimages/imgs/image-20221218132026537.png)
+![image-20221218132026537](../../images/image-20221218132026537.png)
 
 ```html
 <body>
-  
   <!-- 我是注释, 哈哈哈 -->
   我是文本, 呵呵呵
 
@@ -182,28 +177,26 @@ console.log(htmlEl, bodyEl, headEl, doctype)
     <li>4</li>
     <li>5</li>
   </ul>
-  
+
   <script>
-    var bodyEl = document.body
+    var bodyEl = document.body;
     // 根据body元素去获取子元素(element)
-    var childElements = bodyEl.children
-    console.log(childElements)
+    var childElements = bodyEl.children;
+    console.log(childElements);
 
     // 获取box元素
-    var boxEl1 = bodyEl.firstElementChild
-    var boxEl2 = bodyEl.children[0]
-    console.log(boxEl1, boxEl2, boxEl1 === boxEl2) // true
+    var boxEl1 = bodyEl.firstElementChild;
+    var boxEl2 = bodyEl.children[0];
+    console.log(boxEl1, boxEl2, boxEl1 === boxEl2); // true
 
     // 获取ul元素
-    var ulEl = boxEl1.nextElementSibling
-    console.log(ulEl)
+    var ulEl = boxEl1.nextElementSibling;
+    console.log(ulEl);
 
     // 获取li元素
-    var liEls = ulEl.children
-    console.log(liEls)
-
+    var liEls = ulEl.children;
+    console.log(liEls);
   </script>
-
 </body>
 ```
 
@@ -211,9 +204,9 @@ console.log(htmlEl, bodyEl, headEl, doctype)
 
 \<table> 元素支持 (除了上面给出的，之外) 以下这些属性：
 
-* table.rows — \<tr> 元素的集合；
-* table.caption/tHead/tFoot — 引用元素 \<caption>，\<thead>，\<tfoot>；
-* table.tBodies — \<tbody> 元素的集合；
+- table.rows — \<tr> 元素的集合；
+- table.caption/tHead/tFoot — 引用元素 \<caption>，\<thead>，\<tfoot>；
+- table.tBodies — \<tbody> 元素的集合；
 
 \<thead>，\<tfoot>，\<tbody> 元素提供了 rows 属性：
 
@@ -221,29 +214,29 @@ tbody.rows — 表格内部 \<tr> 元素的集合；
 
 \<tr>：
 
-* tr.cells — 在给定 \<tr> 中的 \<td> 和 \<th> 单元格的集合；
-* tr.sectionRowIndex — 给定的\<tr> 在封闭的 \<thead>/\<tbody>/\<tfoot> 中的位置（索引）；
-* tr.rowIndex — 在整个表格中 \<tr> 的编号（包括表格的所有行）；
+- tr.cells — 在给定 \<tr> 中的 \<td> 和 \<th> 单元格的集合；
+- tr.sectionRowIndex — 给定的\<tr> 在封闭的 \<thead>/\<tbody>/\<tfoot> 中的位置（索引）；
+- tr.rowIndex — 在整个表格中 \<tr> 的编号（包括表格的所有行）；
 
 \<td> 和 \<th>：
 
 td.cellIndex — 在封闭的 \<tr> 中单元格的编号。
 
 ```javascript
-var tableEl = document.body.firstElementChild
+var tableEl = document.body.firstElementChild;
 
 // 通过table元素获取内部的后代元素
-console.log(tableEl.tHead, tableEl.tBodies, tableEl.tFoot)
-console.log(tableEl.rows)
+console.log(tableEl.tHead, tableEl.tBodies, tableEl.tFoot);
+console.log(tableEl.rows);
 
 // 拿到一行元素
-var rowEl = tableEl.rows[2]
-console.log(rowEl.cells[0])
-console.log(rowEl.sectionRowIndex)
-console.log(rowEl.rowIndex)
+var rowEl = tableEl.rows[2];
+console.log(rowEl.cells[0]);
+console.log(rowEl.sectionRowIndex);
+console.log(rowEl.rowIndex);
 ```
 
-## form元素之间的导航
+## form 元素之间的导航
 
 ```javascript
 <form action="">
@@ -271,11 +264,10 @@ setTimeout(function() {
 </script>
 ```
 
-## table的导航的案例练习
+## table 的导航的案例练习
 
 ```html
 <body>
-  
   <table>
     <tr>
       <td>1-1</td>
@@ -304,8 +296,7 @@ setTimeout(function() {
   </table>
 
   <script>
-
-    var tableEl = document.body.firstElementChild
+    var tableEl = document.body.firstElementChild;
 
     // // 1.获取1-1
     // var row1El = tableEl.rows[0]
@@ -318,56 +309,47 @@ setTimeout(function() {
 
     // for循环
     for (var i = 0; i < tableEl.rows.length; i++) {
-      var rowEl = tableEl.rows[i]
-      var cellEl = rowEl.cells[i]
+      var rowEl = tableEl.rows[i];
+      var cellEl = rowEl.cells[i];
 
       // 设置样式
-      cellEl.style.backgroundColor = "red"
-      cellEl.style.color = "white"
+      cellEl.style.backgroundColor = "red";
+      cellEl.style.color = "white";
     }
-
   </script>
-
 </body>
 ```
 
 最终实现这么个效果：
 
-![image-20221218202811286](http://139.196.79.103:9001/myimages/imgs/image-20221218202811286.png)
+![image-20221218202811286](../../images/image-20221218202811286.png)
 
 ## **获取元素的方法**
 
-**当元素彼此靠近或者相邻时，DOM导航属性（navigation property）非常有用。**
+**当元素彼此靠近或者相邻时，DOM 导航属性（navigation property）非常有用。**
 
 但是，在实际开发中，我们希望可以任意的获取到某一个元素应该如何操作呢？
 
-**DOM为我们提供了获取元素的方法：**
+**DOM 为我们提供了获取元素的方法：**
 
-![image-20221218211411185](http://139.196.79.103:9001/myimages/imgs/image-20221218211411185.png)
+![image-20221218211411185](../../images/image-20221218211411185.png)
 
 ```html
 <body>
   <div class="box">
     <h2>我是标题</h2>
     <div class="container">
-      <p>
-        我是段落, <span class="keyword">coderwhy</span> 哈哈哈哈
-      </p>
-      <p>
-        我也是段落, <span class="keyword">kobe</span> 呵呵呵呵额
-      </p>
+      <p>我是段落, <span class="keyword">coderwhy</span> 哈哈哈哈</p>
+      <p>我也是段落, <span class="keyword">kobe</span> 呵呵呵呵额</p>
 
       <div class="article">
         <h3 id="title">我是小标题</h3>
-        <p>
-          我是文章的内容, 嘿嘿嘿嘿嘿
-        </p>
+        <p>我是文章的内容, 嘿嘿嘿嘿嘿</p>
       </div>
     </div>
   </div>
-  
-  <script>
 
+  <script>
     // 一. 通过导航获取
     // // 1.拿到body
     // var bodyEl = document.body
@@ -399,29 +381,26 @@ setTimeout(function() {
     // var titleEl = document.getElementById("title")
     // titleEl.style.color = "orange"
 
-
     // 三.querySelector: 通过选择器查询
-    var keywordEl = document.querySelector(".keyword")
+    var keywordEl = document.querySelector(".keyword");
     // keywordEls是对象, 可迭代的
     // 可迭代对象: String/数组/节点的列表
-    var keywordEls = document.querySelectorAll(".keyword")
+    var keywordEls = document.querySelectorAll(".keyword");
     for (var el of keywordEls) {
-      el.style.color = "red"
+      el.style.color = "red";
     }
-    console.log(keywordEls)
+    console.log(keywordEls);
 
-    var titleEl = document.querySelector("#title")
-    titleEl.style.color = "orange"
-
+    var titleEl = document.querySelector("#title");
+    titleEl.style.color = "orange";
   </script>
-
 </body>
 ```
 
 **开发中如何选择呢？**
 
-* 目前最常用的是querySelector和querySelectAll；
-* getElementById偶尔也会使用或者在适配一些低版本浏览器时；
+- 目前最常用的是 querySelector 和 querySelectAll；
+- getElementById 偶尔也会使用或者在适配一些低版本浏览器时；
 
 ## **节点的属性 - nodeType**
 
@@ -431,16 +410,16 @@ setTimeout(function() {
 
 这里我们主要讨论节点共有的属性；
 
-**nodeType属性：**
+**nodeType 属性：**
 
-* nodeType 属性提供了一种获取节点类型的方法；
-* 它有一个数值型值（numeric value）；
+- nodeType 属性提供了一种获取节点类型的方法；
+- 它有一个数值型值（numeric value）；
 
 **常见的节点类型有如下：**
 
-![image-20240502033055980](http://139.196.79.103:9001/myimages/imgs/image-20240502033055980.png)
+![image-20240502033055980](../../images/image-20240502033055980.png)
 
-其他类型可以查看MDN文档： https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType
+其他类型可以查看 MDN 文档： https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType
 
 ```html
 <body>
@@ -450,33 +429,32 @@ setTimeout(function() {
     <h2>我是标题</h2>
     <p>我是内容, 哈哈哈哈</p>
   </div>
-  
+
   <script>
     // 1.获取三个节点
-    var bodyChildNodes = document.body.childNodes
-    var commentNode = bodyChildNodes[1]
-    var textNode = bodyChildNodes[2]
-    var divNode = bodyChildNodes[3]
+    var bodyChildNodes = document.body.childNodes;
+    var commentNode = bodyChildNodes[1];
+    var textNode = bodyChildNodes[2];
+    var divNode = bodyChildNodes[3];
 
     // 2.节点属性
     // 2.1.nodeType 节点的类型
     for (var node of bodyChildNodes) {
-      if (node.nodeType === 8) { // 注释
+      if (node.nodeType === 8) {
+        // 注释
       } else if (node.nodeType === 3) {
       } else if (node.nodeType === 1) {
       }
     }
-    console.log(commentNode.nodeType, textNode.nodeType, divNode.nodeType) // 8 3 1
-    console.log(Node.COMMENT_NODE)
-
+    console.log(commentNode.nodeType, textNode.nodeType, divNode.nodeType); // 8 3 1
+    console.log(Node.COMMENT_NODE);
   </script>
-
 </body>
 ```
 
 ## **节点的属性 – nodeName、tagName**
 
-**nodeName：获取node节点的名字；**
+**nodeName：获取 node 节点的名字；**
 
 **tagName：获取元素的标签名词；**
 
@@ -486,29 +464,29 @@ tagName 属性仅适用于 Element 节点；
 
 nodeName 是为任意 Node 定义的：
 
-* 对于元素，它的意义与 tagName 相同，所以使用哪一个都是可以的；
-* 对于其他节点类型（text，comment 等），它拥有一个对应节点类型的字符串；
+- 对于元素，它的意义与 tagName 相同，所以使用哪一个都是可以的；
+- 对于其他节点类型（text，comment 等），它拥有一个对应节点类型的字符串；
 
 ```html
- <!-- 我是注释 -->
+<!-- 我是注释 -->
 我是文本
 <div class="box">
-    <h2>我是标题</h2>
-    <p>我是内容, 哈哈哈哈</p>
+  <h2>我是标题</h2>
+  <p>我是内容, 哈哈哈哈</p>
 </div>
 ```
 
 ```javascript
 // 1.获取三个节点
-var bodyChildNodes = document.body.childNodes
-var commentNode = bodyChildNodes[1]
-var textNode = bodyChildNodes[2]
-var divNode = bodyChildNodes[3]
+var bodyChildNodes = document.body.childNodes;
+var commentNode = bodyChildNodes[1];
+var textNode = bodyChildNodes[2];
+var divNode = bodyChildNodes[3];
 
 // 2.2.nodeName 节点的名称
 // tagName: 针对元素(element)
-console.log(commentNode.nodeName, textNode.nodeName, divNode.nodeName) // #comment #text DIV
-console.log(commentNode.tagName, divNode.tagName) // undefined 'DIV'
+console.log(commentNode.nodeName, textNode.nodeName, divNode.nodeName); // #comment #text DIV
+console.log(commentNode.tagName, divNode.tagName); // undefined 'DIV'
 ```
 
 ## **节点的属性 - nodeValue**
@@ -521,29 +499,29 @@ console.log(commentNode.tagName, divNode.tagName) // undefined 'DIV'
 
 **innerHTML 属性**
 
-* 将元素中的 HTML 获取为字符串形式；
-* 设置元素中的内容；
+- 将元素中的 HTML 获取为字符串形式；
+- 设置元素中的内容；
 
 **outerHTML 属性**
 
-* 包含了元素的完整 HTML
-* innerHTML 加上元素本身一样；
+- 包含了元素的完整 HTML
+- innerHTML 加上元素本身一样；
 
 **textContent 属性**
 
 仅仅获取元素中的文本内容；
 
-**innerHTML和textContent的区别：**
+**innerHTML 和 textContent 的区别：**
 
-* 使用 innerHTML，我们将其“作为 HTML”插入，带有所有 HTML 标签。
-* 使用 textContent，我们将其“作为文本”插入，所有符号（symbol）均按字面意义处理。
+- 使用 innerHTML，我们将其“作为 HTML”插入，带有所有 HTML 标签。
+- 使用 textContent，我们将其“作为文本”插入，所有符号（symbol）均按字面意义处理。
 
 ```html
 <!-- 我是注释 -->
 我是文本
 <div class="box">
-    <h2>我是标题</h2>
-    <p>我是内容, 哈哈哈哈</p>
+  <h2>我是标题</h2>
+  <p>我是内容, 哈哈哈哈</p>
 </div>
 ```
 
@@ -578,11 +556,11 @@ console.log(divNode.outerHTML) // <div class="box">
 
 ## **节点的其他属性**
 
-**hidden属性：也是一个全局属性，可以用于设置元素隐藏。**
+**hidden 属性：也是一个全局属性，可以用于设置元素隐藏。**
 
 **DOM** **元素还有其他属性：**
 
- value
+value
 
 \<input>，\<select> 和 \<textarea>（HTMLInputElement，HTMLSelectElement……）的 value。
 
@@ -594,7 +572,7 @@ id
 
 所有元素（HTMLElement）的 “id” 特性（attribute）的值。
 
-**class和style我们会在后续专门讲解的。**
+**class 和 style 我们会在后续专门讲解的。**
 
 案例：
 
@@ -604,32 +582,29 @@ id
 <button class="btn">切换</button>
 
 <!-- hidden属性 -->
-<div id="box" class="cba" title="aaa" style="color: red">
-    哈哈哈哈哈
-</div>
+<div id="box" class="cba" title="aaa" style="color: red">哈哈哈哈哈</div>
 ```
 
 ```javascript
 // 1.获取元素
-var boxEl = document.querySelector("#box")
-var btnEl = document.querySelector(".btn")
+var boxEl = document.querySelector("#box");
+var btnEl = document.querySelector(".btn");
 
 // 2.监听btn的点击
-btnEl.onclick = function() {
-    // 1.只是隐藏
-    // boxEl.hidden = true
-    // boxEl.style.display = "none"
+btnEl.onclick = function () {
+  // 1.只是隐藏
+  // boxEl.hidden = true
+  // boxEl.style.display = "none"
 
-    // 2.切换
-    // boxEl.hidden = false
-    // if (boxEl.hidden === false) {
-    //   boxEl.hidden = true
-    // } else {
-    //   boxEl.hidden = false
-    // }
+  // 2.切换
+  // boxEl.hidden = false
+  // if (boxEl.hidden === false) {
+  //   boxEl.hidden = true
+  // } else {
+  //   boxEl.hidden = false
+  // }
 
-    // 3.直接取反
-    boxEl.hidden = !boxEl.hidden
-}
+  // 3.直接取反
+  boxEl.hidden = !boxEl.hidden;
+};
 ```
-

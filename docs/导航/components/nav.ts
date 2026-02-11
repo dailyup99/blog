@@ -13,7 +13,7 @@ type NavData = {
   title: string;
 };
 
-const icon = "http://139.196.79.103:9001/myimages/imgs/202409222118480.webp";
+const icon = new URL("../../images/202409222118480.webp", import.meta.url).href;
 
 export const NAV_DATA: NavData[] = [
   {

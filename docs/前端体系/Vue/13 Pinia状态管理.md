@@ -12,7 +12,7 @@ Pinia开始于大概2019年，最初是作为一个实验为Vue重新设计状�
 
 Pinia本质上依然是一个状态管理的库，用于跨组件、页面进行状态共享（这点和Vuex、Redux一样）；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530210434429.png" alt="image-20230530210434429" style="zoom:67%;" />
+<img src="..\..\images\image-20230530210434429.png" />
 
 ## **Pinia和Vuex的区别**
 
@@ -42,7 +42,7 @@ Pinia 最初是为了探索 Vuex 的下一次迭代会是什么样子，结合�
 
 **也不再有命名空间的概念，不需要记住它们的复杂关系；**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530210709523.png" alt="image-20230530210709523" style="zoom:67%;" />
+<img src="..\..\images\image-20230530210709523.png" />
 
 ## **如何使用Pinia？**
 
@@ -185,7 +185,7 @@ export default useCounter
 
 在 Pinia 中，状态被定义为返回初始状态的函数；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530214558145.png" alt="image-20230530214558145" style="zoom:67%;" />
+<img src="..\..\images\image-20230530214558145.png" />
 
 ## **操作State（一）**
 
@@ -193,13 +193,13 @@ export default useCounter
 
 默认情况下，您可以通过 store 实例访问状态来直接读取和写入状态；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530214653467.png" alt="image-20230530214653467" style="zoom:67%;" />
+<img src="..\..\images\image-20230530214653467.png" />
 
 **重置 State：**
 
 你可以通过调用 store 上的 $reset() 方法将状态 重置 到其初始值；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530214715296.png" alt="image-20230530214715296" style="zoom:67%;" />
+<img src="..\..\images\image-20230530214715296.png" />
 
 ## **操作State（二）**
 
@@ -209,7 +209,7 @@ export default useCounter
 
 它允许您使用部分“state”对象同时应用多个更改；
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530214749416.png" alt="image-20230530214749416" style="zoom:67%;" />
+<img src="..\..\images\image-20230530214749416.png" />
 
 **替换State：**
 
@@ -217,7 +217,7 @@ export default useCounter
 
 但是，原先有的属性，新对象没有的属性还是会被保留下来
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20230530214845677.png" alt="image-20230530214845677" style="zoom:67%;" />
+<img src="..\..\images\image-20230530214845677.png" />
 
 ```javascript
 <template>

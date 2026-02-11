@@ -4,38 +4,38 @@ outline: deep
 
 ## **单页应用程序（SPA）**
 
-单页应用程序 (SPA) 全称是：Single-page application，SPA应用是在客户端呈现的（术语称：CRS）。
+单页应用程序 (SPA) 全称是：Single-page application，SPA 应用是在客户端呈现的（术语称：CRS）。
 
-* SPA应用默认只返回一个空HTML页面，如：body只有\<div id="app">\</div>。
+- SPA 应用默认只返回一个空 HTML 页面，如：body 只有\<div id="app">\</div>。
 
-* 而整个应用程序的内容都是通过 Javascript 动态加载，包括应用程序的逻辑、UI 以及与服务器通信相关的所有数据。
+- 而整个应用程序的内容都是通过 Javascript 动态加载，包括应用程序的逻辑、UI 以及与服务器通信相关的所有数据。
 
-* 构建 SPA 应用常见的库和框架有： React、AngularJS、Vue.js 等。
+- 构建 SPA 应用常见的库和框架有： React、AngularJS、Vue.js 等。
 
 客户端渲染原理
 
-![image-20240504135541059](http://139.196.79.103:9001/myimages/imgs/image-20240504135541059.png)
+![image-20240504135541059](../../images/image-20240504135541059.png)
 
-## **SPA优缺点**
+## **SPA 优缺点**
 
-SPA的优点
+SPA 的优点
 
 只需加载一次
 
-* SPA应用程序只需要在第一次请求时加载页面，页面切换不需重新加载，而传统的Web应用程序必须在每次请求时都得加载页面，需要花费更多时间。因此，SPA页面加载速度要比传统 Web 应用程序更快。
+- SPA 应用程序只需要在第一次请求时加载页面，页面切换不需重新加载，而传统的 Web 应用程序必须在每次请求时都得加载页面，需要花费更多时间。因此，SPA 页面加载速度要比传统 Web 应用程序更快。
 
 更好的用户体验
 
-* SPA 提供类似于桌面或移动应用程序的体验。用户切换页面不必重新加载新页面
-* 切换页面只是内容发生了变化，页面并没有重新加载，从而使体验变得更加流畅
+- SPA 提供类似于桌面或移动应用程序的体验。用户切换页面不必重新加载新页面
+- 切换页面只是内容发生了变化，页面并没有重新加载，从而使体验变得更加流畅
 
-可轻松的构建功能丰富的Web应用程序
+可轻松的构建功能丰富的 Web 应用程序
 
-SPA的缺点
+SPA 的缺点
 
-* SPA应用默认只返回一个空HTML页面，不利于SEO （search engine optimization )
-* 首屏加载的资源过大时，一样会影响首屏的渲染
-* 也不利于构建复杂的项目，复杂 Web 应用程序的大文件可能变得难以维护
+- SPA 应用默认只返回一个空 HTML 页面，不利于 SEO （search engine optimization )
+- 首屏加载的资源过大时，一样会影响首屏的渲染
+- 也不利于构建复杂的项目，复杂 Web 应用程序的大文件可能变得难以维护
 
 ## **爬虫-工作流程**
 
@@ -43,50 +43,50 @@ Google 爬虫的工作流程分为 3 个阶段，并非每个网页都会经历�
 
 **抓取**：
 
-* 爬虫（也称蜘蛛），从互联网上发现各类网页，网页中的外部连接也会被发现。
-* 抓取数以十亿被发现网页的内容，如：文本、图片和视频
+- 爬虫（也称蜘蛛），从互联网上发现各类网页，网页中的外部连接也会被发现。
+- 抓取数以十亿被发现网页的内容，如：文本、图片和视频
 
 **索引编制**：
 
-* 爬虫程序会分析网页上的文本、图片和视频文件
-* 并将信息存储在大型数据库（索引区）中
-* 例如 \<title> 元素和 Alt 属性、图片、视频等
-* 爬虫会对内容类似的网页归类分组
-* 不符合规则内容和网站会被清理
-  * 如：禁止访问 或 需要权限网站等等
+- 爬虫程序会分析网页上的文本、图片和视频文件
+- 并将信息存储在大型数据库（索引区）中
+- 例如 \<title> 元素和 Alt 属性、图片、视频等
+- 爬虫会对内容类似的网页归类分组
+- 不符合规则内容和网站会被清理
+  - 如：禁止访问 或 需要权限网站等等
 
 **呈现搜索结果**：
 
 当用户在 Google 中搜索时，搜索引擎会根据内容的类型，选择一组网页中最具代表性的网页进行呈现
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20240504140314255.png" alt="image-20240504140314255" style="zoom: 80%;" />
+<img src="..\..\images\image-20240504140314255.png" />
 
 ## **搜索引擎的优化（SEO）**
 
-语义性HTML标记
+语义性 HTML 标记
 
-* 标题用\<h1>，一个页面只有一个； 副标题用\<h2>到\<h6>。
-* 不要过度使用h标签，多次使用不会增加 SEO（search engine optimization )。
-* 段落用\<p>，列表用\<ul>，并且li只放在 ul 中 等等。
+- 标题用\<h1>，一个页面只有一个； 副标题用\<h2>到\<h6>。
+- 不要过度使用 h 标签，多次使用不会增加 SEO（search engine optimization )。
+- 段落用\<p>，列表用\<ul>，并且 li 只放在 ul 中 等等。
 
 每个页面需包含：标题 + 内部链接
 
-* 每个页面对应的title，同一网站所有页面都有内链可以指向首页
+- 每个页面对应的 title，同一网站所有页面都有内链可以指向首页
 
 确保链接可供抓取，如右图所示：
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20240504141030364.png" alt="image-20240504141030364" style="zoom: 67%;" />
+<img src="..\..\images\image-20240504141030364.png" />
 
-meta标签优化：设置 description keywords 等
+meta 标签优化：设置 description keywords 等
 
-文本标记和img：
+文本标记和 img：
 
-* 比如\<b>和\<strong>加粗文本的标签，爬虫也会关注到该内容
-* img标签添加 alt 属，图片加载失败，爬虫会取alt内容。
+- 比如\<b>和\<strong>加粗文本的标签，爬虫也会关注到该内容
+- img 标签添加 alt 属，图片加载失败，爬虫会取 alt 内容。
 
 robots.txt 文件：规定爬虫可访问您网站上的哪些网址。
 
-sitemap.xml站点地图：在站点地图列出所有网页，确保爬虫不会漏掉某些网页
+sitemap.xml 站点地图：在站点地图列出所有网页，确保爬虫不会漏掉某些网页
 
 更多查看：https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata
 
@@ -94,80 +94,80 @@ sitemap.xml站点地图：在站点地图列出所有网页，确保爬虫不会
 
 静态站点生成(SSG) 全称是：Static Site Generate，是预先生成好的静态网站。
 
-* SSG 应用一般在构建阶段就确定了网站的内容。
-* 如果网站的内容需要更新了，那必须得重新再次构建和部署。
-* 构建 SSG 应用常见的库和框架有： Vue Nuxt、 React Next.js 等。
+- SSG 应用一般在构建阶段就确定了网站的内容。
+- 如果网站的内容需要更新了，那必须得重新再次构建和部署。
+- 构建 SSG 应用常见的库和框架有： Vue Nuxt、 React Next.js 等。
 
-SSG的优点：
+SSG 的优点：
 
-* 访问速度非常快，因为每个页面都是在构建阶段就已经提前生成好了。
-* 直接给浏览器返回静态的HTML，也有利于SEO
-* SSG应用依然保留了SPA应用的特性，比如：前端路由、响应式数据、虚拟DOM等
+- 访问速度非常快，因为每个页面都是在构建阶段就已经提前生成好了。
+- 直接给浏览器返回静态的 HTML，也有利于 SEO
+- SSG 应用依然保留了 SPA 应用的特性，比如：前端路由、响应式数据、虚拟 DOM 等
 
-SSG的缺点：
+SSG 的缺点：
 
-* 页面都是静态，不利于展示实时性的内容，实时性的更适合SSR。
-* 如果站点内容更新了，那必须得重新再次构建和部署。
+- 页面都是静态，不利于展示实时性的内容，实时性的更适合 SSR。
+- 如果站点内容更新了，那必须得重新再次构建和部署。
 
 ## **服务器端渲染（SSR）**
 
-服务器端渲染全称是：Server Side Render，在服务器端渲染页面，并将渲染好HTML返回给浏览器呈现。
+服务器端渲染全称是：Server Side Render，在服务器端渲染页面，并将渲染好 HTML 返回给浏览器呈现。
 
-SSR应用的页面是在服务端渲染的，用户每请求一个SSR页面都会先在服务端进行渲染，然后将渲染好的页面，返回给浏览器呈现。
+SSR 应用的页面是在服务端渲染的，用户每请求一个 SSR 页面都会先在服务端进行渲染，然后将渲染好的页面，返回给浏览器呈现。
 
-构建 SSR 应用常见的库和框架有： Vue Nuxt、 React Next.js 等（SSR应用也称同构应用） 。
+构建 SSR 应用常见的库和框架有： Vue Nuxt、 React Next.js 等（SSR 应用也称同构应用） 。
 
 服务器端渲染原理
 
-![image-20240504142111586](http://139.196.79.103:9001/myimages/imgs/image-20240504142111586.png)
+![image-20240504142111586](../../images/image-20240504142111586.png)
 
-## **SSR优缺点**
+## **SSR 优缺点**
 
-SSR的优点
+SSR 的优点
 
 更快的首屏渲染速度
 
-* 浏览器显示静态页面的内容要比 JavaScript 动态生成的内容快得多。
-* 当用户访问首页时可立即返回静态页面内容，而不需要等待浏览器先加载完整个应用程序。
+- 浏览器显示静态页面的内容要比 JavaScript 动态生成的内容快得多。
+- 当用户访问首页时可立即返回静态页面内容，而不需要等待浏览器先加载完整个应用程序。
 
-更好的SEO
+更好的 SEO
 
-* 爬虫是最擅长爬取静态的HTML页面，服务器端直接返回一个静态的HTML给浏览器。
-* 这样有利于爬虫快速抓取网页内容，并编入索引，有利于SEO。
+- 爬虫是最擅长爬取静态的 HTML 页面，服务器端直接返回一个静态的 HTML 给浏览器。
+- 这样有利于爬虫快速抓取网页内容，并编入索引，有利于 SEO。
 
-SSR应用程序在 Hydration（水合） 之后依然可以保留 Web 应用程序的交互性。比如：前端路由、响应式数据、虚拟DOM等
+SSR 应用程序在 Hydration（水合） 之后依然可以保留 Web 应用程序的交互性。比如：前端路由、响应式数据、虚拟 DOM 等
 
-SSR的缺点
+SSR 的缺点
 
-* SSR 通常需要对服务器进行更多 API 调用，以及在服务器端渲染需要消耗更多的服务器资源，成本高。
-* 增加了一定的开发成本，用户需要关心哪些代码是运行在服务器端，哪些代码是运行在浏览器端。
-* SSR 配置站点的缓存通常会比SPA站点要复杂一点。
+- SSR 通常需要对服务器进行更多 API 调用，以及在服务器端渲染需要消耗更多的服务器资源，成本高。
+- 增加了一定的开发成本，用户需要关心哪些代码是运行在服务器端，哪些代码是运行在浏览器端。
+- SSR 配置站点的缓存通常会比 SPA 站点要复杂一点。
 
 ## **SSR 解决方案**
 
-SSR的解决方案：
+SSR 的解决方案：
 
-* 方案一：php、jsp ...
-* 方案二：从零搭建 SSR 项目（ Node+webpack+Vue/React ）
-* 方案三：直接使用流行的框架（推荐）
-  * React : Next.js
-  * Vue3 : Nuxt3 | | Vue2 : Nuxt.js
-  * Angular : Anglular Universal
+- 方案一：php、jsp ...
+- 方案二：从零搭建 SSR 项目（ Node+webpack+Vue/React ）
+- 方案三：直接使用流行的框架（推荐）
+  - React : Next.js
+  - Vue3 : Nuxt3 | | Vue2 : Nuxt.js
+  - Angular : Anglular Universal
 
-SSR应用场景非常广阔，比如：
+SSR 应用场景非常广阔，比如：
 
-* SaaS产品，如：电子邮件网站、在线游戏、客户关系管理系统（CRM）、采购系统等
-* 门户网站、电子商务、零售网站
-* 单个页面、静态网站、文档类网站等等
+- SaaS 产品，如：电子邮件网站、在线游戏、客户关系管理系统（CRM）、采购系统等
+- 门户网站、电子商务、零售网站
+- 单个页面、静态网站、文档类网站等等
 
-## **邂逅Vue3 + SSR**
+## **邂逅 Vue3 + SSR**
 
-Vue除了支持开发SPA应用之外，其实也是支持开发SSR应用的。
+Vue 除了支持开发 SPA 应用之外，其实也是支持开发 SSR 应用的。
 
-在Vue中创建SSR应用，需要调用createSSRApp函数，而不是createApp
+在 Vue 中创建 SSR 应用，需要调用 createSSRApp 函数，而不是 createApp
 
-* createApp：创建应用，直接挂载到页面上
-* createSSRApp：创建应用，是在激活的模式下挂载应用
+- createApp：创建应用，直接挂载到页面上
+- createSSRApp：创建应用，是在激活的模式下挂载应用
 
 服务端用 @vue/server-renderer 包中的 renderToString 来进行渲染。
 
@@ -175,13 +175,13 @@ Vue除了支持开发SPA应用之外，其实也是支持开发SSR应用的。
 
 需安装的依赖项：
 
-* npm i express
-* npm i –D nodemon
-* npm i -D webpack webpack-cli webpack-node-externals
+- npm i express
+- npm i –D nodemon
+- npm i -D webpack webpack-cli webpack-node-externals
 
 nodemon:
 
-启动Node程序时并监听文件的变化，变化即刷新
+启动 Node 程序时并监听文件的变化，变化即刷新
 
 webpack-node-externals：
 
@@ -189,7 +189,7 @@ webpack-node-externals：
 
 文件目录结构如下：
 
-![image-20240504163627542](http://139.196.79.103:9001/myimages/imgs/image-20240504163627542.png)
+![image-20240504163627542](../../images/image-20240504163627542.png)
 
 pageckage.json
 
@@ -239,9 +239,9 @@ server.listen(3000, () => {
 });
 ```
 
-到这里执行npm run dev，然后浏览器访问localhost:3000就可以看到 Hello Node Server 2000
+到这里执行 npm run dev，然后浏览器访问 localhost:3000 就可以看到 Hello Node Server 2000
 
-接着我们对服务进行打包，因为等会会在src/server/index.js中引入vue、pinia等
+接着我们对服务进行打包，因为等会会在 src/server/index.js 中引入 vue、pinia 等
 
 config/wp.config.js
 
@@ -260,52 +260,52 @@ module.exports = {
 };
 ```
 
-这样执行npm run build:server的时候就会在build/server目录下生成一个server_bundle.js文件，接着执行
+这样执行 npm run build:server 的时候就会在 build/server 目录下生成一个 server_bundle.js 文件，接着执行
 
-npm run start，跑起来访问localhost:3000，这样我们的服务就算打包好了。
+npm run start，跑起来访问 localhost:3000，这样我们的服务就算打包好了。
 
 ## **Vue3 + SSR 搭建**
 
 需安装的依赖项：
 
-* npm i express 
-* npm i –D nodemon
-* npm i vue
-* npm i -D vue-loader
-* npm i -D babel-loader @babel/preset-env
-* npm i -D webpack webpack-cli
-* npm i -D webpack-merge webpack-node-externals
+- npm i express
+- npm i –D nodemon
+- npm i vue
+- npm i -D vue-loader
+- npm i -D babel-loader @babel/preset-env
+- npm i -D webpack webpack-cli
+- npm i -D webpack-merge webpack-node-externals
 
-vue-loader：加载.vue文件
+vue-loader：加载.vue 文件
 
-webpack-merge： 用来合并webpack配置
+webpack-merge： 用来合并 webpack 配置
 
 babel-loader、@babel/preset-env
 
-* 加载JS文件，转换新语法
+- 加载 JS 文件，转换新语法
 
 ## **跨请求状态污染**
 
-在SPA中，整个生命周期中只有一个App对象实例 或 一个Router对象实例 或 一个Store对象实例都是可以的，因为每个用户在
+在 SPA 中，整个生命周期中只有一个 App 对象实例 或 一个 Router 对象实例 或 一个 Store 对象实例都是可以的，因为每个用户在
 
-使用浏览器访问SPA应用时，应用模块都会重新初始化，这也是一种**单例模式。**
+使用浏览器访问 SPA 应用时，应用模块都会重新初始化，这也是一种**单例模式。**
 
-然而，在 SSR 环境下，App应用模块通常只在服务器启动时初始化一次。同一个应用模块会在多个服务器请求之间被复用，而
+然而，在 SSR 环境下，App 应用模块通常只在服务器启动时初始化一次。同一个应用模块会在多个服务器请求之间被复用，而
 
 我们的单例状态对象也一样，也会在多个请求之间被复用，比如：
 
-* 当某个用户对共享的单例状态进行修改，那么这个状态可能会意外地泄露给另一个在请求的用户。
-* 我们把这种情况称为：**跨请求状态污染**。
+- 当某个用户对共享的单例状态进行修改，那么这个状态可能会意外地泄露给另一个在请求的用户。
+- 我们把这种情况称为：**跨请求状态污染**。
 
-为了避免这种跨请求状态污染，SSR的解决方案是：
+为了避免这种跨请求状态污染，SSR 的解决方案是：
 
-* 可以在每个请求中为整个应用创建一个全新的实例，包括后面的 router 和全局 store等实例。
-* 所以我们在创建App 或 路由 或 Store对象时都是使用一个函数来创建，保证每个请求都会创建一个全新的实例。
-* 这样也会有缺点：需要消耗更多的服务器的资源。
+- 可以在每个请求中为整个应用创建一个全新的实例，包括后面的 router 和全局 store 等实例。
+- 所以我们在创建 App 或 路由 或 Store 对象时都是使用一个函数来创建，保证每个请求都会创建一个全新的实例。
+- 这样也会有缺点：需要消耗更多的服务器的资源。
 
 文件目录结构如下：
 
-![image-20240504165410575](http://139.196.79.103:9001/myimages/imgs/image-20240504165410575.png)
+![image-20240504165410575](../../images/image-20240504165410575.png)
 
 src/server/index.js
 
@@ -371,11 +371,11 @@ src/App.vue
 </template>
 
 <script setup>
-import { ref } from "vue";
-const count = ref(100);
-function addCounter() {
-  count.value++;
-}
+  import { ref } from "vue";
+  const count = ref(100);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
@@ -426,30 +426,30 @@ package.json
 },
 ```
 
-同样执行npm run build:server，然后执行npm run start
+同样执行 npm run build:server，然后执行 npm run start
 
-访问localhost:3000，就可以看到App.vue了
+访问 localhost:3000，就可以看到 App.vue 了
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20240504170330239.png" alt="image-20240504170330239" style="zoom:67%;" />
+<img src="..\..\images\image-20240504170330239.png" />
 
-不过，+1按钮不能点击，需要进行水合，具体往下看
+不过，+1 按钮不能点击，需要进行水合，具体往下看
 
 ## **Vue3 SSR + Hydration**
 
 服务器端渲染页面 + 客户端激活页面，是页面有交互效果（这个过程称为：Hydration 水合）
 
-Hydration的具体步骤如下：
+Hydration 的具体步骤如下：
 
-* 1.开发一个App应用，比如App.vue
-* 2.将App.vue打包为一个客户端的client_bundle.js文件
-  * 用来激活应用，使页面有交互效果
-* 3.将App.vue打包为一个服务器端的server_bundle.js文件
-  * 用来在服务器端动态生成页面的HTML
-* 4. server_bundle.js 渲染的页面 + client_bundle.js 文件进行Hydration
+- 1.开发一个 App 应用，比如 App.vue
+- 2.将 App.vue 打包为一个客户端的 client_bundle.js 文件
+  - 用来激活应用，使页面有交互效果
+- 3.将 App.vue 打包为一个服务器端的 server_bundle.js 文件
+  - 用来在服务器端动态生成页面的 HTML
+- 4. server_bundle.js 渲染的页面 + client_bundle.js 文件进行 Hydration
 
 页面目录结构如下：
 
-![image-20240504170717736](http://139.196.79.103:9001/myimages/imgs/image-20240504170717736.png)
+![image-20240504170717736](../../images/image-20240504170717736.png)
 
 src/client/index.js
 
@@ -563,14 +563,14 @@ npm i vue-router
 
 注意事项：
 
-* 为了避免 跨请求状态污染
-* 需在每个请求中都创建一个全新router
+- 为了避免 跨请求状态污染
+- 需在每个请求中都创建一个全新 router
 
-在使用路由之前，我们对webpack进行一下配置，因为config/client.config.js和config/server.config.js有很多相同的代码，需要进行合并
+在使用路由之前，我们对 webpack 进行一下配置，因为 config/client.config.js 和 config/server.config.js 有很多相同的代码，需要进行合并
 
 目录结构如下：
 
-![image-20240504173301894](http://139.196.79.103:9001/myimages/imgs/image-20240504173301894.png)
+![image-20240504173301894](../../images/image-20240504173301894.png)
 
 config/base.config.js
 
@@ -646,7 +646,7 @@ module.exports = merge(baseConfig, {
 
 目录结构如下：
 
-![image-20240504173630420](http://139.196.79.103:9001/myimages/imgs/image-20240504173630420.png)
+![image-20240504173630420](../../images/image-20240504173630420.png)
 
 src/client/index.js
 
@@ -735,7 +735,8 @@ const routes = [
   },
 ];
 
-export default function (history) { // history由外面传进来
+export default function (history) {
+  // history由外面传进来
   return createRouter({
     history,
     routes,
@@ -766,11 +767,11 @@ src/App.vue
 </template>
 
 <script setup>
-import { ref } from "vue";
-const count = ref(100);
-function addCounter() {
-  count.value++;
-}
+  import { ref } from "vue";
+  const count = ref(100);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
@@ -786,11 +787,11 @@ src/views/home.vue
 </template>
 
 <script setup>
-import { ref } from "vue";
-const count = ref(200);
-function addCounter() {
-  count.value++;
-}
+  import { ref } from "vue";
+  const count = ref(200);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
@@ -806,11 +807,11 @@ src/views/about.vue
 </template>
 
 <script setup>
-import { ref } from "vue";
-const count = ref(300);
-function addCounter() {
-  count.value++;
-}
+  import { ref } from "vue";
+  const count = ref(300);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
@@ -822,12 +823,12 @@ npm i pinia
 
 注意事项：
 
-* 为了避免 跨请求状态污染
-* 需在每个请求中都创建一个全新pinia
+- 为了避免 跨请求状态污染
+- 需在每个请求中都创建一个全新 pinia
 
 目录结构如下：
 
-![image-20240504174352758](http://139.196.79.103:9001/myimages/imgs/image-20240504174352758.png)
+![image-20240504174352758](../../images/image-20240504174352758.png)
 
 src/client/index.js
 
@@ -863,7 +864,7 @@ import { renderToString } from "@vue/server-renderer";
 import createRouter from "../router";
 // 内存路由-> node用
 import { createMemoryHistory } from "vue-router";
-import { createPinia } from 'pinia'
+import { createPinia } from "pinia";
 // 部署 静态资源
 server.use(express.static("build"));
 
@@ -878,9 +879,8 @@ server.get("/*", async (req, res) => {
   await router.isReady(); // 等待(异步)路由加载完成,在渲染页面
 
   // app 安装pinia插件
-  let pinia = createPinia()
-  app.use(pinia)
-
+  let pinia = createPinia();
+  app.use(pinia);
 
   let appStringHtml = await renderToString(app);
   res.send(
@@ -948,13 +948,13 @@ src/views/home.vue
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { useHomeStore } from "../store/home";
-let homeStore = useHomeStore();
-let { count } = storeToRefs(homeStore);
-function addCounter() {
-  count.value++;
-}
+  import { storeToRefs } from "pinia";
+  import { useHomeStore } from "../store/home";
+  let homeStore = useHomeStore();
+  let { count } = storeToRefs(homeStore);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
@@ -970,14 +970,14 @@ src/views/about.vue
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { useHomeStore } from "../store/home";
-let homeStore = useHomeStore();
-let { count } = storeToRefs(homeStore);
-function addCounter() {
-  count.value++;
-}
+  import { storeToRefs } from "pinia";
+  import { useHomeStore } from "../store/home";
+  let homeStore = useHomeStore();
+  let { count } = storeToRefs(homeStore);
+  function addCounter() {
+    count.value++;
+  }
 </script>
 ```
 
-![image-20240504175342245](http://139.196.79.103:9001/myimages/imgs/image-20240504175342245.png)
+![image-20240504175342245](../../images/image-20240504175342245.png)

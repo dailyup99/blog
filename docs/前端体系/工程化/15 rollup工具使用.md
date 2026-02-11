@@ -112,7 +112,7 @@ npm install @rollup/plugin-node-resolve -D
 
 **打包和排除lodash**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20240610081448048.png" alt="image-20240610081448048" style="zoom:67%;" />
+<img src="..\..\images\image-20240610081448048.png" />
 
 ```javascript
 // 默认lodash没有被打包是因为它使用commonjs, rollup默认情况下只会处理es module
@@ -303,7 +303,7 @@ module.exports = {
 
 **在我们打包vue项目后，运行会报如下的错误：**
 
-<img src="http://139.196.79.103:9001/myimages/imgs/image-20240610084658043.png" alt="image-20240610084658043" style="zoom:67%;" />
+<img src="..\..\images\image-20240610084658043.png" />
 
 **这是因为在我们打包的vue代码中，用到 process.env.NODE_ENV，所以我们可以使用一个插件 rollup-plugin-replace 设置**
 

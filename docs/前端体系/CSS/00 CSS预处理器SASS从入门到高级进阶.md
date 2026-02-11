@@ -2,33 +2,33 @@
 outline: deep
 ---
 
-## 关于sass(scss)、less、postcss、stylus的简介和区别
+## 关于 sass(scss)、less、postcss、stylus 的简介和区别
 
-### 为什么会出现css预处理器
+### 为什么会出现 css 预处理器
 
-比如一个项目的主题色在很多地方引用，后面需要修改，就得改很多个地方，难以维护。css预处理器就是解决类似问题的。
+比如一个项目的主题色在很多地方引用，后面需要修改，就得改很多个地方，难以维护。css 预处理器就是解决类似问题的。
 
-### css预处理器的本质
+### css 预处理器的本质
 
-它会通过编译器最终编译成浏览器可以识别的CSS文件。比较优秀的有：sass、less、stylus。
+它会通过编译器最终编译成浏览器可以识别的 CSS 文件。比较优秀的有：sass、less、stylus。
 
 ### sass
 
-sass是一种动态样式语言，由Ruby开发者设计和开发，比CSS多出好些功能，比如变量、嵌套、运算、混入、继承、指令、颜色处理、函数等。
+sass 是一种动态样式语言，由 Ruby 开发者设计和开发，比 CSS 多出好些功能，比如变量、嵌套、运算、混入、继承、指令、颜色处理、函数等。
 
-### sass与scss的关系
+### sass 与 scss 的关系
 
-sass从第三代开始，放弃了缩进风格，并且完全向下兼容普通的css代码，这一代的sass也被称为scss。
+sass 从第三代开始，放弃了缩进风格，并且完全向下兼容普通的 css 代码，这一代的 sass 也被称为 scss。
 
-### sass/scss与less、stylus的区别
+### sass/scss 与 less、stylus 的区别
 
 #### 编译环境不一样
 
-Sass需要Ruby环境
+Sass 需要 Ruby 环境
 
-Less需要引入less.js
+Less 需要引入 less.js
 
-Stylus需要安装node
+Stylus 需要安装 node
 
 #### 变量符不一样
 
@@ -36,7 +36,7 @@ Sass
 
 $color:#eee;
 
- Less
+Less
 
 @color:#eee;
 
@@ -46,29 +46,29 @@ mainColor:#eee;
 
 #### 输出风格
 
-SASS的输出风格有四种：
+SASS 的输出风格有四种：
 
-nested，嵌套缩进的CSS代码，默认值
+nested，嵌套缩进的 CSS 代码，默认值
 
-expanded，展开的多行CSS代码
+expanded，展开的多行 CSS 代码
 
-compact，简洁格式的CSS代码
+compact，简洁格式的 CSS 代码
 
-compressed，压缩后的CSS代码
+compressed，压缩后的 CSS 代码
 
 ### 总结
 
-使用CSS预处理是为了让CSS代码更好维护，开发更加灵活、强大。
+使用 CSS 预处理是为了让 CSS 代码更好维护，开发更加灵活、强大。
 
-## vscode集成sass
+## vscode 集成 sass
 
 ### 安装插件
 
-安装Live Sass Compiler这个插件，进行一些配置，打开下面这个地址
+安装 Live Sass Compiler 这个插件，进行一些配置，打开下面这个地址
 
 https://github.com/ritwickdey/vscode-live-sass-compiler
 
-找到Settings=>Settings Docs，点击打开，复制里面的配置
+找到 Settings=>Settings Docs，点击打开，复制里面的配置
 
 ```js
 "liveSassCompile.settings.formats":[
@@ -87,37 +87,37 @@ https://github.com/ritwickdey/vscode-live-sass-compiler
 /*排除目录*/
 "liveSassCompile.settings.excludeList":[
     "**/node_modules/**",
-    ".vscode/**" 
+    ".vscode/**"
 ],
-/*是否生成对应的map*/    
+/*是否生成对应的map*/
 "liveSassCompile.settings.generateMap": true,
 /*是否添加兼容前缀，例如：-webkit- -moz-等*/
 "liveSassCompile.settings.autoprefix": [
     "> 1%",
     "last 2 versions"
-]    
+]
 
 ```
 
 找到这个插件，点击拓展设置
 
-![image-20221120210306905](http://139.196.79.103:9001/myimages/imgs/image-20221120210306905.png)
+![image-20221120210306905](../../images/image-20221120210306905.png)
 
-紧接着在settings.json中设置，将刚才的代码粘贴进去
+紧接着在 settings.json 中设置，将刚才的代码粘贴进去
 
-![image-20221120210429189](http://139.196.79.103:9001/myimages/imgs/image-20221120210429189.png)
+![image-20221120210429189](../../images/image-20221120210429189.png)
 
-### 将scss编译成css
+### 将 scss 编译成 css
 
-点击vscode下面的Watchs Sass，就会将scss转为css
+点击 vscode 下面的 Watchs Sass，就会将 scss 转为 css
 
-![image-20221120211506549](http://139.196.79.103:9001/myimages/imgs/image-20221120211506549.png)
+![image-20221120211506549](../../images/image-20221120211506549.png)
 
-## sass的几种输出格式
+## sass 的几种输出格式
 
-这个就是改上面settings.json中的format的值，编译出来的CSS会展示不同的格式
+这个就是改上面 settings.json 中的 format 的值，编译出来的 CSS 会展示不同的格式
 
-对下面这段代码设置不同的format值，编译展示不同的CSS
+对下面这段代码设置不同的 format 值，编译展示不同的 CSS
 
 ```css
 html {
@@ -143,7 +143,7 @@ html {
 }
 ```
 
-比如将设置format为expanded：展开格式，那么将编译为
+比如将设置 format 为 expanded：展开格式，那么将编译为
 
 ```css
 html {
@@ -168,11 +168,11 @@ html .container::after {
 }
 ```
 
-## sass语法功能扩张
+## sass 语法功能扩张
 
 ### 选择器嵌套
 
-有下面这段css代码，如何改造成scss代码
+有下面这段 css 代码，如何改造成 scss 代码
 
 ```css
 .container {
@@ -182,7 +182,7 @@ html .container::after {
 
 .container .header {
   height: 90px;
-  line-height: 90px
+  line-height: 90px;
 }
 
 .container .header .logo {
@@ -201,7 +201,7 @@ html .container::after {
 }
 ```
 
-用scss就可以这样写
+用 scss 就可以这样写
 
 ```css
 .container {
@@ -211,7 +211,7 @@ html .container::after {
   .header {
     height: 90px;
     line-height: 90px;
-    
+
     .logo {
       width: 100px;
       height: 60px;
@@ -230,11 +230,11 @@ html .container::after {
 }
 ```
 
-编译出来的css代码和上面一样
+编译出来的 css 代码和上面一样
 
 ## 父选择器&
 
-再来看下面这段css代码，如何改造成scss
+再来看下面这段 css 代码，如何改造成 scss
 
 ```css
 .container {
@@ -286,7 +286,7 @@ html .container::after {
 
 ### 属性嵌套
 
-还有下面这段css代码，如何改写
+还有下面这段 css 代码，如何改写
 
 ```css
 .container a {
@@ -314,7 +314,7 @@ html .container::after {
 
 ### 占位符选择器%必须通过@extend
 
-下面这段scss代码正常是不会编译
+下面这段 scss 代码正常是不会编译
 
 ```css
 .button%base {
@@ -340,7 +340,7 @@ html .container::after {
 }
 ```
 
-但是如果使用@extend就会被编译
+但是如果使用@extend 就会被编译
 
 ```css
 .button%base {
@@ -385,13 +385,14 @@ html .container::after {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-
 ```
 
 经过编译就会变成下面这样
 
 ```css
-.button.btn-danger, .button.btn-success, .button.btn-default {
+.button.btn-danger,
+.button.btn-success,
+.button.btn-default {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -432,72 +433,74 @@ html .container::after {
 }
 ```
 
-## sass的两种注释
+## sass 的两种注释
 
 ### 单行注释
 
-// 不会编译到css中
+// 不会编译到 css 中
 
 ### 多行注释
 
-/**/ 会被编译到css中
+/\*\*/ 会被编译到 css 中
 
-## sass变量详解
+## sass 变量详解
 
-### css变量的定义与书写
+### css 变量的定义与书写
 
 ```css
 :root {
-    --color: #F00;
+  --color: #f00;
 }
 
 body {
-    --border-color: #f2f2f2;
+  --border-color: #f2f2f2;
 }
 
 .header {
-    --background-color: #f8f8f8;
+  --background-color: #f8f8f8;
 }
 
 p {
-    color: var(--color);
-    border-color: var(--border-color);
+  color: var(--color);
+  border-color: var(--border-color);
 }
 
 .header {
-    background-color: var(--background-color);
+  background-color: var(--background-color);
 }
 ```
 
-SASS的写法
+SASS 的写法
 
 ```css
-$font-size:14px;
+$font-size: 14px;
 .container {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 ```
 
-### sass变量的定义
+### sass 变量的定义
 
 #### 定义规则
 
-* 变量以美元符号($)开头，后面跟变量名；
-* 变量名是不以数字开头的可包含字母、数字、下划线、横线（连接符）；
-* 写法同css，即变量名和值之间用冒号(:)分隔；
-* 变量一定要先定义，后使用；
+- 变量以美元符号($)开头，后面跟变量名；
+- 变量名是不以数字开头的可包含字母、数字、下划线、横线（连接符）；
+- 写法同 css，即变量名和值之间用冒号(:)分隔；
+- 变量一定要先定义，后使用；
 
 #### 连接符与下划线
 
 通过连接符与下划线 定义的同名变量为同一变量，建议使用连接符
 
 ```css
-$font-size:14px;
-$font_size:16px;
-.container{font-size: $font-size;}
+$font-size: 14px;
+$font_size: 16px;
+.container {
+  font-size: $font-size;
+}
 ```
 
-上面这段scss代码会被编译成
+上面这段 scss 代码会被编译成
 
 ```css
 .container {
@@ -513,8 +516,8 @@ $font_size:16px;
 
 ```css
 .container {
-    $font-size: 14px;
-    font-size: $font-size;
+  $font-size: 14px;
+  font-size: $font-size;
 }
 ```
 
@@ -533,12 +536,12 @@ $font_size:16px;
 ##### 第一种：在选择器外面的最前面定义的变量
 
 ```css
-$font-size:16px;
+$font-size: 16px;
 .container {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 .footer {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 ```
 
@@ -554,17 +557,15 @@ $font-size:16px;
 }
 ```
 
-
-
 ##### 第二种：使用 !global 标志定义全局变量
 
 ```css
 .container {
-    $font-size: 16px !global;
-    font-size: $font-size;
+  $font-size: 16px !global;
+  font-size: $font-size;
 }
 .footer {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 ```
 
@@ -584,7 +585,7 @@ $font-size:16px;
 
 变量值的类型可以有很多种
 
-SASS支持 7 种主要的数据类型
+SASS 支持 7 种主要的数据类型
 
 - 数字，1, 2, 13, 10px，30%
 - 字符串，有引号字符串与无引号字符串，"foo", 'bar', baz
@@ -597,42 +598,48 @@ SASS支持 7 种主要的数据类型
 例如
 
 ```css
-$layer-index:10;
-$border-width:3px;
-$font-base-family:'Open Sans', Helvetica, Sans-Serif;
-$top-bg-color:rgba(255,147,29,0.6);
-$block-base-padding:6px 10px 6px 10px;
-$blank-mode:true;
-$var:null; // 值null是其类型的唯一值。它表示缺少值，通常由函数返回以指示缺少结果。
-$color-map: (color1: #fa0000, color2: #fbe200, color3: #95d7eb);
+$layer-index: 10;
+$border-width: 3px;
+$font-base-family: "Open Sans", Helvetica, Sans-Serif;
+$top-bg-color: rgba(255, 147, 29, 0.6);
+$block-base-padding: 6px 10px 6px 10px;
+$blank-mode: true;
+$var: null; // 值null是其类型的唯一值。它表示缺少值，通常由函数返回以指示缺少结果。
+$color-map: (
+  color1: #fa0000,
+  color2: #fbe200,
+  color3: #95d7eb
+);
 
-$fonts: (serif: "Helvetica Neue",monospace: "Consolas");
+$fonts: (
+  serif: "Helvetica Neue",
+  monospace: "Consolas"
+);
 ```
 
 使用
 
 ```css
 .container {
-    $font-size: 16px !global;
-    font-size: $font-size;
-    @if $blank-mode {
-        background-color: #000;
-    }
-    @else {
-        background-color: #fff;
-    }
-    content: type-of($var);
-    content:length($var);
-    color: map-get($color-map, color2);
+  $font-size: 16px !global;
+  font-size: $font-size;
+  @if $blank-mode {
+    background-color: #000;
+  } @else {
+    background-color: #fff;
+  }
+  content: type-of($var);
+  content: length($var);
+  color: map-get($color-map, color2);
 }
 
 .footer {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 
 // 如果列表中包含空值，则生成的CSS中将忽略该空值。
 .wrap {
-    font: 18px bold map-get($fonts, "sans");
+  font: 18px bold map-get($fonts, "sans");
 }
 ```
 
@@ -667,7 +674,7 @@ $color:#666 !default;
 }
 ```
 
-## sass导入@import详解
+## sass 导入@import 详解
 
 ### @import
 
@@ -678,25 +685,23 @@ Sass 拓展了 @import 的功能，允许其导入 SCSS 或 Sass 文件。被导
 public.scss
 
 ```css
-$font-base-color:#333;
+$font-base-color: #333;
 ```
 
-在index.scss里面使用
+在 index.scss 里面使用
 
 ```css
 @import "public";
-$color:#666;
+$color: #666;
 .container {
-    border-color: $color;
-    color: $font-base-color;
+  border-color: $color;
+  color: $font-base-color;
 }
 ```
 
-**注意：**跟我们普通css里面@import的区别
+**注意：**跟我们普通 css 里面@import 的区别
 
- 
-
-###### 如下几种方式，都将作为普通的css语句，不会导入任何 sass 文件
+###### 如下几种方式，都将作为普通的 css 语句，不会导入任何 sass 文件
 
 1. 文件拓展名是 .css；
 2. 文件名以 http:// 开头；
@@ -707,22 +712,22 @@ $color:#666;
 @import "public.css";
 @import url(public);
 @import "http://xxx.com/xxx";
-@import 'landscape' screen and (orientation:landscape);
+@import "landscape" screen and (orientation: landscape);
 ```
 
 ### 局部文件(partials)
 
-Sass源文件中可以通过@import指令导入其他Sass源文件，被导入的文件就是局部文件，局部文件让Sass模块化编写更加容易。
+Sass 源文件中可以通过@import 指令导入其他 Sass 源文件，被导入的文件就是局部文件，局部文件让 Sass 模块化编写更加容易。
 
-如果一个目录正在被Sass程序监测，目录下的所有scss/sass源文件都会被编译，但通常不希望局部文件被编译，因为局部文件是用来被导入到其他文件的。如果不想局部文件被编译，文件名可以以下划线 （_）开头
+如果一个目录正在被 Sass 程序监测，目录下的所有 scss/sass 源文件都会被编译，但通常不希望局部文件被编译，因为局部文件是用来被导入到其他文件的。如果不想局部文件被编译，文件名可以以下划线 （\_）开头
 
 例如：
 
-_theme.scss
+\_theme.scss
 
 ```css
-$border-color:#999;
-$background-color:#f2f2f2;
+$border-color: #999;
+$background-color: #f2f2f2;
 ```
 
 使用
@@ -730,12 +735,12 @@ $background-color:#f2f2f2;
 ```css
 @import "theme";
 .container {
-    border-color: $border-color;
-    background-color: $background-color;
+  border-color: $border-color;
+  background-color: $background-color;
 }
 ```
 
-可以看到，@import 引入的theme.scss，可以没有下划线，这是允许的，这也就意味着，同一个目录下不能同时出现两个相关名的sass文件（一个不带下划线，一个带下划线），添加下划线的文件将会被忽略。
+可以看到，@import 引入的 theme.scss，可以没有下划线，这是允许的，这也就意味着，同一个目录下不能同时出现两个相关名的 sass 文件（一个不带下划线，一个带下划线），添加下划线的文件将会被忽略。
 
 ### 嵌套 @import
 
@@ -743,11 +748,11 @@ $background-color:#f2f2f2;
 
 例如
 
-_base.scss
+\_base.scss
 
 ```css
 .main-color {
-    color: #F00;
+  color: #f00;
 }
 ```
 
@@ -755,13 +760,13 @@ _base.scss
 
 ```css
 .container {
-    @import "base";
+  @import "base";
 }
 ```
 
-**注意：**@import不能嵌套使用在控制指令或混入中
+**注意：**@import 不能嵌套使用在控制指令或混入中
 
-## sass混合指令 (mixin directives)
+## sass 混合指令 (mixin directives)
 
 混合指令（Mixin）用于定义可重复使用的样式。混合指令可以包含所有的 CSS 规则，绝大部分 Sass 规则，甚至通过参数功能引入变量，输出多样化的样式。
 
@@ -769,21 +774,21 @@ _base.scss
 
 ```css
 @mixin mixin-name() {
-    /* css 声明 */
+  /* css 声明 */
 }
 ```
 
-#### 例1：标准形式
+#### 例 1：标准形式
 
 定义
 
 ```css
 // 定义页面一个区块基本的样式
 @mixin block {
-    width: 96%;
-    margin-left: 2%;
-    border-radius: 8px;
-    border: 1px #f6f6f6 solid;
+  width: 96%;
+  margin-left: 2%;
+  border-radius: 8px;
+  border: 1px #f6f6f6 solid;
 }
 ```
 
@@ -806,18 +811,18 @@ _base.scss
 }
 ```
 
-#### 例2：嵌入选择器
+#### 例 2：嵌入选择器
 
 例如
 
 ```css
 // 定义警告字体样式,下划线（_）与横线（-）是一样的
 @mixin warning-text {
-    .warn-text {
-        font-size: 12px;
-        color: rgb(255, 253, 123);
-        line-height: 180%;
-    }
+  .warn-text {
+    font-size: 12px;
+    color: rgb(255, 253, 123);
+    line-height: 180%;
+  }
 }
 ```
 
@@ -826,7 +831,7 @@ _base.scss
 ```css
 // 使用混入
 .container {
-    @include warning-text();
+  @include warning-text();
 }
 ```
 
@@ -840,17 +845,17 @@ _base.scss
 }
 ```
 
-#### 例3：使用变量
+#### 例 3：使用变量
 
 定义
 
 ```css
 // 定义flex布局元素纵轴的排列方式
 @mixin flex-align($aitem) {
-    -webkit-box-align: $aitem;
-    -webkit-align-items: $aitem;
-    -ms-flex-align: $aitem;
-    align-items: $aitem;
+  -webkit-box-align: $aitem;
+  -webkit-align-items: $aitem;
+  -ms-flex-align: $aitem;
+  align-items: $aitem;
 }
 ```
 
@@ -859,26 +864,26 @@ _base.scss
 ```css
 // 只有一个参数，直接传递参数
 .container {
-    @include flex-align(center);
+  @include flex-align(center);
 }
 
 // 给指定参数指定值
 .footer {
-    @include flex-align($aitem: center);
+  @include flex-align($aitem: center);
 }
 ```
 
-#### 例4：使用变量（多参数）
+#### 例 4：使用变量（多参数）
 
 例如
 
 ```css
 // 定义块元素内边距
 @mixin block-padding($top, $right, $bottom, $left) {
-    padding-top: $top;
-    padding-right: $right;
-    padding-bottom: $bottom;
-    padding-left: $left;
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
 }
 ```
 
@@ -887,7 +892,7 @@ _base.scss
 ```css
 // 按照参数顺序赋值
 .container {
-    @include block-padding(10px, 20px, 30px, 40px);
+  @include block-padding(10px, 20px, 30px, 40px);
 }
 ```
 
@@ -896,7 +901,7 @@ _base.scss
 ```css
 // 可指定参数赋值
 .container {
-    @include block-padding($left: 20px, $top: 10px, $bottom: 10px, $right: 30px);
+  @include block-padding($left: 20px, $top: 10px, $bottom: 10px, $right: 30px);
 }
 ```
 
@@ -905,25 +910,23 @@ _base.scss
 ```css
 // 可指定参数赋值
 .container {
-    @include block-padding($left: 10px, $top: 10px, $bottom: 0, $right: 0);
+  @include block-padding($left: 10px, $top: 10px, $bottom: 0, $right: 0);
 }
 ```
 
-**问题：**必须指定4个值
+**问题：**必须指定 4 个值
 
- 
-
-#### 例5：指定默认值
+#### 例 5：指定默认值
 
 定义
 
 ```css
 // 定义块元素内边距，参数指定默认值
-@mixin block-padding($top:0, $right:0, $bottom:0, $left:0) {
-    padding-top: $top;
-    padding-right: $right;
-    padding-bottom: $bottom;
-    padding-left: $left;
+@mixin block-padding($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
 }
 ```
 
@@ -932,16 +935,16 @@ _base.scss
 ```css
 // 可指定参数赋值
 .container {
-    // 不带参数
-    //@include block-padding;
-    //按顺序指定参数值
-    //@include block-padding(10px,20px);
-    //给指定参数指定值
-    @include block-padding($left: 10px, $top: 20px)
+  // 不带参数
+  //@include block-padding;
+  //按顺序指定参数值
+  //@include block-padding(10px,20px);
+  //给指定参数指定值
+  @include block-padding($left: 10px, $top: 20px);
 }
 ```
 
-#### 例6：可变参数
+#### 例 6：可变参数
 
 参数不固定的情况
 
@@ -953,8 +956,8 @@ _base.scss
  */
 
 @mixin linear-gradient($direction, $gradients...) {
-    background-color: nth($gradients, 1);
-    background-image: linear-gradient($direction, $gradients);
+  background-color: nth($gradients, 1);
+  background-image: linear-gradient($direction, $gradients);
 }
 ```
 
@@ -962,40 +965,43 @@ _base.scss
 
 ```css
 .table-data {
-    @include linear-gradient(to right, #F00, orange, yellow);
+  @include linear-gradient(to right, #f00, orange, yellow);
 }
 ```
 
- 会编译成
+会编译成
 
 ```css
 .table-data {
-  background-color: #F00;
-  background-image: -webkit-gradient(linear, left top, right top, from(#F00), color-stop(orange), to(yellow));
-  background-image: linear-gradient(to right, #F00, orange, yellow);
+  background-color: #f00;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#f00),
+    color-stop(orange),
+    to(yellow)
+  );
+  background-image: linear-gradient(to right, #f00, orange, yellow);
 }
 ```
 
+### @mixin 混入总结
 
-
-### @mixin混入总结
-
-- mixin是可以重复使用的一组CSS声明
-- mixin有助于减少重复代码，只需声明一次，就可在文件中引用
+- mixin 是可以重复使用的一组 CSS 声明
+- mixin 有助于减少重复代码，只需声明一次，就可在文件中引用
 - 混合指令可以包含所有的 CSS 规则，绝大部分 Sass 规则，甚至通过参数功能引入变量，输出多样化的样式。
 - 使用参数时建议加上默认值
-
- 
 
 **什么时候用？？？？** 很多地方都会用到却能根据不同场景灵活使用的样式
 
 ## sass @extend（继承）指令
 
-​	在设计网页的时候通常遇到这样的情况：一个元素使用的样式与另一个元素完全相同，但又添加了额外的样式。通常会在 HTML 中给元素定义两个 class，一个通用样式，一个特殊样式。
+​ 在设计网页的时候通常遇到这样的情况：一个元素使用的样式与另一个元素完全相同，但又添加了额外的样式。通常会在 HTML 中给元素定义两个 class，一个通用样式，一个特殊样式。
 
-### css案例
+### css 案例
 
-接下来以警告框为例进行讲解4种类型
+接下来以警告框为例进行讲解 4 种类型
 
 | 标记    | 说明                     |
 | ------- | ------------------------ |
@@ -1004,15 +1010,15 @@ _base.scss
 | warning | 警告！请不要提交。       |
 | danger  | 错误！请进行一些更改。   |
 
-所有警告框的基本样式（风格、字体大小、内边距、边框等...） ，因为我们通常会定义一个通用alert样式
+所有警告框的基本样式（风格、字体大小、内边距、边框等...） ，因为我们通常会定义一个通用 alert 样式
 
 ```css
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 12px;
 }
 ```
 
@@ -1020,27 +1026,27 @@ _base.scss
 
 ```css
 .alert-info {
-    color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
 
 .alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
 
 .alert-warning {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 
 .alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 ```
 
@@ -1064,39 +1070,37 @@ _base.scss
 </div>
 ```
 
- 
-
-### 使用继承@extend改进
+### 使用继承@extend 改进
 
 基本样式我们没有变，主要是各个警告框单独的样式
 
 ```css
 .alert-info {
-    @extend .alert;
-    color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
+  @extend .alert;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
 
 .alert-success {
-    @extend .alert;
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+  @extend .alert;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
 
 .alert-warning {
-    @extend .alert;
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
+  @extend .alert;
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 
 .alert-danger {
-    @extend .alert;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  @extend .alert;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 ```
 
@@ -1104,7 +1108,11 @@ _base.scss
 
 ```css
 // 继承.alert的样式
-.alert, .alert-danger, .alert-warning, .alert-success, .alert-info {
+.alert,
+.alert-danger,
+.alert-warning,
+.alert-success,
+.alert-info {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
@@ -1163,16 +1171,16 @@ _base.scss
 
 ```css
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 .important {
-    font-weight: bold;
-    font-size: 14px;
+  font-weight: bold;
+  font-size: 14px;
 }
 ```
 
@@ -1180,31 +1188,31 @@ _base.scss
 
 ```css
 .alert-danger {
-    @extend .alert;
-    @extend .important;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  @extend .alert;
+  @extend .important;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 ```
 
-### @extend多层继承
+### @extend 多层继承
 
 第一层继承
 
 ```css
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 .important {
-    @extend .alert;
-    font-weight: bold;
-    font-size: 14px;
+  @extend .alert;
+  font-weight: bold;
+  font-size: 14px;
 }
 ```
 
@@ -1212,62 +1220,62 @@ _base.scss
 
 ```css
 .alert-danger {
-    @extend .important;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  @extend .important;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 ```
 
 ### 占位符%
 
-你可能发现被继承的css父类并没有被实际应用，也就是说html代码中没有使用该类，它的唯一目的就是扩展其他选择器。
+你可能发现被继承的 css 父类并没有被实际应用，也就是说 html 代码中没有使用该类，它的唯一目的就是扩展其他选择器。
 
-对于该类，可能不希望被编译输出到最终的css文件中，它只会增加CSS文件的大小，永远不会被使用。
+对于该类，可能不希望被编译输出到最终的 css 文件中，它只会增加 CSS 文件的大小，永远不会被使用。
 
 这就是占位符选择器的作用。
 
 占位符选择器类似于类选择器，但是，它们不是以句点(.)开头，而是以百分号(%)开头。
 
-当在Sass文件中使用占位符选择器时，它可以用于扩展其他选择器，但不会被编译成最终的CSS。
+当在 Sass 文件中使用占位符选择器时，它可以用于扩展其他选择器，但不会被编译成最终的 CSS。
 
 改写
 
 ```css
 %alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 .alert-info {
-    @extend %alert;
-    color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
+  @extend %alert;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
 
 .alert-success {
-    @extend %alert;
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+  @extend %alert;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
 
 .alert-warning {
-    @extend %alert;
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
+  @extend %alert;
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 
 .alert-danger {
-    @extend %alert;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  @extend %alert;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 ```
 
@@ -1275,7 +1283,10 @@ _base.scss
 
 ```css
 // 可以看到这里没有编译.alert
-.alert-danger, .alert-warning, .alert-success, .alert-info {
+.alert-danger,
+.alert-warning,
+.alert-success,
+.alert-info {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
@@ -1308,7 +1319,7 @@ _base.scss
 }
 ```
 
-还可以使用@minix进行改进
+还可以使用@minix 进行改进
 
 ```css
 @mixin alert {
@@ -1396,7 +1407,7 @@ _base.scss
 }
 ```
 
-可以看到相当于把.alert样式都混入到各自的样式中，相较于继承来说，并不是那么友好。
+可以看到相当于把.alert 样式都混入到各自的样式中，相较于继承来说，并不是那么友好。
 
 ## sass 运算 (operations)符的基本使用
 
@@ -1409,31 +1420,29 @@ _base.scss
 | ==   | 等于   |
 | !=   | 不等于 |
 
-例1数字比较：
+例 1 数字比较：
 
 ```css
-$theme:1;
+$theme: 1;
 .container {
-    @if $theme==1 {
-        background-color: red;
-    }
-    @else {
-        background-color: blue;
-    }
+  @if $theme==1 {
+    background-color: red;
+  } @else {
+    background-color: blue;
+  }
 }
 ```
 
-例2字符串比较：
+例 2 字符串比较：
 
 ```css
-$theme:"blue";
+$theme: "blue";
 .container {
-    @if $theme !="blue" {
-        background-color: red;
-    }
-    @else {
-        background-color: blue;
-    }
+  @if $theme != "blue" {
+    background-color: red;
+  } @else {
+    background-color: blue;
+  }
 }
 ```
 
@@ -1451,14 +1460,13 @@ $theme:"blue";
 例
 
 ```css
-$theme:3;
+$theme: 3;
 .container {
-    @if $theme >= 5 {
-        background-color: red;
-    }
-    @else {
-        background-color: blue;
-    }
+  @if $theme >= 5 {
+    background-color: red;
+  } @else {
+    background-color: blue;
+  }
 }
 ```
 
@@ -1473,22 +1481,20 @@ $theme:3;
 例
 
 ```css
-$width:100;
-$height:200;
-$last:false;
+$width: 100;
+$height: 200;
+$last: false;
 div {
-    @if $width>50 and $height<300 {
-        font-size: 16px;
-    }
-    @else {
-        font-size: 14px;
-    }
-    @if not $last {
-        border-color: red;
-    }
-    @else {
-        border-color: blue;
-    }
+  @if $width>50 and $height<300 {
+    font-size: 16px;
+  } @else {
+    font-size: 14px;
+  }
+  @if not $last {
+    border-color: red;
+  } @else {
+    border-color: blue;
+  }
 }
 ```
 
@@ -1498,7 +1504,7 @@ div {
 | ---- | ---- |
 | +    | 加   |
 | -    | 减   |
-| *    | 乘   |
+| \*   | 乘   |
 | /    | 除   |
 | %    | 取模 |
 
@@ -1512,48 +1518,48 @@ div {
     线数字与百分号或单位运算时会自动转化成相应的百分比与单位值
 */
 .container {
-    /* ==================+ 运算===================== */
-    width: 50 + 20; // 70
-    width: 50 + 20%; // 70%
-    width: 50% + 20%; // 70%
-    width: 10px + 20px; // 30px
-    width: 10pt + 20px; // 25pt (1px=3/4pt)
-    width: 10pt + 20; // 30pt
-    width: 10px + 10; // 20px
-    /* ==================- 运算===================== */
-    height: 50 - 30; // 20
-    height: 10 - 30%; // -20%
-    height: 60% - 30%; // 30%
-    height: 50px - 20px; // 30px
-    height: 50pt - 20px; // 35pt
-    height: 50pt - 40; // 10pt
-    /* ==================* 运算===================== */
-    height: 50 * 30; // 1500
-    height: 10 * 30%; // 300%
-    /* height: 60% * 30%; 出现了两个百分号*/
-    /* height: 50px * 20px; 出现了两个单位*/
-    height: 50 * 2px; // 100px
-    height: 50pt * 4; // 200pt
-    /* ==================/运算 (除完后最多只能保留一种单位)===================== */
-    $width: 100px;
-    width: 10 / 5; // 10/5
-    width: 10px / 5px; // 10px/5px
-    width: 10px / 10 * 2; // 2px
-    width: 20px / 2px * 5%; // 50%
-    width: ($width/2); // 使用变量与括号 50px
-    z-index: round(10)/2; // 使用了函数 // 5
-    height: (500px/2); // 使用了括号 // 250px
-    /* ==================% 运算===================== */
-    width: 10 % 3; // 1
-    width: 50 % 3px; // 2px
-    width: 50px % 4px; // 2px
-    width: 50px % 7; // 1px
-    width: 50% % 7; // 1%
-    width: 50% % 9%;// 5%
-    width: 50px % 10pt; // 50px % 13.33333px  = 10px
-    width: 50px % 13.33333px; // 10.00001px
-    width: 50px + 10pt; //  63.3333333333px
-    /* width: 50px % 5%; 单位不统一*/
+  /* ==================+ 运算===================== */
+  width: 50 + 20; // 70
+  width: 50 + 20%; // 70%
+  width: 50% + 20%; // 70%
+  width: 10px + 20px; // 30px
+  width: 10pt + 20px; // 25pt (1px=3/4pt)
+  width: 10pt + 20; // 30pt
+  width: 10px + 10; // 20px
+  /* ==================- 运算===================== */
+  height: 50 - 30; // 20
+  height: 10 - 30%; // -20%
+  height: 60% - 30%; // 30%
+  height: 50px - 20px; // 30px
+  height: 50pt - 20px; // 35pt
+  height: 50pt - 40; // 10pt
+  /* ==================* 运算===================== */
+  height: 50 * 30; // 1500
+  height: 10 * 30%; // 300%
+  /* height: 60% * 30%; 出现了两个百分号*/
+  /* height: 50px * 20px; 出现了两个单位*/
+  height: 50 * 2px; // 100px
+  height: 50pt * 4; // 200pt
+  /* ==================/运算 (除完后最多只能保留一种单位)===================== */
+  $width: 100px;
+  width: 10 / 5; // 10/5
+  width: 10px / 5px; // 10px/5px
+  width: 10px / 10 * 2; // 2px
+  width: 20px / 2px * 5%; // 50%
+  width: ($width/2); // 使用变量与括号 50px
+  z-index: round(10) / 2; // 使用了函数 // 5
+  height: (500px/2); // 使用了括号 // 250px
+  /* ==================% 运算===================== */
+  width: 10 % 3; // 1
+  width: 50 % 3px; // 2px
+  width: 50px % 4px; // 2px
+  width: 50px % 7; // 1px
+  width: 50% % 7; // 1%
+  width: 50% % 9%; // 5%
+  width: 50px % 10pt; // 50px % 13.33333px  = 10px
+  width: 50px % 13.33333px; // 10.00001px
+  width: 50px + 10pt; //  63.3333333333px
+  /* width: 50px % 5%; 单位不统一*/
 }
 ```
 
@@ -1570,11 +1576,11 @@ div {
 ```css
 $width: 1000px;
 div {
-    font: 16px/30px Arial, Helvetica, sans-serif; // 不运算
-    width: ($width/2); // 使用变量与括号
-    z-index: round(10)/2; // 使用了函数
-    height: (500px/2); // 使用了括号
-    margin-left: 5px + 8px/2px; // 使用了+表达式
+  font: 16px/30px Arial, Helvetica, sans-serif; // 不运算
+  width: ($width/2); // 使用变量与括号
+  z-index: round(10) / 2; // 使用了函数
+  height: (500px/2); // 使用了括号
+  margin-left: 5px + 8px/2px; // 使用了+表达式
 }
 ```
 
@@ -1614,7 +1620,7 @@ div {
 
 ```
 p{
-    font: 16px/30px Arial, Helvetica, sans-serif; 
+    font: 16px/30px Arial, Helvetica, sans-serif;
 }
 ```
 
@@ -1636,7 +1642,7 @@ p {
 ```css
 $class-name: danger;
 $attr: color;
-$author:'老姚';
+$author: "老姚";
 
 /* 
    * 这是文件的说明部分
@@ -1644,7 +1650,7 @@ $author:'老姚';
  */
 
 a.#{$class-name} {
-    border-#{$attr}: #F00;
+  border-#{$attr}: #f00;
 }
 ```
 
@@ -1657,48 +1663,46 @@ a.#{$class-name} {
     @author: 老姚
  */
 a.danger {
-  border-color: #F00;
+  border-color: #f00;
 }
 ```
 
 ## sass 常见函数的基本使用
 
- 
-
-常见函数简介，更多函数列表可看：https://sass-lang.com/documentation/modules 
+常见函数简介，更多函数列表可看：https://sass-lang.com/documentation/modules
 
 ### Color(颜色函数)
 
-sass包含很多操作颜色的函数。例如：lighten() 与 darken()函数可用于调亮或调暗颜色，opacify()函数使颜色透明度减少，transparent()函数使颜色透明度增加，mix()函数可用来混合两种颜色。
+sass 包含很多操作颜色的函数。例如：lighten() 与 darken()函数可用于调亮或调暗颜色，opacify()函数使颜色透明度减少，transparent()函数使颜色透明度增加，mix()函数可用来混合两种颜色。
 
 ```css
 p {
-    height: 30px;
+  height: 30px;
 }
 
 .p0 {
-    background-color: #5c7a29;
+  background-color: #5c7a29;
 }
 
 .p1 {
-    /* 
+  /* 
         让颜色变亮
         lighten($color, $amount)
         $amount 的取值在0% - 100% 之间
      */
-    background-color: lighten(#5c7a29, 30%);
+  background-color: lighten(#5c7a29, 30%);
 }
 
 .p2 {
-    // 让颜色变暗  通常使用color.scale()代替该方案
-    background-color: darken(#5c7a29, 15%);
+  // 让颜色变暗  通常使用color.scale()代替该方案
+  background-color: darken(#5c7a29, 15%);
 }
 
 .p3 {
-    // 降低颜色透明度  通常使用color.scale()代替该方案
-    // background-color: opacify(#5c7a29,0.5);
-    // 0.1和0.5这两个值，加起来不能超过1
-    background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
+  // 降低颜色透明度  通常使用color.scale()代替该方案
+  // background-color: opacify(#5c7a29,0.5);
+  // 0.1和0.5这两个值，加起来不能超过1
+  background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 }
 ```
 
@@ -1714,17 +1718,17 @@ p {
 
 ### String（字符串函数）
 
-Sass有许多处理字符串的函数，比如向字符串添加引号的quote()、获取字符串长度的string-length()和将内容插入字符串给定位置的string-insert()。
+Sass 有许多处理字符串的函数，比如向字符串添加引号的 quote()、获取字符串长度的 string-length()和将内容插入字符串给定位置的 string-insert()。
 
 例
 
 ```css
 p {
-    &:after {
-        content: quote(这是里面的内容); // 加引号
-    }
-    background-color: unquote($string: "#F00"); // 去掉字符串
-    z-index:str-length("sass学习"); // 计算字符串长度
+  &:after {
+    content: quote(这是里面的内容); // 加引号
+  }
+  background-color: unquote($string: "#F00"); // 去掉字符串
+  z-index: str-length("sass学习"); // 计算字符串长度
 }
 ```
 
@@ -1732,7 +1736,7 @@ p {
 
 ```css
 p {
-  background-color: #F00;
+  background-color: #f00;
   z-index: 6;
 }
 p:after {
@@ -1742,50 +1746,60 @@ p:after {
 
 ### Math(数值函数)
 
-数值函数处理数值计算，例如：percentage()将无单元的数值转换为百分比，round()将数字四舍五入为最接近的整数，min()和max()获取几个数字中的最小值或最大值，random()返回一个随机数。
+数值函数处理数值计算，例如：percentage()将无单元的数值转换为百分比，round()将数字四舍五入为最接近的整数，min()和 max()获取几个数字中的最小值或最大值，random()返回一个随机数。
 
 例如
 
 ```css
 p {
-    z-index: abs($number: -15); // 15 绝对值
-    z-index: ceil(5.8); //6 向上取整
-    z-index: max(5, 1, 6, 8, 3); //8 获取最大值
-    opacity: random(); // 随机 0-1
+  z-index: abs($number: -15); // 15 绝对值
+  z-index: ceil(5.8); //6 向上取整
+  z-index: max(5, 1, 6, 8, 3); //8 获取最大值
+  opacity: random(); // 随机 0-1
 }
 ```
 
-### List函数
+### List 函数
 
-List函数操作List，length()返回列表长度，nth()返回列表中的特定项，join()将两个列表连接在一起，append()在列表末尾添加一个值。
+List 函数操作 List，length()返回列表长度，nth()返回列表中的特定项，join()将两个列表连接在一起，append()在列表末尾添加一个值。
 
 例如：
 
 ```css
 p {
-    z-index: length(12px); //1 只有一个元素
-    z-index: length(12px 5px 8px); //3 有3个元素
-    z-index: index(a b c d, c); //3 c所在的位置
-    padding: append(10px 20px, 30px); // 10px 20px 30px 将30px追加到列表末尾
-    color: nth($list: red blue green, $n: 2); // blue 第2个位置是blue
+  z-index: length(12px); //1 只有一个元素
+  z-index: length(12px 5px 8px); //3 有3个元素
+  z-index: index(a b c d, c); //3 c所在的位置
+  padding: append(10px 20px, 30px); // 10px 20px 30px 将30px追加到列表末尾
+  color: nth($list: red blue green, $n: 2); // blue 第2个位置是blue
 }
 ```
 
-### Map函数
+### Map 函数
 
-Map函数操作Map，map-get()根据键值获取map中的对应值，map-merge()来将两个map合并成一个新的map，map-values()映射中的所有值。
+Map 函数操作 Map，map-get()根据键值获取 map 中的对应值，map-merge()来将两个 map 合并成一个新的 map，map-values()映射中的所有值。
 
 ```css
-$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
-$padding:(top:10px, right:20px, bottom:10px, left:30px);
+$font-sizes: (
+  "small": 12px,
+  "normal": 18px,
+  "large": 24px,
+);
+$padding: (
+  top: 10px,
+  right: 20px,
+  bottom: 10px,
+  left: 30px,
+);
 p {
-    font-size: map-get($font-sizes, "normal"); //18px
-    @if map-has-key($padding, "right") { // 判断是否有right这个key
-        padding-right: map-get($padding, "right");
-    }
-    &:after {
-        content: map-keys($font-sizes) + " "+ map-values($padding) + "";
-    }
+  font-size: map-get($font-sizes, "normal"); //18px
+  @if map-has-key($padding, "right") {
+    // 判断是否有right这个key
+    padding-right: map-get($padding, "right");
+  }
+  &:after {
+    content: map-keys($font-sizes) + " " + map-values($padding) + "";
+  }
 }
 ```
 
@@ -1801,9 +1815,9 @@ p:after {
 }
 ```
 
-### selector选择器函数
+### selector 选择器函数
 
-选择符相关函数可对CSS选择进行一些相应的操作，例如：selector-append()可以把一个选择符附加到另一个选择符，selector-unify()将两组选择器合成一个复合选择器。
+选择符相关函数可对 CSS 选择进行一些相应的操作，例如：selector-append()可以把一个选择符附加到另一个选择符，selector-unify()将两组选择器合成一个复合选择器。
 
 例如
 
@@ -1830,27 +1844,26 @@ p:after {
 
 ### 自检函数
 
-自检相关函数，例如：feature-exists()检查当前Sass版本是否存在某个特性，variable-exists()检查当前作用域中是否存在某个变量，mixin-exists()检查某个mixin是否存在。
+自检相关函数，例如：feature-exists()检查当前 Sass 版本是否存在某个特性，variable-exists()检查当前作用域中是否存在某个变量，mixin-exists()检查某个 mixin 是否存在。
 
 例如：
 
 ```css
-$color:#F00;
-@mixin padding($left:0, $top:0, $right:0, $bottom:0) {
-    padding: $top $right $bottom $left;
+$color: #f00;
+@mixin padding($left: 0, $top: 0, $right: 0, $bottom: 0) {
+  padding: $top $right $bottom $left;
 }
 
 .container {
-    // 注意：这里是color，不是$color
-    @if variable-exists(color) {
-        color: $color;
-    }
-    @else {
-        content: "$color不存在";
-    }
-    @if mixin-exists(padding) {
-        @include padding($left: 10px, $right: 10px);
-    }
+  // 注意：这里是color，不是$color
+  @if variable-exists(color) {
+    color: $color;
+  } @else {
+    content: "$color不存在";
+  }
+  @if mixin-exists(padding) {
+    @include padding($left: 10px, $right: 10px);
+  }
 }
 ```
 
@@ -1858,86 +1871,78 @@ $color:#F00;
 
 ## sass 流程控制指令@if、@for、@each、@while
 
- 
-
-### @if控制指令
+### @if 控制指令
 
 @if()函数允许您根据条件进行分支，并仅返回两种可能结果中的一种。
 
-语法方式同js的if....else if ...else
+语法方式同 js 的 if....else if ...else
 
 代码形式：
 
 ```css
-.container{
-    // 第一种
-    @if(/* 条件 */){
-        // ...
-    }
-
-    // 第二种
-    @if(/* 条件 */){
-        // ...
-    }@else{
-        // ...
-    }
-    
-    // 第三种
-    @if(/* 条件 */){
-        // ...
-    }@else if(){
-        // ...
-    }@else{
-        // ...
-    }
-}
-```
-
-例1
-
-```css
-$theme:"green";
 .container {
-    @if $theme=="red" {
-        color: red;
-    }
-    @else if $theme=="blue" {
-        color: blue;
-    }
-    @else if $theme=="green" {
-        color: green;
-    }
-    @else {
-        color: darkgray;
-    }
+  // 第一种
+  @if (/* 条件 */) {
+    // ...
+  }
+
+  // 第二种
+  @if (/* 条件 */) {
+    // ...
+  } @else {
+    // ...
+  }
+
+  // 第三种
+  @if (/* 条件 */) {
+    // ...
+  } @else if() {
+    // ...
+  } @else {
+    // ...
+  }
 }
 ```
 
-例如，定义一个css的三角形@mixin声明
+例 1
 
 ```css
-@mixin triangle($direction:top, $size:30px, $border-color:black) {
-    width: 0px;
-    height: 0px;
-    display: inline-block;
-    border-width: $size;
-    border-#{$direction}-width: 0;
-    @if ($direction==top) {
-        border-color: transparent transparent $border-color transparent;
-        border-style: dashed dashed solid dashed;
-    }
-    @else if($direction==right) {
-        border-color: transparent transparent transparent $border-color;
-        border-style: dashed dashed dashed solid;
-    }
-    @else if($direction==bottom) {
-        border-color: $border-color transparent transparent transparent;
-        border-style: solid dashed dashed dashed;
-    }
-    @else if($direction==left) {
-        border-color: transparent $border-color transparent transparent;
-        border-style: dashed solid dashed dashed;
-    }
+$theme: "green";
+.container {
+  @if $theme== "red" {
+    color: red;
+  } @else if $theme== "blue" {
+    color: blue;
+  } @else if $theme== "green" {
+    color: green;
+  } @else {
+    color: darkgray;
+  }
+}
+```
+
+例如，定义一个 css 的三角形@mixin 声明
+
+```css
+@mixin triangle($direction: top, $size: 30px, $border-color: black) {
+  width: 0px;
+  height: 0px;
+  display: inline-block;
+  border-width: $size;
+  border-#{$direction}-width: 0;
+  @if ($direction==top) {
+    border-color: transparent transparent $border-color transparent;
+    border-style: dashed dashed solid dashed;
+  } @else if($direction==right) {
+    border-color: transparent transparent transparent $border-color;
+    border-style: dashed dashed dashed solid;
+  } @else if($direction==bottom) {
+    border-color: $border-color transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+  } @else if($direction==left) {
+    border-color: transparent $border-color transparent transparent;
+    border-style: dashed solid dashed dashed;
+  }
 }
 ```
 
@@ -1945,19 +1950,19 @@ $theme:"green";
 
 ```css
 .p0 {
-    @include triangle();
+  @include triangle();
 }
 
 .p1 {
-    @include triangle(right, 50px, red);
+  @include triangle(right, 50px, red);
 }
 
 .p2 {
-    @include triangle(bottom, 50px, blue);
+  @include triangle(bottom, 50px, blue);
 }
 
 .p3 {
-    @include triangle(left, 50px, green);
+  @include triangle(left, 50px, green);
 }
 ```
 
@@ -1970,30 +1975,27 @@ html
 <p class="p3"></p>
 ```
 
-### @if指令中的代码改进优化
+### @if 指令中的代码改进优化
 
 ```css
-@mixin triangle($direction:top, $size:30px, $border-color:black) {
+@mixin triangle($direction: top, $size: 30px, $border-color: black) {
   width: 0px;
   height: 0px;
   display: inline-block;
   border-width: $size;
   border-#{$direction}-width: 0;
   @if ($direction==top) {
-      border-color: transparent transparent $border-color transparent;
-      border-style: dashed dashed solid dashed;
-  }
-  @else if($direction==right) {
-      border-color: transparent transparent transparent $border-color;
-      border-style: dashed dashed dashed solid;
-  }
-  @else if($direction==bottom) {
-      border-color: $border-color transparent transparent transparent;
-      border-style: solid dashed dashed dashed;
-  }
-  @else if($direction==left) {
-      border-color: transparent $border-color transparent transparent;
-      border-style: dashed solid dashed dashed;
+    border-color: transparent transparent $border-color transparent;
+    border-style: dashed dashed solid dashed;
+  } @else if($direction==right) {
+    border-color: transparent transparent transparent $border-color;
+    border-style: dashed dashed dashed solid;
+  } @else if($direction==bottom) {
+    border-color: $border-color transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+  } @else if($direction==left) {
+    border-color: transparent $border-color transparent transparent;
+    border-style: dashed solid dashed dashed;
   }
 }
 
@@ -2075,24 +2077,21 @@ display: inline-block;
   display: inline-block;
 }
 
-@mixin triangle($direction:top, $size:30px, $border-color:black) {
+@mixin triangle($direction: top, $size: 30px, $border-color: black) {
   border-width: $size;
   border-#{$direction}-width: 0;
   @if ($direction==top) {
-      border-color: transparent transparent $border-color transparent;
-      border-style: dashed dashed solid dashed;
-  }
-  @else if($direction==right) {
-      border-color: transparent transparent transparent $border-color;
-      border-style: dashed dashed dashed solid;
-  }
-  @else if($direction==bottom) {
-      border-color: $border-color transparent transparent transparent;
-      border-style: solid dashed dashed dashed;
-  }
-  @else if($direction==left) {
-      border-color: transparent $border-color transparent transparent;
-      border-style: dashed solid dashed dashed;
+    border-color: transparent transparent $border-color transparent;
+    border-style: dashed dashed solid dashed;
+  } @else if($direction==right) {
+    border-color: transparent transparent transparent $border-color;
+    border-style: dashed dashed dashed solid;
+  } @else if($direction==bottom) {
+    border-color: $border-color transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+  } @else if($direction==left) {
+    border-color: transparent $border-color transparent transparent;
+    border-style: dashed solid dashed dashed;
   }
 }
 
@@ -2117,10 +2116,13 @@ display: inline-block;
 }
 ```
 
-最终编译出来的css代码，代码量就少很多，使用继承就是把公共的部分提取出去
+最终编译出来的 css 代码，代码量就少很多，使用继承就是把公共的部分提取出去
 
 ```css
-.p3, .p2, .p1, .p0 {
+.p3,
+.p2,
+.p1,
+.p0 {
   width: 0px;
   height: 0px;
   display: inline-block;
@@ -2155,33 +2157,33 @@ display: inline-block;
 }
 ```
 
-### @for指令
+### @for 指令
 
-@for 指令可以在限制的范围内重复输出格式，每次按要求（变量的值）对输出结果做出变动。这个指令包含两种格式：@for $var from  through ，或者 @for $var from  to 
+@for 指令可以在限制的范围内重复输出格式，每次按要求（变量的值）对输出结果做出变动。这个指令包含两种格式：@for $var from through ，或者 @for $var from to
 
 区别在于 through 与 to 的含义：
 
 - 当使用`through`时，条件范围包含与的值。
-- 而使用`to` 时条件范围只包含的值不包含  的值。
-- 另外，$var 可以是任何变量，比如 $i； 和  必须是整数值。
+- 而使用`to` 时条件范围只包含的值不包含 的值。
+- 另外，$var 可以是任何变量，比如 $i； 和 必须是整数值。
 
-例1
+例 1
 
 ```css
 @for $i from 1 to 4 {
-    .p#{$i} {
-        width: 10px * $i;
-        height: 30px;
-        background-color: red;
-    }
+  .p#{$i} {
+    width: 10px * $i;
+    height: 30px;
+    background-color: red;
+  }
 }
 
 @for $i from 1 through 3 {
-    .p#{$i} {
-        width: 10px * $i;
-        height: 30px;
-        background-color: red;
-    }
+  .p#{$i} {
+    width: 10px * $i;
+    height: 30px;
+    background-color: red;
+  }
 }
 ```
 
@@ -2193,64 +2195,64 @@ display: inline-block;
 <p class="p3"></p>
 ```
 
-例2：加载动画
+例 2：加载动画
 
 ```css
 #loading {
-    position: fixed;
-    top: 200px;
-    left: 46%;
+  position: fixed;
+  top: 200px;
+  left: 46%;
 }
 
 #loading span {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #3498db;
-    opacity: 0.5;
-    border-radius: 50%;
-    animation: loading 1s infinite ease-in-out;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #3498db;
+  opacity: 0.5;
+  border-radius: 50%;
+  animation: loading 1s infinite ease-in-out;
 }
 
 #loading span:nth-child(1) {
-    left: 0;
-    animation-delay: 0s;
+  left: 0;
+  animation-delay: 0s;
 }
 
 #loading span:nth-child(2) {
-    left: 20px;
-    animation-delay: 0.2s;
+  left: 20px;
+  animation-delay: 0.2s;
 }
 
 #loading span:nth-child(3) {
-    left: 40px;
-    animation-delay: 0.4s;
+  left: 40px;
+  animation-delay: 0.4s;
 }
 
 #loading span:nth-child(4) {
-    left: 60px;
-    animation-delay: 0.6s;
+  left: 60px;
+  animation-delay: 0.6s;
 }
 
 #loading span:nth-child(5) {
-    left: 80px;
-    animation-delay: .8s;
+  left: 80px;
+  animation-delay: 0.8s;
 }
 
 @keyframes loading {
-    0% {
-        opacity: 0.3;
-        transform: translateY(0px);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(-20px);
-        background: green;
-    }
-    100% {
-        opacity: 0.3;
-        transform: translateY(0px);
-    }
+  0% {
+    opacity: 0.3;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px);
+    background: green;
+  }
+  100% {
+    opacity: 0.3;
+    transform: translateY(0px);
+  }
 }
 ```
 
@@ -2266,63 +2268,63 @@ html
 </div>
 ```
 
-用@for改进动画部分
+用@for 改进动画部分
 
 ```css
 @for $i from 1 to 5 {
-    #loading span:nth-child(#{$i}) {
-        left: 20 * ($i - 1) + px;
-        /* animation-delay: 20 * ($i - 1) / 100 + s; */
-        animation-delay: unquote($string: "0.") + ($i - 1) * 2 + s; // 去掉字符串
-    }
+  #loading span:nth-child(#{$i}) {
+    left: 20 * ($i - 1) + px;
+    /* animation-delay: 20 * ($i - 1) / 100 + s; */
+    animation-delay: unquote($string: "0.") + ($i - 1) * 2 + s; // 去掉字符串
+  }
 }
 ```
 
-### @each指令
+### @each 指令
 
-@each 指令的格式是 $var in , $var 可以是任何变量名，比如 $length 或者 $name，而  是一连串的值，也就是值列表。
+@each 指令的格式是 $var in , $var 可以是任何变量名，比如 $length 或者 $name，而 是一连串的值，也就是值列表。
 
 例如做如下效果
 
 ![image-20211129101633273](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAABICAIAAADqL/d0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABEElEQVR4nO3csQ3CMBBAUYzYgxGYgZ3SI3p2YgZGYBKzQQpk8Snea0/RJdKXKytjznmA1LF+AVAhf0CF9FRIT4X0VEhPhfRUSE+F9FRIT4X0VEhPhfRUSE+F9FRI7/TNQ2PsTdddmx33vUXztmbRr77mcH2/dqbP82XVosd47Ey3ua1atIqzkJ4K6amQngrpqZCeCumpkJ4K6amQ3vCHEHLOQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpKdCeiqkp0J6KqSnQnoqpPcBXV4Ti47PTEgAAAAASUVORK5CYII=)
 
-普通CSS的写法
+普通 CSS 的写法
 
 ```css
-p{
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    margin: 10px;
+p {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin: 10px;
 }
-.p0{
-    background-color: red;
+.p0 {
+  background-color: red;
 }
-.p1{
-    background-color: green;
+.p1 {
+  background-color: green;
 }
-.p2{
-    background-color: blue;
-}
-
-.p3{
-    background-color:turquoise;
+.p2 {
+  background-color: blue;
 }
 
-.p4{
-    background-color: darkmagenta;
+.p3 {
+  background-color: turquoise;
+}
+
+.p4 {
+  background-color: darkmagenta;
 }
 ```
 
-用@each改进
+用@each 改进
 
 ```css
-$color-list:red green blue turquoise darkmagenta;
+$color-list: red green blue turquoise darkmagenta;
 @each $color in $color-list {
-    $index: index($color-list, $color);
-    .p#{$index - 1} {
-        background-color: $color;
-    }
+  $index: index($color-list, $color);
+  .p#{$index - 1} {
+    background-color: $color;
+  }
 }
 ```
 
@@ -2330,78 +2332,76 @@ $color-list:red green blue turquoise darkmagenta;
 
 @while 指令重复输出格式直到表达式返回结果为 false。这样可以实现比 @for 更复杂的循环。
 
-用sass实现bootstrap中css的这么一段代码
+用 sass 实现 bootstrap 中 css 的这么一段代码
 
-https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css 
+https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css
 
 ```css
 .col-sm-12 {
-    width: 100%;
+  width: 100%;
 }
 
 .col-sm-11 {
-    width: 91.66666667%;
+  width: 91.66666667%;
 }
 
 .col-sm-10 {
-    width: 83.33333333%;
+  width: 83.33333333%;
 }
 
 .col-sm-9 {
-    width: 75%;
+  width: 75%;
 }
 
 .col-sm-8 {
-    width: 66.66666667%;
+  width: 66.66666667%;
 }
 
 .col-sm-7 {
-    width: 58.33333333%;
+  width: 58.33333333%;
 }
 
 .col-sm-6 {
-    width: 50%;
+  width: 50%;
 }
 
 .col-sm-5 {
-    width: 41.66666667%;
+  width: 41.66666667%;
 }
 
 .col-sm-4 {
-    width: 33.33333333%;
+  width: 33.33333333%;
 }
 
 .col-sm-3 {
-    width: 25%;
+  width: 25%;
 }
 
 .col-sm-2 {
-    width: 16.66666667%;
+  width: 16.66666667%;
 }
 
 .col-sm-1 {
-    width: 8.33333333%;
+  width: 8.33333333%;
 }
 ```
 
-用@while实现
+用@while 实现
 
 ```css
-$column:12;
+$column: 12;
 @while $column>0 {
-    .col-sm-#{$column} {
-        width: $column / 12 * 100%;
-        // width: $column / 12 * 100 + %; 会标红
-        width: $column / 12 * 100#{"%"};
-        width: unquote($string: $column / 12 * 100 + "%");
-    }
-    $column:$column - 1;
+  .col-sm-#{$column} {
+    width: $column / 12 * 100%;
+    // width: $column / 12 * 100 + %; 会标红
+    width: $column / 12 * 100#{"%"};
+    width: unquote($string: $column / 12 * 100 + "%");
+  }
+  $column: $column - 1;
 }
 ```
 
-## sass @function的使用
-
- 
+## sass @function 的使用
 
 ### 函数作用
 
@@ -2412,21 +2412,20 @@ $column:12;
 #### 函数的定义
 
 ```css
-@function function-name([$param1,$param2,...]){
-    ...
-    @return $value;
+@function function-name([$param1, $param2, ...]) {
+  ... @return $value;
 }
 ```
 
-提示：函数名function-name 与function_name 是相同的
+提示：函数名 function-name 与 function_name 是相同的
 
 #### @return
 
-它只允许在@函数体中使用，并且每个@function必须以@return结束。当遇到@return时，它会立即结束函数并返回其结果。
+它只允许在@函数体中使用，并且每个@function 必须以@return 结束。当遇到@return 时，它会立即结束函数并返回其结果。
 
 例如：
 
-下面这段css代码，如何用函数进行改写
+下面这段 css 代码，如何用函数进行改写
 
 ```css
 .row-cols-1 > * {
@@ -2462,8 +2461,8 @@ $column:12;
 }
 
 @for $i from 1 through 6 {
-  .row-cols-#{$i}>* {
-      width: row-cols-width($i);
+  .row-cols-#{$i} > * {
+    width: row-cols-width($i);
   }
 }
 ```
@@ -2477,8 +2476,12 @@ $column:12;
     *@param $gradients  颜色过度的值列表
  */
 
-@function background-linear-gradient($direction, $start-color, $end-color:blue) {
-    @return linear-gradient($direction, $start-color, $end-color);
+@function background-linear-gradient(
+  $direction,
+  $start-color,
+  $end-color: blue
+) {
+  @return linear-gradient($direction, $start-color, $end-color);
 }
 ```
 
@@ -2486,7 +2489,7 @@ $column:12;
 
 ```css
 .header {
-    background-image: background-linear-gradient(to right, red, green);
+  background-image: background-linear-gradient(to right, red, green);
 }
 ```
 
@@ -2494,7 +2497,7 @@ $column:12;
 
 ```css
 .header {
-    background-image: background-linear-gradient(to right, red);
+  background-image: background-linear-gradient(to right, red);
 }
 ```
 
@@ -2502,13 +2505,14 @@ $column:12;
 
 ```css
 .header {
-    background-image: background-linear-gradient($start-color: red, $direction: to bottom);
+  background-image: background-linear-gradient(
+    $start-color: red,
+    $direction: to bottom
+  );
 }
 ```
 
-注意：函数参数默认值可以是任意SassScript表达式，甚至可以引用前面的参数
-
- 
+注意：函数参数默认值可以是任意 SassScript 表达式，甚至可以引用前面的参数
 
 ### 任意参数
 
@@ -2522,29 +2526,29 @@ $column:12;
  */
 
 @function background-linear-gradient($direction, $gradients...) {
-    @return linear-gradient($direction, $gradients);
+  @return linear-gradient($direction, $gradients);
 }
 
 .header {
-    background-image: background-linear-gradient(to bottom, red, green, blue);
+  background-image: background-linear-gradient(to bottom, red, green, blue);
 }
 ```
 
 #### 调用任意参数
 
 ```css
-$widths: 50px,30px,100px;
+$widths: 50px, 30px, 100px;
 .logo {
-    width: min($widths...);
+  width: min($widths...);
 }
 ```
 
-### 混入mixin和函数function的区别
+### 混入 mixin 和函数 function 的区别
 
-- 混入mixin主要是通过传递参数的方式输出多样化的样式，为了可以现实代码**复用**。
-- 函数的功能主要是通过传递参数后，经过函数内部的计算，最后@return输出一个值。
+- 混入 mixin 主要是通过传递参数的方式输出多样化的样式，为了可以现实代码**复用**。
+- 函数的功能主要是通过传递参数后，经过函数内部的计算，最后@return 输出一个值。
 
-## 三元条件函数if的使用
+## 三元条件函数 if 的使用
 
 ### 如何使用
 
@@ -2552,32 +2556,29 @@ $widths: 50px,30px,100px;
 if($condition,$if-true,$if-false);
 ```
 
-判断$condition，如果条件成立，则返回$if-true的结果，如果条件不成立，则返回$if-false的结果。
-
- 
+判断$condition，如果条件成立，则返回$if-true 的结果，如果条件不成立，则返回$if-false 的结果。
 
 案例：
 
-if的写法（浅色与深色模式）
+if 的写法（浅色与深色模式）
 
 ```css
-$theme:'light';
+$theme: "light";
 .container {
-    @if $theme=='light' {
-        color: #000;
-    }
-    @else {
-        color: #FFF;
-    }
+  @if $theme== "light" {
+    color: #000;
+  } @else {
+    color: #fff;
+  }
 }
 ```
 
- 三元条件函数if改进
+三元条件函数 if 改进
 
 ```css
-$theme:'light';
+$theme: "light";
 .container {
-    color: if($theme=='light', #000, #FFF);
+  color: if($theme== "light", #000, #fff);
 }
 ```
 
@@ -2585,9 +2586,9 @@ $theme:'light';
 
 ### 作用
 
-从其他Sass样式表加载mixin，function和变量，并将来自多个样式表的CSS组合在一起，@use加载的样式表被称为“模块”，多次引入只包含一次。
+从其他 Sass 样式表加载 mixin，function 和变量，并将来自多个样式表的 CSS 组合在一起，@use 加载的样式表被称为“模块”，多次引入只包含一次。
 
-@use也可以看作是对@import的增强
+@use 也可以看作是对@import 的增强
 
 ### 语法
 
@@ -2595,291 +2596,279 @@ $theme:'light';
 @use '<url>' [as alias|namespace]
 ```
 
- 
+### 加载普通 scss、css
 
-### 加载普通scss、css
-
-use下面的_common.scss
+use 下面的\_common.scss
 
 ```css
-$font-size:14px !default;
+$font-size: 14px !default;
 * {
-    margin: 0;
-    padding: 0;
-    font-size: $font-size;
-    color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: $font-size;
+  color: #333;
 }
 
 @function column-width($col, $total) {
-    @return percentage($col/$total);
+  @return percentage($col/$total);
 }
 
-@mixin bgColor($bg-color:#f2f2f2) {
-    background-color: $bg-color;
+@mixin bgColor($bg-color: #f2f2f2) {
+  background-color: $bg-color;
 }
 ```
 
-use下面的about.css
+use 下面的 about.css
 
 ```css
 h1 {
-    font-size: 24px;
+  font-size: 24px;
 }
 ```
 
 使用
 
 ```css
-@use 'use/common';
-@use 'use/about';
+@use "use/common";
+@use "use/about";
 ```
-
- 
 
 ### 加载模块
 
-新增_global.scss
+新增\_global.scss
 
 ```css
-$font-size:28px;
-@mixin base($color:#F00) {
-    color: $color;
+$font-size: 28px;
+@mixin base($color: #f00) {
+  color: $color;
 }
 
 .gclass {
-    background-color: #F00;
+  background-color: #f00;
 }
 ```
 
-#### @import的方式
+#### @import 的方式
 
 ```css
-@import 'use/common';
-@import 'use/global';
-@import 'use/global';
+@import "use/common";
+@import "use/global";
+@import "use/global";
 body {
-    font-size: $font-size;
-    @include base('#FFF');
-    @include base('#000');
-    width: column-width(3, 12);
-    @include bgColor('#F00');
+  font-size: $font-size;
+  @include base("#FFF");
+  @include base("#000");
+  width: column-width(3, 12);
+  @include bgColor("#F00");
 }
 ```
 
-#### @use的方式
+#### @use 的方式
 
 ```css
-@use 'use/common';
-@use 'use/global' as g1;
-@use 'use/global' as g2;
+@use "use/common";
+@use "use/global" as g1;
+@use "use/global" as g2;
 body {
-    font-size: common.$font-size;
-    @include g1.base('#FFF');
-    @include g2.base('#000');
-    width: common.column-width(3, 12);
-    @include common.bgColor('#F00');
+  font-size: common.$font-size;
+  @include g1.base("#FFF");
+  @include g2.base("#000");
+  width: common.column-width(3, 12);
+  @include common.bgColor("#F00");
 }
 ```
 
- 通过@use引入的样式默认把文件名作为模块名使用，你可以通过as的形式重新取一个别名
+通过@use 引入的样式默认把文件名作为模块名使用，你可以通过 as 的形式重新取一个别名
 
-#### @use取消别名
+#### @use 取消别名
 
-可能@use "" as * 来取消命名空间，这种方式加载的模块被提升为全局模块
+可能@use "" as \* 来取消命名空间，这种方式加载的模块被提升为全局模块
 
 注意：这种方式慎用
 
 ```css
-@use 'use/common';
-@use 'use/global' as *;
-@use 'use/global' as g2;
+@use "use/common";
+@use "use/global" as *;
+@use "use/global" as g2;
 body {
-    font-size: $font-size;
-    @include base('#FFF');
-    @include g2.base('#000');
-    width: common.column-width(3, 12);
-    @include common.bgColor('#F00');
+  font-size: $font-size;
+  @include base("#FFF");
+  @include g2.base("#000");
+  width: common.column-width(3, 12);
+  @include common.bgColor("#F00");
 }
 ```
 
- 
-
 ### 定义私有成员
 
-如果加载的模块内部有变量只想在模块内使用，可使用-或_定义在变量头即可
+如果加载的模块内部有变量只想在模块内使用，可使用-或\_定义在变量头即可
 
 例如：
 
 ```css
-$-font-size:14px;
+$-font-size: 14px;
 * {
-    margin: 0;
-    padding: 0;
-    font-size: $-font-size;
-    color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: $-font-size;
+  color: #333;
 }
-@use 'use/common';
-@use 'use/global' as *;
-@use 'use/global' as g2;
+@use "use/common";
+@use "use/global" as *;
+@use "use/global" as g2;
 body {
-    font-size: common.$-font-size;      // 报错 Error: Private members can't be accessed from outside their modules.
-    @include base('#FFF');
-    @include g2.base('#000');
+  font-size: common.$-font-size; // 报错 Error: Private members can't be accessed from outside their modules.
+  @include base("#FFF");
+  @include g2.base("#000");
 }
 ```
-
- 
 
 ### 定义默认值
 
-#### 通过！default能变量定义默认值
+#### 通过！default 能变量定义默认值
 
 ```css
-$font-size:14px !default;
+$font-size: 14px !default;
 * {
-    margin: 0;
-    padding: 0;
-    font-size: $font-size;
-    color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: $font-size;
+  color: #333;
 }
 ```
 
-#### @use引入时可通过with(...)修改默认值
+#### @use 引入时可通过 with(...)修改默认值
 
 ```css
-@use 'use/common' with ( $font-size:16px, );
-@use 'use/global' as *;
-@use 'use/global' as g2;
-common.$font-size:28px; // 也可能通过这种方式覆盖
+@use "use/common" with (
+  $font-size: 16px
+);
+@use "use/global" as *;
+@use "use/global" as g2;
+common.$font-size: 28px; // 也可能通过这种方式覆盖
 body {
-    font-size: common.$font-size;
-    @include base('#FFF');
-    @include g2.base('#000');
+  font-size: common.$font-size;
+  @include base("#FFF");
+  @include g2.base("#000");
 }
 ```
 
- 
+### 默认加载 index.scss
 
-### 默认加载index.scss
-
-创建_index.scss
+创建\_index.scss
 
 ```css
-@use 'common' with ( $font-size:16px, );
-@use 'global' as *;
-@use 'global' as g2;
-common.$font-size:28px; // 也可能通过这种方式覆盖
+@use "common" with (
+  $font-size: 16px
+);
+@use "global" as *;
+@use "global" as g2;
+common.$font-size: 28px; // 也可能通过这种方式覆盖
 body {
-    font-size: common.$font-size;
-    @include base('#FFF');
-    @include g2.base('#000');
+  font-size: common.$font-size;
+  @include base("#FFF");
+  @include g2.base("#000");
 }
 ```
 
 使用
 
 ```css
-@use 'use/index';
+@use "use/index";
 ```
 
- 
+### @use 使用总结
 
-### @use使用总结
+- @use 引入同一个文件多次，不会重复引入，而@import 会重复引入
+- @use 引入的文件都是一个模块，默认以文件名作为模块名，可通过 as alias 取别名
+- @use 引入多个文件时，每个文件都是单独的模块，相同变量名不会覆盖，通过模块名访问，而@import 变量会被覆盖
+- @use 方式可通过 @use 'xxx' as \*来取消命名空间，建议不要这么做
+- @use 模块内可通过$- 或$*来定义私有成员，也就是说*或者-开头的 Variables mixins functions 不会被引入
+- @use 模块内变量可通过！default 定义默认值，引入时可通用 with（...）的方式修改
+- 可定义-index.scss 或\_index.scss 来合并多个 scss 文件，它@use 默认加载文件
 
-- @use引入同一个文件多次，不会重复引入，而@import会重复引入
-- @use引入的文件都是一个模块，默认以文件名作为模块名，可通过as alias取别名
-- @use引入多个文件时，每个文件都是单独的模块，相同变量名不会覆盖，通过模块名访问，而@import变量会被覆盖
-- @use方式可通过 @use 'xxx' as *来取消命名空间，建议不要这么做
-- @use模块内可通过$- 或$*来定义私有成员，也就是说*或者-开头的Variables mixins functions 不会被引入
-- @use模块内变量可通过！default 定义默认值，引入时可通用with（...）的方式修改
-- 可定义-index.scss或_index.scss来合并多个scss文件，它@use默认加载文件
-
-## sass @forward的使用
+## sass @forward 的使用
 
 ### 作用
 
 通过 `@forward`加载一个模块的成员，并将这些成员当作自己的成员对外暴露出去，类似于类似于 es6 的 export ...，通常用于跨多个文件组织 Sass 库
 
- 
-
-### 转发、合并scss
+### 转发、合并 scss
 
 #### 转发
 
-创建forward/_common.scss
+创建 forward/\_common.scss
 
 ```css
-$font-size:14px !default;
+$font-size: 14px !default;
 * {
-    margin: 0;
-    padding: 0;
-    font-size: $font-size;
-    color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: $font-size;
+  color: #333;
 }
 
 @function column-width($col, $total) {
-    @return percentage($col/$total);
+  @return percentage($col/$total);
 }
 
-@mixin bgColor($bg-color:#f2f2f2) {
-    background-color: $bg-color;
+@mixin bgColor($bg-color: #f2f2f2) {
+  background-color: $bg-color;
 }
 ```
 
-创建启动合并bootstrap.scss 
+创建启动合并 bootstrap.scss
 
 ```css
-@forward 'uses/common';
+@forward "uses/common";
 ```
 
 使用
 
 ```css
-@use 'bootstrap';
+@use "bootstrap";
 .body {
-    font-size: bootstrap.$font-size;
-    width: bootstrap.column-width(3, 12);
-    @include bootstrap.bgColor('#F00');
+  font-size: bootstrap.$font-size;
+  width: bootstrap.column-width(3, 12);
+  @include bootstrap.bgColor("#F00");
 }
 ```
 
 #### 合并
 
-新增一个_global.scss
+新增一个\_global.scss
 
 ```css
-$font-size:28px;
-@mixin base($color:#F00) {
-    color: $color;
+$font-size: 28px;
+@mixin base($color: #f00) {
+  color: $color;
 }
 
 .gclass {
-    background-color: #F00;
+  background-color: #f00;
 }
 ```
 
 统一转发
 
 ```css
-@forward 'uses/common';
-@forward 'uses/global';
+@forward "uses/common";
+@forward "uses/global";
 ```
 
 使用
 
 ```css
-@use 'bootstrap';
+@use "bootstrap";
 .body {
-    font-size: bootstrap.$font-size;
-    width: bootstrap.column-width(3, 12);
-    @include bootstrap.bgColor('#F00');
-    @include bootstrap.base('#000');
+  font-size: bootstrap.$font-size;
+  width: bootstrap.column-width(3, 12);
+  @include bootstrap.bgColor("#F00");
+  @include bootstrap.base("#000");
 }
 ```
 
 **问题：**当多个被转发的文件存在相同变量、函数、混入时会有问题
-
- 
 
 ### 选择性转发
 
@@ -2898,93 +2887,89 @@ $font-size:28px;
 使用
 
 ```css
-@use 'bootstrap';
+@use "bootstrap";
 .body {
-    font-size: bootstrap.$com-font-size;
-    width: bootstrap.com-column-width(3, 12);
-    @include bootstrap.com-bgColor('#000');
-    @include bootstrap.glob-base('#000');
+  font-size: bootstrap.$com-font-size;
+  width: bootstrap.com-column-width(3, 12);
+  @include bootstrap.com-bgColor("#000");
+  @include bootstrap.glob-base("#000");
 }
 ```
 
- 
-
 ### 转发时定义前缀
 
-@forward "" as -*
+@forward "" as -\*
 
 bootstrap.scs
 
 ```css
-@forward 'uses/common' as com-*;
-@forward 'uses/global' as glob-*;
+@forward "uses/common" as com-*;
+@forward "uses/global" as glob-*;
 ```
 
 使用
 
 ```css
-@use 'bootstrap';
+@use "bootstrap";
 .body {
-    font-size: bootstrap.$com-font-size;
-    width: bootstrap.com-column-width(3, 12);
-    @include bootstrap.com-bgColor('#F00');
-    @include bootstrap.glob-base('#000');
+  font-size: bootstrap.$com-font-size;
+  width: bootstrap.com-column-width(3, 12);
+  @include bootstrap.com-bgColor("#F00");
+  @include bootstrap.glob-base("#000");
 }
 ```
-
- 
-
- 
 
 ### 转发时配置模块的成员
 
 bootstarp
 
 ```css
-@forward 'uses/common' as com-* with ( $font-size:30px !default);
-@forward 'uses/global' as glob-* show glob-base;
+@forward "uses/common" as com-* with (
+  $font-size: 30px !default
+);
+@forward "uses/global" as glob-* show glob-base;
 ```
 
 使用
 
 ```css
-@use 'bootstrap' with ($com-font-size:50px);
+@use "bootstrap" with (
+  $com-font-size: 50px
+);
 .body {
-    font-size: bootstrap.$com-font-size;
-    width: bootstrap.com-column-width(3, 12);
-    @include bootstrap.com-bgColor('#000');
-    @include bootstrap.glob-base('#000');
+  font-size: bootstrap.$com-font-size;
+  width: bootstrap.com-column-width(3, 12);
+  @include bootstrap.com-bgColor("#000");
+  @include bootstrap.glob-base("#000");
 }
 ```
 
-### @use与@forward一起使用的情况
+### @use 与@forward 一起使用的情况
 
-当一个模块里面须要同时使用@use与@forward时，建议先使用@forwar后再使用@use
+当一个模块里面须要同时使用@use 与@forward 时，建议先使用@forwar 后再使用@use
 
 ```css
-@use 'uses/code';
-@forward 'uses/common' as com-*;
-@forward 'uses/global' as glob-* show glob-base;
-@use 'use/common' as c1;
+@use "uses/code";
+@forward "uses/common" as com-*;
+@forward "uses/global" as glob-* show glob-base;
+@use "use/common" as c1;
 .test {
-    font-size: c1.$font-size;
-    color: code.$color;
+  font-size: c1.$font-size;
+  color: code.$color;
 }
 ```
 
- 
-
-## sass中@at-root使用
+## sass 中@at-root 使用
 
 ### 作用
 
-@at-root可以使被嵌套的选择器或属性跳出嵌套
+@at-root 可以使被嵌套的选择器或属性跳出嵌套
 
 ### 语法
 
 ```css
-@at-root <selector>{
-    ...
+@at-root <selector > {
+  ...;
 }
 ```
 
@@ -2992,13 +2977,13 @@ bootstarp
 
 ```css
 .parent {
-    font-size: 12px;
-    .child {
-        font-size: 14px;
-        .son {
-            font-size: 16px;
-        }
+  font-size: 12px;
+  .child {
+    font-size: 14px;
+    .son {
+      font-size: 16px;
     }
+  }
 }
 ```
 
@@ -3006,13 +2991,13 @@ bootstarp
 
 ```css
 .parent {
-    font-size: 12px;
-    @at-root .child {
-        font-size: 14px;
-        @at-root .son {
-            font-size: 16px;
-        }
+  font-size: 12px;
+  @at-root .child {
+    font-size: 14px;
+    @at-root .son {
+      font-size: 16px;
     }
+  }
 }
 ```
 
@@ -3020,153 +3005,157 @@ bootstarp
 
 ```css
 .parent {
-    font-size: 12px;
-    @at-root {
-        .child-1 {
-            font-size: 14px;
-        }
-        .child-2 {
-            font-size: 16px;
-        }
+  font-size: 12px;
+  @at-root {
+    .child-1 {
+      font-size: 14px;
     }
+    .child-2 {
+      font-size: 16px;
+    }
+  }
 }
 ```
 
-### @at-root与&的结合使用
+### @at-root 与&的结合使用
 
 &的使用
 
 ```css
 .foo {
-    & .bar {
-        color: gray;
-    }
+  & .bar {
+    color: gray;
+  }
 }
 
 .foo {
-    & {
-        color: gray;
-    }
+  & {
+    color: gray;
+  }
 }
 
 .foo {
-    .bar & {
-        color: gray;
-    }
+  .bar & {
+    color: gray;
+  }
 }
 ```
 
-这跟前面加@at-root效果是一样的
+这跟前面加@at-root 效果是一样的
 
- 
+### 使用@at-root 结合#{&}实现 BEM 效果
 
-### 使用@at-root结合#{&}实现BEM效果
-
-理解BEM：https://zhuanlan.zhihu.com/p/122214519
+理解 BEM：https://zhuanlan.zhihu.com/p/122214519
 
 官网学习：https://en.bem.info/methodology/quick-start/
 
-BEM完整命名规则：block-name__element-name--modifier-name  (也可以换成驼峰式命名)
+BEM 完整命名规则：block-name\_\_element-name--modifier-name (也可以换成驼峰式命名)
 
-官方网站最新推出：block-name__element-name_modifier-name
+官方网站最新推出：block-name\_\_element-name_modifier-name
 
-比较BEM的一则样式
+比较 BEM 的一则样式
 
 ```css
-.block{width: 1000px;}
-.block__element{font-size: 12px;}
-.block--modifier{font-size: 14px;}
-.block__element--modifier{font-size: 16px;} 
+.block {
+  width: 1000px;
+}
+.block__element {
+  font-size: 12px;
+}
+.block--modifier {
+  font-size: 14px;
+}
+.block__element--modifier {
+  font-size: 16px;
+}
 ```
 
 实现
 
 ```css
 .block {
-    width: 1000px;
-    @at-root #{&}__element {
-        font-size: 12px;
-        @at-root #{&}--modifier {
-            font-size: 16px;
-        }
-    }
+  width: 1000px;
+  @at-root #{&}__element {
+    font-size: 12px;
     @at-root #{&}--modifier {
-        font-size: 14px;
+      font-size: 16px;
     }
+  }
+  @at-root #{&}--modifier {
+    font-size: 14px;
+  }
 }
 
 //或
 
 .block {
-    width: 1000px;
-    @at-root {
-        #{&}__element {
-            font-size: 12px;
-            @at-root #{&}--modifier {
-                font-size: 16px;
-            }
-        }
-        #{&}--modifier {
-            font-size: 14px;
-        }
+  width: 1000px;
+  @at-root {
+    #{&}__element {
+      font-size: 12px;
+      @at-root #{&}--modifier {
+        font-size: 16px;
+      }
     }
+    #{&}--modifier {
+      font-size: 14px;
+    }
+  }
 }
 
 // 实现上也能直接用&实现
 .block {
-    width: 1000px;
-    &__element {
-        font-size: 12px;
-        &--modifier {
-            font-size: 16px;
-        }
-    }
+  width: 1000px;
+  &__element {
+    font-size: 12px;
     &--modifier {
-        font-size: 14px;
+      font-size: 16px;
     }
+  }
+  &--modifier {
+    font-size: 14px;
+  }
 }
 ```
 
- 
-
 ### @at-root (without: …)和@at-root (with: …)的使用
 
-默认@at-root只会跳出选择器嵌套，而不能跳出@media或@support，如果要跳出这两种，则需使用@at-root (without: media)，@at-root (without: support)。这个语法的关键词有四个：
+默认@at-root 只会跳出选择器嵌套，而不能跳出@media 或@support，如果要跳出这两种，则需使用@at-root (without: media)，@at-root (without: support)。这个语法的关键词有四个：
 
-1、all（表示所有） 2、rule（表示常规css） 3、media（表示media） 4、supports（表示supports）
+1、all（表示所有） 2、rule（表示常规 css） 3、media（表示 media） 4、supports（表示 supports）
 
 演示
 
 ```css
 @media screen {
-    .parent {
-        font-size: 12px;
-        @at-root (without: media) {
-            .child {
-                font-size: 14px;
-                .son {
-                    font-size: 16px;
-                }
-            }
+  .parent {
+    font-size: 12px;
+    @at-root (without: media) {
+      .child {
+        font-size: 14px;
+        .son {
+          font-size: 16px;
         }
+      }
     }
+  }
 }
 @supports (display: flex) {
-    .parent {
-        font-size: 12px;
-        @at-root (with: supports) {
-            .child {
-                font-size: 14px;
-                .son {
-                    font-size: 16px;
-                }
-            }
+  .parent {
+    font-size: 12px;
+    @at-root (with: supports) {
+      .child {
+        font-size: 14px;
+        .son {
+          font-size: 16px;
         }
+      }
     }
+  }
 }
 ```
 
-案例简单演示@at-root的用法
+案例简单演示@at-root 的用法
 
 html
 
@@ -3202,62 +3191,62 @@ html
 </html>
 ```
 
-简单的test.scss
+简单的 test.scss
 
 ```css
 body {
-    margin: 0;
-    padding: 0;
-    width: 750px;
-    max-width: 750px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 750px;
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .header {
-    background-color: aquamarine;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    padding: 0 30px;
-    @at-root .logo {
-        font-size: 36px;
-        margin-right: 30px;
+  background-color: aquamarine;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  @at-root .logo {
+    font-size: 36px;
+    margin-right: 30px;
+  }
+  .search-form {
+    .content {
+      display: flex;
+      align-items: center;
+      .input {
+        padding: 4px 10px;
+        margin-right: 10px;
+      }
+      .button {
+        border: none;
+        background-color: cadetblue;
+        color: #fff;
+        height: 28px;
+        width: 60px;
+      }
     }
-    .search-form {
-        .content {
-            display: flex;
-            align-items: center;
-            .input {
-                padding: 4px 10px;
-                margin-right: 10px;
-            }
-            .button {
-                border: none;
-                background-color: cadetblue;
-                color: #FFF;
-                height: 28px;
-                width: 60px;
-            }
-        }
-    }
+  }
 }
 
 .center {
-    flex: 1;
-    background-color: black;
+  flex: 1;
+  background-color: black;
 }
 
 .footer {
-    height: 200px;
-    background-color: burlywood;
+  height: 200px;
+  background-color: burlywood;
 }
 ```
 
 ## 参考链接
 
-B站地址：https://www.bilibili.com/video/BV1Ci4y1d74K/?p=1
+B 站地址：https://www.bilibili.com/video/BV1Ci4y1d74K/?p=1
 
 sass 官方中文文档：https://www.sass.hk/docs/

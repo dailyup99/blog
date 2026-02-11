@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-2002 年 AJAX 诞生至今，前端从刀耕火种的年代，经历了一系列的发展，各种标准和工具百花齐放。下图中我们可以看到，自 2009 年 Node.js 诞生，前端先后出现了 CommonJS 、 AMD 、 CMD 、 UMD 和 ES Module 等模块规范，底层规范的发展催生出了一系列工具链的创新，比如 AMD 规范提出时社区诞生的模块加载工具 requireJS ，基于CommonJS 规范的模块打包工具 browserify ，还有能让用户提前用上 ES Module 语法的 JS 编译器 Babel 、兼容各种模块规范的重量级打包工具 Webpack 以及基于浏览器原生ES Module 支持而实现的 **no-bundle** 构建工具 Vite 等等。
+2002 年 AJAX 诞生至今，前端从刀耕火种的年代，经历了一系列的发展，各种标准和工具百花齐放。下图中我们可以看到，自 2009 年 Node.js 诞生，前端先后出现了 CommonJS 、 AMD 、 CMD 、 UMD 和 ES Module 等模块规范，底层规范的发展催生出了一系列工具链的创新，比如 AMD 规范提出时社区诞生的模块加载工具 requireJS ，基于 CommonJS 规范的模块打包工具 browserify ，还有能让用户提前用上 ES Module 语法的 JS 编译器 Babel 、兼容各种模块规范的重量级打包工具 Webpack 以及基于浏览器原生 ES Module 支持而实现的 **no-bundle** 构建工具 Vite 等等。
 
-![image-20250824014430081](http://139.196.79.103:9001/myimages/imgs/202508240144134.png)
+![image-20250824014430081](../../images/202508240144134.png)
 
 总体而言，业界经历了一系列**由规范、标准引领工程化改革**的过程。构建工具作为前端工程化的核心要素，与底层的前端模块化规范和标准息息相关。接下来的时间，我就带你梳理一下前端模块化是如何演进的。这样你能更清楚地了解到各种模块化标准诞生的背景和意义，也能更好地理解 ES Module 为什么能够成为现今最主流的前端模块化标准。
 
@@ -17,76 +17,60 @@ outline: deep
 文件划分方式是最原始的模块化实现，简单来说就是将应用的状态和逻辑分散到不同的文件中，然后通过 HTML 中的 script 来一一引入。下面是一个通过 文件划分 实现模块化的具体例子:
 
 ```html
-// module-a.js
-let data = "data";
-// module-b.js
-function method() {
- console.log("execute method");
-}
-// index.html
+// module-a.js let data = "data"; // module-b.js function method() {
+console.log("execute method"); } // index.html
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-     <meta charset="UTF-8" />
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Document</title>
-   </head>
-   <body>
-     <script src="./module-a.js"></script>
-     <script src="./module-b.js"></script>
-     <script>
-       console.log(data);
-       method();
-     </script>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./module-a.js"></script>
+    <script src="./module-b.js"></script>
+    <script>
+      console.log(data);
+      method();
+    </script>
+  </body>
 </html>
 ```
 
 从中可以看到 module-a 和 module-b 为两个不同的模块，通过两个 script 标签分别引入到 HTML 中，这么做看似是分散了不同模块的状态和运行逻辑，但实际上也隐藏着一些风险因素:
 
-* 模块变量相当于在全局声明和定义，会有变量名冲突的问题。比如 module-b 可能也存在 data 变量，这就会与 module-a 中的变量冲突。
+- 模块变量相当于在全局声明和定义，会有变量名冲突的问题。比如 module-b 可能也存在 data 变量，这就会与 module-a 中的变量冲突。
 
-* 由于变量都在全局定义，我们很难知道某个变量到底属于哪些模块，因此也给调试带来了困难。
+- 由于变量都在全局定义，我们很难知道某个变量到底属于哪些模块，因此也给调试带来了困难。
 
-* 无法清晰地管理模块之间的依赖关系和加载顺序。假如 module-a 依赖 module-b ，那么上述 HTML 的 script 执行顺序需要手动调整，不然可能会产生运行时错误。
+- 无法清晰地管理模块之间的依赖关系和加载顺序。假如 module-a 依赖 module-b ，那么上述 HTML 的 script 执行顺序需要手动调整，不然可能会产生运行时错误。
 
 ### 2.命名空间
 
 命名空间 是模块化的另一种实现手段，它可以解决上述文件划分方式中 全局变量定义 所带来的一系列问题。下面是一个简单的例子:
 
 ```html
-// module-a.js
-window.moduleA = {
- data: "moduleA",
- method: function () {
- console.log("execute A's method");
- },
-};
-// module-b.js
-window.moduleB = {
- data: "moduleB",
- method: function () {
- console.log("execute B's method");
- },
-};
+// module-a.js window.moduleA = { data: "moduleA", method: function () {
+console.log("execute A's method"); }, }; // module-b.js window.moduleB = { data:
+"moduleB", method: function () { console.log("execute B's method"); }, };
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-     <meta charset="UTF-8" />
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Document</title>
-   </head>
-   <body>
-   <script src="./module-a.js"></script>
-   <script src="./module-b.js"></script>
-   <script>
-     // 此时 window 上已经绑定了 moduleA 和 moduleB
-     console.log(moduleA.data);
-     moduleB.method();
-   </script>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./module-a.js"></script>
+    <script src="./module-b.js"></script>
+    <script>
+      // 此时 window 上已经绑定了 moduleA 和 moduleB
+      console.log(moduleA.data);
+      moduleB.method();
+    </script>
+  </body>
 </html>
 ```
 
@@ -97,44 +81,28 @@ window.moduleB = {
 不过，相比于 命名空间 的模块化手段， IIFE 实现的模块化安全性要更高，对于模块作用域的区分更加彻底。你可以参考如下 IIFE 实现模块化 的例子:
 
 ```html
-// module-a.js
-(function () {
- let data = "moduleA";
- function method() {
- console.log(data + "execute");
- }
- window.moduleA = {
- method: method,
- };
-})();
-// module-b.js
-(function () {
- let data = "moduleB";
- function method() {
- console.log(data + "execute");
- }
- window.moduleB = {
- method: method,
- };
-})();
-// index.html
+// module-a.js (function () { let data = "moduleA"; function method() {
+console.log(data + "execute"); } window.moduleA = { method: method, }; })(); //
+module-b.js (function () { let data = "moduleB"; function method() {
+console.log(data + "execute"); } window.moduleB = { method: method, }; })(); //
+index.html
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8" />
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Document</title>
- </head>
- <body>
-   <script src="./module-a.js"></script>
-   <script src="./module-b.js"></script>
-   <script>
-     // 此时 window 上已经绑定了 moduleA 和 moduleB
-     console.log(moduleA.data);
-     moduleB.method();
-   </script>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./module-a.js"></script>
+    <script src="./module-b.js"></script>
+    <script>
+      // 此时 window 上已经绑定了 moduleA 和 moduleB
+      console.log(moduleA.data);
+      moduleB.method();
+    </script>
+  </body>
 </html>
 ```
 
@@ -143,13 +111,13 @@ window.moduleB = {
 ```javascript
 // module-a.js
 (function () {
- let data = "moduleA";
- function method() {
- console.log(data + "execute");
- }
- window.moduleA = {
- method: method,
- };
+  let data = "moduleA";
+  function method() {
+    console.log(data + "execute");
+  }
+  window.moduleA = {
+    method: method,
+  };
 })();
 ```
 
@@ -163,10 +131,10 @@ window.moduleB = {
 
 ## CommonJS 规范
 
-CommonJS 是业界最早正式提出的 JavaScript 模块规范，主要用于服务端，随着Node.js 越来越普及，这个规范也被业界广泛应用。对于模块规范而言，一般会包含 2方面内容:
+CommonJS 是业界最早正式提出的 JavaScript 模块规范，主要用于服务端，随着 Node.js 越来越普及，这个规范也被业界广泛应用。对于模块规范而言，一般会包含 2 方面内容:
 
-* 统一的模块化代码规范
-* 实现自动加载模块的加载器(也称 loader )
+- 统一的模块化代码规范
+- 实现自动加载模块的加载器(也称 loader )
 
 对于 CommonJS 模块规范本身，相信有 Node.js 使用经验的同学都不陌生了，为了方便你理解，我举一个使用 CommonJS 的简单例子:
 
@@ -174,26 +142,26 @@ CommonJS 是业界最早正式提出的 JavaScript 模块规范，主要用于�
 // module-a.js
 var data = "hello world";
 function getData() {
- return data;
+  return data;
 }
 module.exports = {
- getData,
+  getData,
 };
 // index.js
 const { getData } = require("./module-a.js");
 console.log(getData());
 ```
 
-代码中使用 require 来导入一个模块，用 module.exports 来导出一个模块。实际上Node.js 内部会有相应的 loader 转译模块代码，最后模块代码会被处理成下面这样:
+代码中使用 require 来导入一个模块，用 module.exports 来导出一个模块。实际上 Node.js 内部会有相应的 loader 转译模块代码，最后模块代码会被处理成下面这样:
 
 ```javascript
 (function (exports, require, module, __filename, __dirname) {
- // 执行模块代码
- // 返回 exports 对象
+  // 执行模块代码
+  // 返回 exports 对象
 });
 ```
 
-对 CommonJS 而言，一方面它定义了一套完整的模块化代码规范，另一方面 Node.js为之实现了自动加载模块的 loader ，看上去是一个很不错的模块规范，但也存在一些问题:
+对 CommonJS 而言，一方面它定义了一套完整的模块化代码规范，另一方面 Node.js 为之实现了自动加载模块的 loader ，看上去是一个很不错的模块规范，但也存在一些问题:
 
 模块加载器由 Node.js 提供，依赖了 Node.js 本身的功能实现，比如文件系统，如果 CommonJS 模块直接放到浏览器中是无法执行的。当然, 业界也产生了 browserify 这种打包工具来支持打包 CommonJS 模块，从而顺利在浏览器中执行，相当于社区实现了一个第三方的 loader。
 
@@ -208,15 +176,15 @@ AMD 全称为 Asynchronous Module Definition ，即异步模块定义规范。�
 ```javascript
 // main.js
 define(["./print"], function (printModule) {
- printModule.print("main");
+  printModule.print("main");
 });
 // print.js
 define(function () {
-   return {
-     print: function (msg) {
-       console.log("print " + msg);
-     },
-   };
+  return {
+    print: function (msg) {
+      console.log("print " + msg);
+    },
+  };
 });
 ```
 
@@ -227,7 +195,7 @@ define(function () {
 ```javascript
 // module-a.js
 require(["./print.js"], function (printModule) {
- printModule.print("module-a");
+  printModule.print("module-a");
 });
 ```
 
@@ -247,32 +215,27 @@ ES6 Module 也被称作 ES Module (或 ESM )， 是由 ECMAScript 官方提出�
 
 大家可能会担心 ES Module 的兼容性问题，其实 ES Module 的浏览器兼容性如今已经相当好了，覆盖了 90% 以上的浏览器份额，在 CanIUse 上的详情数据如下图所示:
 
-![image-20250824015722086](http://139.196.79.103:9001/myimages/imgs/202508240157164.png)
+![image-20250824015722086](../../images/202508240157164.png)
 
 不仅如此，一直以 CommonJS 作为模块标准的 Node.js 也紧跟 ES Module 的发展步伐，从 12.20 版本开始正式支持原生 ES Module。也就是说，如今 ES Module 能够同时在浏览器与 Node.js 环境中执行，拥有天然的跨平台能力。
 
 下面是一个使用 ES Module 的简单例子:
 
 ```html
-import { methodA } from "./module-a.js";
-methodA();
-//module-a.js
-const methodA = () => {
- console.log("a");
-};
-export { methodA };
+import { methodA } from "./module-a.js"; methodA(); //module-a.js const methodA
+= () => { console.log("a"); }; export { methodA };
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8" />
-   <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Vite App</title>
- </head>
- <body>
-   <div id="root"></div>
-   <script type="module" src="./main.js"></script>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
 ```
 
@@ -296,10 +259,10 @@ node main.js
 
 ```javascript
 async function func() {
- // 加载一个 ES 模块
- // 文件名后缀需要是 mjs
- const { a } = await import("./module-a.mjs");
- console.log(a);
+  // 加载一个 ES 模块
+  // 文件名后缀需要是 mjs
+  const { a } = await import("./module-a.mjs");
+  console.log(a);
 }
 func();
 module.exports = {
@@ -318,4 +281,3 @@ ES Module 作为 ECMAScript 官方提出的规范，经过五年多的发展，�
 由于前端构建工具的改革与底层模块化规范的发展息息相关，从一开始我就带你从头梳理了前端模块化的演进史，从无模块化标准的时代开始谈起，跟你介绍了 文件划分 的模块化方案，并分析了这个方案潜在的几个问题。随后又介绍了 命名空间 和 IIFE 两种方案，但这两种方式并没有解决模块自动加载的问题。由此展开对前端模块化规范的介绍，我主要给你分析了三个主流的模块化标准: CommonJS 、 AMD 以及 ES Module ，针对每个规范从 模块化代码标准 、 模块自动加载方案 这两个维度给你进行了详细的拆解，最后得出 ESModule 即将成为主流前端模块化方案的结论。
 
 本小节的内容就到这里了，希望能对你有所启发，也欢迎你把自己的学习心得打到评论区，我们下一节再见~
-

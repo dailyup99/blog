@@ -171,7 +171,7 @@ export function Header() {
 
 现在打开浏览器，可以看见 p 标签的类名已经被处理成了哈希值的形式:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240316605.png" alt="image-20250824031618557" style="zoom:67%;" />
+<img src="..\..\images\202508240316605.png" />
 
 说明现在 CSS Modules 已经正式生效了！同样的，你也可以在配置文件中的css.modules 选项来配置 CSS Modules 的功能，比如下面这个例子:
 
@@ -193,7 +193,7 @@ export default {
 
 再次访问页面，我们可以发现刚才的类名已经变成了我们自定义的形式:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240317111.png" alt="image-20250824031734080" style="zoom:67%;" />
+<img src="..\..\images\202508240317111.png" />
 
 这是一个 CSS Modules 中很常见的配置，对开发时的调试非常有用。其它的一些配置项不太常用，大家可以去这个地址进行查阅。
 
@@ -345,7 +345,7 @@ export function Header() {
 
 启动项目可以看到如下的效果，说明样式已经正常生效:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240329091.png" alt="image-20250824032930049" style="zoom:67%;" />
+<img src="..\..\images\202508240329091.png" />
 
 除了本身的原子化 CSS 能力，Windi CSS 还有一些非常好用的高级功能，在此我给大家推荐自己常用的两个能力: **attributify** 和 **shortcuts**。
 
@@ -468,7 +468,7 @@ export default App;
 
 当你启动项目之后可以看到 Tailwind CSS 的样式已经正常生效:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508240340689.png" alt="image-20250824034010647" style="zoom:67%;" />
+<img src="..\..\images\202508240340689.png" />
 
 小结
 

@@ -8,7 +8,7 @@ outline: deep
 
 说到自定义的能力，你肯定很容易想到 插件机制 ，利用一个个插件来扩展构建工具自身的能力。没错，这一节中我们将系统学习 Vite 的插件机制，带你掌握 Vite 插件开发的基本知识以及实战开发技巧。
 
-虽然 Vite 的插件机制是基于 Rollup 来设计的，并且上一小节我们也已经对 Rollup 的插件机制进行了详细的解读，但实际上 Vite 的插件机制也包含了自己独有的一部分，与Rollup 的各个插件 Hook 并非完全兼容，因此本节我们将重点关注 Vite 独有的部分以及和 Rollup 所区别的部分，而对于 Vite 和 Rollup 中相同的 Hook (如 resolveId 、load 、 transform )只是稍微提及，就不再展开赘述了。
+虽然 Vite 的插件机制是基于 Rollup 来设计的，并且上一小节我们也已经对 Rollup 的插件机制进行了详细的解读，但实际上 Vite 的插件机制也包含了自己独有的一部分，与 Rollup 的各个插件 Hook 并非完全兼容，因此本节我们将重点关注 Vite 独有的部分以及和 Rollup 所区别的部分，而对于 Vite 和 Rollup 中相同的 Hook (如 resolveId 、load 、 transform )只是稍微提及，就不再展开赘述了。
 
 让我们先从一个简单的例子入手吧！
 
@@ -35,21 +35,21 @@ Vite 插件与 Rollup 插件结构类似，为一个 name 和各种插件 Hook �
 export function myVitePlugin(options) {
   console.log(options);
   return {
-    name: 'vite-plugin-xxx',
+    name: "vite-plugin-xxx",
     load(id) {
       // 在钩子逻辑中可以通过闭包访问外部的 options 传参
-    }
+    },
   };
 }
 // 使用方式
 // vite.config.ts
-import { myVitePlugin } from './myVitePlugin';
+import { myVitePlugin } from "./myVitePlugin";
 export default {
   plugins: [
     myVitePlugin({
       /* 给插件传参 */
-    })
-  ]
+    }),
+  ],
 };
 ```
 
@@ -59,19 +59,19 @@ export default {
 
 在双引擎架构这一节中介绍过，Vite **开发阶段**会模拟 Rollup 的行为:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301039379.png" alt="image-20250830103941321" style="zoom:67%;" />
+<img src="..\..\images\202508301039379.png" />
 
 其中 Vite 会调用一系列与 Rollup 兼容的钩子，这个钩子主要分为三个阶段:
 
-* **服务器启动阶段**: options 和 buildStart 钩子会在服务启动时被调用。
-* **请求响应阶段**: 当浏览器发起请求时，Vite 内部依次调用 resolveId 、 load 和transform 钩子。
-* **服务器关闭阶段**: Vite 会依次执行 buildEnd 和 closeBundle 钩子。
+- **服务器启动阶段**: options 和 buildStart 钩子会在服务启动时被调用。
+- **请求响应阶段**: 当浏览器发起请求时，Vite 内部依次调用 resolveId 、 load 和 transform 钩子。
+- **服务器关闭阶段**: Vite 会依次执行 buildEnd 和 closeBundle 钩子。
 
-除了以上钩子，其他 Rollup 插件钩子(如 moduleParsed 、 renderChunk )均不会在Vite **开发阶段**调用。而生产环境下，由于 Vite 直接使用 Rollup，Vite 插件中所有Rollup 的插件钩子都会生效。
+除了以上钩子，其他 Rollup 插件钩子(如 moduleParsed 、 renderChunk )均不会在 Vite **开发阶段**调用。而生产环境下，由于 Vite 直接使用 Rollup，Vite 插件中所有 Rollup 的插件钩子都会生效。
 
 ### 独有 Hook
 
-接下来给大家介绍 Vite 中特有的一些 Hook，这些 Hook 只会在 Vite 内部调用，而放到Rollup 中会被直接忽略。
+接下来给大家介绍 Vite 中特有的一些 Hook，这些 Hook 只会在 Vite 内部调用，而放到 Rollup 中会被直接忽略。
 
 #### 给配置再加点料: config
 
@@ -80,12 +80,12 @@ Vite 在读取完配置文件（即 vite.config.ts ）之后，会拿到用户�
 ```javascript
 // 返回部分配置（推荐）
 const editConfigPlugin = () => ({
-  name: 'vite-plugin-modify-config',
+  name: "vite-plugin-modify-config",
   config: () => ({
     alias: {
-      react: require.resolve('react')
-    }
-  })
+      react: require.resolve("react"),
+    },
+  }),
 });
 ```
 
@@ -93,14 +93,14 @@ const editConfigPlugin = () => ({
 
 ```javascript
 const mutateConfigPlugin = () => ({
-  name: 'mutate-config',
+  name: "mutate-config",
   // command 为 `serve`(开发环境) 或者 `build`(生产环境)
   config(config, { command }) {
     // 生产环境中修改 root 参数
-    if (command === 'build') {
+    if (command === "build") {
       config.root = __dirname;
     }
-  }
+  },
 });
 ```
 
@@ -135,7 +135,7 @@ Vite 在解析完配置之后会调用 configResolved 钩子，这个钩子一�
 const exmaplePlugin = () => {
   let config;
   return {
-    name: 'read-config',
+    name: "read-config",
     configResolved(resolvedConfig) {
       // 记录最终配置
       config = resolvedConfig;
@@ -143,18 +143,18 @@ const exmaplePlugin = () => {
     // 在其他钩子中可以访问到配置
     transform(code, id) {
       console.log(config);
-    }
+    },
   };
 };
 ```
 
 #### 获取 Dev Server 实例: configureServer
 
-这个钩子仅在**开发阶段**会被调用，用于扩展 Vite 的 Dev Server，一般用于增加自定义server 中间件，如下代码所示:
+这个钩子仅在**开发阶段**会被调用，用于扩展 Vite 的 Dev Server，一般用于增加自定义 server 中间件，如下代码所示:
 
 ```javascript
 const myPlugin = () => ({
-  name: 'configure-server',
+  name: "configure-server",
   configureServer(server) {
     // 姿势 1: 在 Vite 内置中间件之前执行
     server.middlewares.use((req, res, next) => {
@@ -166,7 +166,7 @@ const myPlugin = () => ({
         // 自定义请求处理逻辑
       });
     };
-  }
+  },
 });
 ```
 
@@ -233,18 +233,18 @@ const handleHmrPlugin = () => {
       console.log(await read());
       // 自行处理 HMR 事件
       ctx.server.ws.send({
-        type: 'custom',
-        event: 'special-update',
-        data: { a: 1 }
+        type: "custom",
+        event: "special-update",
+        data: { a: 1 },
       });
       return [];
-    }
+    },
   };
 };
 
 // 前端代码中加入
 if (import.meta.hot) {
-  import.meta.hot.on('special-update', data => {
+  import.meta.hot.on("special-update", (data) => {
     // 执行自定义更新
     // { a: 1 }
     console.log(data);
@@ -255,15 +255,15 @@ if (import.meta.hot) {
 
 以上就是 Vite 独有的五个钩子，我们来重新梳理一下:
 
-* config : 用来进一步修改配置。
+- config : 用来进一步修改配置。
 
-* configResolved : 用来记录最终的配置信息。
+- configResolved : 用来记录最终的配置信息。
 
-* configureServer : 用来获取 Vite Dev Server 实例，添加中间件。
+- configureServer : 用来获取 Vite Dev Server 实例，添加中间件。
 
-* transformIndexHtml : 用来转换 HTML 的内容。
+- transformIndexHtml : 用来转换 HTML 的内容。
 
-* handleHotUpdate : 用来进行热更新模块的过滤，或者进行自定义的热更新处理。
+- handleHotUpdate : 用来进行热更新模块的过滤，或者进行自定义的热更新处理。
 
 ## 插件 Hook 执行顺序
 
@@ -279,7 +279,7 @@ if (import.meta.hot) {
 // 以下为服务启动和关闭的钩子
 export default function testHookPlugin () {
   return {
-  name: 'test-hooks-plugin', 
+  name: 'test-hooks-plugin',
   // Vite 独有钩子
   config(config) {
     console.log('config');
@@ -318,19 +318,19 @@ export default function testHookPlugin () {
 
 将插件加入到 Vite 配置文件中，然后启动，你可以观察到各个 Hook 的执行顺序:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301100782.png" alt="image-20250830110028710" style="zoom:67%;" />
+<img src="..\..\images\202508301100782.png" />
 
 由此我们可以梳理出 Vite 插件的执行顺序:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301101314.png" alt="image-20250830110125272" style="zoom:67%;" />
+<img src="..\..\images\202508301101314.png" />
 
-* 服务启动阶段: config 、 configResolved 、 options 、 configureServer 、buildStart
+- 服务启动阶段: config 、 configResolved 、 options 、 configureServer 、buildStart
 
-* 请求响应阶段: 如果是 html 文件，仅执行 transformIndexHtml 钩子；对于非 HTML文件，则依次执行 resolveId 、 load 和 transform 钩子。相信大家学过 Rollup 的插件机制，已经对这三个钩子比较熟悉了。
+- 请求响应阶段: 如果是 html 文件，仅执行 transformIndexHtml 钩子；对于非 HTML 文件，则依次执行 resolveId 、 load 和 transform 钩子。相信大家学过 Rollup 的插件机制，已经对这三个钩子比较熟悉了。
 
-* 热更新阶段: 执行 handleHotUpdate 钩子。
+- 热更新阶段: 执行 handleHotUpdate 钩子。
 
-* 服务关闭阶段: 依次执行 buildEnd 和 closeBundle 钩子。
+- 服务关闭阶段: 依次执行 buildEnd 和 closeBundle 钩子。
 
 ## 插件应用位置
 
@@ -340,8 +340,8 @@ export default function testHookPlugin () {
 
 ```json
 {
-   // 'serve' 表示仅用于开发环境，'build'表示仅用于生产环境
-   apply: 'serve'
+  // 'serve' 表示仅用于开发环境，'build'表示仅用于生产环境
+  "apply": "serve"
 }
 ```
 
@@ -359,23 +359,23 @@ apply(config, { command }) {
 ```javascript
 {
   // 默认为`normal`，可取值还有`pre`和`post`
-  enforce: 'pre'
+  enforce: "pre";
 }
 ```
 
 Vite 中插件的执行顺序如下图所示:
 
-![image-20250830110513162](http://139.196.79.103:9001/myimages/imgs/202508301105202.png)
+![image-20250830110513162](../../images/202508301105202.png)
 
 Vite 会依次执行如下的插件:
 
-* Alias (路径别名)相关的插件。
-* 带有 enforce: 'pre' 的用户插件。
-* Vite 核心插件。
-* 没有 enforce 值的用户插件，也叫 普通插件 。
-* Vite 生产环境构建用的插件。
-* 带有 enforce: 'post' 的用户插件。
-* Vite 后置构建插件(如压缩插件)。
+- Alias (路径别名)相关的插件。
+- 带有 enforce: 'pre' 的用户插件。
+- Vite 核心插件。
+- 没有 enforce 值的用户插件，也叫 普通插件 。
+- Vite 生产环境构建用的插件。
+- 带有 enforce: 'post' 的用户插件。
+- Vite 后置构建插件(如压缩插件)。
 
 ## 插件开发实战
 
@@ -405,7 +405,7 @@ export default function virtualFibModulePlugin(): Plugin {
   return {
     name: 'vite-plugin-virtual-module',
     resolveId(id) {
-      if (id === virtualFibModuleId) { 
+      if (id === virtualFibModuleId) {
         return resolvedFibVirtualModuleId;
       }
     },
@@ -423,7 +423,7 @@ export default function virtualFibModulePlugin(): Plugin {
 
 ```typescript
 // vite.config.ts
-import virtual from './plugins/virtual-module.ts';
+import virtual from "./plugins/virtual-module.ts";
 // 配置插件
 {
   plugins: [react(), virtual()];
@@ -433,13 +433,13 @@ import virtual from './plugins/virtual-module.ts';
 然后在 main.tsx 中加入如下的代码:
 
 ```typescript
-import fib from 'virtual:fib';
-alert(`结果: ${fib(10)}`)
+import fib from "virtual:fib";
+alert(`结果: ${fib(10)}`);
 ```
 
 这里我们使用了 virtual:fib 这个虚拟模块，虽然这个模块不存在真实的文件系统中，但你打开浏览器后可以发现这个模块导出的函数是可以正常执行的:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301113925.png" alt="image-20250830111334885" style="zoom:67%;" />
+<img src="..\..\images\202508301113925.png" />
 
 接着我们来尝试一下如何通过虚拟模块来读取内存中的变量，在 virtual-module.ts 中增加如下代码:
 
@@ -458,10 +458,10 @@ export default function virtualFibModulePlugin(): Plugin {
     +   config = c;
     + },
     resolveId(id) {
-      if (id === virtualFibModuleId) { 
+      if (id === virtualFibModuleId) {
         return resolvedFibVirtualModuleId;
       }
-      + if (id === virtualEnvModuleId) { 
+      + if (id === virtualEnvModuleId) {
       +   return resolvedEnvVirtualModuleId;
       + }
     },
@@ -481,22 +481,22 @@ export default function virtualFibModulePlugin(): Plugin {
 
 ```javascript
 // main.tsx
-import env from 'virtual:env';
-console.log(env)
+import env from "virtual:env";
+console.log(env);
 ```
 
 virtual:env 一般情况下会有类型问题，我们需要增加一个类型声明文件来声明这个模块:
 
 ```typescript
 // types/shim.d.ts
-declare module 'virtual:*' {
- 	export default any;
+declare module "virtual:*" {
+  export default any;
 }
 ```
 
 这样就解决了类型报错的问题。接着你可以去浏览器观察一下输出的情况:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301119523.png" alt="image-20250830111907489" style="zoom:80%;" />
+<img src="..\..\images\202508301119523.png" />
 
 Vite 环境变量能正确地在浏览器中打印出来，说明在内存中计算出来的 virtual:env 模块的确被成功地加载了。从中你可以看到，虚拟模块的内容完全能够被动态计算出来，因此它的灵活性和可定制程度非常高，实用性也很强，在 Vite 内部的插件被深度地使用，社区当中也有不少知名的插件(如 vite-plugin-windicss 、 vite-plugin-svg-icons 等)也使用了虚拟模块的技术。
 
@@ -513,20 +513,20 @@ pnpm i resolve @svgr/core -D
 接着在 plugins 目录新建 svgr.ts :
 
 ```typescript
-import { Plugin } from 'vite';
-import * as fs from 'fs';
-import * as resolve from 'resolve';
+import { Plugin } from "vite";
+import * as fs from "fs";
+import * as resolve from "resolve";
 interface SvgrOptions {
   // svg 资源模块默认导出，url 或者组件
-  defaultExport: 'url' | 'component';
+  defaultExport: "url" | "component";
 }
 export default function viteSvgrPlugin(options: SvgrOptions) {
-  const { defaultExport = 'url' } = options;
+  const { defaultExport = "url" } = options;
   return {
-    name: 'vite-plugin-svgr',
+    name: "vite-plugin-svgr",
     async transform(code, id) {
       // 转换逻辑: svg -> React 组件
-    }
+    },
   };
 }
 ```
@@ -553,11 +553,11 @@ import logoUrl, { ReactComponent as Logo } from './logo.svg';
 
 明确了需求之后，接下来让我们来整理一下插件开发的整体思路，主要逻辑在 transform 钩子中完成，流程如下:
 
-* 根据 id 入参过滤出 svg 资源；
-* 读取 svg 文件内容；
-* 利用 @svgr/core 将 svg 转换为 React 组件代码;
-* 处理默认导出为 url 的情况；
-* 将组件的 jsx 代码转译为浏览器可运行的代码。
+- 根据 id 入参过滤出 svg 资源；
+- 读取 svg 文件内容；
+- 利用 @svgr/core 将 svg 转换为 React 组件代码;
+- 处理默认导出为 url 的情况；
+- 将组件的 jsx 代码转译为浏览器可运行的代码。
 
 下面是插件的完整的代码，你可以参考学习:
 
@@ -611,12 +611,12 @@ export default function viteSvgrPlugin(options: SvgrOptions): Plugin {
 
 ```javascript
 // vite.config.ts
-import svgr from './plugins/svgr';
+import svgr from "./plugins/svgr";
 // 返回的配置
 {
   plugins: [
     // 省略其它插件
-    svgr()
+    svgr(),
   ];
 }
 ```
@@ -625,45 +625,45 @@ import svgr from './plugins/svgr';
 
 ```tsx
 // App.tsx
-import Logo from './logo.svg'
+import Logo from "./logo.svg";
 
 function App() {
   return (
     <>
       <Logo />
     </>
-  )
+  );
 }
 export default App;
 ```
 
 打开浏览器，可以看到组件已经正常显示:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301141748.png" alt="image-20250830114121671" style="zoom:80%;" />
+<img src="..\..\images\202508301141748.png" />
 
 ## 调试技巧
 
-另外，在开发调试插件的过程，我推荐大家在本地装上 vite-plugin-inspect 插件，并在Vite 中使用它:
+另外，在开发调试插件的过程，我推荐大家在本地装上 vite-plugin-inspect 插件，并在 Vite 中使用它:
 
 ```typescript
 // vite.config.ts
-import inspect from 'vite-plugin-inspect';
+import inspect from "vite-plugin-inspect";
 // 返回的配置
 {
   plugins: [
     // 省略其它插件
-    inspect()
+    inspect(),
   ];
 }
 ```
 
 这样当你再次启动项目时，会发现多出一个调试地址:
 
-<img src="http://139.196.79.103:9001/myimages/imgs/202508301142782.png" alt="image-20250830114225727" style="zoom:67%;" />
+<img src="..\..\images\202508301142782.png" />
 
 你可以通过这个地址来查看项目中各个模块的编译结果：
 
-![image-20250830114302865](http://139.196.79.103:9001/myimages/imgs/202508301143917.png)
+![image-20250830114302865](../../images/202508301143917.png)
 
 点击特定的文件后，你可以看到这个模块经过各个插件处理后的中间结果，如下图所示:
 
@@ -673,6 +673,6 @@ import inspect from 'vite-plugin-inspect';
 
 好，本节的内容到这里就接近尾声了。本节你需要重点掌握 Vite **插件钩子的含义**、**作用顺序**以及**插件的实战开发**。
 
-首先我通过一个最简单的示例让你对 Vite 插件的结构有了初步的印象，然后对 Vite 中的各种钩子函数进行了介绍，主要包括 通用钩子 和 独有钩子 ，通用钩子与 Rollup 兼容，而独有钩子在 Rollup 中会被忽略。而由于上一节已经详细介绍了 Rollup 的插件机制，对于通用钩子我们没有继续展开，而是详细介绍了 5 个独有钩子，分别是: config 、configResolved 、 configureServer 、 transformIndexHtml 和 handleHotUpdate 。不仅如此，我还给你从宏观角度分析了 Vite 插件的作用场景和作用顺序，你可以分别通过apply 和 enforce 两个参数来进行手动的控制。
+首先我通过一个最简单的示例让你对 Vite 插件的结构有了初步的印象，然后对 Vite 中的各种钩子函数进行了介绍，主要包括 通用钩子 和 独有钩子 ，通用钩子与 Rollup 兼容，而独有钩子在 Rollup 中会被忽略。而由于上一节已经详细介绍了 Rollup 的插件机制，对于通用钩子我们没有继续展开，而是详细介绍了 5 个独有钩子，分别是: config 、configResolved 、 configureServer 、 transformIndexHtml 和 handleHotUpdate 。不仅如此，我还给你从宏观角度分析了 Vite 插件的作用场景和作用顺序，你可以分别通过 apply 和 enforce 两个参数来进行手动的控制。
 
-接下来我们正式进入插件开发实战的环节，实现了 虚拟模块加载插件 和 Svg 组件加载插件 ，相信你已经对虚拟模块的概念和使用有了直观的了解，也能通过后者的开发过程了解到如何在 Vite 中集成其它的前端编译工具。总体来说，Vite 插件的设计秉承了 Rollup的插件设计理念，通过一个个语义化的 Hook 来组织，十分简洁和灵活，上手难度并不大，但真正难的地方在于如何利用 Vite 插件去解决实际开发过程的问题，由于篇幅所限，本文的示例并不能覆盖所有的开发场景，你也不必着急，我们会在后面的几个小节中接触到更加高级的开发场景，你也将接触过越来越多的插件，当然，你的插件开发技能也能越来越纯熟。大家继续加油l！
+接下来我们正式进入插件开发实战的环节，实现了 虚拟模块加载插件 和 Svg 组件加载插件 ，相信你已经对虚拟模块的概念和使用有了直观的了解，也能通过后者的开发过程了解到如何在 Vite 中集成其它的前端编译工具。总体来说，Vite 插件的设计秉承了 Rollup 的插件设计理念，通过一个个语义化的 Hook 来组织，十分简洁和灵活，上手难度并不大，但真正难的地方在于如何利用 Vite 插件去解决实际开发过程的问题，由于篇幅所限，本文的示例并不能覆盖所有的开发场景，你也不必着急，我们会在后面的几个小节中接触到更加高级的开发场景，你也将接触过越来越多的插件，当然，你的插件开发技能也能越来越纯熟。大家继续加油 l！

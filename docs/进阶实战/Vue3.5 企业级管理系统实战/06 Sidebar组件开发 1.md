@@ -51,11 +51,11 @@ $menuBg: #304156;
   </el-menu>
 </template>
 <script lang="ts" setup>
-import variables from "@/style/variables.module.scss";
-const route = useRoute();
-const defaultActive = computed(() => {
-  return route.path;
-});
+  import variables from "@/style/variables.module.scss";
+  const route = useRoute();
+  const defaultActive = computed(() => {
+    return route.path;
+  });
 </script>
 <style scoped></style>
 ```
@@ -81,7 +81,7 @@ export default variables;
 
 在 `layout/index.vue` 中引入 `Sidebar` 组件。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506270130006.webp)
+![图片](../../images/202506270130006.webp)
 
 ```html
 //src/layout/indev.vue
@@ -102,31 +102,31 @@ export default variables;
   </div>
 </template>
 <style lang="scss">
-.app-wrapper {
-  @apply flex w-full h-full;
-  .sidebar-container {
-    @apply bg-red w-[var(--sidebar-width)];
-  }
-  .main-container {
-    @apply flex flex-col flex-1;
-  }
-  .header {
-    @apply h-84px;
-    .navbar {
-      @apply h-[var(--navbar-height)] bg-yellow;
+  .app-wrapper {
+    @apply flex w-full h-full;
+    .sidebar-container {
+      @apply bg-red w-[var(--sidebar-width)];
     }
-    .tags-view {
-      @apply h-[var(--tagsview-height)] bg-blue;
+    .main-container {
+      @apply flex flex-col flex-1;
+    }
+    .header {
+      @apply h-84px;
+      .navbar {
+        @apply h-[var(--navbar-height)] bg-yellow;
+      }
+      .tags-view {
+        @apply h-[var(--tagsview-height)] bg-blue;
+      }
+    }
+    .app-main {
+      @apply bg-cyan;
+      min-height: calc(100vh - var(--tagsview-height) - var(--navbar-height));
     }
   }
-  .app-main {
-    @apply bg-cyan;
-    min-height: calc(100vh - var(--tagsview-height) - var(--navbar-height));
-  }
-}
 </style>
 ```
 
 完成上述所有步骤后，在项目的根目录下运行 `npm run dev` 命令即可启动开发服务器，打开浏览器访问相应的地址，就可以查看页面的实际效果，检查 Sidebar 组件是否按照预期显示和工作。
 
-![图片](http://139.196.79.103:9001/myimages/imgs/202506270131532.webp)
+![图片](../../images/202506270131532.webp)

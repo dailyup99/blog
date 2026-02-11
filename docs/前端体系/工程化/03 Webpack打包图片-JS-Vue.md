@@ -6,29 +6,29 @@ outline: deep
 
 为了演示我们项目中可以加载图片，我们需要在项目中使用图片，比较常见的使用图片的方式是两种：
 
-img元素，设置src属性；
+img 元素，设置 src 属性；
 
-其他元素（比如div），设置background-image的css属性；
+其他元素（比如 div），设置 background-image 的 css 属性；
 
 ```javascript
 // 引入图片模块
-import zznhImage from "../img/zznh.png"
+import zznhImage from "../img/zznh.png";
 
 // 创建img元素
-const imgEl = document.createElement("img")
-imgEl.src = zznhImage
-document.body.append(imgEl)
+const imgEl = document.createElement("img");
+imgEl.src = zznhImage;
+document.body.append(imgEl);
 ```
 
 **这个时候，打包会报错**
 
-## **认识asset module type**
+## **认识 asset module type**
 
-**我们当前使用的webpack版本是webpack5：**
+**我们当前使用的 webpack 版本是 webpack5：**
 
-在webpack5之前，加载这些资源我们需要使用一些loader，比如raw-loader 、url-loader、file-loader；
+在 webpack5 之前，加载这些资源我们需要使用一些 loader，比如 raw-loader 、url-loader、file-loader；
 
-在webpack5开始，我们可以直接使用资源模块类型（asset module type），来替代上面的这些loader；
+在 webpack5 开始，我们可以直接使用资源模块类型（asset module type），来替代上面的这些 loader；
 
 **资源模块类型(asset module type)**，通过添加 4 种新的模块类型，来替换所有这些 loader：
 
@@ -57,9 +57,9 @@ module: {
 }
 ```
 
-webpack5开始不需要安装任何loader，上面这样配置之后，图片就能出来了。
+webpack5 开始不需要安装任何 loader，上面这样配置之后，图片就能出来了。
 
-## **asset module type的使用**
+## **asset module type 的使用**
 
 **比如加载图片，我们可以使用下面的方式：**
 
@@ -74,35 +74,35 @@ module: {
 
 但是，如何可以自定义文件的输出路径和文件名呢？
 
-**方式一：**修改output，添加assetModuleFilename属性；
+**方式一：**修改 output，添加 assetModuleFilename 属性；
 
-**方式二：**在Rule中，添加一个generator属性，并且设置filename；
+**方式二：**在 Rule 中，添加一个 generator 属性，并且设置 filename；
 
-我们这里介绍几个最常用的placeholder：
+我们这里介绍几个最常用的 placeholder：
 
 **[ext]：** 处理文件的扩展名；
 
 **[name]：**处理文件的名称；
 
-**[hash]：**文件的内容，使用MD4的散列函数处理，生成的一个128位的hash值（32个十六进制）；
+**[hash]：**文件的内容，使用 MD4 的散列函数处理，生成的一个 128 位的 hash 值（32 个十六进制）；
 
-## **url-loader的limit效果**
+## **url-loader 的 limit 效果**
 
 **开发中我们往往是小的图片需要转换，但是大的图片直接使用图片即可**
 
-这是因为小的图片转换base64之后可以和页面一起被请求，减少不必要的请求过程；
+这是因为小的图片转换 base64 之后可以和页面一起被请求，减少不必要的请求过程；
 
 而大的图片也进行转换，反而会影响页面的请求速度；
 
 **我们需要两个步骤来实现：**
 
-**步骤一：**将type修改为asset；
+**步骤一：**将 type 修改为 asset；
 
-**步骤二：**添加一个parser属性，并且制定dataUrl的条件，添加maxSize属性；
+**步骤二：**添加一个 parser 属性，并且制定 dataUrl 的条件，添加 maxSize 属性；
 
 下面来演示整个过程：
 
-首先，理解下asset/resource、asset/inline、asset三者之间的区别
+首先，理解下 asset/resource、asset/inline、asset 三者之间的区别
 
 asset/resource
 
@@ -115,7 +115,7 @@ asset/resource
 }
 ```
 
-![image-20230405093909811](http://139.196.79.103:9001/myimages/imgs/image-20230405093909811.png)
+![image-20230405093909811](../../images/image-20230405093909811.png)
 
 asset/inline
 
@@ -128,9 +128,9 @@ asset/inline
 }
 ```
 
-![image-20230405094054645](http://139.196.79.103:9001/myimages/imgs/image-20230405094054645.png)
+![image-20230405094054645](../../images/image-20230405094054645.png)
 
-asset可以综合两者，设置当图片大于某个值（比如下面的60kb）时，进行单独打包，小于这个值，进行base64编码
+asset 可以综合两者，设置当图片大于某个值（比如下面的 60kb）时，进行单独打包，小于这个值，进行 base64 编码
 
 ```javascript
 // 3.合理的规范:
@@ -146,7 +146,7 @@ type: "asset",
 
 我们会发现打包出来的图片根本看不懂，有没有办法自定义呢？答案是有的
 
-第一种方法，在output中设置assetModuleFilename
+第一种方法，在 output 中设置 assetModuleFilename
 
 ```javascript
 module.exports = {
@@ -154,12 +154,12 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./build"),
-    assetModuleFilename: "abc.png" // 打包后叫abc.png
+    assetModuleFilename: "abc.png", // 打包后叫abc.png
   },
-}
+};
 ```
 
-上面这种方法是针对所有的资源，不管是图片还是字体打包后都叫abc.png，这显然不合理，开发中也不这样配置。
+上面这种方法是针对所有的资源，不管是图片还是字体打包后都叫 abc.png，这显然不合理，开发中也不这样配置。
 
 那么，可以使用第二种方法
 
@@ -186,47 +186,47 @@ module.exports = {
 },
 ```
 
-设置hash，因为图片可能放在不同的文件夹中，比如下面既有在images中，也有在img中
+设置 hash，因为图片可能放在不同的文件夹中，比如下面既有在 images 中，也有在 img 中
 
-![image-20230405095027412](http://139.196.79.103:9001/myimages/imgs/image-20230405095027412.png)
+![image-20230405095027412](../../images/image-20230405095027412.png)
 
-打包后，我们会发现图片和bundle.js混在一起，所以配置filename的时候加img/就会生成一个单独的img文件夹
+打包后，我们会发现图片和 bundle.js 混在一起，所以配置 filename 的时候加 img/就会生成一个单独的 img 文件夹
 
-![image-20230405095231329](http://139.196.79.103:9001/myimages/imgs/image-20230405095231329.png)
+![image-20230405095231329](../../images/image-20230405095231329.png)
 
-## **为什么需要babel？**
+## **为什么需要 babel？**
 
-**事实上，在开发中我们很少直接去接触babel，但是babel对于前端开发来说，目前是不可缺少的一部分：**
+**事实上，在开发中我们很少直接去接触 babel，但是 babel 对于前端开发来说，目前是不可缺少的一部分：**
 
-开发中，我们想要使用ES6+的语法，想要使用TypeScript，开发React项目，它们都是离不开Babel的；
+开发中，我们想要使用 ES6+的语法，想要使用 TypeScript，开发 React 项目，它们都是离不开 Babel 的；
 
-所以，学习Babel对于我们理解代码从编写到线上的转变过程至关重要；
+所以，学习 Babel 对于我们理解代码从编写到线上的转变过程至关重要；
 
-**那么，Babel到底是什么呢？**
+**那么，Babel 到底是什么呢？**
 
-Babel是一个工具链，主要用于旧浏览器或者环境中将ECMAScript 2015+代码转换为向后兼容版本的JavaScript；
+Babel 是一个工具链，主要用于旧浏览器或者环境中将 ECMAScript 2015+代码转换为向后兼容版本的 JavaScript；
 
 包括：语法转换、源代码转换等；
 
-![image-20230405102316823](http://139.196.79.103:9001/myimages/imgs/image-20230405102316823.png)
+![image-20230405102316823](../../images/image-20230405102316823.png)
 
-## **Babel命令行使用**
+## **Babel 命令行使用**
 
-babel本身可以作为**一个独立的工具**（和postcss一样），不和webpack等构建工具配置来单独使用。
+babel 本身可以作为**一个独立的工具**（和 postcss 一样），不和 webpack 等构建工具配置来单独使用。
 
-如果我们希望在命令行尝试使用babel，需要安装如下库：
+如果我们希望在命令行尝试使用 babel，需要安装如下库：
 
-@babel/core：babel的核心代码，必须安装；
+@babel/core：babel 的核心代码，必须安装；
 
-@babel/cli：可以让我们在命令行使用babel；
+@babel/cli：可以让我们在命令行使用 babel；
 
 npm install @babel/cli @babel/core -D
 
-使用babel来处理我们的源代码：
+使用 babel 来处理我们的源代码：
 
 src：是源文件的目录；
 
---out-dir：指定要输出的文件夹dist；
+--out-dir：指定要输出的文件夹 dist；
 
 npx babel src --out-dir dist
 
@@ -248,13 +248,13 @@ npm install @babel/plugin-transform-block-scoping -D
 
 npx babel src --out-dir dist --plugins=@babel/plugin-transform-block-scoping,@babel/plugin-transform-arrow-functions
 
-## **Babel的预设preset**
+## **Babel 的预设 preset**
 
 但是如果要转换的内容过多，一个个设置是比较麻烦的，我们可以使用预设（preset）：
 
 后面我们再具体来讲预设代表的含义；
 
-安装@babel/preset-env预设：
+安装@babel/preset-env 预设：
 
 npm install @babel/preset-env -D
 
@@ -264,7 +264,7 @@ npx babel src --out-dir dist --presets=@babel/preset-env
 
 ## **babel-loader**
 
-在实际开发中，我们通常会在构建工具中通过配置babel来对其进行使用的，比如在webpack中。
+在实际开发中，我们通常会在构建工具中通过配置 babel 来对其进行使用的，比如在 webpack 中。
 
 那么我们就需要去安装相关的依赖：
 
@@ -272,20 +272,20 @@ npx babel src --out-dir dist --presets=@babel/preset-env
 
 npm install babel-loader -D
 
-我们可以设置一个规则，在加载js文件时，使用我们的babel：
+我们可以设置一个规则，在加载 js 文件时，使用我们的 babel：
 
 ```javascript
 {
     test: /\.js$/,
         use: [
-            { 
-                loader: "babel-loader", 
+            {
+                loader: "babel-loader",
                 // options: {
                 //   plugins: [
                 //     "@babel/plugin-transform-arrow-functions",
                 //     "@babel/plugin-transform-block-scoping"
                 //   ]
-                // } 
+                // }
             }
         ]
 },
@@ -293,9 +293,9 @@ npm install babel-loader -D
 
 ## **babel-preset**
 
-如果我们一个个去安装使用插件，那么需要手动来管理大量的babel插件，我们可以直接给webpack提供一个preset，webpack
+如果我们一个个去安装使用插件，那么需要手动来管理大量的 babel 插件，我们可以直接给 webpack 提供一个 preset，webpack
 
-会根据我们的预设来加载对应的插件列表，并且将其传递给babel。
+会根据我们的预设来加载对应的插件列表，并且将其传递给 babel。
 
 比如常见的预设有三个：
 
@@ -305,11 +305,11 @@ react
 
 TypeScript
 
-安装preset-env：
+安装 preset-env：
 
 npm install @babel/preset-env
 
-上面配置otpions有点长，我们可以在根目录下创建babel.config.js，在里面配置，效果是一样的
+上面配置 otpions 有点长，我们可以在根目录下创建 babel.config.js，在里面配置，效果是一样的
 
 babel.config.js
 
@@ -319,80 +319,75 @@ module.exports = {
   //   "@babel/plugin-transform-arrow-functions",
   //   "@babel/plugin-transform-block-scoping"
   // ]
-  presets: [
-    "@babel/preset-env"
-  ]
-}
+  presets: ["@babel/preset-env"],
+};
 ```
 
-## **编写App.vue代码**
+## **编写 App.vue 代码**
 
-在开发中我们会编写Vue相关的代码，webpack可以对Vue代码进行解析：
+在开发中我们会编写 Vue 相关的代码，webpack 可以对 Vue 代码进行解析：
 
-接下来我们编写自己的App.vue代码；
+接下来我们编写自己的 App.vue 代码；
 
 ```vue
 <template>
   <div>
     <!-- html -->
-    <h2 class="title_vue">{{title}}</h2>
-    <p class="content_vue">
-      我是内容, 哈哈哈哈哈哈哈哈
-    </p>
+    <h2 class="title_vue">{{ title }}</h2>
+    <p class="content_vue">我是内容, 哈哈哈哈哈哈哈哈</p>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        title: "我是Vue的标题"
-      }
-    }
-  }
+export default {
+  data() {
+    return {
+      title: "我是Vue的标题",
+    };
+  },
+};
 </script>
 
 <style>
-  .title_vue {
-    color: green;
-    font-size: 100px;
-  }
+.title_vue {
+  color: green;
+  font-size: 100px;
+}
 
-  .content_vue {
-    color: yellow;
-    font-size: 30px;
-  }
+.content_vue {
+  color: yellow;
+  font-size: 30px;
+}
 </style>
-
 ```
 
-## **App.vue的打包过程**
+## **App.vue 的打包过程**
 
-我们对代码打包会报错：我们需要合适的Loader来处理文件。
+我们对代码打包会报错：我们需要合适的 Loader 来处理文件。
 
-这个时候我们需要使用vue-loader：
+这个时候我们需要使用 vue-loader：
 
 npm install vue-loader -D
 
-在webpack的模板规则中进行配置：
+在 webpack 的模板规则中进行配置：
 
 ## **@vue/compiler-sfc**
 
-打包依然会报错，这是因为我们必须添加@vue/compiler-sfc来对template进行解析：
+打包依然会报错，这是因为我们必须添加@vue/compiler-sfc 来对 template 进行解析：
 
 npm install @vue/compiler-sfc -D
 
-如果执行npm install vue，会默认安装@vue/compiler-sfc
+如果执行 npm install vue，会默认安装@vue/compiler-sfc
 
-另外我们需要配置对应的Vue插件：
+另外我们需要配置对应的 Vue 插件：
 
-重新打包即可支持App.vue的写法
+重新打包即可支持 App.vue 的写法
 
-另外，我们也可以编写其他的.vue文件来编写自己的组件；
+另外，我们也可以编写其他的.vue 文件来编写自己的组件；
 
 ```javascript
-const path = require("path")
-const { VueLoaderPlugin } = require("vue-loader/dist/index") // 引入
+const path = require("path");
+const { VueLoaderPlugin } = require("vue-loader/dist/index"); // 引入
 
 module.exports = {
   entry: "./src/main.js",
@@ -404,27 +399,27 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader"
-      }
-    ]
+        loader: "vue-loader",
+      },
+    ],
   },
   plugins: [
-    new VueLoaderPlugin() // 需要配置对应的Vue插件
-  ]
-}
+    new VueLoaderPlugin(), // 需要配置对应的Vue插件
+  ],
+};
 ```
 
-## **resolve模块解析**
+## **resolve 模块解析**
 
-resolve用于设置模块如何被解析：
+resolve 用于设置模块如何被解析：
 
 在开发中我们会有各种各样的模块依赖，这些模块可能来自于自己编写的代码，也可能来自第三方库；
 
-resolve可以帮助webpack从每个 require/import 语句中，找到需要引入到合适的模块代码；
+resolve 可以帮助 webpack 从每个 require/import 语句中，找到需要引入到合适的模块代码；
 
 webpack 使用 enhanced-resolve 来解析文件路径；
 
-**webpack能解析三种文件路径：**
+**webpack 能解析三种文件路径：**
 
 绝对路径
 
@@ -438,11 +433,11 @@ webpack 使用 enhanced-resolve 来解析文件路径；
 
 模块路径
 
-在 resolve.modules中指定的所有目录检索模块；
+在 resolve.modules 中指定的所有目录检索模块；
 
-默认值是 ['node_modules']，所以默认会从node_modules中查找文件；
+默认值是 ['node_modules']，所以默认会从 node_modules 中查找文件；
 
-我们可以通过设置别名的方式来替换初识模块路径，具体后面讲解alias的配置；
+我们可以通过设置别名的方式来替换初识模块路径，具体后面讲解 alias 的配置；
 
 ## **确定文件还是文件夹**
 
@@ -450,25 +445,25 @@ webpack 使用 enhanced-resolve 来解析文件路径；
 
 如果文件具有扩展名，则直接打包文件；
 
-否则，将使用 resolve.extensions选项作为文件扩展名解析；
+否则，将使用 resolve.extensions 选项作为文件扩展名解析；
 
 如果是一个文件夹：
 
-会在文件夹中根据 resolve.mainFiles配置选项中指定的文件顺序查找；
+会在文件夹中根据 resolve.mainFiles 配置选项中指定的文件顺序查找；
 
-resolve.mainFiles的默认值是 ['index']；
+resolve.mainFiles 的默认值是 ['index']；
 
-再根据 resolve.extensions来解析扩展名；
+再根据 resolve.extensions 来解析扩展名；
 
-## **extensions和alias配置**
+## **extensions 和 alias 配置**
 
-extensions是解析到文件时自动添加扩展名：
+extensions 是解析到文件时自动添加扩展名：
 
 默认值是 ['.wasm', '.mjs', '.js', '.json']；
 
 所以如果我们代码中想要添加加载 .vue 或者 jsx 或者 ts 等文件时，我们必须自己写上扩展名；
 
-另一个非常好用的功能是配置别名alias：
+另一个非常好用的功能是配置别名 alias：
 
 特别是当我们项目的目录结构比较深的时候，或者一个文件的路径可能需要 ../../../这种路径片段；
 
@@ -484,9 +479,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json", ".vue", ".jsx", ".ts", ".tsx"], // 加拓展名
     alias: {
-      utils: path.resolve(__dirname, "./src/utils") // 起别名
-    }
+      utils: path.resolve(__dirname, "./src/utils"), // 起别名
+    },
   },
-}
+};
 ```
-
