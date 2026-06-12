@@ -7,7 +7,6 @@
     "docs:dev": "vitepress dev --open",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "docs:deploy": "bash deploy.sh"
   },
   "dependencies": {
     "vitepress-plugin-image-viewer": "^1.1.4",
