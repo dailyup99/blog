@@ -17,6 +17,207 @@ const icon = new URL("../../images/202409222118480.webp", import.meta.url).href;
 
 export const NAV_DATA: NavData[] = [
   {
+    title: "工作常用",
+    items: [
+      {
+        title: "Vben Admin",
+        desc: "企业级管理系统框架",
+        icon,
+        link: "https://doc.vben.pro/components/introduction.html",
+      },
+      {
+        title: "Vxe Table",
+        desc: "一个基于 Vue 的高性能表格组件库",
+        icon,
+        link: "https://vxetable.cn/v4/#/demo/list",
+      },
+      {
+        title: "Iconify",
+        desc: "一个图标库",
+        icon,
+        link: "https://icon-sets.iconify.design/",
+      },
+      {
+        title: "Element-plus",
+        desc: "一个UI组件库",
+        icon,
+        link: "https://element-plus.org/zh-CN/component/overview",
+      },
+      {
+        title: "Chatgpt",
+        desc: "AI网页版",
+        icon,
+        link: "https://chatgpt.com/",
+      },
+      {
+        title: "百度翻译",
+        desc: "百度翻译在线翻译",
+        icon,
+        link: "https://fanyi.baidu.com/mtpe-individual/transText",
+      },
+      {
+        title: "下拉框选项样式调试",
+        desc: "下拉框选项样式调试",
+        icon,
+        link: "https://www.cnblogs.com/shayloyuki/p/18768084",
+      },
+      {
+        title: "Json在线解析",
+        desc: "Json在线解析",
+        icon,
+        link: "https://www.json.cn/",
+      },
+      {
+        title: "Shein官网",
+        desc: "shein官网",
+        icon,
+        link: "https://us.shein.com/",
+      },
+      {
+        title: "Temu官网",
+        desc: "temu官网",
+        icon,
+        link: "https://www.temu.com/",
+      },
+      {
+        title: "妙手官网",
+        desc: "妙手官网",
+        icon,
+        link: "https://erp.91miaoshou.com/",
+      },
+      {
+        title: "4seller官网",
+        desc: "4seller官网",
+        icon,
+        link: "https://www.4seller.com/home.html",
+      },
+      {
+        title: "疾风OMS官网",
+        desc: "疾风OMS官网",
+        icon,
+        link: "https://zeyuan.jfwms.net/?redirect=/web/order/all",
+      },
+      {
+        title: "择远新系统线上",
+        desc: "择远新系统线上",
+        icon,
+        link: "https://zy.globepod.cn/#/auth/login",
+      },
+      {
+        title: "择远新系统测试",
+        desc: "择远新系统测试",
+        icon,
+        link: "https://testbizadmin.lanhaiyinqing.com/#/auth/login",
+      },
+    ],
+  },
+  {
+    title: "科学上网",
+    items: [
+      {
+        title: "Okztwo",
+        desc: "okztwo",
+        icon,
+        link: "https://okztwo.net/",
+      },
+      {
+        title: "掠影网络",
+        desc: "掠影网络",
+        icon,
+        link: "https://dvpnx.com/login",
+      },
+      {
+        title: "Clash Verge Rev",
+        desc: "支持Windows、macOS和Linux",
+        icon,
+        link: "https://github.com/clash-verge-rev/clash-verge-rev",
+      },
+      {
+        title: "v2rayN",
+        desc: "支持Windows、macOS和Linux",
+        icon,
+        link: "https://github.com/2dust/v2rayN",
+      },
+      {
+        title: "ClashMetaForAndroid",
+        desc: "只支持安卓",
+        icon,
+        link: "https://github.com/MetaCubeX/ClashMetaForAndroid",
+      },
+      {
+        title: "FlClash",
+        desc: "支持安卓、Windows、macOS和Linux",
+        icon,
+        link: "https://github.com/chen08209/FlClash",
+      },
+      {
+        title: "Cloudflare",
+        desc: "cloudflare",
+        icon,
+        link: "https://dash.cloudflare.com/login",
+      },
+    ],
+  },
+  {
+    title: "谷歌相关",
+    items: [
+      {
+        title: "查看谷歌账号地区",
+        desc: "查看谷歌账号地区",
+        icon,
+        link: "https://policies.google.com/terms",
+      },
+      {
+        title: "修改谷歌账号地区",
+        desc: "修改谷歌账号地区",
+        icon,
+        link: "https://policies.google.com/country-association-form",
+      },
+      {
+        title: "绑定Visa卡",
+        desc: "绑定Visa卡",
+        icon,
+        link: "https://payments.google.com/gp/w/home/paymentmethods",
+      },
+      {
+        title: "谷歌 AI Pro",
+        desc: "谷歌 AI Pro",
+        icon,
+        link: "https://t.me/gemini12pro_bot?start=inv_MQ-7M4SX4YE",
+      },
+      {
+        title: "Antigravity",
+        desc: "谷歌反重力",
+        icon,
+        link: "https://antigravity.google/",
+      },
+      {
+        title: "Antigravity-Ide",
+        desc: "谷歌反重力IDE",
+        icon,
+        link: "https://antigravity.google/product/antigravity-ide",
+      },
+      {
+        title: "Antigravity Tools",
+        desc: "谷歌反重力账号管理工具，可以快速切换账号",
+        icon,
+        link: "https://github.com/lbjlaq/Antigravity-Manager",
+      },
+      {
+        title: "Youtube",
+        desc: "Youtube",
+        icon,
+        link: "http://youtube.com/",
+      },
+      {
+        title: "2fa",
+        desc: "获取谷歌身份验证器验证码",
+        icon,
+        link: "https://2fa.live/",
+      },
+    ],
+  },
+  {
     title: "Vue生态",
     items: [
       {
@@ -407,6 +608,64 @@ export const NAV_DATA: NavData[] = [
         desc: "学会提问",
         icon,
         link: "https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way",
+      },
+    ],
+  },
+  {
+    title: "技术项目",
+    items: [
+      {
+        title: "AS-Editor",
+        desc: "低代码拖拽的商城项目",
+        icon,
+        link: "https://gitee.com/was666/as-editor",
+      },
+    ],
+  },
+  {
+    title: "其他",
+    items: [
+      {
+        title: "工具箱",
+        desc: "一个包含影视、音乐、阅读的工具箱",
+        icon,
+        link: "https://tools.liumingye.cn/",
+      },
+      {
+        title: "歌曲海",
+        desc: "一个免费下载音乐的网站",
+        icon,
+        link: "https://www.gequhai.com/",
+      },
+      {
+        title: "it网站",
+        desc: "各种it课程",
+        icon,
+        link: "https://www.itdjs.com/",
+      },
+      {
+        title: "电脑网盘倍速播放",
+        desc: "电脑网盘倍速播放",
+        icon,
+        link: "https://my.feishu.cn/docx/DO3tdEJdnoJFjDxj6gvcJ7QonWc",
+      },
+      {
+        title: "脚本猫",
+        desc: "脚本猫",
+        icon,
+        link: "https://scriptcat.org/zh-CN/search?keyword=%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%92%AD%E6%94%BE%E5%99%A8",
+      },
+      {
+        title: "大圣盘",
+        desc: "各种网盘资源",
+        icon,
+        link: "https://www.dashengpan.com/#/main/search?restype=1",
+      },
+      {
+        title: "副业指南",
+        desc: "副业指南",
+        icon,
+        link: "https://front-end.toimc.com/notes/bussiness/1-1%20%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D",
       },
     ],
   },
