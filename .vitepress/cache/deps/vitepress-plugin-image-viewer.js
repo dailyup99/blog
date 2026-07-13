@@ -2,31 +2,9 @@ import {
   nextTick,
   onMounted,
   watch
-} from "./chunk-4X5TYTPO.js";
+} from "./chunk-5QLTCEDZ.js";
 
 // node_modules/viewerjs/dist/viewer.esm.js
-function _classCallCheck(a, n) {
-  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(e, r) {
-  for (var t = 0; t < r.length; t++) {
-    var o = r[t];
-    o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, _toPropertyKey(o.key), o);
-  }
-}
-function _createClass(e, r, t) {
-  return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
-    writable: false
-  }), e;
-}
-function _defineProperty(e, r, t) {
-  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
-    value: t,
-    enumerable: true,
-    configurable: true,
-    writable: true
-  }) : e[r] = t, e;
-}
 function ownKeys(e, r) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -48,20 +26,6 @@ function _objectSpread2(e) {
   }
   return e;
 }
-function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : i + "";
-}
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -69,6 +33,61 @@ function _typeof(o) {
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof(o);
+}
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor)
+      descriptor.writable = true;
+    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps)
+    _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps)
+    _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null)
+    return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== void 0) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object")
+      return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
 }
 var DEFAULTS = {
   /**
@@ -1437,15 +1456,15 @@ var methods = {
       _this.hidden();
     };
     if (options.transition && !immediate) {
-      var _onViewerTransitionEnd = function onViewerTransitionEnd(event) {
+      var onViewerTransitionEnd = function onViewerTransitionEnd2(event) {
         if (event && event.target === viewer2) {
-          removeListener(viewer2, EVENT_TRANSITION_END, _onViewerTransitionEnd);
+          removeListener(viewer2, EVENT_TRANSITION_END, onViewerTransitionEnd2);
           _this.hidden();
         }
       };
       var onImageTransitionEnd = function onImageTransitionEnd2() {
         if (hasClass(viewer2, CLASS_TRANSITION)) {
-          addListener(viewer2, EVENT_TRANSITION_END, _onViewerTransitionEnd);
+          addListener(viewer2, EVENT_TRANSITION_END, onViewerTransitionEnd);
           removeClass(viewer2, CLASS_IN);
         } else {
           hideImmediately();
@@ -1456,7 +1475,7 @@ var methods = {
           if (_this.viewed && hasClass(image, CLASS_TRANSITION)) {
             removeListener(image, EVENT_TRANSITION_END, onImageTransitionEnd);
           } else if (hasClass(viewer2, CLASS_TRANSITION)) {
-            removeListener(viewer2, EVENT_TRANSITION_END, _onViewerTransitionEnd);
+            removeListener(viewer2, EVENT_TRANSITION_END, onViewerTransitionEnd);
           }
         }
       };
@@ -2016,27 +2035,27 @@ var methods = {
       player.appendChild(image);
     });
     if (isNumber(options.interval) && options.interval > 0) {
-      var _prev = function prev2() {
+      var prev2 = function prev3() {
         clearTimeout(_this7.playing.timeout);
         removeClass(list[index], CLASS_IN);
         index -= 1;
         index = index >= 0 ? index : total - 1;
         addClass(list[index], CLASS_IN);
-        _this7.playing.timeout = setTimeout(_prev, options.interval);
+        _this7.playing.timeout = setTimeout(prev3, options.interval);
       };
-      var _next = function next2() {
+      var next2 = function next3() {
         clearTimeout(_this7.playing.timeout);
         removeClass(list[index], CLASS_IN);
         index += 1;
         index = index < total ? index : 0;
         addClass(list[index], CLASS_IN);
-        _this7.playing.timeout = setTimeout(_next, options.interval);
+        _this7.playing.timeout = setTimeout(next3, options.interval);
       };
       if (total > 1) {
         this.playing = {
-          prev: _prev,
-          next: _next,
-          timeout: setTimeout(_next, options.interval)
+          prev: prev2,
+          next: next2,
+          timeout: setTimeout(next2, options.interval)
         };
       }
     }
@@ -2560,7 +2579,7 @@ var Viewer = function() {
     this.id = getUniqueID();
     this.init();
   }
-  return _createClass(Viewer2, [{
+  _createClass(Viewer2, [{
     key: "init",
     value: function init() {
       var _this = this;
@@ -2811,6 +2830,7 @@ var Viewer = function() {
       assign(DEFAULTS, isPlainObject(options) && options);
     }
   }]);
+  return Viewer2;
 }();
 assign(Viewer.prototype, render, events, handlers, methods, others);
 
@@ -2829,13 +2849,10 @@ var setViewer = (el = ".vp-doc", option) => {
       oneToOne: 4
     }
   };
-  const container = document.querySelector(el);
-  if (container) {
-    viewer = new Viewer(container, {
-      ...defaultBaseOption,
-      ...option
-    });
-  }
+  viewer = new Viewer(document.querySelector(el), {
+    ...defaultBaseOption,
+    ...option
+  });
 };
 var imageViewer = (route, el, option) => {
   onMounted(() => {
@@ -2854,13 +2871,13 @@ export {
 
 viewerjs/dist/viewer.esm.js:
   (*!
-   * Viewer.js v1.11.7
+   * Viewer.js v1.11.6
    * https://fengyuanchen.github.io/viewerjs
    *
    * Copyright 2015-present Chen Fengyuan
    * Released under the MIT license
    *
-   * Date: 2024-11-24T04:32:19.116Z
+   * Date: 2023-09-17T03:16:38.052Z
    *)
 */
 //# sourceMappingURL=vitepress-plugin-image-viewer.js.map
