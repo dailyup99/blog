@@ -107,7 +107,7 @@ export const NAV_DATA: NavData[] = [
         title: "择远新系统测试",
         desc: "择远新系统测试",
         icon,
-        link: "https://testbizadmin.lanhaiyinqing.com/#/auth/login",
+        link: "https://testerp.globepod.cn/#/auth/login",
       },
     ],
   },
