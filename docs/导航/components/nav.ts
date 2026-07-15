@@ -17,6 +17,23 @@ const icon = new URL("../../images/202409222118480.webp", import.meta.url).href;
 
 export const NAV_DATA: NavData[] = [
   {
+    title: "codex相关",
+    items: [
+      {
+        title: "bigtoken",
+        desc: "中转站",
+        icon,
+        link: "https://bigtoken.top/home",
+      },
+      {
+        title: "CC-Switch",
+        desc: "CC-Switch",
+        icon,
+        link: "https://github.com/farion1231/cc-switch/releases/tag/v3.17.0",
+      },
+    ],
+  },
+  {
     title: "工作常用",
     items: [
       {
@@ -127,22 +144,10 @@ export const NAV_DATA: NavData[] = [
         link: "https://dvpnx.com/login",
       },
       {
-        title: "Clash Verge Rev",
-        desc: "支持Windows、macOS和Linux",
+        title: "Clash-for-Windows",
+        desc: "Clash-for-Windows",
         icon,
-        link: "https://github.com/clash-verge-rev/clash-verge-rev",
-      },
-      {
-        title: "v2rayN",
-        desc: "支持Windows、macOS和Linux",
-        icon,
-        link: "https://github.com/2dust/v2rayN",
-      },
-      {
-        title: "ClashMetaForAndroid",
-        desc: "只支持安卓",
-        icon,
-        link: "https://github.com/MetaCubeX/ClashMetaForAndroid",
+        link: "https://github.com/Z-Siqi/Clash-for-Windows_Chinese/releases/tag/0.20.39.3",
       },
       {
         title: "FlClash",
@@ -181,7 +186,7 @@ export const NAV_DATA: NavData[] = [
       },
       {
         title: "谷歌 AI Pro",
-        desc: "谷歌 AI Pro",
+        desc: "获取谷歌 AI Pro",
         icon,
         link: "https://t.me/gemini12pro_bot?start=inv_MQ-7M4SX4YE",
       },
@@ -447,12 +452,6 @@ export const NAV_DATA: NavData[] = [
         link: "https://github.com/chokcoco/CSS-Inspiration",
       },
       {
-        title: "Clash",
-        desc: "一个使用 Go 语言编写，基于规则的跨平台代理软件核心程序",
-        icon,
-        link: "https://doc.miyun.app/app/clash-win/",
-      },
-      {
         title: "Tinypng",
         desc: "一个图片压缩网站",
         icon,
@@ -660,12 +659,6 @@ export const NAV_DATA: NavData[] = [
         desc: "各种网盘资源",
         icon,
         link: "https://www.dashengpan.com/#/main/search?restype=1",
-      },
-      {
-        title: "副业指南",
-        desc: "副业指南",
-        icon,
-        link: "https://front-end.toimc.com/notes/bussiness/1-1%20%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D",
       },
     ],
   },
