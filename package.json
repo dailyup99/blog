@@ -4,9 +4,11 @@
     "vitepress": "^1.1.3"
   },
   "scripts": {
-    "docs:dev": "vitepress dev --open",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:dev": "node scripts/dev.mjs dev --open",
+    "docs:build": "node scripts/localize-images.mjs && vitepress build",
+    "docs:preview": "vitepress preview",
+    "images:localize": "node scripts/localize-images.mjs",
+    "images:watch": "node scripts/localize-images.mjs --watch"
   },
   "dependencies": {
     "vitepress-plugin-image-viewer": "^1.1.4",
